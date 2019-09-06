@@ -86,22 +86,13 @@ export class HeroService {
     );
   }
 
-  // tslint:disable-next-line: ban-types
-  // updateHero(hero: Hero): Observable<any> {
-  //   return this.http.put(this.heroesUrl, hero, this.httpOptions).pipe(
-  //     tap(_ => this.log(`updated hero id=${hero.id}`)),
-  //     catchError(this.handleError<any>('updateHero'))
-  //   );
-  // }
-
-  /** PUT: update the hero on the server */
-  updateHero(hero: Hero, id: number): Observable<any> {
-    const url = `${this.heroesUrl}/${id}`;
-    return this.http.put(url, hero, this.httpOptions).pipe(
-      tap(_ => this.log(`updated Hero id=${id}`)),
-      catchError(this.handleError<any>('updateHero'))
-    );
-  }
+  //  PUT: update the hero on the server
+   updateHero(hero: Hero): Observable<any> {
+     return this.http.put(this.heroesUrl, hero, this.httpOptions).pipe(
+       tap(_ => this.log(`updated hero id=${hero.id}`)),
+       catchError(this.handleError<any>('updateHero'))
+     );
+   }
 
   /**
    * Handle Http operation that failed.

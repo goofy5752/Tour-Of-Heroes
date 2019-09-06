@@ -10,7 +10,7 @@ namespace TourOfHeroesWebApi.Controllers
     public class HeroesController : ApiController
     {
         private readonly TourOfHeroesDbContext _dbContext;
-
+        
         public HeroesController(TourOfHeroesDbContext dbContext)
         {
             _dbContext = dbContext;
@@ -38,7 +38,7 @@ namespace TourOfHeroesWebApi.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(Hero hero, int id)
+        public async Task<IActionResult> Put([FromRoute] int id, [FromBody] Hero hero)
         {
             var dbHero = this._dbContext.Heroes.FirstOrDefault(x => x.Id == id);
             dbHero.Name = hero.Name;
