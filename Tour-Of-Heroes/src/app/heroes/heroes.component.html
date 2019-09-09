@@ -1,12 +1,11 @@
-<h2>My Heroes</h2>
-
+<h2>Add new hero</h2>
 <div class="input-group mb-3">
     <input #heroName type="text" class="form-control" placeholder="Hero name" aria-describedby="basic-addon2">
     <div class="input-group-append">
         <button class="btn btn-outline-secondary" type="button" title="add hero" (click)="add(heroName.value); heroName.value=''">Add</button>
     </div>
 </div>
-
+<h2>My heroes</h2>
 <ul class="list-group text-center ulHeroes">
     <li class="list-group-item" *ngFor="let hero of heroes">
         <a class="list-group-item list-group-item-action" routerLink="/detail/{{hero.id}}">

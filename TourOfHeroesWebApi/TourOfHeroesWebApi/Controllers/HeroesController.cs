@@ -57,7 +57,7 @@ namespace TourOfHeroesWebApi.Controllers
 
             this._dbContext.Heroes.Remove(hero);
             await this._dbContext.SaveChangesAsync();
-            return hero;
+            return this.NoContent();
         }
     }
 }
