@@ -29,6 +29,21 @@ namespace TourOfHeroesWebApi.Controllers
             return hero;
         }
 
+        [HttpGet]
+        [Route("get-heroes")]
+        public ActionResult<IEnumerable<Hero>> GetHeroesBySearchString(string name)
+        {
+            var heroes = this._dbContext.Heroes.Where(x => x.Name.Contains(name)).ToList();
+            if (heroes.Count != 0)
+            {
+                return heroes;
+            }
+            else
+            {
+                return this.NoContent();
+            }
+        }
+
         [HttpPost]
         public async Task<ActionResult<Hero>> Post(Hero hero)
         {

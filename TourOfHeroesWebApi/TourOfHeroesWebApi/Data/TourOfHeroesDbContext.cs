@@ -14,7 +14,7 @@ namespace TourOfHeroesWebApi.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=DESKTOP-RC4CRFC\\SQLEXPRESS;Database=TourOfHeroes;Integrated Security=True;");
+            optionsBuilder.UseSqlServer("Server=DESKTOP-QASR8MP\\SQLEXPRESS;Database=TourOfHeroes;Integrated Security=True;");
         }
     }
 }
