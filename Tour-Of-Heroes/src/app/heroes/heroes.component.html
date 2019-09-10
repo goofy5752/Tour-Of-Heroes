@@ -2,7 +2,7 @@
 <div class="input-group mb-3">
     <input #heroName type="text" class="form-control" placeholder="Hero name" aria-describedby="basic-addon2">
     <div class="input-group-append">
-        <button class="btn btn-outline-secondary" type="button" title="add hero" (click)="add(heroName.value); heroName.value=''">Add</button>
+        <button class="btn btn-dark" type="button" title="add hero" (click)="add(heroName.value); heroName.value=''"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
     </div>
 </div>
 <h2>My heroes</h2>
@@ -10,7 +10,7 @@
     <li class="list-group-item" *ngFor="let hero of heroes">
         <a class="list-group-item list-group-item-action" routerLink="/detail/{{hero.id}}">
              {{hero.name}}
-             <button type="button" class="btn btn-dark" title="delete hero" (click)="delete(hero)">x</button>
+             <button type="button" class="btn btn-dark mb-0" title="delete hero" (click)="delete(hero)"><i class="fa fa-trash"></i></button>
         </a>
     </li>
 </ul>
