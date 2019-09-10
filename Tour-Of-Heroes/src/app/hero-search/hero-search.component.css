@@ -17,13 +17,17 @@
 }
 
 .search-result li:hover {
-    background-color: #607D8B;
+    background-color: rgb(52, 58, 64);
 }
 
 .search-result li a {
     color: black;
     display: block;
     text-decoration: none;
+}
+
+.search-result li a:hover {
+    color: white;
 }
 
 ul.search-result {
