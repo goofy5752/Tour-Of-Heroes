@@ -14,6 +14,7 @@ import { MessagesComponent } from './messages/messages.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { NavComponent } from './nav/nav.component';
 import { FooterComponent } from './footer/footer.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
   imports: [
@@ -32,6 +33,7 @@ import { FooterComponent } from './footer/footer.component';
     HeroSearchComponent,
     NavComponent,
     FooterComponent,
+    SidebarComponent,
   ],
   bootstrap: [AppComponent]
 })
