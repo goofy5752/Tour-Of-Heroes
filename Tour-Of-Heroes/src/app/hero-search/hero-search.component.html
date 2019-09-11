@@ -1,11 +1,10 @@
 <div id="search-component">
-
     <form class="form-inline">
-        <input class="form-control" #searchBox id="search-box" (input)="search(searchBox.value)" placeholder="Search hero" />
+        <input class="form-control" #searchBox id="search-box" (input)="search(searchBox.value)" (click)="onClickSearchBar()" placeholder="Search hero" />
     </form>
-    <ul class="search-result">
+    <ul class="search-result" id="searchResult">
         <li *ngFor="let hero of heroes$ | async">
-            <a routerLink="/detail/{{hero.id}}">
+            <a (click)="onPickHero()" (click)="searchBox.value = null" routerLink="/detail/{{hero.id}}">
         {{hero.name}}
       </a>
         </li>

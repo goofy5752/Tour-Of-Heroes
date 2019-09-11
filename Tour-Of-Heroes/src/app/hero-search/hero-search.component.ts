@@ -18,10 +18,20 @@ export class HeroSearchComponent implements OnInit {
   heroes$: Observable<Hero[]>;
   private searchTerms = new Subject<string>();
 
-  constructor(private heroService: HeroService) {}
+  constructor(private heroService: HeroService) { }
   // Push a search term into the observable stream.
   search(term: string): void {
     this.searchTerms.next(term);
+  }
+
+  onPickHero() {
+    const el = document.getElementById('searchResult');
+    el.hidden = true;
+  }
+
+  onClickSearchBar() {
+    const el = document.getElementById('searchResult');
+    el.hidden = false;
   }
 
   ngOnInit(): void {
