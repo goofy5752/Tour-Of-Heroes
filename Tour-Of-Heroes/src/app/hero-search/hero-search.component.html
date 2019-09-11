@@ -4,7 +4,7 @@
     </form>
     <ul class="search-result" id="searchResult">
         <li *ngFor="let hero of heroes$ | async">
-            <a (click)="onPickHero()" (click)="searchBox.value = null" routerLink="/detail/{{hero.id}}">
+            <a (click)="onPickHero()" routerLink="/detail/{{hero.id}}">
         {{hero.name}}
       </a>
         </li>
