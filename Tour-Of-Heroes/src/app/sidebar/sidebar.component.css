@@ -216,17 +216,8 @@
 
 .sidebar-nav ul>li>a:focus,
 .sidebar-nav ul>li>a:hover {
-    background-color: rgba(162, 162, 162, .09)
-}
-
-.sidebar-nav ul>li.active>a {
-    background-color: rgba(0, 0, 0, .025);
+    background-color: rgba(162, 162, 162, .09);
     border-left-color: #1e88e5
-}
-
-.sidebar-nav ul>li.active>ul li.active>a {
-    background-color: rgba(162, 162, 162, .026);
-    font-weight: 700
 }
 
 .sidebar-nav ul>li ul>li>a {
