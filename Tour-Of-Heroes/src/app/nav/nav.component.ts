@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { isNumber } from 'util';
 
 @Component({
   selector: 'app-nav',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavComponent implements OnInit {
 
-  constructor() { }
+  private href = '';
+
+  constructor(private router: Router) {}
 
   ngOnInit() {
+      this.href = this.router.url;
+      const charToUpper =  this.href.charAt(1).toUpperCase();
+      // const lastChar = isNumber(this.href.charAt(this.href.length - 1));
+      // if (lastChar === false) {
+      //   return 'Hero details';
+      // }
+      // return typeof lastChar;
+      return charToUpper + this.href.substring(2, this.href.length);
   }
 
 }

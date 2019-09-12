@@ -3,5 +3,9 @@
 }
 
 .collapse {
-    height: 44px;
+    height: 44.3px;
+}
+
+.nav-item {
+    color: white;
 }
