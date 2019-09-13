@@ -2,18 +2,23 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using TourOfHeroesWebApi.Data;
-using TourOfHeroesWebApi.Data.Models;
+using TourOfHeroesData;
+using TourOfHeroesData.Models;
+using TourOfHeroesServices;
+using TourOfHeroesServices.Contracts;
+using TourOfHeroesWebApi.DTOs;
 
 namespace TourOfHeroesWebApi.Controllers
 {
     public class HeroesController : ApiController
     {
         private readonly TourOfHeroesDbContext _dbContext;
-        
-        public HeroesController(TourOfHeroesDbContext dbContext)
+        private readonly IImageService _imageService;
+
+        public HeroesController(TourOfHeroesDbContext dbContext, IImageService imageService)
         {
             _dbContext = dbContext;
+            _imageService = imageService;
         }
 
         [HttpGet]
@@ -45,15 +50,26 @@ namespace TourOfHeroesWebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Hero>> Post(Hero hero)
+        public async Task<ActionResult<Hero>> Post(CreateHeroDTO heroDto)
         {
+            var imgUrl = this._imageService.AddToCloudinaryAndReturnImageUrl(heroDto.Image);
+            var coverImgUrl = this._imageService.AddToCloudinaryAndReturnImageUrl(heroDto.CoverImage);
+            await this._imageService.SaveAllAsync();
+            var hero = new Hero
+            {
+                Name = heroDto.Name,
+                Description = heroDto.Description,
+                Image = imgUrl,
+                CoverImage = coverImgUrl
+            };
+
             await this._dbContext.Heroes.AddAsync(hero);
             await this._dbContext.SaveChangesAsync();
             return this.CreatedAtAction("Get", new { id = hero.Id });
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put([FromRoute] int id, [FromBody] Hero hero)
+        public async Task<IActionResult> Put(int id, Hero hero)
         {
             var dbHero = this._dbContext.Heroes.FirstOrDefault(x => x.Id == id);
             dbHero.Name = hero.Name;

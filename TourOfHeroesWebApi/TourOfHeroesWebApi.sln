@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29209.62
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TourOfHeroesWebApi", "TourOfHeroesWebApi\TourOfHeroesWebApi.csproj", "{69C8362F-1DF0-402D-A6CC-7B383B6714D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TourOfHeroesWebApi", "TourOfHeroesWebApi\TourOfHeroesWebApi.csproj", "{69C8362F-1DF0-402D-A6CC-7B383B6714D0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TourOfHeroesData", "TourOfHeroesData\TourOfHeroesData.csproj", "{EB1B2DB3-B22C-403E-894E-1418980FC769}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TourOfHeroesServices", "TourOfHeroesServices\TourOfHeroesServices.csproj", "{21C928B5-9D28-4A4B-BC50-9E3475FF7B2B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{69C8362F-1DF0-402D-A6CC-7B383B6714D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69C8362F-1DF0-402D-A6CC-7B383B6714D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{69C8362F-1DF0-402D-A6CC-7B383B6714D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB1B2DB3-B22C-403E-894E-1418980FC769}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB1B2DB3-B22C-403E-894E-1418980FC769}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB1B2DB3-B22C-403E-894E-1418980FC769}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB1B2DB3-B22C-403E-894E-1418980FC769}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21C928B5-9D28-4A4B-BC50-9E3475FF7B2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21C928B5-9D28-4A4B-BC50-9E3475FF7B2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21C928B5-9D28-4A4B-BC50-9E3475FF7B2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21C928B5-9D28-4A4B-BC50-9E3475FF7B2B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
