@@ -2,6 +2,6 @@ export class Hero {
     id: number;
     name: string;
     description: string;
-    image: any;
-    coverImage: any;
+    image: File;
+    coverImage: File;
 }

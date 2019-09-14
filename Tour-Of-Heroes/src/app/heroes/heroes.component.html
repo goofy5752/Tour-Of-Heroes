@@ -4,12 +4,11 @@
         <input #heroDescription type="text" class="form-control" placeholder="Hero description"
             aria-describedby="basic-addon2">
         <input #heroImage type="file" class="form-control" placeholder="Hero image" aria-describedby="basic-addon2">
-        <input #heroCoverImage type="file" class="form-control" placeholder="Hero cover image"
-            aria-describedby="basic-addon2">
+        <input #heroCoverImage type="file" class="form-control" placeholder="Hero cover image" aria-describedby="basic-addon2">
     </div>
     <div class="input-group-append">
         <button class="btn btn-outline-secondary" type="button" title="add hero"
-            (click)="add(heroName.value, heroDescription.value, heroImage.value, heroCoverImage.value); heroName.value=''">Add</button>
+            (click)="add(heroName.value, heroDescription.value, heroImage, heroCoverImage); heroName.value=''">Add</button>
     </div>
     <div class="row mb-5">
         <div class="col-sm-6" *ngFor="let hero of heroes">
