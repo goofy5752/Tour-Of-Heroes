@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
@@ -10,6 +10,11 @@ import { HeroService } from '../hero.service';
 })
 export class HeroesComponent implements OnInit {
   heroes: Hero[];
+  http: any;
+  @ViewChild('heroImage', { static: false }) heroImage;
+  @ViewChild('heroCoverImage', { static: false }) heroCoverImage;
+  heroImageFile: File;
+  heroCoverImageFile: File;
 
   constructor(private heroService: HeroService) { }
 
@@ -22,10 +27,22 @@ export class HeroesComponent implements OnInit {
       .subscribe(heroes => this.heroes = heroes);
   }
 
-  add(name: string, description: string, image: any, coverImage: any): void {
+  stageHeroImageFile(): void {
+    this.heroImageFile = this.heroImage.nativeElement.files[0];
+    console.log(this.heroImageFile);
+  }
+
+  stageHeroCoverImageFile(): void {
+    this.heroCoverImageFile = this.heroCoverImage.nativeElement.files[0];
+    console.log(this.heroCoverImageFile);
+  }
+
+  add(name: string, description: string): void {
     name = name.trim();
     description = description.trim();
-    if (!name || !description) { return; }
+    const image = this.heroImageFile;
+    const coverImage = this.heroCoverImageFile;
+    if (!name || !description || !image || !coverImage) { return; }
     this.heroService.addHero({ name, description, image, coverImage } as Hero)
       .subscribe(hero => {
         this.heroes.push(hero);

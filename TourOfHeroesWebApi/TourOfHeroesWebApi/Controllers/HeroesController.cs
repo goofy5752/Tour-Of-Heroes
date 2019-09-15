@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TourOfHeroesData;
 using TourOfHeroesData.Models;
-using TourOfHeroesServices;
 using TourOfHeroesServices.Contracts;
 using TourOfHeroesWebApi.DTOs;
 
@@ -49,23 +48,23 @@ namespace TourOfHeroesWebApi.Controllers
             }
         }
 
-        [HttpPost]
-        public async Task<ActionResult<Hero>> Post(CreateHeroDTO heroDto)
+        [HttpPost, DisableRequestSizeLimit]
+        public async Task<ActionResult<Hero>> Post(CreateHeroDTO hero)
         {
-            var imgUrl = this._imageService.AddToCloudinaryAndReturnImageUrl(heroDto.Image);
-            var coverImgUrl = this._imageService.AddToCloudinaryAndReturnImageUrl(heroDto.CoverImage);
+            var imgUrl = this._imageService.AddToCloudinaryAndReturnImageUrl(hero.Image);
+            var coverImgUrl = this._imageService.AddToCloudinaryAndReturnImageUrl(hero.CoverImage);
             await this._imageService.SaveAllAsync();
-            var hero = new Hero
+            var heroObj = new Hero
             {
-                Name = heroDto.Name,
-                Description = heroDto.Description,
+                Name = hero.Name,
+                Description = hero.Description,
                 Image = imgUrl,
                 CoverImage = coverImgUrl
             };
 
-            await this._dbContext.Heroes.AddAsync(hero);
+            await this._dbContext.Heroes.AddAsync(heroObj);
             await this._dbContext.SaveChangesAsync();
-            return this.CreatedAtAction("Get", new { id = hero.Id });
+            return this.CreatedAtAction("Get", new { id = heroObj.Id });
         }
 
         [HttpPut("{id}")]

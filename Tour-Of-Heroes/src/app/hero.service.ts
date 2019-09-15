@@ -14,7 +14,7 @@ export class HeroService {
   private heroesUrl = 'https://localhost:44353/api/heroes';  // URL to web api
 
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders().append('Content-Disposition', 'multipart/form-data').append('Accept', 'application/json')
   };
 
   constructor(
@@ -69,7 +69,13 @@ export class HeroService {
 
   /** POST: add a new hero to the server */
   addHero(hero: Hero): Observable<Hero> {
-    return this.http.post<Hero>(this.heroesUrl, hero, this.httpOptions).pipe(
+    const formData = new FormData();
+    formData.append('name', hero.name);
+    formData.append('description', hero.description);
+    formData.append('image', hero.image, hero.image.name);
+    formData.append('coverImage', hero.coverImage, hero.coverImage.name);
+    console.log(formData.getAll('image'));
+    return this.http.post<Hero>(this.heroesUrl, formData).pipe(
       tap((newHero: Hero) => this.log(`added hero w/ id=${newHero.id}`)),
       catchError(this.handleError<Hero>('addHero'))
     );

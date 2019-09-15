@@ -1,15 +1,17 @@
 <div class="container container-lg">
-    <div class="input-group">
-        <input #heroName type="text" class="form-control" placeholder="Hero name" aria-describedby="basic-addon2">
-        <input #heroDescription type="text" class="form-control" placeholder="Hero description"
-            aria-describedby="basic-addon2">
-        <input #heroImage type="file" class="form-control" placeholder="Hero image" aria-describedby="basic-addon2">
-        <input #heroCoverImage type="file" class="form-control" placeholder="Hero cover image" aria-describedby="basic-addon2">
-    </div>
-    <div class="input-group-append">
-        <button class="btn btn-outline-secondary" type="button" title="add hero"
-            (click)="add(heroName.value, heroDescription.value, heroImage, heroCoverImage); heroName.value=''">Add</button>
-    </div>
+    <form enctype="multipart/form-data" method="post">
+        <div class="input-group">
+            <input #heroName type="text" class="form-control" placeholder="Hero name">
+            <input #heroDescription type="text" class="form-control" placeholder="Hero description">
+            <input #heroImage type="file" (change)="stageHeroImageFile()" class="form-control" placeholder="Hero image">
+            <input #heroCoverImage type="file" (change)="stageHeroCoverImageFile()" class="form-control"
+                placeholder="Hero cover image">
+        </div>
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" title="add hero"
+                (click)="add(heroName.value, heroDescription.value); heroName.value=''">Add</button>
+        </div>
+    </form>
     <div class="row mb-5">
         <div class="col-sm-6" *ngFor="let hero of heroes">
             <div class="cardbox" style="color: black">
