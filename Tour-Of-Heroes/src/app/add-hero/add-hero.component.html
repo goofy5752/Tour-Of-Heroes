@@ -1,0 +1,13 @@
+<form enctype="multipart/form-data" method="post">
+    <div class="text-center">
+        <input #heroName type="text" class="form-control" placeholder="Hero name">
+        <input #heroDescription type="text" class="form-control" placeholder="Hero description">
+        <input #heroImage type="file" (change)="stageHeroImageFile()" class="form-control" placeholder="Hero image">
+        <input #heroCoverImage type="file" (change)="stageHeroCoverImageFile()" class="form-control"
+            placeholder="Hero cover image">
+    </div>
+    <div class="input-group-append text-center">
+        <button class="btn btn-outline-secondary" type="button" title="add hero"
+            (click)="add(heroName.value, heroDescription.value); heroName.value=''">Add</button>
+    </div>
+</form>

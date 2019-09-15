@@ -15,6 +15,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { NavComponent } from './nav/nav.component';
 import { FooterComponent } from './footer/footer.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { AddHeroComponent } from './add-hero/add-hero.component';
 
 @NgModule({
   imports: [
@@ -34,6 +35,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     NavComponent,
     FooterComponent,
     SidebarComponent,
+    AddHeroComponent,
   ],
   bootstrap: [AppComponent]
 })
