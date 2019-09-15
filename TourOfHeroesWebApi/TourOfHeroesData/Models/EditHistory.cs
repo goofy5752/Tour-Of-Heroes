@@ -18,5 +18,6 @@ namespace TourOfHeroesData.Models
         public DateTime EditedOn { get; set; }
 
         public virtual Hero Hero { get; set; }
+        public int HeroId { get; set; }
     }
 }
