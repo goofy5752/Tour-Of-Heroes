@@ -48,6 +48,7 @@ namespace TourOfHeroesWebApi
             app.UseHttpsRedirection();
             app.UseCors(options =>
                 options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            app.UseMiddleware(typeof(ErrorHandlingMiddleware));
             app.UseMvc();
         }
     }
