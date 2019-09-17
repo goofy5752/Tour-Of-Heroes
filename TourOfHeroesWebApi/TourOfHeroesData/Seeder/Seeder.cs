@@ -23,7 +23,7 @@ namespace TourOfHeroesData.Seeder
                 var cptAmerica = new Hero
                 {
                     Name = "Captain America",
-                    Description = "",
+                    Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel eros orci. Integer dictum pretium imperdiet. In tellus ligula, vestibulum vel orci et, dictum accumsan magna. Sed porttitor ligula sit amet sem tristique aliquet. Sed porta magna non enim fringilla placerat. Praesent volutpat congue purus, at ullamcorper magna aliquet ut. Vestibulum at pellentesque sapien. Phasellus eu mattis mauris. Sed pharetra maximus dolor ut rutrum. Quisque commodo magna a enim pulvinar sollicitudin.",
                     Image = "https://res.cloudinary.com/goofy5752/image/upload/v1568707816/HeroUploads/cpt_america_img_h3vbyt.jpg",
                     CoverImage = "https://res.cloudinary.com/goofy5752/image/upload/v1568707816/HeroUploads/cpt_america_cover_c0v4og.png"
                 };
@@ -33,7 +33,7 @@ namespace TourOfHeroesData.Seeder
                 var spiderman = new Hero
                 {
                     Name = "Spider-Man",
-                    Description = "",
+                    Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel eros orci. Integer dictum pretium imperdiet. In tellus ligula, vestibulum vel orci et, dictum accumsan magna. Sed porttitor ligula sit amet sem tristique aliquet. Sed porta magna non enim fringilla placerat. Praesent volutpat congue purus, at ullamcorper magna aliquet ut. Vestibulum at pellentesque sapien. Phasellus eu mattis mauris. Sed pharetra maximus dolor ut rutrum. Quisque commodo magna a enim pulvinar sollicitudin.",
                     Image = "https://res.cloudinary.com/goofy5752/image/upload/v1568707690/HeroUploads/spiderman-img_vcfskb.jpg",
                     CoverImage = "https://res.cloudinary.com/goofy5752/image/upload/v1568707690/HeroUploads/spiderman-cover_akceyp.jpg"
                 };
@@ -43,7 +43,7 @@ namespace TourOfHeroesData.Seeder
                 var thor = new Hero
                 {
                     Name = "Thor",
-                    Description = "",
+                    Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel eros orci. Integer dictum pretium imperdiet. In tellus ligula, vestibulum vel orci et, dictum accumsan magna. Sed porttitor ligula sit amet sem tristique aliquet. Sed porta magna non enim fringilla placerat. Praesent volutpat congue purus, at ullamcorper magna aliquet ut. Vestibulum at pellentesque sapien. Phasellus eu mattis mauris. Sed pharetra maximus dolor ut rutrum. Quisque commodo magna a enim pulvinar sollicitudin.",
                     Image = "https://res.cloudinary.com/goofy5752/image/upload/v1568707791/HeroUploads/thor-img_aeb3pa.jpg",
                     CoverImage = "https://res.cloudinary.com/goofy5752/image/upload/v1568707792/HeroUploads/thor-cover_ab0mdt.jpg"
                 };
@@ -53,7 +53,7 @@ namespace TourOfHeroesData.Seeder
                 var hulk = new Hero
                 {
                     Name = "Hulk",
-                    Description = "",
+                    Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel eros orci. Integer dictum pretium imperdiet. In tellus ligula, vestibulum vel orci et, dictum accumsan magna. Sed porttitor ligula sit amet sem tristique aliquet. Sed porta magna non enim fringilla placerat. Praesent volutpat congue purus, at ullamcorper magna aliquet ut. Vestibulum at pellentesque sapien. Phasellus eu mattis mauris. Sed pharetra maximus dolor ut rutrum. Quisque commodo magna a enim pulvinar sollicitudin.",
                     Image = "https://res.cloudinary.com/goofy5752/image/upload/v1568707689/HeroUploads/hulk-img_dauwaa.jpg",
                     CoverImage = "https://res.cloudinary.com/goofy5752/image/upload/v1568707690/HeroUploads/hulk-cover_mgxrcq.jpg"
                 };
@@ -63,7 +63,7 @@ namespace TourOfHeroesData.Seeder
                 var ironman = new Hero
                 {
                     Name = "Iron Man",
-                    Description = "",
+                    Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel eros orci. Integer dictum pretium imperdiet. In tellus ligula, vestibulum vel orci et, dictum accumsan magna. Sed porttitor ligula sit amet sem tristique aliquet. Sed porta magna non enim fringilla placerat. Praesent volutpat congue purus, at ullamcorper magna aliquet ut. Vestibulum at pellentesque sapien. Phasellus eu mattis mauris. Sed pharetra maximus dolor ut rutrum. Quisque commodo magna a enim pulvinar sollicitudin.",
                     Image = "https://res.cloudinary.com/goofy5752/image/upload/v1568707689/HeroUploads/ironman-img_kvxuvy.jpg",
                     CoverImage = "https://res.cloudinary.com/goofy5752/image/upload/v1568707689/HeroUploads/ironman-cover_kvdzuy.jpg"
                 };
@@ -73,12 +73,32 @@ namespace TourOfHeroesData.Seeder
                 var hawkeye = new Hero
                 {
                     Name = "Hawkeye",
-                    Description = "",
+                    Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel eros orci. Integer dictum pretium imperdiet. In tellus ligula, vestibulum vel orci et, dictum accumsan magna. Sed porttitor ligula sit amet sem tristique aliquet. Sed porta magna non enim fringilla placerat. Praesent volutpat congue purus, at ullamcorper magna aliquet ut. Vestibulum at pellentesque sapien. Phasellus eu mattis mauris. Sed pharetra maximus dolor ut rutrum. Quisque commodo magna a enim pulvinar sollicitudin.",
                     Image = "https://res.cloudinary.com/goofy5752/image/upload/v1568707690/HeroUploads/hawkeye-img_lvvkth.jpg",
                     CoverImage = "https://res.cloudinary.com/goofy5752/image/upload/v1568707690/HeroUploads/hawkeye-cover_dpzgsd.jpg"
                 };
 
                 heroList.Add(hawkeye);
+
+                var blackwidow = new Hero
+                {
+                    Name = "Black Widow",
+                    Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel eros orci. Integer dictum pretium imperdiet. In tellus ligula, vestibulum vel orci et, dictum accumsan magna. Sed porttitor ligula sit amet sem tristique aliquet. Sed porta magna non enim fringilla placerat. Praesent volutpat congue purus, at ullamcorper magna aliquet ut. Vestibulum at pellentesque sapien. Phasellus eu mattis mauris. Sed pharetra maximus dolor ut rutrum. Quisque commodo magna a enim pulvinar sollicitudin.",
+                    Image = "https://res.cloudinary.com/goofy5752/image/upload/v1568712498/HeroUploads/blackwidow-img_kvu6ch.jpg",
+                    CoverImage = "https://res.cloudinary.com/goofy5752/image/upload/v1568712498/HeroUploads/blackwidow-cover_kuhthy.jpg"
+                };
+
+                heroList.Add(blackwidow);
+
+                var blackpanther = new Hero
+                {
+                    Name = "Black Panther",
+                    Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel eros orci. Integer dictum pretium imperdiet. In tellus ligula, vestibulum vel orci et, dictum accumsan magna. Sed porttitor ligula sit amet sem tristique aliquet. Sed porta magna non enim fringilla placerat. Praesent volutpat congue purus, at ullamcorper magna aliquet ut. Vestibulum at pellentesque sapien. Phasellus eu mattis mauris. Sed pharetra maximus dolor ut rutrum. Quisque commodo magna a enim pulvinar sollicitudin.",
+                    Image = "https://res.cloudinary.com/goofy5752/image/upload/v1568712497/HeroUploads/black-panther-img_ea6z3e.jpg",
+                    CoverImage = "https://res.cloudinary.com/goofy5752/image/upload/v1568712498/HeroUploads/black-panther-cover_gulfqb.jpg"
+                };
+
+                heroList.Add(blackpanther);
 
                 _dbContext.Heroes.AddRange(heroList);
                 _dbContext.SaveChangesAsync();
