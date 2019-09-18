@@ -27,7 +27,7 @@ namespace TourOfHeroesData.Seeder
                     Name = "Captain America",
                     Description = "Captain America is a fictional superhero appearing in American comic books published by Marvel Comics. Created by cartoonists Joe Simon and Jack Kirby, the character first appeared in Captain America Comics #1 (cover dated March 1941) from Timely Comics, a predecessor of Marvel Comics. Captain America was designed as a patriotic supersoldier who often fought the Axis powers of World War II and was Timely Comics' most popular character during the wartime period. The popularity of superheroes waned following the war and the Captain America comic book was discontinued in 1950, with a short-lived revival in 1953. Since Marvel Comics revived the character in 1964, Captain America has remained in publication.",
                     Image = "https://res.cloudinary.com/goofy5752/image/upload/v1568707816/HeroUploads/cpt_america_img_h3vbyt.jpg",
-                    CoverImage = "https://res.cloudinary.com/goofy5752/image/upload/v1568707816/HeroUploads/cpt_america_cover_c0v4og.png",
+                    CoverImage = "https://res.cloudinary.com/goofy5752/image/upload/v1568818599/HeroUploads/cpt-america-cover_mcbtj7.jpg",
                     RealName = "Chris Evans",
                     Birthday = new DateTime(1981,6,13).ToString("MM/dd/yyyy"),
                     Gender = "Male"
