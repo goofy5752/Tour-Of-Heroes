@@ -1,19 +1,6 @@
 <app-nav></app-nav>
 <app-sidebar></app-sidebar>
 <div class="container-fluid bg-light">
-    <div class="row">
-        <div class="col-9">
-            <div class="content" role="main">
-                <router-outlet></router-outlet>
-            </div>
-        </div>
-        <div class="col-3" style="margin-bottom: 75px;">
-            <div class="cardbox text-center" style="margin-top: 39px;">
-                <p>
-                    <app-messages></app-messages>
-                </p>
-            </div>
-        </div>
-    </div>
+    <router-outlet></router-outlet>
 </div>
 <app-footer></app-footer>

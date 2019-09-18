@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 
 import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
+import { headersToString } from 'selenium-webdriver/http';
 
 @Component({
   selector: 'app-hero-detail',
@@ -38,5 +39,10 @@ export class HeroDetailComponent implements OnInit {
   save(): void {
     this.heroService.updateHero(this.hero)
       .subscribe(() => this.goBack());
+  }
+
+  getUrl() {
+    const id = +this.route.snapshot.paramMap.get('id');
+    const hero = this.heroService.getHero(id);
   }
 }

@@ -1,11 +1,51 @@
-<div *ngIf="hero">
-    <h2>{{hero.name | uppercase}} Details</h2>
-    <div><span>id: </span>{{hero.id}}</div>
-    <div>
-        <label>Name:
-      <input type="text" class="form-control" [(ngModel)]="hero.name" placeholder="Name"/>
-    </label>
+<section class="section-container" *ngIf="hero" style="margin-top: 60px;">
+    <div class="container-overlap text-center bg-info">
+        <div class="mb-3"><img alt="user" class="wd-sm rounded-circle img-thumbnail" src={{hero.image}}></div>
+        <div class="text-white">
+            <input type="text" class="inputCustom" [(ngModel)]="hero.name" placeholder="Name" />
+            <button type="button" class="btn btn-success mx-2" (click)="save()"><i class="fa fa-floppy-o"
+          aria-hidden="true"></i></button><br>
+            <small>
+        {{hero.description}}
+      </small>
+        </div>
     </div>
-    <button type="button" class="btn btn-dark mx-2" (click)="goBack()"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></button>
-    <button type="button" class="btn btn-dark mx-2" (click)="save()"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
-</div>
+    <div class="container container-md mb-5">
+        <form class="cardbox ng-untouched ng-pristine ng-valid" novalidate="">
+            <h5 class="cardbox-heading pb-0">Personal Information</h5>
+            <div class="cardbox-body">
+                <table class="table table-striped mb-0">
+                    <tbody>
+                        <tr>
+                            <td><em class="ion-ios-document icon-fw mr-3"></em>Real name</td>
+                            <td>{{hero.realName}}</td>
+                        </tr>
+                        <tr>
+                            <td><em class="ion-ios-egg icon-fw mr-3"></em>Birthday</td>
+                            <td><span class="is-editable text-inherit">{{hero.birthday}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><em class="ion-ios-man icon-fw mr-3"></em>{{hero.gender}}</td>
+                            <td>
+                                <a class="text-inherit" href="#" id="gender"></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </form>
+        <div class="cardbox">
+            <h5 class="cardbox-heading">Activity</h5>
+            <div class="cardbox-body pb-0" *ngFor="let hero of heroes">
+                <p class="float-left mr-3"><em class="p-1 rounded-circle d-inline-block bg-info"></em></p>
+                <div class="oh">
+                    <p><strong class="mr-2">Added</strong><span class="mr-2">a new edit</span>{{hero.oldValue}</p>
+                    <div class="clearfix">
+                        <div class="float-left text-muted"><em class="ion-ios-timer mr-2"></em><span>an hour ago</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

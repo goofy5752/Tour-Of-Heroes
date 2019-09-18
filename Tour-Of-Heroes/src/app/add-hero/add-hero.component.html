@@ -1,13 +1,29 @@
-<form enctype="multipart/form-data" method="post">
-    <div class="text-center">
-        <input #heroName type="text" class="form-control" placeholder="Hero name">
-        <input #heroDescription type="text" class="form-control" placeholder="Hero description">
-        <input #heroImage type="file" (change)="stageHeroImageFile()" class="form-control" placeholder="Hero image">
-        <input #heroCoverImage type="file" (change)="stageHeroCoverImageFile()" class="form-control"
-            placeholder="Hero cover image">
+<form enctype="multipart/form-data" method="post" style="text-align: -webkit-center;">
+    <div style="margin-top: 80px">
+        <label for="heroName">Name:
+            <input #heroName type="text" class="form-control" placeholder="Hero name">
+        </label>
+        <label for="heroDescription">Description:
+            <input #heroDescription type="text" class="form-control" placeholder="Hero description">
+        </label>
+        <label for="heroImage">Image:
+            <input #heroImage type="file" (change)="stageHeroImageFile()" class="form-control" placeholder="Hero image">
+        </label>
+        <label for="heroCoverImage">Cover Image:
+            <input #heroCoverImage type="file" (change)="stageHeroCoverImageFile()" class="form-control"
+                placeholder="Hero cover image">
+        </label>
+        <label for="heroRealName">Real Name:
+            <input #heroRealName type="text" class="form-control" placeholder="Hero real name">
+        </label>
+        <label for="heroBirthday">Birthday:
+            <input #heroBirthday type="date" class="form-control" placeholder="Hero birthday">
+        </label>
+        <label for="heroGender">Gender:
+            <input #heroGender type="text" class="form-control" placeholder="Hero gender">
+        </label>
     </div>
     <div class="input-group-append text-center">
-        <button class="btn btn-outline-secondary" type="button" title="add hero"
-            (click)="add(heroName.value, heroDescription.value); heroName.value=''">Add</button>
+        <button class="btn btn-outline-secondary" type="button" title="add hero" (click)="add(heroName.value, heroDescription.value, heroRealName.value, heroBirthday.value, heroGender.value); heroName.value=''">Add</button>
     </div>
 </form>

@@ -30,13 +30,13 @@ export class AddHeroComponent implements OnInit {
     console.log(this.heroCoverImageFile);
   }
 
-  add(name: string, description: string): void {
+  add(name: string, description: string, realName: string, birthday: string, gender: string): void {
     name = name.trim();
     description = description.trim();
     const image = this.heroImageFile;
     const coverImage = this.heroCoverImageFile;
     if (!name || !description || !image || !coverImage) { return; }
-    this.heroService.addHero({ name, description, image, coverImage } as Hero)
+    this.heroService.addHero({ name, description, image, coverImage, realName, birthday, gender } as Hero)
       .subscribe(hero => {
         this.heroes.push(hero);
       });

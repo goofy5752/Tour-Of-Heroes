@@ -75,6 +75,9 @@ export class HeroService {
     formData.append('description', hero.description);
     formData.append('image', hero.image, hero.image.name);
     formData.append('coverImage', hero.coverImage, hero.coverImage.name);
+    formData.append('realName', hero.realName);
+    formData.append('birthday', hero.birthday);
+    formData.append('gender', hero.gender);
     console.log(formData.getAll('image'));
     return this.http.post<Hero>(this.heroesUrl, formData, this.httpOptions).pipe(
       tap((newHero: Hero) => this.log(`added hero w/ id=${newHero.id}`)),

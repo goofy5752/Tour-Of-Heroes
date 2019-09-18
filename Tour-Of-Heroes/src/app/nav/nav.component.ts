@@ -16,12 +16,6 @@ export class NavComponent implements OnInit {
   ngOnInit() {
       this.href = this.router.url;
       const charToUpper =  this.href.charAt(1).toUpperCase();
-      // const lastChar = isNumber(this.href.charAt(this.href.length - 1));
-      // if (lastChar === false) {
-      //   return 'Hero details';
-      // }
-      // return typeof lastChar;
       return charToUpper + this.href.substring(2, this.href.length);
   }
-
 }

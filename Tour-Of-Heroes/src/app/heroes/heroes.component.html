@@ -2,17 +2,15 @@
     <div class="row mb-5">
         <div class="col-sm-6" *ngFor="let hero of heroes">
             <div class="cardbox" style="color: black">
-                <div class="pb-1 bg-gradient-warning"></div>
                 <div class="cardbox-body">
                     <div class="d-flex">
                         <div>
                             <div class="lead mb-2">{{hero.name}}</div>
-                            <p><em class="ion-ios-mail mr-2 icon-lg text-warning"></em><span>{{hero.id}}</span></p>
-                            <button class="btn btn-warning" type="button"
-                                routerLink="/detail/{{hero.id}}">Details</button>
+                            <p><em class="ion-ios-people mr-2 icon-lg text-warning"></em><span>{{hero.id}}</span></p>
+                            <button class="btn btn-warning" type="button" routerLink="/detail/{{hero.id}}">Details</button>
+                            <button class="btn btn-danger" type="button" (click)="delete(hero)" style="margin-left: 14px;">Delete</button>
                         </div>
-                        <div class="ml-auto"><img alt="hero" class="shadow-z5 thumb80 rounded"
-                                src={{hero.image}}></div>
+                        <div class="ml-auto"><img alt="hero" class="shadow-z5 thumb80 rounded" src={{hero.image}}></div>
                     </div>
                 </div>
             </div>
