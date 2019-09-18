@@ -2,21 +2,17 @@
 .ion-ios-body:before,
 .ion-ios-document:before,
 .ion-ios-egg:before,
-.ion-ios-female:before,
 .ion-ios-information-circle:before,
 .ion-ios-information:before,
 .ion-ios-man:before,
-.ion-ios-outlet:before,
 .ion-ios-text:before,
 .ion-ios-timer:before,
 .ion-md-body:before,
 .ion-md-document:before,
 .ion-md-egg:before,
-.ion-md-female:before,
 .ion-md-information-circle:before,
 .ion-md-information:before,
 .ion-md-man:before,
-.ion-md-outlet:before,
 .ion-md-text:before,
 .ion-md-timer:before {
     display: inline-block;
@@ -1911,8 +1907,8 @@ a.text-info:hover {
 
 @media print {
     *,
-     ::after,
-     ::before {
+    ::after,
+    ::before {
         text-shadow: none!important;
         box-shadow: none!important
     }
@@ -1947,14 +1943,14 @@ a.text-info:hover {
 
 .wd-sm {
     width: 150px;
-    height: 150px;
+    height: 150px
 }
 
 .inputCustom {
     width: 150px;
-    background-color: white;
+    background-color: #fff;
     list-style-type: none;
     border-radius: 7px;
     height: 37px;
-    text-align: center;
+    text-align: center
 }
