@@ -1,29 +1,20 @@
-<form enctype="multipart/form-data" method="post" style="text-align: -webkit-center;">
-    <div style="margin-top: 80px">
-        <label for="heroName">Name:
-            <input #heroName type="text" class="form-control" placeholder="Hero name">
-        </label>
-        <label for="heroDescription">Description:
-            <input #heroDescription type="text" class="form-control" placeholder="Hero description">
-        </label>
-        <label for="heroImage">Image:
-            <input #heroImage type="file" (change)="stageHeroImageFile()" class="form-control" placeholder="Hero image">
-        </label>
-        <label for="heroCoverImage">Cover Image:
-            <input #heroCoverImage type="file" (change)="stageHeroCoverImageFile()" class="form-control"
-                placeholder="Hero cover image">
-        </label>
-        <label for="heroRealName">Real Name:
-            <input #heroRealName type="text" class="form-control" placeholder="Hero real name">
-        </label>
-        <label for="heroBirthday">Birthday:
-            <input #heroBirthday type="date" class="form-control" placeholder="Hero birthday">
-        </label>
-        <label for="heroGender">Gender:
-            <input #heroGender type="text" class="form-control" placeholder="Hero gender">
-        </label>
+<div class="cardbox mb-5 mt-5"><img class="customImg" src="https://res.cloudinary.com/goofy5752/image/upload/v1568817396/HeroUploads/dark-theme_ijeqfk.jpg">
+    <div class="cardbox-body" style="color: white; text-align: -webkit-center;">
+        <form action="" novalidate="" class="ng-untouched ng-pristine ng-valid">
+            <div class="form-group"><label>Name</label><input #heroName class="form-control" type="text"></div>
+            <div class="form-group"><label>Description</label><textarea #heroDescription class="form-control" rows="3"></textarea></div>
+            <div class="form-group"><label>Real name</label><input #heroRealName class="form-control" type="text"></div>
+            <div class="form-group"><label>Birthday</label><input #heroBirthday class="form-control" type="text"></div>
+            <div class="form-group"><label>Gender</label><input #heroGender class="form-control" type="text"></div>
+            <div class="form-group">
+                <p>Profile image</p><label class="custom-file"><input #heroImage  class="custom-file-input" id="file"
+                            type="file" (change)="stageHeroImageFile()"><span class="custom-file-control"></span></label>
+            </div>
+            <div class="form-group">
+                <p>Cover image</p><label class="custom-file"><input #heroCoverImage class="custom-file-input" id="file"
+                            type="file" (change)="stageHeroCoverImageFile()"><span class="custom-file-control"></span></label>
+            </div>
+            <button class="btn btn-info" type="button" (click)="add(heroName.value, heroDescription.value, heroRealName.value, heroBirthday.value, heroGender.value);">Create new hero</button>
+        </form>
     </div>
-    <div class="input-group-append text-center">
-        <button class="btn btn-outline-secondary" type="button" title="add hero" (click)="add(heroName.value, heroDescription.value, heroRealName.value, heroBirthday.value, heroGender.value); heroName.value=''">Add</button>
-    </div>
-</form>
+</div>
