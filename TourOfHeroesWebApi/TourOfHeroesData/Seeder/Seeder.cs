@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using TourOfHeroesData.Models;
 using TourOfHeroesData.Seeder.Contracts;
@@ -25,7 +27,10 @@ namespace TourOfHeroesData.Seeder
                     Name = "Captain America",
                     Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel eros orci. Integer dictum pretium imperdiet. In tellus ligula, vestibulum vel orci et, dictum accumsan magna. Sed porttitor ligula sit amet sem tristique aliquet. Sed porta magna non enim fringilla placerat. Praesent volutpat congue purus, at ullamcorper magna aliquet ut. Vestibulum at pellentesque sapien. Phasellus eu mattis mauris. Sed pharetra maximus dolor ut rutrum. Quisque commodo magna a enim pulvinar sollicitudin.",
                     Image = "https://res.cloudinary.com/goofy5752/image/upload/v1568707816/HeroUploads/cpt_america_img_h3vbyt.jpg",
-                    CoverImage = "https://res.cloudinary.com/goofy5752/image/upload/v1568707816/HeroUploads/cpt_america_cover_c0v4og.png"
+                    CoverImage = "https://res.cloudinary.com/goofy5752/image/upload/v1568707816/HeroUploads/cpt_america_cover_c0v4og.png",
+                    RealName = "Chris Evans",
+                    Birthday = new DateTime(1981,6,13).ToString("MM/dd/yyyy"),
+                    Gender = "Male"
                 };
 
                 heroList.Add(cptAmerica);
@@ -35,7 +40,10 @@ namespace TourOfHeroesData.Seeder
                     Name = "Spider-Man",
                     Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel eros orci. Integer dictum pretium imperdiet. In tellus ligula, vestibulum vel orci et, dictum accumsan magna. Sed porttitor ligula sit amet sem tristique aliquet. Sed porta magna non enim fringilla placerat. Praesent volutpat congue purus, at ullamcorper magna aliquet ut. Vestibulum at pellentesque sapien. Phasellus eu mattis mauris. Sed pharetra maximus dolor ut rutrum. Quisque commodo magna a enim pulvinar sollicitudin.",
                     Image = "https://res.cloudinary.com/goofy5752/image/upload/v1568707690/HeroUploads/spiderman-img_vcfskb.jpg",
-                    CoverImage = "https://res.cloudinary.com/goofy5752/image/upload/v1568707690/HeroUploads/spiderman-cover_akceyp.jpg"
+                    CoverImage = "https://res.cloudinary.com/goofy5752/image/upload/v1568707690/HeroUploads/spiderman-cover_akceyp.jpg",
+                    RealName = "Tobey Maguire",
+                    Birthday = new DateTime(1975, 6, 27).ToString("MM/dd/yyyy"),
+                    Gender = "Male"
                 };
 
                 heroList.Add(spiderman);
@@ -45,7 +53,10 @@ namespace TourOfHeroesData.Seeder
                     Name = "Thor",
                     Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel eros orci. Integer dictum pretium imperdiet. In tellus ligula, vestibulum vel orci et, dictum accumsan magna. Sed porttitor ligula sit amet sem tristique aliquet. Sed porta magna non enim fringilla placerat. Praesent volutpat congue purus, at ullamcorper magna aliquet ut. Vestibulum at pellentesque sapien. Phasellus eu mattis mauris. Sed pharetra maximus dolor ut rutrum. Quisque commodo magna a enim pulvinar sollicitudin.",
                     Image = "https://res.cloudinary.com/goofy5752/image/upload/v1568707791/HeroUploads/thor-img_aeb3pa.jpg",
-                    CoverImage = "https://res.cloudinary.com/goofy5752/image/upload/v1568707792/HeroUploads/thor-cover_ab0mdt.jpg"
+                    CoverImage = "https://res.cloudinary.com/goofy5752/image/upload/v1568707792/HeroUploads/thor-cover_ab0mdt.jpg",
+                    RealName = "Chris Hemsworth",
+                    Birthday = new DateTime(1983, 8, 11).ToString("MM/dd/yyyy"),
+                    Gender = "Male"
                 };
 
                 heroList.Add(thor);
@@ -55,7 +66,10 @@ namespace TourOfHeroesData.Seeder
                     Name = "Hulk",
                     Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel eros orci. Integer dictum pretium imperdiet. In tellus ligula, vestibulum vel orci et, dictum accumsan magna. Sed porttitor ligula sit amet sem tristique aliquet. Sed porta magna non enim fringilla placerat. Praesent volutpat congue purus, at ullamcorper magna aliquet ut. Vestibulum at pellentesque sapien. Phasellus eu mattis mauris. Sed pharetra maximus dolor ut rutrum. Quisque commodo magna a enim pulvinar sollicitudin.",
                     Image = "https://res.cloudinary.com/goofy5752/image/upload/v1568707689/HeroUploads/hulk-img_dauwaa.jpg",
-                    CoverImage = "https://res.cloudinary.com/goofy5752/image/upload/v1568707690/HeroUploads/hulk-cover_mgxrcq.jpg"
+                    CoverImage = "https://res.cloudinary.com/goofy5752/image/upload/v1568707690/HeroUploads/hulk-cover_mgxrcq.jpg",
+                    RealName = "Mark Ruffalo",
+                    Birthday = new DateTime(1967, 11, 22).ToString("MM/dd/yyyy"),
+                    Gender = "Male"
                 };
 
                 heroList.Add(hulk);
@@ -65,7 +79,10 @@ namespace TourOfHeroesData.Seeder
                     Name = "Iron Man",
                     Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel eros orci. Integer dictum pretium imperdiet. In tellus ligula, vestibulum vel orci et, dictum accumsan magna. Sed porttitor ligula sit amet sem tristique aliquet. Sed porta magna non enim fringilla placerat. Praesent volutpat congue purus, at ullamcorper magna aliquet ut. Vestibulum at pellentesque sapien. Phasellus eu mattis mauris. Sed pharetra maximus dolor ut rutrum. Quisque commodo magna a enim pulvinar sollicitudin.",
                     Image = "https://res.cloudinary.com/goofy5752/image/upload/v1568707689/HeroUploads/ironman-img_kvxuvy.jpg",
-                    CoverImage = "https://res.cloudinary.com/goofy5752/image/upload/v1568707689/HeroUploads/ironman-cover_kvdzuy.jpg"
+                    CoverImage = "https://res.cloudinary.com/goofy5752/image/upload/v1568707689/HeroUploads/ironman-cover_kvdzuy.jpg",
+                    RealName = "Robert Downey Jr",
+                    Birthday = new DateTime(1965, 4, 4).ToString("MM/dd/yyyy"),
+                    Gender = "Male"
                 };
 
                 heroList.Add(ironman);
@@ -75,7 +92,10 @@ namespace TourOfHeroesData.Seeder
                     Name = "Hawkeye",
                     Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel eros orci. Integer dictum pretium imperdiet. In tellus ligula, vestibulum vel orci et, dictum accumsan magna. Sed porttitor ligula sit amet sem tristique aliquet. Sed porta magna non enim fringilla placerat. Praesent volutpat congue purus, at ullamcorper magna aliquet ut. Vestibulum at pellentesque sapien. Phasellus eu mattis mauris. Sed pharetra maximus dolor ut rutrum. Quisque commodo magna a enim pulvinar sollicitudin.",
                     Image = "https://res.cloudinary.com/goofy5752/image/upload/v1568707690/HeroUploads/hawkeye-img_lvvkth.jpg",
-                    CoverImage = "https://res.cloudinary.com/goofy5752/image/upload/v1568707690/HeroUploads/hawkeye-cover_dpzgsd.jpg"
+                    CoverImage = "https://res.cloudinary.com/goofy5752/image/upload/v1568707690/HeroUploads/hawkeye-cover_dpzgsd.jpg",
+                    RealName = "Jeremy Renner",
+                    Birthday = new DateTime(1971, 1, 7).ToString("MM/dd/yyyy"),
+                    Gender = "Male"
                 };
 
                 heroList.Add(hawkeye);
@@ -85,7 +105,10 @@ namespace TourOfHeroesData.Seeder
                     Name = "Black Widow",
                     Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel eros orci. Integer dictum pretium imperdiet. In tellus ligula, vestibulum vel orci et, dictum accumsan magna. Sed porttitor ligula sit amet sem tristique aliquet. Sed porta magna non enim fringilla placerat. Praesent volutpat congue purus, at ullamcorper magna aliquet ut. Vestibulum at pellentesque sapien. Phasellus eu mattis mauris. Sed pharetra maximus dolor ut rutrum. Quisque commodo magna a enim pulvinar sollicitudin.",
                     Image = "https://res.cloudinary.com/goofy5752/image/upload/v1568712498/HeroUploads/blackwidow-img_kvu6ch.jpg",
-                    CoverImage = "https://res.cloudinary.com/goofy5752/image/upload/v1568712498/HeroUploads/blackwidow-cover_kuhthy.jpg"
+                    CoverImage = "https://res.cloudinary.com/goofy5752/image/upload/v1568712498/HeroUploads/blackwidow-cover_kuhthy.jpg",
+                    RealName = "Scarlett Johansson",
+                    Birthday = new DateTime(1984, 11, 22).ToString("MM/dd/yyyy"),
+                    Gender = "Female"
                 };
 
                 heroList.Add(blackwidow);
@@ -95,7 +118,10 @@ namespace TourOfHeroesData.Seeder
                     Name = "Black Panther",
                     Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel eros orci. Integer dictum pretium imperdiet. In tellus ligula, vestibulum vel orci et, dictum accumsan magna. Sed porttitor ligula sit amet sem tristique aliquet. Sed porta magna non enim fringilla placerat. Praesent volutpat congue purus, at ullamcorper magna aliquet ut. Vestibulum at pellentesque sapien. Phasellus eu mattis mauris. Sed pharetra maximus dolor ut rutrum. Quisque commodo magna a enim pulvinar sollicitudin.",
                     Image = "https://res.cloudinary.com/goofy5752/image/upload/v1568712497/HeroUploads/black-panther-img_ea6z3e.jpg",
-                    CoverImage = "https://res.cloudinary.com/goofy5752/image/upload/v1568712498/HeroUploads/black-panther-cover_gulfqb.jpg"
+                    CoverImage = "https://res.cloudinary.com/goofy5752/image/upload/v1568712498/HeroUploads/black-panther-cover_gulfqb.jpg",
+                    RealName = "Chadwick Boseman",
+                    Birthday = new DateTime(1976, 11, 29).ToString("MM/dd/yyyy"),
+                    Gender = "Male"
                 };
 
                 heroList.Add(blackpanther);

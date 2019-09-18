@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TourOfHeroesData;
@@ -59,7 +60,10 @@ namespace TourOfHeroesWebApi.Controllers
                 Name = hero.Name,
                 Description = hero.Description,
                 Image = imgUrl,
-                CoverImage = coverImgUrl
+                CoverImage = coverImgUrl,
+                RealName = hero.RealName,
+                Birthday = hero.Birthday.ToString("MM/dd/yyyy"),
+                Gender = hero.Gender
             };
 
             await this._dbContext.Heroes.AddAsync(heroObj);
@@ -71,7 +75,18 @@ namespace TourOfHeroesWebApi.Controllers
         public async Task<IActionResult> Put(int id, Hero hero)
         {
             var dbHero = this._dbContext.Heroes.FirstOrDefault(x => x.Id == id);
-            dbHero.Name = hero.Name;
+            if (dbHero != null)
+            {
+                var editHistory = new EditHistory()
+                {
+                    OldValue = dbHero.Name,
+                    NewValue = hero.Name,
+                    Hero = hero
+                };
+                dbHero.EditHistories.Add(editHistory);
+            }
+
+            if (dbHero != null) dbHero.Name = hero.Name;
             await _dbContext.SaveChangesAsync();
             return this.NoContent();
         }
