@@ -1,13 +1,14 @@
 <section class="section-container" *ngIf="hero" style="margin-top: 60px;">
-    <div class="container-overlap text-center bg-info">
-        <div class="mb-3"><img alt="user" class="wd-sm rounded-circle img-thumbnail" src={{hero.image}}></div>
+    <div class="container-overlap text-center bg-dark"><img class="coverImg" src={{hero.coverImage}}>
+        <div class="mb-3">
+            <img alt="user" class="wd-sm rounded-circle img-thumbnail" src={{hero.image}}></div>
         <div class="text-white">
             <input type="text" class="inputCustom" [(ngModel)]="hero.name" placeholder="Name" />
             <button type="button" class="btn btn-success mx-2" (click)="save()"><i class="fa fa-floppy-o"
-          aria-hidden="true"></i></button><br>
-            <small>
-        {{hero.description}}
-      </small>
+                    aria-hidden="true"></i></button><br>
+            <small style="color: white">
+                {{hero.description}}
+            </small>
         </div>
     </div>
     <div class="container container-md mb-5">
@@ -35,7 +36,7 @@
                 </table>
             </div>
         </form>
-        <div class="cardbox">
+        <div class="cardbox" style="margin-bottom: 100px">
             <h5 class="cardbox-heading">Activity</h5>
             <div class="cardbox-body pb-0" *ngFor="let hero of heroes">
                 <p class="float-left mr-3"><em class="p-1 rounded-circle d-inline-block bg-info"></em></p>

@@ -1907,8 +1907,8 @@ a.text-info:hover {
 
 @media print {
     *,
-    ::after,
-    ::before {
+     ::after,
+     ::before {
         text-shadow: none!important;
         box-shadow: none!important
     }
@@ -1953,4 +1953,9 @@ a.text-info:hover {
     border-radius: 7px;
     height: 37px;
     text-align: center
+}
+
+.coverImg {
+    max-width: 100%;
+    max-height: 100%
 }
