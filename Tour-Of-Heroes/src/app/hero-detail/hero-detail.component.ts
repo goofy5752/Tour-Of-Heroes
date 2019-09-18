@@ -4,7 +4,6 @@ import { Location } from '@angular/common';
 
 import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
-import { headersToString } from 'selenium-webdriver/http';
 
 @Component({
   selector: 'app-hero-detail',

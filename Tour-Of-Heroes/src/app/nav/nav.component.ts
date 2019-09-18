@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { isNumber } from 'util';
 
 @Component({
   selector: 'app-nav',
