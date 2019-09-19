@@ -1,15 +1,16 @@
-<section class="section-container" *ngIf="hero" style="margin-top: 60px;">
-    <div class="container-overlap text-center" style="background-color: black;"><img class="coverImg" src="{{hero.coverImage}}">
-        <div class="mb-3">
+<section class="section-container" *ngIf="hero" style="margin-top: 70px;">
+    <!-- <div class="container-overlap text-center" style="background-color: black;"> -->
+    <div class="coverImg text-center" [ngStyle]="{'background-image': getUrl()}" [style.height.px]="getCoverImgSize()">
+        <div class="imgContentBottom">
             <div>
                 <img alt="user" class="wd-sm rounded-circle img-thumbnail" src={{hero.image}}></div>
             <div class="text-white">
                 <input type="text" class="inputCustom" [(ngModel)]="hero.name" placeholder="Name" />
                 <button type="button" class="btn btn-success mx-2" (click)="save()"><i class="fa fa-floppy-o"
-                        aria-hidden="true"></i></button><br>
+                    aria-hidden="true"></i></button><br>
                 <small style="color: white">
-                    {{hero.description}}
-                </small>
+                {{hero.description}}
+            </small>
             </div>
         </div>
     </div>

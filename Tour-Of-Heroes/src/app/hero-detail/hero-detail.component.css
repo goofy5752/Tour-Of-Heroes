@@ -1952,16 +1952,13 @@ a.text-info:hover {
 }
 
 .coverImg {
-    max-width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
     max-height: 100%;
+    background-position: center;
 }
 
-.mb-3 {
-    z-index: 100!important;
-    margin-bottom: 50px!important;
-}
-
-.container-overlap .mb-3 {
+.imgContentBottom {
     position: absolute;
     bottom: 0;
 }

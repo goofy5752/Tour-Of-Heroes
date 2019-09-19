@@ -39,4 +39,14 @@ export class HeroDetailComponent implements OnInit {
     this.heroService.updateHero(this.hero)
       .subscribe(() => this.goBack());
   }
+
+  getUrl(): any {
+    return `url(${this.hero.coverImage})`;
+  }
+
+  getCoverImgSize() {
+    const img = new Image();
+    img.src = `${this.hero.coverImage}`;
+    return img.height;
+  }
 }
