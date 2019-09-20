@@ -12,6 +12,6 @@ namespace TourOfHeroesData
 
         public DbSet<Hero> Heroes { get; set; }
 
-        public DbSet<EditHistory> EditHistories { get; set; }
+        public DbSet<EditHistory> EditHistory { get; set; }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using TourOfHeroesData.Models;
 using TourOfHeroesData.Seeder.Contracts;
@@ -29,7 +28,7 @@ namespace TourOfHeroesData.Seeder
                     Image = "https://res.cloudinary.com/goofy5752/image/upload/v1568707816/HeroUploads/cpt_america_img_h3vbyt.jpg",
                     CoverImage = "https://res.cloudinary.com/goofy5752/image/upload/v1568818599/HeroUploads/cpt-america-cover_mcbtj7.jpg",
                     RealName = "Chris Evans",
-                    Birthday = new DateTime(1981,6,13).ToString("MM/dd/yyyy"),
+                    Birthday = new DateTime(1981,6,13),
                     Gender = "Male"
                 };
 
@@ -42,7 +41,7 @@ namespace TourOfHeroesData.Seeder
                     Image = "https://res.cloudinary.com/goofy5752/image/upload/v1568707690/HeroUploads/spiderman-img_vcfskb.jpg",
                     CoverImage = "https://res.cloudinary.com/goofy5752/image/upload/v1568707690/HeroUploads/spiderman-cover_akceyp.jpg",
                     RealName = "Tobey Maguire",
-                    Birthday = new DateTime(1975, 6, 27).ToString("MM/dd/yyyy"),
+                    Birthday = new DateTime(1975, 6, 27),
                     Gender = "Male"
                 };
 
@@ -55,7 +54,7 @@ namespace TourOfHeroesData.Seeder
                     Image = "https://res.cloudinary.com/goofy5752/image/upload/v1568707791/HeroUploads/thor-img_aeb3pa.jpg",
                     CoverImage = "https://res.cloudinary.com/goofy5752/image/upload/v1568707792/HeroUploads/thor-cover_ab0mdt.jpg",
                     RealName = "Chris Hemsworth",
-                    Birthday = new DateTime(1983, 8, 11).ToString("MM/dd/yyyy"),
+                    Birthday = new DateTime(1983, 8, 11),
                     Gender = "Male"
                 };
 
@@ -68,7 +67,7 @@ namespace TourOfHeroesData.Seeder
                     Image = "https://res.cloudinary.com/goofy5752/image/upload/v1568707689/HeroUploads/hulk-img_dauwaa.jpg",
                     CoverImage = "https://res.cloudinary.com/goofy5752/image/upload/v1568707690/HeroUploads/hulk-cover_mgxrcq.jpg",
                     RealName = "Mark Ruffalo",
-                    Birthday = new DateTime(1967, 11, 22).ToString("MM/dd/yyyy"),
+                    Birthday = new DateTime(1967, 11, 22),
                     Gender = "Male"
                 };
 
@@ -81,7 +80,7 @@ namespace TourOfHeroesData.Seeder
                     Image = "https://res.cloudinary.com/goofy5752/image/upload/v1568707689/HeroUploads/ironman-img_kvxuvy.jpg",
                     CoverImage = "https://res.cloudinary.com/goofy5752/image/upload/v1568707689/HeroUploads/ironman-cover_kvdzuy.jpg",
                     RealName = "Robert Downey Jr",
-                    Birthday = new DateTime(1965, 4, 4).ToString("MM/dd/yyyy"),
+                    Birthday = new DateTime(1965, 4, 4),
                     Gender = "Male"
                 };
 
@@ -94,7 +93,7 @@ namespace TourOfHeroesData.Seeder
                     Image = "https://res.cloudinary.com/goofy5752/image/upload/v1568707690/HeroUploads/hawkeye-img_lvvkth.jpg",
                     CoverImage = "https://res.cloudinary.com/goofy5752/image/upload/v1568707690/HeroUploads/hawkeye-cover_dpzgsd.jpg",
                     RealName = "Jeremy Renner",
-                    Birthday = new DateTime(1971, 1, 7).ToString("MM/dd/yyyy"),
+                    Birthday = new DateTime(1971, 1, 7),
                     Gender = "Male"
                 };
 
@@ -107,7 +106,7 @@ namespace TourOfHeroesData.Seeder
                     Image = "https://res.cloudinary.com/goofy5752/image/upload/v1568712498/HeroUploads/blackwidow-img_kvu6ch.jpg",
                     CoverImage = "https://res.cloudinary.com/goofy5752/image/upload/v1568712498/HeroUploads/blackwidow-cover_kuhthy.jpg",
                     RealName = "Scarlett Johansson",
-                    Birthday = new DateTime(1984, 11, 22).ToString("MM/dd/yyyy"),
+                    Birthday = new DateTime(1984, 11, 22),
                     Gender = "Female"
                 };
 
@@ -120,7 +119,7 @@ namespace TourOfHeroesData.Seeder
                     Image = "https://res.cloudinary.com/goofy5752/image/upload/v1568712497/HeroUploads/black-panther-img_ea6z3e.jpg",
                     CoverImage = "https://res.cloudinary.com/goofy5752/image/upload/v1568712498/HeroUploads/black-panther-cover_gulfqb.jpg",
                     RealName = "Chadwick Boseman",
-                    Birthday = new DateTime(1976, 11, 29).ToString("MM/dd/yyyy"),
+                    Birthday = new DateTime(1976, 11, 29),
                     Gender = "Male"
                 };
 

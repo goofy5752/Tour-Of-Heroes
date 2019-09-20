@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TourOfHeroesData;
@@ -62,7 +61,7 @@ namespace TourOfHeroesWebApi.Controllers
                 Image = imgUrl,
                 CoverImage = coverImgUrl,
                 RealName = hero.RealName,
-                Birthday = hero.Birthday.ToString("MM/dd/yyyy"),
+                Birthday = hero.Birthday,
                 Gender = hero.Gender
             };
 
