@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 
 namespace TourOfHeroesWebApi.DTOs
 {
@@ -15,7 +14,7 @@ namespace TourOfHeroesWebApi.DTOs
 
         public string RealName { get; set; }
 
-        public DateTime Birthday { get; set; }
+        public string Birthday { get; set; }
 
         public string Gender { get; set; }
     }

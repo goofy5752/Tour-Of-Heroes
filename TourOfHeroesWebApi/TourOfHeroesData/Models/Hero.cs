@@ -8,7 +8,7 @@ namespace TourOfHeroesData.Models
     {
         public Hero()
         {
-            this.EditHistories = new List<EditHistory>();
+            this.EditHistory = new List<EditHistory>();
         }
 
         public int Id { get; set; }
@@ -40,6 +40,6 @@ namespace TourOfHeroesData.Models
         [MaxLength(10)]
         public string Gender { get; set; }
 
-        public List<EditHistory> EditHistories { get; set; }
+        public List<EditHistory> EditHistory { get; set; }
     }
 }

@@ -6,6 +6,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { Hero } from './hero';
 import { MessageService } from './message.service';
+import { ActivatedRoute, Params } from '@angular/router';
 
 
 @Injectable({ providedIn: 'root' })
@@ -19,6 +20,7 @@ export class HeroService {
   };
 
   constructor(
+    private route: ActivatedRoute,
     private http: HttpClient,
     private messageService: MessageService) { }
 
@@ -76,9 +78,8 @@ export class HeroService {
     formData.append('image', hero.image, hero.image.name);
     formData.append('coverImage', hero.coverImage, hero.coverImage.name);
     formData.append('realName', hero.realName);
-    formData.append('birthday', hero.birthday);
+    // formData.append('birthday', hero.birthday);
     formData.append('gender', hero.gender);
-    console.log(formData.getAll('image'));
     return this.http.post<Hero>(this.heroesUrl, formData, this.httpOptions).pipe(
       tap((newHero: Hero) => this.log(`added hero w/ id=${newHero.id}`)),
       catchError(this.handleError<Hero>('addHero'))
@@ -97,10 +98,11 @@ export class HeroService {
   }
 
   //  PUT: update the hero on the server
-  updateHero(hero: Hero): Observable<any> {
-    const url = `${this.heroesUrl}/${hero.id}`;
-    return this.http.put(url, hero, this.httpOptions).pipe(
-      tap(_ => this.log(`updated hero id=${hero.id}`)),
+  updateHero(name: string): Observable<any> {
+    const id = +this.route.snapshot.paramMap.get('id');
+    const url = `${this.heroesUrl}/${id}`;
+    return this.http.put(url, {name}, this.httpOptions).pipe(
+      tap(_ => this.log(`updated hero id=${id}`)),
       catchError(this.handleError<any>('updateHero'))
     );
   }

@@ -82,10 +82,6 @@
 }
 
 .cardbox {
-    position: relative;
-    border-radius: 3px;
-    background-color: #fff;
-    box-shadow: 0 5px 25px 0 rgba(123, 123, 123, .15);
     margin-bottom: 8px;
     margin-top: 20px;
 }

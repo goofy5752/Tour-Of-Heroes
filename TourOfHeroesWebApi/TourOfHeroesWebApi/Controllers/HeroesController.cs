@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -27,6 +28,7 @@ namespace TourOfHeroesWebApi.Controllers
         }
 
         [HttpGet("{id}")]
+        [Route("heroes/{id}")]
         public ActionResult<Hero> Get(int id)
         {
             var hero = this._dbContext.Heroes.FirstOrDefault(x => x.Id == id);
@@ -49,11 +51,14 @@ namespace TourOfHeroesWebApi.Controllers
         }
 
         [HttpPost, DisableRequestSizeLimit]
-        public async Task<ActionResult<Hero>> Post(CreateHeroDTO hero)
+        public async Task<ActionResult<Hero>> CreateHero([FromForm] CreateHeroDTO hero)
         {
             var imgUrl = this._imageService.AddToCloudinaryAndReturnImageUrl(hero.Image);
             var coverImgUrl = this._imageService.AddToCloudinaryAndReturnImageUrl(hero.CoverImage);
             await this._imageService.SaveAllAsync();
+            var birthDay = int.Parse(hero.Birthday.Split('/')[0]);
+            var birthMonth = int.Parse(hero.Birthday.Split('/')[1]);
+            var birthYear = int.Parse(hero.Birthday.Split('/')[2]);
             var heroObj = new Hero
             {
                 Name = hero.Name,
@@ -61,7 +66,7 @@ namespace TourOfHeroesWebApi.Controllers
                 Image = imgUrl,
                 CoverImage = coverImgUrl,
                 RealName = hero.RealName,
-                Birthday = hero.Birthday,
+                Birthday = new DateTime(birthYear, birthMonth, birthDay),
                 Gender = hero.Gender
             };
 
@@ -71,21 +76,25 @@ namespace TourOfHeroesWebApi.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, Hero hero)
+        [Route("heroes/{id}")]
+        public async Task<IActionResult> UpdateHero(string name)
         {
-            var dbHero = this._dbContext.Heroes.FirstOrDefault(x => x.Id == id);
+            Console.WriteLine();
+            
+            var dbHero = this._dbContext.Heroes.FirstOrDefault(x => x.Name == name);
+            
             if (dbHero != null)
             {
                 var editHistory = new EditHistory()
                 {
                     OldValue = dbHero.Name,
-                    NewValue = hero.Name,
-                    Hero = hero
+                    NewValue = name,
+                    HeroId = dbHero.Id
                 };
-                dbHero.EditHistories.Add(editHistory);
+                dbHero.EditHistory.Add(editHistory);
+                dbHero.Name = name;
             }
 
-            if (dbHero != null) dbHero.Name = hero.Name;
             await _dbContext.SaveChangesAsync();
             return this.NoContent();
         }
