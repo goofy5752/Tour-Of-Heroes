@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TourOfHeroesData;
+using TourOfHeroesData.Common;
+using TourOfHeroesData.Common.Contracts;
 using TourOfHeroesData.Seeder;
 using TourOfHeroesData.Seeder.Contracts;
 using TourOfHeroesServices;
@@ -28,6 +30,9 @@ namespace TourOfHeroesWebApi
             services.AddDbContext<TourOfHeroesDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
+
+            services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
 
             services.AddTransient<ISeeder, Seeder>();
             services.AddTransient<IImageService, ImageService>();

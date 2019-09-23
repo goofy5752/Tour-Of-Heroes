@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using TourOfHeroesData;
+using TourOfHeroesData.Common.Contracts;
 using TourOfHeroesData.Models;
 using TourOfHeroesServices.Contracts;
 using TourOfHeroesWebApi.DTOs;
@@ -12,26 +12,26 @@ namespace TourOfHeroesWebApi.Controllers
 {
     public class HeroesController : ApiController
     {
-        private readonly TourOfHeroesDbContext _dbContext;
+        private readonly IRepository<Hero> _heroDbContext;
         private readonly IImageService _imageService;
 
-        public HeroesController(TourOfHeroesDbContext dbContext, IImageService imageService)
+        public HeroesController(IRepository<Hero> heroDbContext, IImageService imageService)
         {
-            _dbContext = dbContext;
+            _heroDbContext = heroDbContext;
             _imageService = imageService;
         }
 
         [HttpGet]
         public ActionResult<IEnumerable<Hero>> Get()
         {
-            return this._dbContext.Heroes.ToList();
+            return this._heroDbContext.All().ToList();
         }
 
         [HttpGet("{id}")]
         [Route("heroes/{id}")]
         public ActionResult<Hero> Get(int id)
         {
-            var hero = this._dbContext.Heroes.FirstOrDefault(x => x.Id == id);
+            var hero = this._heroDbContext.All().FirstOrDefault(x => x.Id == id);
             return hero;
         }
 
@@ -39,7 +39,7 @@ namespace TourOfHeroesWebApi.Controllers
         [Route("get-heroes")]
         public ActionResult<IEnumerable<Hero>> GetHeroesBySearchString(string name)
         {
-            var heroes = this._dbContext.Heroes.Where(x => x.Name.Contains(name)).ToList();
+            var heroes = this._heroDbContext.All().Where(x => x.Name.Contains(name)).ToList();
             if (heroes.Count != 0)
             {
                 return heroes;
@@ -70,8 +70,8 @@ namespace TourOfHeroesWebApi.Controllers
                 Gender = hero.Gender
             };
 
-            await this._dbContext.Heroes.AddAsync(heroObj);
-            await this._dbContext.SaveChangesAsync();
+            await this._heroDbContext.AddAsync(heroObj);
+            await this._heroDbContext.SaveChangesAsync();
             return this.CreatedAtAction("Get", new { id = heroObj.Id });
         }
 
@@ -81,7 +81,7 @@ namespace TourOfHeroesWebApi.Controllers
         {
             Console.WriteLine();
             
-            var dbHero = this._dbContext.Heroes.FirstOrDefault(x => x.Name == name);
+            var dbHero = this._heroDbContext.All().FirstOrDefault(x => x.Name == name);
             
             if (dbHero != null)
             {
@@ -95,21 +95,21 @@ namespace TourOfHeroesWebApi.Controllers
                 dbHero.Name = name;
             }
 
-            await _dbContext.SaveChangesAsync();
+            await _heroDbContext.SaveChangesAsync();
             return this.NoContent();
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult<Hero>> Delete(int id)
         {
-            var hero = this._dbContext.Heroes.FirstOrDefault(x => x.Id == id);
+            var hero = this._heroDbContext.All().FirstOrDefault(x => x.Id == id);
             if (hero == null)
             {
                 return this.NotFound();
             }
 
-            this._dbContext.Heroes.Remove(hero);
-            await this._dbContext.SaveChangesAsync();
+            this._heroDbContext.Delete((hero));
+            await this._heroDbContext.SaveChangesAsync();
             return this.NoContent();
         }
     }
