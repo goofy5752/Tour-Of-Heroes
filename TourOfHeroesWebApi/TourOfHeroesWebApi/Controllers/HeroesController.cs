@@ -53,26 +53,31 @@ namespace TourOfHeroesWebApi.Controllers
         [HttpPost, DisableRequestSizeLimit]
         public async Task<ActionResult<Hero>> CreateHero([FromForm] CreateHeroDTO hero)
         {
-            var imgUrl = this._imageService.AddToCloudinaryAndReturnImageUrl(hero.Image);
-            var coverImgUrl = this._imageService.AddToCloudinaryAndReturnImageUrl(hero.CoverImage);
-            await this._imageService.SaveAllAsync();
-            var birthDay = int.Parse(hero.Birthday.Split('/')[0]);
-            var birthMonth = int.Parse(hero.Birthday.Split('/')[1]);
-            var birthYear = int.Parse(hero.Birthday.Split('/')[2]);
-            var heroObj = new Hero
+            if (ModelState.IsValid)
             {
-                Name = hero.Name,
-                Description = hero.Description,
-                Image = imgUrl,
-                CoverImage = coverImgUrl,
-                RealName = hero.RealName,
-                Birthday = new DateTime(birthYear, birthMonth, birthDay),
-                Gender = hero.Gender
-            };
+                var imgUrl = this._imageService.AddToCloudinaryAndReturnImageUrl(hero.Image);
+                var coverImgUrl = this._imageService.AddToCloudinaryAndReturnImageUrl(hero.CoverImage);
+                await this._imageService.SaveAllAsync();
+                var birthDay = int.Parse(hero.Birthday.Split('/')[0]);
+                var birthMonth = int.Parse(hero.Birthday.Split('/')[1]);
+                var birthYear = int.Parse(hero.Birthday.Split('/')[2]);
+                var heroObj = new Hero
+                {
+                    Name = hero.Name,
+                    Description = hero.Description,
+                    Image = imgUrl,
+                    CoverImage = coverImgUrl,
+                    RealName = hero.RealName,
+                    Birthday = new DateTime(birthYear, birthMonth, birthDay),
+                    Gender = hero.Gender
+                };
 
-            await this._heroDbContext.AddAsync(heroObj);
-            await this._heroDbContext.SaveChangesAsync();
-            return this.CreatedAtAction("Get", new { id = heroObj.Id });
+                await this._heroDbContext.AddAsync(heroObj);
+                await this._heroDbContext.SaveChangesAsync();
+                return this.CreatedAtAction("Get", new { id = heroObj.Id });
+            }
+
+            return this.NoContent();
         }
 
         [HttpPut("{id}")]
@@ -100,6 +105,7 @@ namespace TourOfHeroesWebApi.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Route("heroes/{id}")]
         public async Task<ActionResult<Hero>> Delete(int id)
         {
             var hero = this._heroDbContext.All().FirstOrDefault(x => x.Id == id);

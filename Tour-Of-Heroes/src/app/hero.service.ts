@@ -16,7 +16,7 @@ export class HeroService {
 
   httpOptions = {
     headers: new HttpHeaders()
-      .append('Content-Type', 'application/json; charset=utf-8')
+      .append('Content-Disposition', 'multipart/form-data')
   };
 
   constructor(
@@ -78,7 +78,7 @@ export class HeroService {
     formData.append('image', hero.image, hero.image.name);
     formData.append('coverImage', hero.coverImage, hero.coverImage.name);
     formData.append('realName', hero.realName);
-    // formData.append('birthday', hero.birthday);
+    formData.append('birthday', hero.birthday);
     formData.append('gender', hero.gender);
     return this.http.post<Hero>(this.heroesUrl, formData, this.httpOptions).pipe(
       tap((newHero: Hero) => this.log(`added hero w/ id=${newHero.id}`)),
