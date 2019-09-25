@@ -7,7 +7,7 @@ export class Hero {
     image: File;
     coverImage: File;
     realName: string;
-    birthday: string;
+    birthday: Date;
     gender: string;
     editHistories: EditHistories;
 }
