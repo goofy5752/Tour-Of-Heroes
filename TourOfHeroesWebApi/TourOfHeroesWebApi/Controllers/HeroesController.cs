@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -58,9 +57,6 @@ namespace TourOfHeroesWebApi.Controllers
                 var imgUrl = this._imageService.AddToCloudinaryAndReturnImageUrl(hero.Image);
                 var coverImgUrl = this._imageService.AddToCloudinaryAndReturnImageUrl(hero.CoverImage);
                 await this._imageService.SaveAllAsync();
-                var birthDay = int.Parse(hero.Birthday.Split('/')[0]);
-                var birthMonth = int.Parse(hero.Birthday.Split('/')[1]);
-                var birthYear = int.Parse(hero.Birthday.Split('/')[2]);
                 var heroObj = new Hero
                 {
                     Name = hero.Name,
@@ -68,7 +64,7 @@ namespace TourOfHeroesWebApi.Controllers
                     Image = imgUrl,
                     CoverImage = coverImgUrl,
                     RealName = hero.RealName,
-                    Birthday = new DateTime(birthYear, birthMonth, birthDay),
+                    Birthday = hero.Birthday.Date,
                     Gender = hero.Gender
                 };
 
@@ -84,10 +80,8 @@ namespace TourOfHeroesWebApi.Controllers
         [Route("heroes/{id}")]
         public async Task<IActionResult> UpdateHero(string name)
         {
-            Console.WriteLine();
-            
             var dbHero = this._heroDbContext.All().FirstOrDefault(x => x.Name == name);
-            
+
             if (dbHero != null)
             {
                 var editHistory = new EditHistory()

@@ -30,7 +30,7 @@ export class AddHeroComponent implements OnInit {
     console.log(this.heroCoverImageFile);
   }
 
-  add(name: string, description: string, realName: string, birthday: string, gender: string): void {
+  add(name: string, description: string, realName: string, birthday: Date, gender: string): void {
     name = name.trim();
     description = description.trim();
     const image = this.heroImageFile;

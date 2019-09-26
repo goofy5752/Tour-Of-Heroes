@@ -7,7 +7,7 @@
     overflow-y: auto;
     overflow-x: visible;
     -webkit-overflow-scrolling: touch;
-    background-color: #263238;
+    background-color: #ff002b;
     color: #fff;
     z-index: 40;
     -webkit-transform: translate3d(0, 0, 0);
@@ -111,40 +111,9 @@
     }
 } */
 
-.sidebar-layout-obfuscator {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    z-index: 30;
-    visibility: hidden;
-    opacity: 0;
-    background-color: rgba(0, 0, 0, .3);
-    will-change: opacity;
-    transition: opacity .28s ease-in-out, visibility .28s ease-in-out
-}
-
 .sidebar-cover-visible,
 .sidebar-visible {
     overflow: hidden
-}
-
-.sidebar-cover-visible .sidebar-container,
-.sidebar-visible .sidebar-container {
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, .15);
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0)
-}
-
-.sidebar-cover-visible .sidebar-layout-obfuscator,
-.sidebar-visible .sidebar-layout-obfuscator {
-    opacity: 1;
-    visibility: visible
-}
-
-.no-csstransforms3d .sidebar-container {
-    margin-left: -240px
 }
 
 @media only screen and (min-width:992px) {
@@ -189,7 +158,7 @@
     letter-spacing: .0125em;
     color: inherit;
     overflow: hidden;
-    cursor: default
+    cursor: pointer
 }
 
 .sidebar-nav ul>li>a>.nav-caret,
@@ -247,4 +216,10 @@
 
 .sidebar-nav>ul>li>a>span:last-of-type {
     margin-left: -4px
+}
+
+.sidebar-container {
+    background-image: url('https://res.cloudinary.com/goofy5752/image/upload/v1568817396/HeroUploads/dark-theme_ijeqfk.jpg');
+    background-position: center center;
+    background-size: cover;
 }

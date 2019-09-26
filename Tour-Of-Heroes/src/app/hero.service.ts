@@ -73,12 +73,13 @@ export class HeroService {
   /** POST: add a new hero to the server */
   addHero(hero: Hero): Observable<Hero> {
     const formData = new FormData();
+    const datestr = (new Date(hero.birthday)).toUTCString();
     formData.append('name', hero.name);
     formData.append('description', hero.description);
     formData.append('image', hero.image, hero.image.name);
     formData.append('coverImage', hero.coverImage, hero.coverImage.name);
     formData.append('realName', hero.realName);
-    formData.append('birthday', hero.birthday.getDate().toString());
+    formData.append('birthday', datestr);
     formData.append('gender', hero.gender);
     return this.http.post<Hero>(this.heroesUrl, formData, this.httpOptions).pipe(
       tap((newHero: Hero) => this.log(`added hero w/ id=${newHero.id}`)),

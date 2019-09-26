@@ -85,3 +85,8 @@
     margin-bottom: 8px;
     margin-top: 20px;
 }
+
+.btn,
+a {
+    cursor: pointer;
+}

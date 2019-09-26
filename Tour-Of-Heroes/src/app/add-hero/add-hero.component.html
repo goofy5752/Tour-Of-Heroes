@@ -1,20 +1,48 @@
-<div class="cardbox mb-5"><img class="customImg" src="https://res.cloudinary.com/goofy5752/image/upload/v1568817396/HeroUploads/dark-theme_ijeqfk.jpg">
-    <div class="cardbox-body" style="color: white; text-align: -webkit-center;">
-        <form action="" novalidate="" class="ng-untouched ng-pristine ng-valid">
-            <div class="form-group"><label>Name</label><input #heroName class="form-control" type="text"></div>
-            <div class="form-group"><label>Description</label><textarea #heroDescription class="form-control" rows="3"></textarea></div>
-            <div class="form-group"><label>Real name</label><input #heroRealName class="form-control" type="text"></div>
-            <div class="form-group"><label>Birthday</label><input #heroBirthday class="form-control" type="text"></div>
-            <div class="form-group"><label>Gender</label><input #heroGender class="form-control" type="text"></div>
-            <div class="form-group">
-                <p>Profile image</p><label class="custom-file"><input #heroImage  class="custom-file-input" id="file"
-                            type="file" (change)="stageHeroImageFile()"><span class="custom-file-control"></span></label>
+<div class="card mb-5" style="margin-top: 70px;">
+    <div class="header">
+        <h4 class="title">Create new superhero</h4>
+    </div>
+    <div class="content">
+        <form novalidate="" class="ng-untouched ng-pristine ng-valid">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group"><label>Character name</label><input #heroName class="form-control" placeholder="Character name" type="text">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group"><label for="exampleInputEmail1">Real Name</label><input #heroRealName class="form-control" placeholder="Real name" type="text"></div>
+                </div>
             </div>
-            <div class="form-group">
-                <p>Cover image</p><label class="custom-file"><input #heroCoverImage class="custom-file-input" id="file"
-                            type="file" (change)="stageHeroCoverImageFile()"><span class="custom-file-control"></span></label>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group"><label>Profile image</label><input class="form-control" #heroImage type="file" (change)="stageHeroImageFile()"></div>
+                </div>
+                <div class=" col-md-6 ">
+                    <div class="form-group"><label>Cover image</label><input class="form-control" #heroCoverImage type="file" (change)="stageHeroCoverImageFile()">
+                    </div>
+                </div>
             </div>
-            <button class="btn btn-info" type="button" (click)="add(heroName.value, heroDescription.value, heroRealName.value, heroBirthday.value, heroGender.value);">Create new hero</button>
+            <div class=" row ">
+                <div class="col-md-6">
+                    <div class="form-group"><label>Birthday</label><input class="form-control" #heroBirthday placeholder="Birthday" type="date"></div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group"><label>Gender</label><br>
+                        <select class="form-control" name="Gender" #heroGender>
+                            <option value="Default">Choose gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                          </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-md-12">
+                    <div class="form-group"><label>Character description</label><textarea #heroDescription class="form-control" placeholder="Character description..." rows="5"></textarea>
+                    </div>
+                </div>
+            </div><button class="btn btn-info btn-fill pull-right" type="submit" (click)="add(heroName.value, heroDescription.value, heroRealName.value, heroBirthday.value, heroGender.value);">Create Hero</button>
+            <div class="clearfix "></div>
         </form>
     </div>
 </div>
