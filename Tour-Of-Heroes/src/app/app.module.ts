@@ -16,6 +16,7 @@ import { FooterComponent } from './footer/footer.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { AddHeroComponent } from './add-hero/add-hero.component';
 import { HeroesMainContentComponent } from './heroes-main-content/heroes-main-content.component';
+import { AddHeroMainComponent } from './add-hero-main/add-hero-main.component';
 
 @NgModule({
   imports: [
@@ -36,6 +37,7 @@ import { HeroesMainContentComponent } from './heroes-main-content/heroes-main-co
     SidebarComponent,
     AddHeroComponent,
     HeroesMainContentComponent,
+    AddHeroMainComponent,
   ],
   bootstrap: [AppComponent]
 })
