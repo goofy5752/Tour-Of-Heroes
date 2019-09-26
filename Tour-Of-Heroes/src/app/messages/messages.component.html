@@ -1,8 +1,8 @@
-<h2 style="color: black">Activity</h2>
+<h2>Activity</h2>
 <button type="button" class="btn btn-dark" (click)="messageService.clear()"><i class="fa fa-close"></i></button>
 
 <div *ngIf="messageService.messages.length">
 
-    <div *ngFor='let message of messageService.messages' style="color: black;"> {{message}} </div>
+    <div *ngFor='let message of messageService.messages'> {{message}} </div>
 
 </div>
