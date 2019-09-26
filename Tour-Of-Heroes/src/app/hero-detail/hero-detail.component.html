@@ -1,5 +1,5 @@
-<section class="section-container" *ngIf="hero" style="margin-top: 60px;">
-    <div class="container-overlap text-center" style="background-color: black;"><img class="coverImg" src="{{hero.coverImage}}">
+<section class="section-container" *ngIf="hero">
+    <div class="container-overlap text-center"><img class="coverImg" src="{{hero.coverImage}}">
         <div class="contentImg">
             <div>
                 <img alt="user" class="wd-sm rounded-circle img-thumbnail" src={{hero.image}}></div>
@@ -7,15 +7,15 @@
                 <input type="text" class="inputCustom" [(ngModel)]="hero.name" placeholder="Name" />
                 <button type="button" class="btn btn-success mx-2" (click)="save()"><i class="fa fa-floppy-o"
                         aria-hidden="true"></i></button><br>
-                <small style="color: white">
+                <small>
                     {{hero.description}}
                 </small>
             </div>
         </div>
     </div>
-    <div class="container container-md mb-5">
+    <div class="container">
         <form class="cardbox ng-untouched ng-pristine ng-valid" novalidate="">
-            <h5 class="cardbox-heading pb-0" style="text-align: center">Personal Information</h5>
+            <h5 class="cardbox-heading pb-0">Personal Information</h5>
             <div class="cardbox-body">
                 <table class="table table-striped mb-0">
                     <tbody>
@@ -29,16 +29,16 @@
                             </td>
                         </tr>
                         <tr>
-                            <td><em class="ion-ios-man icon-fw mr-3"></em>{{hero.gender}}</td>
+                            <td><em class="ion-ios-man icon-fw mr-3"></em>Gender</td>
                             <td>
-                                <a class="text-inherit" href="#" id="gender"></a>
+                                <span class="is-editable text-inherit">{{hero.gender}}</span>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </form>
-        <div class="cardbox" style="margin-bottom: 100px">
+        <div class="cardbox">
             <h5 class="cardbox-heading">Activity</h5>
             <div class="cardbox-body pb-0" *ngFor="let hero of heroes">
                 <p class="float-left mr-3"><em class="p-1 rounded-circle d-inline-block bg-info"></em></p>

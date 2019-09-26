@@ -1369,7 +1369,8 @@ small {
     padding-right: 15px;
     padding-left: 15px;
     margin-right: auto;
-    margin-left: auto
+    margin-left: auto;
+    margin-bottom: 100px;
 }
 
 @media (min-width:576px) {
@@ -1960,4 +1961,12 @@ a.text-info:hover {
     position: absolute;
     bottom: 0;
     margin-bottom: 35px;
+}
+
+.section-container {
+    margin-top: 60px;
+}
+
+.cardbox-heading {
+    text-align: center;
 }
