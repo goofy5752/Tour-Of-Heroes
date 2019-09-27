@@ -6,42 +6,63 @@
         <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
             <div class="row">
                 <div class="col-md-6">
-                    <div class="form-group" formGroup="form"><label>Character name</label><input #heroName class="form-control" placeholder="Character name" type="text" formControlName="heroName" [ngClass]="{ 'is-invalid': submitted && f.heroName.errors }">
-                    </div>
-                    <div *ngIf="submitted && f.heroName.errors" class="invalid-feedback">
-                        <div *ngIf="f.heroName.errors.required">Character name is required</div>
+                    <div class="form-group"><label>Character name</label><input #heroName class="form-control" placeholder="Character name" type="text" formControlName="heroName" [ngClass]="{ 'is-invalid': submitted && f.heroName.errors }">
+                        <div *ngIf="submitted && f.heroName.errors" class="invalid-feedback">
+                            <div *ngIf="f.heroName.errors.required">Character name is required</div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="form-group"><label for="exampleInputEmail1">Real Name</label><input #heroRealName class="form-control" placeholder="Real name" type="text" formControlName="heroRealName"></div>
+                    <div class="form-group"><label for="exampleInputEmail1">Real Name</label><input #heroRealName class="form-control" placeholder="Real name" type="text" formControlName="heroRealName" [ngClass]="{ 'is-invalid': submitted && f.heroRealName.errors }">
+                        <div *ngIf="submitted && f.heroRealName.errors" class="invalid-feedback">
+                            <div *ngIf="f.heroRealName.errors.required">Real name is required</div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <div class="form-group"><label>Profile image</label><input class="form-control" #heroImage type="file" (change)="stageHeroImageFile()" formControlName="heroImage"></div>
+                    <div class="form-group"><label>Profile image</label><input class="form-control" #heroImage type="file" (change)="stageHeroImageFile()" formControlName="heroImage" [ngClass]="{ 'is-invalid': submitted && f.heroImage.errors }">
+                        <div *ngIf="submitted && f.heroImage.errors" class="invalid-feedback">
+                            <div *ngIf="f.heroImage.errors.required">Character image is required</div>
+                        </div>
+                    </div>
                 </div>
                 <div class=" col-md-6 ">
-                    <div class="form-group"><label>Cover image</label><input class="form-control" #heroCoverImage type="file" (change)="stageHeroCoverImageFile()" formControlName="heroCoverImage">
+                    <div class="form-group"><label>Cover image</label><input class="form-control" #heroCoverImage type="file" (change)="stageHeroCoverImageFile()" formControlName="heroCoverImage" [ngClass]="{ 'is-invalid': submitted && f.heroCoverImage.errors }">
+                        <div *ngIf="submitted && f.heroCoverImage.errors" class="invalid-feedback">
+                            <div *ngIf="f.heroCoverImage.errors.required">Character cover image is required</div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class=" row ">
                 <div class="col-md-6">
-                    <div class="form-group"><label>Birthday</label><input class="form-control" #heroBirthday placeholder="Birthday" type="date" formControlName="heroBirthday"></div>
+                    <div class="form-group"><label>Birthday</label><input class="form-control" #heroBirthday placeholder="Birthday" type="date" formControlName="heroBirthday" [ngClass]="{ 'is-invalid': submitted && f.heroBirthday.errors }">
+                        <div *ngIf="submitted && f.heroBirthday.errors" class="invalid-feedback">
+                            <div *ngIf="f.heroBirthday.errors.required">Birthday is required</div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group"><label>Gender</label><br>
-                        <select formControlName="heroGender" class="form-control" name="Gender" #heroGender>
+                        <select formControlName="heroGender" class="form-control" name="Gender" #heroGender [ngClass]="{ 'is-invalid': submitted && f.heroGender.errors }">
                             <option value="Default">Choose gender</option>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
                         </select>
+                        <div *ngIf="submitted && f.heroGender.errors" class="invalid-feedback">
+                            <div *ngIf="f.heroGender.errors.required">Gender is required</div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="row ">
                 <div class="col-md-12">
-                    <div class="form-group"><label>Character description</label><textarea #heroDescription class="form-control" placeholder="Character description..." rows="5" formControlName="heroDescription"></textarea>
+                    <div class="form-group"><label>Character description</label><textarea #heroDescription class="form-control" placeholder="Character description..." rows="5" formControlName="heroDescription" [ngClass]="{ 'is-invalid': submitted && f.heroDescription.errors }"></textarea>
+                        <div *ngIf="submitted && f.heroDescription.errors" class="invalid-feedback">
+                            <div *ngIf="f.heroDescription.errors.required">Description is required</div>
+                        </div>
                     </div>
                 </div>
             </div><button class="btn btn-info btn-fill pull-right" type="submit" (click)="add(heroName.value, heroDescription.value, heroRealName.value, heroBirthday.value, heroGender.value);">Create

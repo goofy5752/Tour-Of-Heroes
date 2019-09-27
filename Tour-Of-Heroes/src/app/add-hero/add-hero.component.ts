@@ -28,7 +28,8 @@ export class AddHeroComponent implements OnInit {
       heroImage: ['', Validators.required],
       heroCoverImage: ['', Validators.required],
       heroBirthday: ['', Validators.required],
-      heroGender: ['', Validators.required]
+      heroGender: ['', Validators.required],
+      heroDescription: ['', Validators.required]
     }, {
     });
   }
