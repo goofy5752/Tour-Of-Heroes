@@ -17,6 +17,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { AddHeroComponent } from './add-hero/add-hero.component';
 import { HeroesMainContentComponent } from './heroes-main-content/heroes-main-content.component';
 import { AddHeroMainComponent } from './add-hero-main/add-hero-main.component';
+import { JwPaginationComponent } from 'jw-angular-pagination';
 
 @NgModule({
   imports: [
@@ -38,6 +39,7 @@ import { AddHeroMainComponent } from './add-hero-main/add-hero-main.component';
     AddHeroComponent,
     HeroesMainContentComponent,
     AddHeroMainComponent,
+    JwPaginationComponent
   ],
   bootstrap: [AppComponent]
 })

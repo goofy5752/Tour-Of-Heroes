@@ -99,11 +99,10 @@ export class HeroService {
   }
 
   //  PUT: update the hero on the server
-  updateHero(name: string): Observable<any> {
-    const id = +this.route.snapshot.paramMap.get('id');
-    const url = `${this.heroesUrl}/${id}`;
-    return this.http.put(url, {name}, this.httpOptions).pipe(
-      tap(_ => this.log(`updated hero id=${id}`)),
+  updateHero(hero: Hero): Observable<any> {
+    const url = `${this.heroesUrl}/${hero.id}`;
+    return this.http.put(url, hero, this.httpOptions).pipe(
+      tap(_ => this.log(`updated hero id=${hero}`)),
       catchError(this.handleError<any>('updateHero'))
     );
   }

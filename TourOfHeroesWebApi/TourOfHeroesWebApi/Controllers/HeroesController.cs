@@ -78,20 +78,20 @@ namespace TourOfHeroesWebApi.Controllers
 
         [HttpPut("{id}")]
         [Route("heroes/{id}")]
-        public async Task<IActionResult> UpdateHero(string name)
+        public async Task<IActionResult> UpdateHero(int id, Hero hero)
         {
-            var dbHero = this._heroDbContext.All().FirstOrDefault(x => x.Name == name);
+            var dbHero = this._heroDbContext.All().FirstOrDefault(x => x.Id == id);
 
             if (dbHero != null)
             {
                 var editHistory = new EditHistory()
                 {
                     OldValue = dbHero.Name,
-                    NewValue = name,
+                    NewValue = hero.Name,
                     HeroId = dbHero.Id
                 };
                 dbHero.EditHistory.Add(editHistory);
-                dbHero.Name = name;
+                dbHero.Name = hero.Name;
             }
 
             await _heroDbContext.SaveChangesAsync();

@@ -10,12 +10,15 @@ import { HeroService } from '../hero.service';
 })
 export class HeroesComponent implements OnInit {
   heroes: Hero[];
+  items = [];
+  pageOfItems = [];
   http: any;
 
   constructor(private heroService: HeroService) { }
 
   ngOnInit() {
     this.getHeroes();
+    this.items = Array(this.heroes.length).fill(0).map((x, i) => ({ id: (i + 1), name: `Item ${i + 1}` }));
   }
 
   getHeroes(): void {
@@ -26,5 +29,10 @@ export class HeroesComponent implements OnInit {
   delete(hero: Hero): void {
     this.heroes = this.heroes.filter(h => h !== hero);
     this.heroService.deleteHero(hero).subscribe();
+  }
+
+  onChangePage(pageOfItems: Array<any>) {
+    // update current page of items
+    this.pageOfItems = pageOfItems;
   }
 }
