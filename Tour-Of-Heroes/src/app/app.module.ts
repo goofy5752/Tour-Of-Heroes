@@ -19,6 +19,7 @@ import { HeroesMainContentComponent } from './heroes-main-content/heroes-main-co
 import { AddHeroMainComponent } from './add-hero-main/add-hero-main.component';
 import { JwPaginationComponent } from 'jw-angular-pagination';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule,
     NgbModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPaginationModule
   ],
   declarations: [
     AppComponent,

@@ -533,3 +533,10 @@ body {
 .btnCust {
     margin-left: 14px;
 }
+
+.pgnCustom {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin-bottom: 20px;
+}

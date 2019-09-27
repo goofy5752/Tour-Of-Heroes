@@ -10,15 +10,20 @@ import { HeroService } from '../hero.service';
 })
 export class HeroesComponent implements OnInit {
   heroes: Hero[];
-  items = [];
-  pageOfItems = [];
   http: any;
+  // Some array of things.
+  public heroData = [];
+  // Pagination parameters.
+  // tslint:disable-next-line: ban-types
+  p: Number = 1;
+  // tslint:disable-next-line: ban-types
+  count: Number = 6;
 
   constructor(private heroService: HeroService) { }
 
   ngOnInit() {
-    this.getHeroes();
-    this.items = Array(this.heroes.length).fill(0).map((x, i) => ({ id: (i + 1), name: `Item ${i + 1}` }));
+    const edikvosi: any = this.getHeroes();
+    this.heroData = edikvosi;
   }
 
   getHeroes(): void {
@@ -29,10 +34,5 @@ export class HeroesComponent implements OnInit {
   delete(hero: Hero): void {
     this.heroes = this.heroes.filter(h => h !== hero);
     this.heroService.deleteHero(hero).subscribe();
-  }
-
-  onChangePage(pageOfItems: Array<any>) {
-    // update current page of items
-    this.pageOfItems = pageOfItems;
   }
 }
