@@ -18,14 +18,16 @@ import { AddHeroComponent } from './add-hero/add-hero.component';
 import { HeroesMainContentComponent } from './heroes-main-content/heroes-main-content.component';
 import { AddHeroMainComponent } from './add-hero-main/add-hero-main.component';
 import { JwPaginationComponent } from 'jw-angular-pagination';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     BrowserModule,
-    FormsModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
     NgbModule,
+    ReactiveFormsModule
   ],
   declarations: [
     AppComponent,
