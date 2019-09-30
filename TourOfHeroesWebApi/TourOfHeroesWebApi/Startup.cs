@@ -36,6 +36,7 @@ namespace TourOfHeroesWebApi
 
             services.AddTransient<ISeeder, Seeder>();
             services.AddTransient<IImageService, ImageService>();
+            services.AddTransient<IHeroService, HeroService>();
             services.AddCors();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

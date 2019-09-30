@@ -2,114 +2,80 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using TourOfHeroesData.Common.Contracts;
 using TourOfHeroesData.Models;
+using TourOfHeroesDTOs;
 using TourOfHeroesServices.Contracts;
-using TourOfHeroesWebApi.DTOs;
 
 namespace TourOfHeroesWebApi.Controllers
 {
     public class HeroesController : ApiController
     {
-        private readonly IRepository<Hero> _heroDbContext;
-        private readonly IImageService _imageService;
+        private readonly IHeroService _heroService;
 
-        public HeroesController(IRepository<Hero> heroDbContext, IImageService imageService)
+        public HeroesController(IHeroService heroService)
         {
-            _heroDbContext = heroDbContext;
-            _imageService = imageService;
+            _heroService = heroService;
         }
 
-        [HttpGet]
+        [HttpGet, DisableRequestSizeLimit]
         public ActionResult<IEnumerable<Hero>> Get()
         {
-            return this._heroDbContext.All().ToList();
+            return this._heroService.GetAllHeroes().ToList();
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}"), DisableRequestSizeLimit]
         [Route("heroes/{id}")]
         public ActionResult<Hero> Get(int id)
         {
-            var hero = this._heroDbContext.All().FirstOrDefault(x => x.Id == id);
+            var hero = this._heroService.GetById(id);
             return hero;
         }
 
-        [HttpGet]
+        [HttpGet, DisableRequestSizeLimit]
         [Route("get-heroes")]
         public ActionResult<IEnumerable<Hero>> GetHeroesBySearchString(string name)
         {
-            var heroes = this._heroDbContext.All().Where(x => x.Name.Contains(name)).ToList();
+            var heroes = this._heroService.GetHeroBySearchString(name).ToList();
             if (heroes.Count != 0)
-            {
                 return heroes;
-            }
-            else
-            {
-                return this.NoContent();
-            }
+            return this.NoContent();
         }
 
         [HttpPost, DisableRequestSizeLimit]
         public async Task<ActionResult<Hero>> CreateHero([FromForm] CreateHeroDTO hero)
         {
-            if (ModelState.IsValid)
-            {
-                var imgUrl = this._imageService.AddToCloudinaryAndReturnImageUrl(hero.Image);
-                var coverImgUrl = this._imageService.AddToCloudinaryAndReturnImageUrl(hero.CoverImage);
-                await this._imageService.SaveAllAsync();
-                var heroObj = new Hero
-                {
-                    Name = hero.Name,
-                    Description = hero.Description,
-                    Image = imgUrl,
-                    CoverImage = coverImgUrl,
-                    RealName = hero.RealName,
-                    Birthday = hero.Birthday.Date,
-                    Gender = hero.Gender
-                };
+            if (!ModelState.IsValid) return this.NoContent();
+            await this._heroService.CreateHero(hero);
+            return this.CreatedAtAction("Get", new { name = hero.Name });
 
-                await this._heroDbContext.AddAsync(heroObj);
-                await this._heroDbContext.SaveChangesAsync();
-                return this.CreatedAtAction("Get", new { id = heroObj.Id });
-            }
-
-            return this.NoContent();
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{id}"), DisableRequestSizeLimit]
         [Route("heroes/{id}")]
         public async Task<IActionResult> UpdateHero(int id, Hero hero)
         {
-            var dbHero = this._heroDbContext.All().FirstOrDefault(x => x.Id == id);
+            var dbHero = this._heroService.GetById(id);
 
             if (dbHero != null)
             {
-                var editHistory = new EditHistory()
-                {
-                    OldValue = dbHero.Name,
-                    NewValue = hero.Name,
-                    HeroId = dbHero.Id
-                };
-                dbHero.EditHistory.Add(editHistory);
-                dbHero.Name = hero.Name;
+                await this._heroService.UpdateHero(id, hero);
             }
 
-            await _heroDbContext.SaveChangesAsync();
             return this.NoContent();
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}"), DisableRequestSizeLimit]
         [Route("heroes/{id}")]
         public async Task<ActionResult<Hero>> Delete(int id)
         {
-            var hero = this._heroDbContext.All().FirstOrDefault(x => x.Id == id);
+            var hero = this._heroService.GetById(id);
+
             if (hero == null)
             {
                 return this.NotFound();
             }
 
-            this._heroDbContext.Delete((hero));
-            await this._heroDbContext.SaveChangesAsync();
+            await this._heroService.DeleteHero(id);
             return this.NoContent();
         }
     }

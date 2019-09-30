@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Http;
 
-namespace TourOfHeroesWebApi.DTOs
+namespace TourOfHeroesDTOs
 {
     public class CreateHeroDTO
     {
