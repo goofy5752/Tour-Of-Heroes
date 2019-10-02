@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace TourOfHeroesDTOs
 {
+    // ReSharper disable once InconsistentNaming
     public class CreateHeroDTO
     {
         [Required(ErrorMessage = "Field is required.")]

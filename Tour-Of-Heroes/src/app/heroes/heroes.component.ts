@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { PageResult } from './../pageResult';
+import { Component, OnInit, Inject } from '@angular/core';
 
 import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
+import { HttpClient } from '@angular/common/http';
+
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-heroes',
@@ -10,26 +14,48 @@ import { HeroService } from '../hero.service';
 })
 export class HeroesComponent implements OnInit {
   heroes: Hero[];
-  http: any;
-  // Some array of things.
-  public heroData = [];
-  // Pagination parameters.
-  // tslint:disable-next-line: ban-types
-  p: Number = 1;
-  // tslint:disable-next-line: ban-types
-  count: Number = 6;
+  private http: HttpClient;
+  baseUrl = 'https://localhost:44353';
+  public Hero: Hero[];
+  public pageNumber = 1;
+  public Count: number;
+  constructor(private heroService: HeroService, http: HttpClient, private router: Router, private route: ActivatedRoute) {
+    this.http = http;
 
-  constructor(private heroService: HeroService) { }
+    http.get<PageResult<Hero>>(this.baseUrl + '/api/heroes').subscribe(result => {
+      this.Hero = result.items;
+      this.pageNumber = result.pageIndex;
+      this.Count = result.count;
+    }, error => console.error(error));
+  }
+
+  public onPageChange = (pageNumber) => {
+    this.http.get<PageResult<Hero>>(this.baseUrl + '/api/heroes/?page=' + pageNumber).subscribe(result => {
+      this.Hero = result.items;
+      this.router.navigate([], {
+        relativeTo: this.route,
+        queryParams: {
+          page: pageNumber
+        },
+        queryParamsHandling: 'merge',
+        // preserve the existing query params in the route
+        skipLocationChange: true
+        // do not trigger navigation
+      });
+      // this.router.url.concat('?page=' + pageNumber);
+      this.pageNumber = result.pageIndex;
+      this.Count = result.count;
+    }, error => console.error(error));
+  }
 
   ngOnInit() {
-    const edikvosi: any = this.getHeroes();
-    this.heroData = edikvosi;
+    // this.getHeroes(); -- Temporary disabled
   }
 
-  getHeroes(): void {
-    this.heroService.getHeroes()
-      .subscribe(heroes => this.heroes = heroes);
-  }
+  // getHeroes(): void {
+  //   this.heroService.getHeroes()
+  //     .subscribe(heroes => this.heroes = heroes); -- Temporary disabled
+  // }
 
   delete(hero: Hero): void {
     this.heroes = this.heroes.filter(h => h !== hero);

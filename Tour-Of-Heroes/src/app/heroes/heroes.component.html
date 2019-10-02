@@ -1,6 +1,6 @@
 <div class="container container-lg">
-    <div class="row mb-5">
-        <div class="col-sm-6" *ngFor="let hero of heroes | paginate: { itemsPerPage: count, currentPage: p }">
+    <div class="row custMarginBottom">
+        <div class="col-sm-6" *ngFor="let hero of Hero | paginate: { itemsPerPage: 6, currentPage: pageNumber, totalItems:Count }">
             <div class="cardbox">
                 <div class="cardbox-body">
                     <div class="d-flex">
@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="pgnCustom">
-            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+            <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
         </div>
     </div>
 </div>

@@ -538,5 +538,9 @@ body {
     position: absolute;
     bottom: 0;
     right: 0;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
+}
+
+.custMarginBottom {
+    margin-bottom: 70px;
 }

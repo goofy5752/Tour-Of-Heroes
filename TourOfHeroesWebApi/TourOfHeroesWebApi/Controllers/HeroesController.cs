@@ -18,9 +18,17 @@ namespace TourOfHeroesWebApi.Controllers
         }
 
         [HttpGet, DisableRequestSizeLimit]
-        public ActionResult<IEnumerable<Hero>> Get()
+        public PageResultDTO<Hero> Get(int? page, int pageSize = 6)
         {
-            return this._heroService.GetAllHeroes().ToList();
+            var countDetails = _heroService.GetAllHeroes().Count();
+            var result = new PageResultDTO<Hero>
+            {
+                Count = countDetails,
+                PageIndex = page ?? 1,
+                PageSize = pageSize,
+                Items = _heroService.GetAllHeroes().Skip((page - 1 ?? 0) * pageSize).Take(pageSize).ToList()
+            };
+            return result;
         }
 
         [HttpGet("{id}"), DisableRequestSizeLimit]
