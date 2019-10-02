@@ -20,6 +20,7 @@ import { AddHeroMainComponent } from './add-hero-main/add-hero-main.component';
 import { JwPaginationComponent } from 'jw-angular-pagination';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { LayoutComponent } from './layout/layout.component';
 
 @NgModule({
   imports: [
@@ -43,7 +44,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     AddHeroComponent,
     HeroesMainContentComponent,
     AddHeroMainComponent,
-    JwPaginationComponent
+    JwPaginationComponent,
+    LayoutComponent
   ],
   bootstrap: [AppComponent]
 })

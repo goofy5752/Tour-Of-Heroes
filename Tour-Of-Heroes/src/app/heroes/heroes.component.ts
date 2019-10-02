@@ -21,7 +21,7 @@ export class HeroesComponent implements OnInit {
   constructor(private heroService: HeroService, http: HttpClient, private router: Router, private route: ActivatedRoute) {
     this.http = http;
 
-    http.get<PageResult<Hero>>(this.baseUrl + '/api/heroes').subscribe(result => {
+    http.get<PageResult<Hero>>(this.baseUrl + '/api/heroes/all').subscribe(result => {
       this.Hero = result.items;
       this.pageNumber = result.pageIndex;
       this.Count = result.count;
@@ -29,7 +29,7 @@ export class HeroesComponent implements OnInit {
   }
 
   public onPageChange = (pageNumber) => {
-    this.http.get<PageResult<Hero>>(this.baseUrl + '/api/heroes/?page=' + pageNumber).subscribe(result => {
+    this.http.get<PageResult<Hero>>(this.baseUrl + '/api/heroes/all?page=' + pageNumber).subscribe(result => {
       this.Hero = result.items;
       this.pageNumber = result.pageIndex;
       this.router.navigate([], {
