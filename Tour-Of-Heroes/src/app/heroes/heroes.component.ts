@@ -32,23 +32,32 @@ export class HeroesComponent implements OnInit {
   public onPageChange = (pageNumber) => {
     this.http.get<PageResult<Hero>>(this.baseUrl + '/api/heroes/?page=' + pageNumber).subscribe(result => {
       this.Hero = result.items;
+      this.pageNumber = result.pageIndex;
       this.router.navigate([], {
         relativeTo: this.route,
         queryParams: {
-          page: pageNumber
+          page: this.pageNumber
         },
         queryParamsHandling: 'merge',
         // preserve the existing query params in the route
-        skipLocationChange: true
+        skipLocationChange: false
         // do not trigger navigation
       });
-      // this.router.url.concat('?page=' + pageNumber);
-      this.pageNumber = result.pageIndex;
       this.Count = result.count;
     }, error => console.error(error));
   }
 
   ngOnInit() {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: {
+        page: this.pageNumber
+      },
+      queryParamsHandling: 'merge',
+      // preserve the existing query params in the route
+      skipLocationChange: false
+      // do not trigger navigation
+    });
     // this.getHeroes(); -- Temporary disabled
   }
 
