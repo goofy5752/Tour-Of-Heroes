@@ -62,7 +62,7 @@ namespace TourOfHeroesWebApi.Controllers
 
         [HttpPut("{id}"), DisableRequestSizeLimit]
         [Route("heroes/{id}")]
-        public async Task<IActionResult> UpdateHero(int id, Hero hero)
+        public async Task<IActionResult> UpdateHero(int id, UpdateHeroDTO hero)
         {
             var dbHero = this._heroService.GetById(id);
 

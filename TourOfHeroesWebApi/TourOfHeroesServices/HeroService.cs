@@ -63,7 +63,7 @@ namespace TourOfHeroesServices
             await this._heroRepository.SaveChangesAsync();
         }
 
-        public async Task UpdateHero(int id, Hero hero)
+        public async Task UpdateHero(int id, UpdateHeroDTO hero)
         {
             var dbHero = this._heroRepository.All().FirstOrDefault(x => x.Id == id);
 

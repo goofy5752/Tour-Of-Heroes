@@ -6,9 +6,7 @@ namespace TourOfHeroesData
     public class TourOfHeroesDbContext : DbContext
     {
         public TourOfHeroesDbContext(DbContextOptions<TourOfHeroesDbContext> options)
-            : base(options)
-        {
-        }
+            : base(options) { }
 
         public DbSet<Hero> Heroes { get; set; }
 

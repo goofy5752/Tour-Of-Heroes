@@ -15,7 +15,7 @@ namespace TourOfHeroesServices.Contracts
 
         Task CreateHero(CreateHeroDTO hero);
 
-        Task UpdateHero(int id, Hero hero);
+        Task UpdateHero(int id, UpdateHeroDTO hero);
 
         Task DeleteHero(int id);
     }

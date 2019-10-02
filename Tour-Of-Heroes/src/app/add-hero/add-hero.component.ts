@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-hero',
@@ -18,7 +19,7 @@ export class AddHeroComponent implements OnInit {
   heroImageFile: File;
   heroCoverImageFile: File;
 
-  constructor(private heroService: HeroService, private formBuilder: FormBuilder) {
+  constructor(private heroService: HeroService, private formBuilder: FormBuilder, private toastr: ToastrService) {
   }
 
   ngOnInit() {
@@ -36,12 +37,14 @@ export class AddHeroComponent implements OnInit {
 
   stageHeroImageFile(): void {
     this.heroImageFile = this.heroImage.nativeElement.files[0];
-    console.log(this.heroImageFile);
+  }
+
+  showFail() {
+    this.toastr.warning('Submit form with right parameters.', 'Failed !');
   }
 
   stageHeroCoverImageFile(): void {
     this.heroCoverImageFile = this.heroCoverImage.nativeElement.files[0];
-    console.log(this.heroCoverImageFile);
   }
 
   add(name: string, description: string, realName: string, birthday: Date, gender: string): void {
@@ -54,6 +57,7 @@ export class AddHeroComponent implements OnInit {
       .subscribe(hero => {
         this.heroes.push(hero);
       });
+    this.toastr.success(`You have create a new character: ${name}`, 'Success !');
   }
 
   onSubmit() {
@@ -63,9 +67,6 @@ export class AddHeroComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
     }
-
-    // display form values on success
-    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
   }
 
   onReset() {

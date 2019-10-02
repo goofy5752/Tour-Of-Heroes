@@ -6,6 +6,7 @@ import { HeroService } from '../hero.service';
 import { HttpClient } from '@angular/common/http';
 
 import { Router, ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-heroes',
@@ -18,7 +19,8 @@ export class HeroesComponent implements OnInit {
   public Hero: Hero[];
   public pageNumber = 1;
   public Count: number;
-  constructor(private heroService: HeroService, http: HttpClient, private router: Router, private route: ActivatedRoute) {
+  // tslint:disable-next-line: max-line-length
+  constructor(private heroService: HeroService, http: HttpClient, private router: Router, private route: ActivatedRoute, private toastr: ToastrService) {
     this.http = http;
 
     http.get<PageResult<Hero>>(this.baseUrl + '/api/heroes/all').subscribe(result => {
@@ -68,5 +70,6 @@ export class HeroesComponent implements OnInit {
   delete(hero: Hero): void {
     this.Hero = this.Hero.filter(h => h !== hero);
     this.heroService.deleteHero(hero).subscribe();
+    this.toastr.success(`You have deleted superhero: ${hero.name}`, 'Success !');
   }
 }
