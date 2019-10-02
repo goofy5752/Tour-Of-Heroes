@@ -17,8 +17,8 @@ namespace TourOfHeroesWebApi.Controllers
             _heroService = heroService;
         }
 
-        [HttpGet, DisableRequestSizeLimit]
-        [Route("all")]
+        [HttpGet("all"), DisableRequestSizeLimit]
+        [Route("heroes/{all}")]
         public PageResultDTO<Hero> Get(int? page, int pageSize = 6)
         {
             var countDetails = _heroService.GetAllHeroes().Count();
@@ -40,8 +40,8 @@ namespace TourOfHeroesWebApi.Controllers
             return hero;
         }
 
-        [HttpGet, DisableRequestSizeLimit]
-        [Route("get-heroes")]
+        [HttpGet("get-heroes"), DisableRequestSizeLimit]
+        [Route("heroes/{get-heroes}")]
         public ActionResult<IEnumerable<Hero>> GetHeroesBySearchString(string name)
         {
             var heroes = this._heroService.GetHeroBySearchString(name).ToList();
@@ -50,8 +50,8 @@ namespace TourOfHeroesWebApi.Controllers
             return this.NoContent();
         }
 
-        [HttpPost, DisableRequestSizeLimit]
-        [Route("create-hero")]
+        [HttpPost("create-hero"), DisableRequestSizeLimit]
+        [Route("heroes/{create-hero}")]
         public async Task<ActionResult<Hero>> CreateHero([FromForm] CreateHeroDTO hero)
         {
             if (!ModelState.IsValid) return this.NoContent();
