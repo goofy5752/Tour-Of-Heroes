@@ -1,8 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Http;
-
-namespace TourOfHeroesDTOs
+﻿namespace TourOfHeroesDTOs
 {
     // ReSharper disable once InconsistentNaming
     public class UpdateHeroDTO
