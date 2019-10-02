@@ -13,7 +13,6 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./heroes.component.css']
 })
 export class HeroesComponent implements OnInit {
-  heroes: Hero[];
   private http: HttpClient;
   baseUrl = 'https://localhost:44353';
   public Hero: Hero[];
@@ -58,16 +57,16 @@ export class HeroesComponent implements OnInit {
       skipLocationChange: false
       // do not trigger navigation
     });
-    // this.getHeroes(); -- Temporary disabled
+    // this.getHeroes(); ---- temporary disbled
   }
 
-  // getHeroes(): void {
-  //   this.heroService.getHeroes()
-  //     .subscribe(heroes => this.heroes = heroes); -- Temporary disabled
-  // }
+  //  getHeroes(): void {
+  //    this.heroService.getHeroes()
+  //      .subscribe(heroes => this.Hero = heroes);
+  //  }
 
   delete(hero: Hero): void {
-    this.heroes = this.heroes.filter(h => h !== hero);
+    this.Hero = this.Hero.filter(h => h !== hero);
     this.heroService.deleteHero(hero).subscribe();
   }
 }

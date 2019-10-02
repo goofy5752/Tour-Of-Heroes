@@ -1,4 +1,4 @@
-import { EditHistories } from './editHistories';
+import { EditHistory } from './editHistory';
 
 export class Hero {
     id: number;
@@ -9,5 +9,5 @@ export class Hero {
     realName: string;
     birthday: Date;
     gender: string;
-    editHistories: EditHistories;
+    editHistories: EditHistory;
 }

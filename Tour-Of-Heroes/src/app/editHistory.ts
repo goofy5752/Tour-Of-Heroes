@@ -1,4 +1,4 @@
-export class EditHistories {
+export class EditHistory {
     editDate: Date;
     newValue: string;
     oldValue: string;

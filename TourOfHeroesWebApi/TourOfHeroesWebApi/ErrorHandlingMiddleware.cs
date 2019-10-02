@@ -9,17 +9,18 @@ namespace TourOfHeroesWebApi
 {
     public class ErrorHandlingMiddleware
     {
-        private readonly RequestDelegate next;
+        private readonly RequestDelegate _next;
+
         public ErrorHandlingMiddleware(RequestDelegate next)
         {
-            this.next = next;
+            this._next = next;
         }
 
         public async Task Invoke(HttpContext context /* other dependencies */)
         {
             try
             {
-                await next(context);
+                await _next(context);
             }
             catch (Exception ex)
             {
