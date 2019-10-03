@@ -20,10 +20,11 @@ namespace TourOfHeroesServices
             _imageService = imageService;
         }
 
-        public IEnumerable<Hero> GetAllHeroes()
+        public IEnumerable<GetHeroDTO> GetAllHeroes()
         {
             var allHeroes = _heroRepository
                 .All()
+                .To<GetHeroDTO>()
                 .ToList();
 
             return allHeroes;
@@ -39,16 +40,19 @@ namespace TourOfHeroesServices
             return hero;
         }
 
-        public IEnumerable<Hero> GetHeroBySearchString(string name)
+        public IEnumerable<GetHeroDTO> GetHeroBySearchString(string name)
         {
-            return this._heroRepository.All().Where(x => x.Name.Contains(name));
+            return this._heroRepository
+                .All()
+                .Where(x => x.Name.Contains(name))
+                .To<GetHeroDTO>()
+                .ToList();
         }
 
         public async Task CreateHero(CreateHeroDTO hero)
         {
             var imgUrl = this._imageService.AddToCloudinaryAndReturnImageUrl(hero.Image);
             var coverImgUrl = this._imageService.AddToCloudinaryAndReturnImageUrl(hero.CoverImage);
-            await this._imageService.SaveAllAsync();
             var heroObj = new Hero
             {
                 Name = hero.Name,
@@ -67,7 +71,9 @@ namespace TourOfHeroesServices
 
         public async Task UpdateHero(int id, UpdateHeroDTO hero)
         {
-            var dbHero = this._heroRepository.All().FirstOrDefault(x => x.Id == id);
+            var dbHero = this._heroRepository
+                .All()
+                .FirstOrDefault(x => x.Id == id);
 
             var editHistory = new EditHistory()
             {
@@ -83,7 +89,9 @@ namespace TourOfHeroesServices
 
         public async Task DeleteHero(int id)
         {
-            var heroToDelete = this._heroRepository.All().FirstOrDefault(x => x.Id == id);
+            var heroToDelete = this._heroRepository
+                .All()
+                .FirstOrDefault(x => x.Id == id);
 
             this._heroRepository.Delete(heroToDelete);
 

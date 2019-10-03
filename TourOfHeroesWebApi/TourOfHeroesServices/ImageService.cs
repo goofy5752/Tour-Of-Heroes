@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using CloudinaryDotNet;
+﻿using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Http;
 using TourOfHeroesData;
@@ -10,11 +9,9 @@ namespace TourOfHeroesServices
     public class ImageService : IImageService
     {
         private readonly Cloudinary _cloudinary;
-        private readonly TourOfHeroesDbContext _context;
 
         public ImageService(TourOfHeroesDbContext context)
         {
-            this._context = context;
             Account account = new Account()
             {
                 ApiKey = "743681715341912",
@@ -48,11 +45,6 @@ namespace TourOfHeroesServices
             var url = uploadResult.Uri.ToString();
 
             return url;
-        }
-
-        public async Task<bool> SaveAllAsync()
-        {
-            return await _context.SaveChangesAsync() > 0;
         }
     }
 }

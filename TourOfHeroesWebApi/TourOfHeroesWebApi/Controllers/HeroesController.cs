@@ -17,12 +17,14 @@ namespace TourOfHeroesWebApi.Controllers
             _heroService = heroService;
         }
 
+        #region GetAllHeroes
+
         [HttpGet("all"), DisableRequestSizeLimit]
         [Route("heroes/{all}")]
-        public PageResultDTO<Hero> Get(int? page, int pageSize = 6)
+        public PageResultDTO<GetHeroDTO> GetAllHeroes(int? page, int pageSize = 6)
         {
             var countDetails = _heroService.GetAllHeroes().Count();
-            var result = new PageResultDTO<Hero>
+            var result = new PageResultDTO<GetHeroDTO>
             {
                 Count = countDetails,
                 PageIndex = page ?? 1,
@@ -32,18 +34,26 @@ namespace TourOfHeroesWebApi.Controllers
             return result;
         }
 
+        #endregion
+
+        #region GetHeroById
+
         [HttpGet("{id}"), DisableRequestSizeLimit]
         [Route("heroes/{id}")]
-        public ActionResult<GetHeroDetailDTO> Get(int id)
+        public ActionResult<GetHeroDetailDTO> GetHeroById(int id)
         {
             var hero = this._heroService.GetById(id);
 
             return hero;
         }
 
+        #endregion
+
+        #region GetHeroesBySearchString
+
         [HttpGet("get-heroes"), DisableRequestSizeLimit]
         [Route("heroes/{get-heroes}")]
-        public ActionResult<IEnumerable<Hero>> GetHeroesBySearchString(string name)
+        public ActionResult<IEnumerable<GetHeroDTO>> GetHeroesBySearchString(string name)
         {
             var heroes = this._heroService.GetHeroBySearchString(name).ToList();
             if (heroes.Count != 0)
@@ -51,15 +61,23 @@ namespace TourOfHeroesWebApi.Controllers
             return this.NoContent();
         }
 
+        #endregion
+
+        #region CreateHero
+
         [HttpPost("create-hero"), DisableRequestSizeLimit]
         [Route("heroes/{create-hero}")]
-        public async Task<ActionResult<Hero>> CreateHero([FromForm] CreateHeroDTO hero)
+        public async Task<ActionResult<CreateHeroDTO>> CreateHero([FromForm] CreateHeroDTO hero)
         {
             if (!ModelState.IsValid) return this.NoContent();
             await this._heroService.CreateHero(hero);
             return this.CreatedAtAction("Get", new { name = hero.Name });
 
         }
+
+        #endregion
+
+        #region UpdateHero
 
         [HttpPut("{id}"), DisableRequestSizeLimit]
         [Route("heroes/{id}")]
@@ -75,6 +93,10 @@ namespace TourOfHeroesWebApi.Controllers
             return this.NoContent();
         }
 
+        #endregion
+
+        #region DeleteHero
+
         [HttpDelete("{id}"), DisableRequestSizeLimit]
         [Route("heroes/{id}")]
         public async Task<ActionResult<Hero>> DeleteHero(int id)
@@ -89,5 +111,7 @@ namespace TourOfHeroesWebApi.Controllers
             await this._heroService.DeleteHero(id);
             return this.NoContent();
         }
+
+        #endregion
     }
 }

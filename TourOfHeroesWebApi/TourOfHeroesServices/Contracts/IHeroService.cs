@@ -7,11 +7,11 @@ namespace TourOfHeroesServices.Contracts
 {
     public interface IHeroService
     {
-        IEnumerable<Hero> GetAllHeroes();
+        IEnumerable<GetHeroDTO> GetAllHeroes();
 
         GetHeroDetailDTO GetById(int id);
 
-        IEnumerable<Hero> GetHeroBySearchString(string name);
+        IEnumerable<GetHeroDTO> GetHeroBySearchString(string name);
 
         Task CreateHero(CreateHeroDTO hero);
 

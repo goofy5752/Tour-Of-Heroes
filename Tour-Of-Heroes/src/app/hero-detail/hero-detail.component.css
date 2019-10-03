@@ -7,6 +7,10 @@
     margin-bottom: 100px;
 }
 
+.container-overlap {
+    position: relative;
+}
+
 .wd-sm {
     width: 150px;
     height: 150px
@@ -29,7 +33,6 @@
 .contentImg {
     position: absolute;
     bottom: 0;
-    margin-bottom: 50px;
 }
 
 .section-container {
@@ -42,6 +45,11 @@
 
 @media only screen and (max-width:1100px) {
     .smallHideCustom {
-        visibility: hidden;
+        display: none;
+    }
+    .contentImg {
+        margin-bottom: 50px;
+        left: 50%;
+        transform: translate(-50%, 0);
     }
 }
