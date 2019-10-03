@@ -77,7 +77,7 @@ namespace TourOfHeroesWebApi.Controllers
 
         [HttpDelete("{id}"), DisableRequestSizeLimit]
         [Route("heroes/{id}")]
-        public async Task<ActionResult<Hero>> Delete(int id)
+        public async Task<ActionResult<Hero>> DeleteHero(int id)
         {
             var hero = this._heroService.GetById(id);
 

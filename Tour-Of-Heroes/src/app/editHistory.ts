@@ -1,5 +1,6 @@
 export class EditHistory {
-    editDate: Date;
+    id: number;
+    editedOn: Date;
     newValue: string;
     oldValue: string;
 }

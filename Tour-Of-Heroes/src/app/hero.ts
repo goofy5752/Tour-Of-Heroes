@@ -9,5 +9,5 @@ export class Hero {
     realName: string;
     birthday: Date;
     gender: string;
-    editHistories: EditHistory;
+    editHistory: EditHistory[];
 }

@@ -1,5 +1,6 @@
+import { EditHistory } from './../editHistory';
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { Hero } from '../hero';
@@ -13,6 +14,7 @@ import { HeroService } from '../hero.service';
 
 export class HeroDetailComponent implements OnInit {
   @Input() hero: Hero;
+  index: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -41,13 +43,8 @@ export class HeroDetailComponent implements OnInit {
       .subscribe(() => this.goBack());
   }
 
-  getUrl(): any {
-    return `url(${this.hero.coverImage})`;
-  }
-
-  getCoverImgSize() {
-    const img = new Image();
-    img.src = `${this.hero.coverImage}`;
-    return img.height;
+  delete(editHistory: EditHistory) {
+    this.hero.editHistory.splice(this.index, 1);
+    this.heroService.deleteHistory(editHistory).subscribe();
   }
 }

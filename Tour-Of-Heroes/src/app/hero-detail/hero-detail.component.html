@@ -16,7 +16,7 @@
         <form class="cardbox ng-untouched ng-pristine ng-valid" novalidate="">
             <h5 class="cardbox-heading pb-0">Personal Information</h5>
             <div class="cardbox-body">
-                <table class="table table-striped mb-0">
+                <table class="table table-striped">
                     <tbody>
                         <tr>
                             <td><em class="ion-ios-document icon-fw mr-3"></em>Real name</td>
@@ -24,7 +24,7 @@
                         </tr>
                         <tr>
                             <td><em class="ion-ios-egg icon-fw mr-3"></em>Birthday</td>
-                            <td><span class="is-editable text-inherit">{{hero.birthday}}</span>
+                            <td><span class="is-editable text-inherit">{{hero.birthday | date: 'longDate'}}</span>
                             </td>
                         </tr>
                         <tr>
@@ -39,14 +39,24 @@
         </form>
         <div class="cardbox">
             <h5 class="cardbox-heading">Activity</h5>
-            <div class="cardbox-body pb-0" *ngFor="let hero of hero.editHistory">
-                <p class="float-left mr-3"><em class="p-1 rounded-circle d-inline-block bg-info"></em></p>
-                <div class="oh">
-                    <p><strong class="mr-2">Added</strong><span class="mr-2">a new edit</span>{{hero.oldValue}</p>
-                    <div class="clearfix">
-                        <div class="float-left text-muted"><em class="ion-ios-timer mr-2"></em><span>an hour ago</span></div>
-                    </div>
-                </div>
+            <div class="cardbox-body pb-0">
+                <table class="table table-striped text-center">
+                    <tbody>
+                        <th>Action</th>
+                        <th>New value</th>
+                        <th>Old value</th>
+                        <th>Edited on</th>
+                        <th>Options</th>
+                        <tr *ngFor="let hero of hero.editHistory; let i = index;">
+                            <td><em class="ion-ios-document icon-fw mr-3"></em>Edit</td>
+                            <td>{{hero.oldValue}}</td>
+                            <td>{{hero.newValue}}</td>
+                            <td>{{hero.editedOn | date: 'medium'}}</td>
+                            <td><button class="btn-danger" (click)="delete(hero)" title="Delete"><i class="fa fa-trash"
+                                aria-hidden="true"></i></button></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

@@ -1,3 +1,4 @@
+import { EditHistory } from './editHistory';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -12,7 +13,8 @@ import { ActivatedRoute, Params } from '@angular/router';
 @Injectable({ providedIn: 'root' })
 export class HeroService {
 
-  private heroesUrl = 'https://localhost:44353/api/heroes';  // URL to web api
+  private heroesUrl = 'https://localhost:44353/api/heroes';  // URL to heroes api
+  private historyUrl = 'https://localhost:44353/api/history'; // URL to history api
 
   httpOptions = {
     headers: new HttpHeaders()
@@ -95,6 +97,16 @@ export class HeroService {
     return this.http.delete<Hero>(url, this.httpOptions).pipe(
       tap(_ => this.log(`deleted hero id=${id}`)),
       catchError(this.handleError<Hero>('deleteHero'))
+    );
+  }
+
+  deleteHistory(editHistory: EditHistory): Observable<EditHistory>{
+    const id = typeof editHistory === 'number' ? editHistory : editHistory.id;
+    const url = `${this.historyUrl}/${id}`;
+
+    return this.http.delete<EditHistory>(url, this.httpOptions).pipe(
+      tap(_ => this.log(`deleted history id=${id}`)),
+      catchError(this.handleError<EditHistory>('deleteHistory'))
     );
   }
 
