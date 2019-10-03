@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System.Reflection;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,8 +10,10 @@ using TourOfHeroesData.Common;
 using TourOfHeroesData.Common.Contracts;
 using TourOfHeroesData.Seeder;
 using TourOfHeroesData.Seeder.Contracts;
+using TourOfHeroesDTOs;
 using TourOfHeroesServices;
 using TourOfHeroesServices.Contracts;
+using TourOfHeroesServices.Mapping;
 
 namespace TourOfHeroesWebApi
 {
@@ -31,7 +34,6 @@ namespace TourOfHeroesWebApi
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
 
             services.AddTransient<ISeeder, Seeder>();
@@ -44,6 +46,8 @@ namespace TourOfHeroesWebApi
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ISeeder seeder)
         {
+            AutoMapperConfig.RegisterMappings(typeof(PageResultDTO<>).GetTypeInfo().Assembly);
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

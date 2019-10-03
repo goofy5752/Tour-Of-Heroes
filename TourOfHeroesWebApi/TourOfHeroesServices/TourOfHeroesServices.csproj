@@ -12,6 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\TourOfHeroesData\TourOfHeroesData.csproj" />
     <ProjectReference Include="..\TourOfHeroesDTOs\TourOfHeroesDTOs.csproj" />
+    <ProjectReference Include="..\TourOfHeroesMapping\TourOfHeroesMapping.csproj" />
   </ItemGroup>
 
   <ItemGroup>

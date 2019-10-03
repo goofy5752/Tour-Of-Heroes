@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TourOfHeroesData\TourOfHeroesData.csproj" />
+    <ProjectReference Include="..\TourOfHeroesMapping\TourOfHeroesMapping.csproj" />
     <ProjectReference Include="..\TourOfHeroesServices\TourOfHeroesServices.csproj" />
   </ItemGroup>
 

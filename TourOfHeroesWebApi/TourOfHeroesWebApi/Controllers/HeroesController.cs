@@ -34,9 +34,10 @@ namespace TourOfHeroesWebApi.Controllers
 
         [HttpGet("{id}"), DisableRequestSizeLimit]
         [Route("heroes/{id}")]
-        public ActionResult<Hero> Get(int id)
+        public ActionResult<GetHeroDetailDTO> Get(int id)
         {
             var hero = this._heroService.GetById(id);
+
             return hero;
         }
 

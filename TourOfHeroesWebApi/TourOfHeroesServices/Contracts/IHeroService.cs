@@ -9,7 +9,7 @@ namespace TourOfHeroesServices.Contracts
     {
         IEnumerable<Hero> GetAllHeroes();
 
-        Hero GetById(int id);
+        GetHeroDetailDTO GetById(int id);
 
         IEnumerable<Hero> GetHeroBySearchString(string name);
 

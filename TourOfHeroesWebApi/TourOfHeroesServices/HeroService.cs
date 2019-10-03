@@ -5,6 +5,7 @@ using TourOfHeroesData.Common.Contracts;
 using TourOfHeroesData.Models;
 using TourOfHeroesDTOs;
 using TourOfHeroesServices.Contracts;
+using TourOfHeroesServices.Mapping;
 
 namespace TourOfHeroesServices
 {
@@ -28,10 +29,11 @@ namespace TourOfHeroesServices
             return allHeroes;
         }
 
-        public Hero GetById(int id)
+        public GetHeroDetailDTO GetById(int id)
         {
             var hero = this._heroRepository
                 .All()
+                .To<GetHeroDetailDTO>()
                 .Single(x => x.Id == id);
 
             return hero;

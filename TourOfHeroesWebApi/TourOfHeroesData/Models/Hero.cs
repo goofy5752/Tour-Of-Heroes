@@ -40,6 +40,6 @@ namespace TourOfHeroesData.Models
         [MaxLength(10)]
         public string Gender { get; set; }
 
-        public List<EditHistory> EditHistory { get; set; }
+        public virtual List<EditHistory> EditHistory { get; set; }
     }
 }
