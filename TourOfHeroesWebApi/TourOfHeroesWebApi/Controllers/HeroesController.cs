@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using TourOfHeroesData.Models;
 using TourOfHeroesDTOs;
 using TourOfHeroesServices.Contracts;
@@ -70,9 +71,17 @@ namespace TourOfHeroesWebApi.Controllers
         public async Task<ActionResult<CreateHeroDTO>> CreateHero([FromForm] CreateHeroDTO hero)
         {
             if (!ModelState.IsValid) return this.NoContent();
-            await this._heroService.CreateHero(hero);
-            return this.CreatedAtAction("Get", new { name = hero.Name });
+            try
+            {
+                await this._heroService.CreateHero(hero);
+            }
+            //
 
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error");
+            }
+            return this.CreatedAtAction("GetAllHeroes", new { name = hero.Name });
         }
 
         #endregion
