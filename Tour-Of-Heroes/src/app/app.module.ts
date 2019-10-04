@@ -23,6 +23,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { LayoutComponent } from './layout/layout.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { Globals } from './globals';
 
 @NgModule({
   imports: [
@@ -34,7 +35,7 @@ import { ToastrModule } from 'ngx-toastr';
     ReactiveFormsModule,
     NgxPaginationModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
   ],
   declarations: [
     AppComponent,
@@ -50,6 +51,10 @@ import { ToastrModule } from 'ngx-toastr';
     AddHeroMainComponent,
     JwPaginationComponent,
     LayoutComponent
+  ],
+  providers: [
+    // ... other global providers
+    Globals // so do not provide it into another components/services if you want it to be a singleton
   ],
   bootstrap: [AppComponent]
 })

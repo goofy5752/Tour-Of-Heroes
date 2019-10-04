@@ -8,6 +8,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { Hero } from './hero';
 import { MessageService } from './message.service';
 import { ActivatedRoute, Params } from '@angular/router';
+import { Globals } from './globals';
 
 
 @Injectable({ providedIn: 'root' })
@@ -24,16 +25,19 @@ export class HeroService {
   constructor(
     private route: ActivatedRoute,
     private http: HttpClient,
-    private messageService: MessageService) { }
+    private messageService: MessageService,
+    public globals: Globals) { }
+
+  public show = this.globals.show;
 
   /** GET heroes from the server */
-   getHeroes(): Observable<Hero[]> {
-     return this.http.get<Hero[]>(this.heroesUrl)
-       .pipe(
-         tap(_ => this.log('fetched heroes')),
-         catchError(this.handleError<Hero[]>('getHeroes', []))
-       );
-   }
+  getHeroes(): Observable<Hero[]> {
+      return this.http.get<Hero[]>(this.heroesUrl)
+        .pipe(
+          tap(_ => {if (this.show) {this.log('fetched heroes'); } }),
+          catchError(this.handleError<Hero[]>('getHeroes', []))
+        );
+  }
 
   /** GET hero by id. Return `undefined` when id not found */
   getHeroNo404<Data>(id: number): Observable<Hero> {
@@ -51,11 +55,18 @@ export class HeroService {
 
   /** GET hero by id. Will 404 if id not found */
   getHero(id: number): Observable<Hero> {
-    const url = `${this.heroesUrl}/${id}`;
-    return this.http.get<Hero>(url).pipe(
-      tap(_ => this.log(`fetched hero id=${id}`)),
-      catchError(this.handleError<Hero>(`getHero id=${id}`))
-    );
+    if (this.show) {
+      const url = `${this.heroesUrl}/${id}`;
+      return this.http.get<Hero>(url).pipe(
+        tap(_ => this.log(`fetched hero id=${id}`)),
+        catchError(this.handleError<Hero>(`getHero id=${id}`))
+      );
+    } else {
+      const url = `${this.heroesUrl}/${id}`;
+      return this.http.get<Hero>(url).pipe(
+        catchError(this.handleError<Hero>(`getHero id=${id}`))
+      );
+    }
   }
 
   /* GET heroes whose name contains search term */
@@ -100,7 +111,7 @@ export class HeroService {
     );
   }
 
-  deleteHistory(editHistory: EditHistory): Observable<EditHistory>{
+  deleteHistory(editHistory: EditHistory): Observable<EditHistory> {
     const id = typeof editHistory === 'number' ? editHistory : editHistory.id;
     const url = `${this.historyUrl}/${id}`;
 

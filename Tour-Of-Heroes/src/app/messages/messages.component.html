@@ -1,8 +1,15 @@
 <h2>Activity</h2>
-<button type="button" class="btn btn-dark" (click)="messageService.clear()"><i class="fa fa-close"></i></button>
+<label class="switch">
+        <input type="checkbox" (click)="toggle()">
+        <span class="slider round"></span>
+</label><br>
 
-<div *ngIf="messageService.messages.length">
+<div *ngIf="globals.show">
+    <div *ngIf="messageService.messages.length">
 
-    <div *ngFor='let message of messageService.messages'> {{message}} </div>
+        <div *ngFor='let message of messageService.messages'> {{message}} </div>
 
+    </div>
 </div>
+
+<button type="button" class="btn btn-dark" (click)="messageService.clear()">Clear</button>
