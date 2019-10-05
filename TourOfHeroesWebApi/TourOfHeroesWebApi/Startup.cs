@@ -1,10 +1,12 @@
-﻿using System.Reflection;
+﻿using System.IO;
+using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NLog;
 using TourOfHeroesData;
 using TourOfHeroesData.Common;
 using TourOfHeroesData.Common.Contracts;
@@ -14,6 +16,7 @@ using TourOfHeroesDTOs;
 using TourOfHeroesServices;
 using TourOfHeroesServices.Contracts;
 using TourOfHeroesServices.Mapping;
+using TourOfHeroesWebApi.GlobalErrorHandling.Extensions;
 
 namespace TourOfHeroesWebApi
 {
@@ -21,6 +24,8 @@ namespace TourOfHeroesWebApi
     {
         public Startup(IConfiguration configuration)
         {
+            // ReSharper disable once StringLiteralTypo
+            LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
             Configuration = configuration;
         }
 
@@ -40,6 +45,7 @@ namespace TourOfHeroesWebApi
             services.AddTransient<IImageService, ImageService>();
             services.AddTransient<IHeroService, HeroService>();
             services.AddTransient<IHistoryService, HistoryService>();
+            services.AddSingleton<ILoggerManager, LoggerManager>();
 
             services.AddCors();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
@@ -60,12 +66,13 @@ namespace TourOfHeroesWebApi
                 app.UseHsts();
             }
 
+            app.ConfigureCustomExceptionMiddleware();
+
             seeder.SeedDatabase();
 
             app.UseHttpsRedirection();
             app.UseCors(options =>
                 options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-            app.UseMiddleware(typeof(ErrorHandlingMiddleware));
             app.UseMvc();
         }
     }

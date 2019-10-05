@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using TourOfHeroesData.Models;
 using TourOfHeroesDTOs;
 
 namespace TourOfHeroesServices.Contracts
