@@ -7,27 +7,33 @@
     overflow-y: auto;
     overflow-x: visible;
     -webkit-overflow-scrolling: touch;
+    background-color: black;
     color: #fff;
-    z-index: 40;
+    z-index: 1;
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
     transition: -webkit-transform .28s ease-in-out;
     transition: transform .28s ease-in-out;
     transition: transform .28s ease-in-out, -webkit-transform .28s ease-in-out;
     will-change: transform;
+}
+
+.sidebar-background {
+    position: absolute;
     background-image: url('https://res.cloudinary.com/goofy5752/image/upload/v1568817396/HeroUploads/dark-theme_ijeqfk.jpg');
     background-position: center center;
     background-size: cover;
+    z-index: -1;
+    bottom: 0;
+    top: 0;
+    right: 0;
+    left: 0;
+    opacity: .66;
 }
 
 .sidebar-container a.sb-link {
     color: rgba(255, 255, 255, .75);
     text-decoration: none
-}
-
-.brand-header {
-    height: 60px;
-    padding: 0 1rem;
 }
 
 .brand-header>.brand-header-logo {

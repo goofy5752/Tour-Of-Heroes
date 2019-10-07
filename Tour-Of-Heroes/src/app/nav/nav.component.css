@@ -10,3 +10,9 @@
 .nav-item {
     color: white;
 }
+
+.brand-header-logo {
+    position: absolute;
+    height: 55px;
+    top: 0;
+}
