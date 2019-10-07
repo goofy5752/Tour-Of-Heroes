@@ -58,12 +58,7 @@ export class HeroService {
     if (this.show) {
       const url = `${this.heroesUrl}/${id}`;
       return this.http.get<Hero>(url).pipe(
-        tap(_ => this.log(`fetched hero id=${id}`)),
-        catchError(this.handleError<Hero>(`getHero id=${id}`))
-      );
-    } else {
-      const url = `${this.heroesUrl}/${id}`;
-      return this.http.get<Hero>(url).pipe(
+        tap(_ => {if (this.show) {this.log(`fetched hero ${id}`); } }),
         catchError(this.handleError<Hero>(`getHero id=${id}`))
       );
     }
