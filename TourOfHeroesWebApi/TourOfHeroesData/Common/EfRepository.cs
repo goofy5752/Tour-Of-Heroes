@@ -41,5 +41,7 @@ namespace TourOfHeroesData.Common
         public Task<int> SaveChangesAsync() => this.Context.SaveChangesAsync();
 
         public void Dispose() => this.Context.Dispose();
+
+        //I'm just a web developer with a few ideas.
     }
 }
