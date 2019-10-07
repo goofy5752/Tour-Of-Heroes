@@ -55,13 +55,11 @@ export class HeroService {
 
   /** GET hero by id. Will 404 if id not found */
   getHero(id: number): Observable<Hero> {
-    if (this.show) {
       const url = `${this.heroesUrl}/${id}`;
       return this.http.get<Hero>(url).pipe(
         tap(_ => {if (this.show) {this.log(`fetched hero ${id}`); } }),
         catchError(this.handleError<Hero>(`getHero id=${id}`))
       );
-    }
   }
 
   /* GET heroes whose name contains search term */
