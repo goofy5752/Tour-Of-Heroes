@@ -9,3 +9,9 @@
     height: 580px;
     margin-top: 39px;
 }
+
+@media only screen and (max-width:850px) {
+    .cardbox {
+        display: none;
+    }
+}

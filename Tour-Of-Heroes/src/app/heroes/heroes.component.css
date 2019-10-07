@@ -286,3 +286,19 @@
 .custMarginBottom {
     margin-bottom: 70px;
 }
+
+@media only screen and (max-width:1115px) {
+    .btnCust {
+        margin-left: 0px;
+        margin-top: 2px;
+    }
+}
+
+@media only screen and (max-width:992px) {
+    .lead {
+        display: none;
+    }
+    p {
+        display: none;
+    }
+}
