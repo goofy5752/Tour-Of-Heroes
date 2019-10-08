@@ -1,10 +1,10 @@
 <h2>Activity</h2>
 <label class="switch">
-        <input type="checkbox" (click)="toggle()">
+        <input type="checkbox" [checked]="globals.showActivity ? 'checked' : null" (click)="toggle()">
         <span class="slider round"></span>
 </label><br>
 
-<div *ngIf="globals.show">
+<div *ngIf="globals.showActivity">
     <div *ngIf="messageService.messages.length">
 
         <div *ngFor='let message of messageService.messages'> {{message}} </div>

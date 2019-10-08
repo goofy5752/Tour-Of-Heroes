@@ -9,19 +9,19 @@ import { MessageService } from '../message.service';
 })
 export class MessagesComponent implements OnInit {
   public buttonName: any = 'Show';
-  // public show;
+  checkedOrNo = '';
 
   constructor(public messageService: MessageService, public globals: Globals) {}
 
   ngOnInit() {
-    console.log(this.globals.show);
+    console.log(this.globals.showActivity);
   }
 
   toggle() {
-    this.globals.show = !this.globals.show;
+    this.globals.showActivity = !this.globals.showActivity;
     // this.show = this.globals.show;
     // CHANGE THE NAME OF THE BUTTON.
-    if (this.globals.show) {
+    if (this.globals.showActivity) {
       this.buttonName = 'Hide';
     } else {
       this.buttonName = 'Show';

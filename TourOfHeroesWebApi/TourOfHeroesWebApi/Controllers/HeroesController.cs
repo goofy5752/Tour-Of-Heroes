@@ -21,7 +21,8 @@
 
         #region GetAllHeroes
 
-        [HttpGet("all"), DisableRequestSizeLimit]
+        [HttpGet("all")]
+        [DisableRequestSizeLimit]
         [Route("heroes/{all}")]
         public PageResultDTO<GetHeroDTO> GetAllHeroes(int? page, int pageSize = 6)
         {
@@ -45,7 +46,8 @@
 
         #region GetHeroById
 
-        [HttpGet("{id}"), DisableRequestSizeLimit]
+        [HttpGet("{id}")]
+        [DisableRequestSizeLimit]
         [Route("heroes/{id}")]
         public ActionResult<GetHeroDetailDTO> GetHeroById(int id)
         {
@@ -62,7 +64,8 @@
 
         #region GetHeroesBySearchString
 
-        [HttpGet("get-heroes"), DisableRequestSizeLimit]
+        [HttpGet("get-heroes")]
+        [DisableRequestSizeLimit]
         [Route("heroes/{get-heroes}")]
         public ActionResult<IEnumerable<GetHeroDTO>> GetHeroesBySearchString(string name)
         {
@@ -82,7 +85,8 @@
 
         #region CreateHero
 
-        [HttpPost("create-hero"), DisableRequestSizeLimit]
+        [HttpPost("create-hero")]
+        [DisableRequestSizeLimit]
         [Route("heroes/{create-hero}")]
         public async Task<ActionResult<CreateHeroDTO>> CreateHero([FromForm] CreateHeroDTO hero)
         {
@@ -101,7 +105,8 @@
 
         #region UpdateHero
 
-        [HttpPut("{id}"), DisableRequestSizeLimit]
+        [HttpPut("{id}")]
+        [DisableRequestSizeLimit]
         [Route("heroes/{id}")]
         public async Task<IActionResult> UpdateHero(int id, UpdateHeroDTO hero)
         {
@@ -123,7 +128,8 @@
 
         #region DeleteHero
 
-        [HttpDelete("{id}"), DisableRequestSizeLimit]
+        [HttpDelete("{id}")]
+        [DisableRequestSizeLimit]
         [Route("heroes/{id}")]
         public async Task<ActionResult<Hero>> DeleteHero(int id)
         {

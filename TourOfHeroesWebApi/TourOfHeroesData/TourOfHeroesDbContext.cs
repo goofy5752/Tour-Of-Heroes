@@ -5,6 +5,7 @@
 
     public class TourOfHeroesDbContext : DbContext
     {
+        // ReSharper disable once SuggestBaseTypeForParameter
         public TourOfHeroesDbContext(DbContextOptions<TourOfHeroesDbContext> options)
             : base(options) { }
 
