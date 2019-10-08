@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using TourOfHeroesData.Models;
-
-namespace TourOfHeroesData
+﻿namespace TourOfHeroesData
 {
+    using Microsoft.EntityFrameworkCore;
+    using Models;
+
     public class TourOfHeroesDbContext : DbContext
     {
         public TourOfHeroesDbContext(DbContextOptions<TourOfHeroesDbContext> options)

@@ -1,9 +1,9 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace TourOfHeroesData.Common.Contracts
+﻿namespace TourOfHeroesData.Common.Contracts
 {
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+
     public interface IRepository<TEntity> : IDisposable
         where TEntity : class
     {

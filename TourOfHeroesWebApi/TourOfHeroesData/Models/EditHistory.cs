@@ -1,8 +1,8 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-
-namespace TourOfHeroesData.Models
+﻿namespace TourOfHeroesData.Models
 {
+    using System;
+    using System.ComponentModel.DataAnnotations;
+
     public class EditHistory
     {
         public EditHistory()

@@ -1,11 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using TourOfHeroesData.Models;
-using TourOfHeroesData.Seeder.Contracts;
-
+﻿// ReSharper disable StringLiteralTypo
+// ReSharper disable IdentifierTypo
 namespace TourOfHeroesData.Seeder
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Models;
+    using Contracts;
+
     public class Seeder : ISeeder
     {
         private readonly TourOfHeroesDbContext _dbContext;

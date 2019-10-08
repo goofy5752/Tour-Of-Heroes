@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
-namespace TourOfHeroesData.Models
+﻿namespace TourOfHeroesData.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
     public class Hero
     {
         public Hero()
         {
+            // ReSharper disable once VirtualMemberCallInConstructor
             this.EditHistory = new List<EditHistory>();
         }
 

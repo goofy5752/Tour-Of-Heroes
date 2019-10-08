@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using TourOfHeroesData.Common.Contracts;
-using TourOfHeroesData.Models;
-using TourOfHeroesServices.Contracts;
-using System.Linq;
-
-namespace TourOfHeroesServices
+﻿namespace TourOfHeroesServices
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using TourOfHeroesData.Common.Contracts;
+    using TourOfHeroesData.Models;
+    using Contracts;
+    using System.Linq;
+
     public class HistoryService : IHistoryService
     {
         private readonly IRepository<EditHistory> _editHistoryRepository;

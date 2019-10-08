@@ -1,11 +1,11 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using TourOfHeroesData.Common.Contracts;
-
-namespace TourOfHeroesData.Common
+﻿namespace TourOfHeroesData.Common
 {
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Microsoft.EntityFrameworkCore;
+    using Contracts;
+
     public class EfRepository<TEntity> : IRepository<TEntity>
         where TEntity : class
     {

@@ -1,8 +1,8 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-
-namespace TourOfHeroesData.Common.Contracts
+﻿namespace TourOfHeroesData.Common.Contracts
 {
+    using System.Linq;
+    using System.Threading.Tasks;
+
     public interface IDeletableEntityRepository<TEntity> : IRepository<TEntity>
         where TEntity : class, IDeletableEntity
     {

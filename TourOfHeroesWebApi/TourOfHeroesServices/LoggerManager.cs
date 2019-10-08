@@ -1,8 +1,8 @@
-﻿using NLog;
-using TourOfHeroesServices.Contracts;
-
-namespace TourOfHeroesServices
+﻿namespace TourOfHeroesServices
 {
+    using NLog;
+    using Contracts;
+
     public class LoggerManager : ILoggerManager
     {
         // ReSharper disable once InconsistentNaming

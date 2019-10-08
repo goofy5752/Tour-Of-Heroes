@@ -1,13 +1,13 @@
-﻿using System.Net;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Http;
-using TourOfHeroesServices.Contracts;
-using TourOfHeroesWebApi.GlobalErrorHandling.CustomExceptionMiddleware;
-using TourOfHeroesWebApi.GlobalErrorHandling.Models;
-
-namespace TourOfHeroesWebApi.GlobalErrorHandling.Extensions
+﻿namespace TourOfHeroesWebApi.GlobalErrorHandling.Extensions
 {
+    using System.Net;
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Diagnostics;
+    using Microsoft.AspNetCore.Http;
+    using TourOfHeroesServices.Contracts;
+    using CustomExceptionMiddleware;
+    using Models;
+
     public static class ExceptionMiddlewareExtensions
     {
         public static void ConfigureExceptionHandler(this IApplicationBuilder app, ILoggerManager logger)

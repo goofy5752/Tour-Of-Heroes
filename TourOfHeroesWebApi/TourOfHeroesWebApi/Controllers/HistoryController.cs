@@ -1,10 +1,10 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using TourOfHeroesData.Models;
-using TourOfHeroesServices.Contracts;
-
-namespace TourOfHeroesWebApi.Controllers
+﻿namespace TourOfHeroesWebApi.Controllers
 {
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Mvc;
+    using TourOfHeroesData.Models;
+    using TourOfHeroesServices.Contracts;
+
     public class HistoryController : ApiController
     {
         private readonly IHistoryService _historyService;
@@ -27,12 +27,11 @@ namespace TourOfHeroesWebApi.Controllers
                 return this.NotFound();
             }
 
-
             _logger.LogInfo($"Deleting history with id {id}...");
 
             await this._historyService.DeleteHistory(id);
 
-            _logger.LogInfo($"Successfully deleted history with id - {id}...");
+            _logger.LogInfo($"Successfully deleted history with id {id}...");
 
             return this.NoContent();
         }

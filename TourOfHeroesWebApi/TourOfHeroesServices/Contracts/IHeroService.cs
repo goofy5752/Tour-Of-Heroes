@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using TourOfHeroesDTOs;
-
-namespace TourOfHeroesServices.Contracts
+﻿namespace TourOfHeroesServices.Contracts
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using TourOfHeroesDTOs;
+
     public interface IHeroService
     {
         IEnumerable<GetHeroDTO> GetAllHeroes();

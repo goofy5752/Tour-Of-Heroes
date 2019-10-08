@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using TourOfHeroesData.Models;
-
-namespace TourOfHeroesServices.Contracts
+﻿namespace TourOfHeroesServices.Contracts
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using TourOfHeroesData.Models;
+
     public interface IHistoryService
     {
         IEnumerable<EditHistory> GetAllHistories();

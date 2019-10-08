@@ -1,7 +1,7 @@
-﻿using Newtonsoft.Json;
-
-namespace TourOfHeroesWebApi.GlobalErrorHandling.Models
+﻿namespace TourOfHeroesWebApi.GlobalErrorHandling.Models
 {
+    using Newtonsoft.Json;
+
     public class ErrorDetails
     {
         public int StatusCode { get; set; }

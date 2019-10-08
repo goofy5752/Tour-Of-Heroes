@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace TourOfHeroesDTOs
+﻿namespace TourOfHeroesDTOs
 {
+    using System.Collections.Generic;
+
     // ReSharper disable once InconsistentNaming
     public class PageResultDTO<T>
     {

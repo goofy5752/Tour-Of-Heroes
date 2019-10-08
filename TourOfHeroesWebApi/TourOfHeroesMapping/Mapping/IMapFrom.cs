@@ -1,4 +1,4 @@
-﻿namespace TourOfHeroesServices.Mapping
+﻿namespace TourOfHeroesMapping.Mapping
 {
     public interface IMapFrom<T>
     {

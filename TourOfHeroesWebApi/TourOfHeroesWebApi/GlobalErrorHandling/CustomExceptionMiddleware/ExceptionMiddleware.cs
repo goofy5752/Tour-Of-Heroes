@@ -1,12 +1,12 @@
-﻿using System;
-using System.Net;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using TourOfHeroesServices.Contracts;
-using TourOfHeroesWebApi.GlobalErrorHandling.Models;
-
-namespace TourOfHeroesWebApi.GlobalErrorHandling.CustomExceptionMiddleware
+﻿namespace TourOfHeroesWebApi.GlobalErrorHandling.CustomExceptionMiddleware
 {
+    using System;
+    using System.Net;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Http;
+    using TourOfHeroesServices.Contracts;
+    using Models;
+
     public class ExceptionMiddleware
     {
         private readonly RequestDelegate _next;

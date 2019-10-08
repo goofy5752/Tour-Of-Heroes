@@ -1,14 +1,14 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using TourOfHeroesData.Common.Contracts;
-using TourOfHeroesData.Models;
-using TourOfHeroesDTOs;
-using TourOfHeroesServices.Contracts;
-using TourOfHeroesServices.Mapping;
-
-namespace TourOfHeroesServices
+﻿namespace TourOfHeroesServices
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using TourOfHeroesData.Common.Contracts;
+    using TourOfHeroesData.Models;
+    using TourOfHeroesDTOs;
+    using Contracts;
+    using TourOfHeroesMapping.Mapping;
+
     public class HeroService : IHeroService
     {
         private readonly IRepository<Hero> _heroRepository;

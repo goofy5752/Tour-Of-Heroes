@@ -1,30 +1,30 @@
-﻿using System.IO;
-using System.Reflection;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using NLog;
-using TourOfHeroesData;
-using TourOfHeroesData.Common;
-using TourOfHeroesData.Common.Contracts;
-using TourOfHeroesData.Seeder;
-using TourOfHeroesData.Seeder.Contracts;
-using TourOfHeroesDTOs;
-using TourOfHeroesServices;
-using TourOfHeroesServices.Contracts;
-using TourOfHeroesServices.Mapping;
-using TourOfHeroesWebApi.GlobalErrorHandling.Extensions;
-
+﻿// ReSharper disable StringLiteralTypo
 namespace TourOfHeroesWebApi
 {
+    using System.IO;
+    using System.Reflection;
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using NLog;
+    using TourOfHeroesData;
+    using TourOfHeroesData.Common;
+    using TourOfHeroesData.Common.Contracts;
+    using TourOfHeroesData.Seeder;
+    using TourOfHeroesData.Seeder.Contracts;
+    using TourOfHeroesDTOs;
+    using TourOfHeroesServices;
+    using TourOfHeroesServices.Contracts;
+    using GlobalErrorHandling.Extensions;
+    using TourOfHeroesMapping.Mapping;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
         {
-            // ReSharper disable once StringLiteralTypo
             LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
             Configuration = configuration;
         }
@@ -62,6 +62,7 @@ namespace TourOfHeroesWebApi
             }
             else
             {
+                // ReSharper disable once CommentTypo
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
