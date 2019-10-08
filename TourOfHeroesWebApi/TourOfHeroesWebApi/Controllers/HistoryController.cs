@@ -8,10 +8,12 @@ namespace TourOfHeroesWebApi.Controllers
     public class HistoryController : ApiController
     {
         private readonly IHistoryService _historyService;
+        private readonly ILoggerManager _logger;
 
-        public HistoryController(IHistoryService historyService)
+        public HistoryController(IHistoryService historyService, ILoggerManager logger)
         {
             _historyService = historyService;
+            _logger = logger;
         }
 
         [HttpDelete("{id}"), DisableRequestSizeLimit]
@@ -25,7 +27,13 @@ namespace TourOfHeroesWebApi.Controllers
                 return this.NotFound();
             }
 
+
+            _logger.LogInfo($"Deleting history with id {id}...");
+
             await this._historyService.DeleteHistory(id);
+
+            _logger.LogInfo($"Successfully deleted history with id - {id}...");
+
             return this.NoContent();
         }
     }
