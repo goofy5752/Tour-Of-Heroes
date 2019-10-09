@@ -1,4 +1,6 @@
-﻿namespace TourOfHeroesWebApi.Controllers
+﻿using Microsoft.AspNetCore.Authorization;
+
+namespace TourOfHeroesWebApi.Controllers
 {
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
@@ -16,7 +18,9 @@
             _logger = logger;
         }
 
-        [HttpDelete("{id}"), DisableRequestSizeLimit]
+        [Authorize]
+        [HttpDelete("{id}")]
+        [DisableRequestSizeLimit]
         [Route("history/{id}")]
         public async Task<ActionResult<Hero>> DeleteHistory(int id)
         {

@@ -1,4 +1,6 @@
-﻿namespace TourOfHeroesWebApi.Controllers
+﻿using Microsoft.AspNetCore.Authorization;
+
+namespace TourOfHeroesWebApi.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
     using System.Collections.Generic;
@@ -8,6 +10,7 @@
     using TourOfHeroesDTOs;
     using TourOfHeroesServices.Contracts;
 
+    [Authorize]
     public class HeroesController : ApiController
     {
         private readonly IHeroService _heroService;
@@ -45,7 +48,7 @@
         #endregion
 
         #region GetHeroById
-
+        
         [HttpGet("{id}")]
         [DisableRequestSizeLimit]
         [Route("heroes/{id}")]
@@ -63,7 +66,7 @@
         #endregion
 
         #region GetHeroesBySearchString
-
+        
         [HttpGet("get-heroes")]
         [DisableRequestSizeLimit]
         [Route("heroes/{get-heroes}")]
@@ -84,7 +87,7 @@
         #endregion
 
         #region CreateHero
-
+        
         [HttpPost("create-hero")]
         [DisableRequestSizeLimit]
         [Route("heroes/{create-hero}")]
@@ -104,7 +107,7 @@
         #endregion
 
         #region UpdateHero
-
+        
         [HttpPut("{id}")]
         [DisableRequestSizeLimit]
         [Route("heroes/{id}")]

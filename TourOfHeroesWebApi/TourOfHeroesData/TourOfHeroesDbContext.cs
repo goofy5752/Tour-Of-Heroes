@@ -12,5 +12,7 @@
         public DbSet<Hero> Heroes { get; set; }
 
         public DbSet<EditHistory> EditHistory { get; set; }
+
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
     }
 }

@@ -1,8 +1,8 @@
-import { PageResult } from './../pageResult';
+import { PageResult } from './../../pageResult';
 import { Component, OnInit, Inject } from '@angular/core';
 
-import { Hero } from '../hero';
-import { HeroService } from '../hero.service';
+import { Hero } from '../../hero';
+import { HeroService } from '../../hero.service';
 import { HttpClient } from '@angular/common/http';
 
 import { Router, ActivatedRoute } from '@angular/router';
