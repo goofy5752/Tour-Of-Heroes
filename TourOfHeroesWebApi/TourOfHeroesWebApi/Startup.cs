@@ -1,10 +1,5 @@
 ﻿// ReSharper disable StringLiteralTypo
 
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Text;
-
 namespace TourOfHeroesWebApi
 {
     using GlobalErrorHandling.Extensions;
@@ -15,6 +10,10 @@ namespace TourOfHeroesWebApi
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.AspNetCore.Authentication.JwtBearer;
+    using Microsoft.IdentityModel.Tokens;
+    using System;
+    using System.Text;
     using NLog;
     using System.IO;
     using System.Reflection;
