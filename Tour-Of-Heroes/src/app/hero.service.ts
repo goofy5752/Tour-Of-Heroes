@@ -26,13 +26,13 @@ export class HeroService {
     public globals: Globals) { }
 
   /** GET heroes from the server */
-  getHeroes(): Observable<Hero[]> {
-    return this.http.get<Hero[]>(this.heroesUrl)
-      .pipe(
-        tap(_ => { if (this.globals.showActivity) { this.log('fetched heroes'); } }),
-        catchError(this.handleError<Hero[]>('getHeroes', []))
-      );
-  }
+  // getHeroes(): Observable<Hero[]> {
+  //   return this.http.get<Hero[]>(this.heroesUrl)
+  //     .pipe(
+  //       tap(_ => { if (this.globals.showActivity) { this.log('fetched heroes'); } }),
+  //       catchError(this.handleError<Hero[]>('getHeroes', []))
+  //     );
+  // }
 
   /** GET hero by id. Return `undefined` when id not found */
   getHeroNo404<Data>(id: number): Observable<Hero> {
@@ -139,7 +139,7 @@ export class HeroService {
   }
 
   /** Log a HeroService message with the MessageService */
-  private log(message: string) {
+  log(message: string) {
     this.messageService.add(`HeroService: ${message}`);
   }
 }

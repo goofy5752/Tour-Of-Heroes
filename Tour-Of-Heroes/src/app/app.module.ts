@@ -29,6 +29,7 @@ import { LoginComponent } from './user/login/login.component';
 import { RegistrationComponent } from './user/registration/registration.component';
 import { UserService } from './user.service';
 import { AuthInterceptor } from './auth/auth.interceptor';
+import { UnauthorizedViewComponent } from './layout-view/unauthorized-view/unauthorized-view.component';
 
 @NgModule({
   imports: [
@@ -59,6 +60,7 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     UserComponent,
     LoginComponent,
     RegistrationComponent,
+    UnauthorizedViewComponent,
   ],
   providers: [
     [UserService, {

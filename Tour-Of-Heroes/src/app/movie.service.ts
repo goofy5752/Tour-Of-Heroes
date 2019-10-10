@@ -1,11 +1,18 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import Movie from './movie';
+
+const apikey = '?api_key=f9b276a8a665a41333c2def2f632a2e4';
+const urlMoviedb = 'https://api.themoviedb.org/3/';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MovieService {
-  private apikey = 'f9b276a8a665a41333c2def2f632a2e4';
-  private urlMoviedb = 'https://api.themoviedb.org/3';
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+
+  getMovieByCharacterName(name: string) {
+    return this.http.get<Movie[]>(urlMoviedb + 'search/movie' + apikey + `&query=${name}`);
+  }
 }

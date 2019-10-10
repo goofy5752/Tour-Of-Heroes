@@ -37,6 +37,15 @@
                 </table>
             </div>
         </form>
+        <div class="row text-center">
+            <div class="col-md-6" *ngFor="let singleMovie of allMovies">
+                <div class="moviesCustom">
+                    <img class="thumbnail" src="http://image.tmdb.org/t/p/w500/{{singleMovie.poster_path}}" width="400px" height="600px">
+                    <h4>{{singleMovie.title}}</h4>
+                    <p>{{singleMovie.release_date}}</p>
+                </div>
+            </div>
+        </div>
         <div class="cardbox">
             <h5 class="cardbox-heading">Activity</h5>
             <div class="cardbox-body pb-0">

@@ -1,3 +1,5 @@
+import { Globals } from './../../globals';
+import { tap } from 'rxjs/operators';
 import { PageResult } from './../../pageResult';
 import { Component, OnInit, Inject } from '@angular/core';
 
@@ -20,10 +22,11 @@ export class HeroesComponent implements OnInit {
   public pageNumber = 1;
   public Count: number;
   // tslint:disable-next-line: max-line-length
-  constructor(private heroService: HeroService, http: HttpClient, private router: Router, private route: ActivatedRoute, private toastr: ToastrService) {
+  constructor(private heroService: HeroService, http: HttpClient, private router: Router, private route: ActivatedRoute, private toastr: ToastrService, public globals: Globals) {
     this.http = http;
 
-    http.get<PageResult<Hero>>(this.baseUrl + '/api/heroes/all').subscribe(result => {
+    // tslint:disable-next-line: max-line-length
+    http.get<PageResult<Hero>>(this.baseUrl + '/api/heroes/all').pipe(tap(_ => {if (this.globals.showActivity) { this.heroService.log(`fetched heroes from page ${this.pageNumber}`); } } )).subscribe(result => {
       this.Hero = result.items;
       this.pageNumber = result.pageIndex;
       this.Count = result.count;
@@ -31,7 +34,8 @@ export class HeroesComponent implements OnInit {
   }
 
   public onPageChange = (pageNumber) => {
-    this.http.get<PageResult<Hero>>(this.baseUrl + '/api/heroes/all?page=' + pageNumber).subscribe(result => {
+    // tslint:disable-next-line: max-line-length
+    this.http.get<PageResult<Hero>>(this.baseUrl + '/api/heroes/all?page=' + pageNumber).pipe(tap(_ =>  {if (this.globals.showActivity) {this.heroService.log(`fetched heroes from page ${pageNumber}`); } } )).subscribe(result => {
       this.Hero = result.items;
       this.pageNumber = result.pageIndex;
       this.router.navigate([], {
