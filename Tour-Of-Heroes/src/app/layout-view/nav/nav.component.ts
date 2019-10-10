@@ -10,11 +10,16 @@ export class NavComponent implements OnInit {
 
   private href = '';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   ngOnInit() {
-      this.href = this.router.url;
-      const charToUpper =  this.href.charAt(1).toUpperCase();
-      return charToUpper + this.href.substring(2, this.href.length);
+    this.href = this.router.url;
+    const charToUpper = this.href.charAt(1).toUpperCase();
+    return charToUpper + this.href.substring(2, this.href.length);
+  }
+
+  clearLocalStorage() {
+    localStorage.removeItem('token');
+    this.router.navigateByUrl('/user/login');
   }
 }

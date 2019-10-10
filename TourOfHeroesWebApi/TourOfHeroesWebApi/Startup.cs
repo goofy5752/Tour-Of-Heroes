@@ -1,10 +1,4 @@
 ﻿// ReSharper disable StringLiteralTypo
-
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Text;
-
 namespace TourOfHeroesWebApi
 {
     using GlobalErrorHandling.Extensions;
@@ -15,7 +9,11 @@ namespace TourOfHeroesWebApi
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.AspNetCore.Authentication.JwtBearer;
+    using Microsoft.IdentityModel.Tokens;
     using NLog;
+    using System;
+    using System.Text;
     using System.IO;
     using System.Reflection;
     using TourOfHeroesData;
@@ -72,7 +70,7 @@ namespace TourOfHeroesWebApi
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                //x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
                 x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(x =>
             {
@@ -84,11 +82,15 @@ namespace TourOfHeroesWebApi
                     IssuerSigningKey = new SymmetricSecurityKey(key),
                     ValidateIssuer = false,
                     ValidateAudience = false,
-                    //ClockSkew = TimeSpan.Zero
+                    ClockSkew = TimeSpan.Zero
                 };
             });
 
+            //repository service
+
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
+
+            //entity services
 
             services.AddTransient<ISeeder, Seeder>();
             services.AddTransient<IImageService, ImageService>();
@@ -120,6 +122,7 @@ namespace TourOfHeroesWebApi
             app.UseHttpsRedirection();
             app.UseCors(options =>
                 options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().WithOrigins(Configuration["ApplicationSettings:Client_URL"]));
+            app.UseAuthentication();
             app.UseMvc();
         }
     }
