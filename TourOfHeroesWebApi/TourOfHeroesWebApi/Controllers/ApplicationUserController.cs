@@ -82,7 +82,10 @@
                 return Ok(new { token });
             }
             else
-                return BadRequest(new { message = "Username or password is incorrect." });
+            {
+                _logger.LogError($"Username or password is incorrect.");
+                return BadRequest(new {message = "Username or password is incorrect."});
+            }
         }
     }
 }
