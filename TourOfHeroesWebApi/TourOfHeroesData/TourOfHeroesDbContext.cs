@@ -14,5 +14,7 @@
         public DbSet<EditHistory> EditHistory { get; set; }
 
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+
+        public DbSet<Movie> Movies { get; set; }
     }
 }

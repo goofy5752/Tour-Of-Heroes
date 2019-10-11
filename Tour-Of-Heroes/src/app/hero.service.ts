@@ -82,6 +82,7 @@ export class HeroService {
     formData.append('realName', hero.realName);
     formData.append('birthday', datestr);
     formData.append('gender', hero.gender);
+    formData.append('movieTitle', JSON.stringify(hero.movieTitle.values));
     return this.http.post<Hero>(`${this.heroesUrl}/create-hero`, formData, this.httpOptions).pipe(
       tap((newHero: Hero) => { if (this.globals.showActivity) { this.log(`added hero w/ id=${newHero.id}`); } }),
       catchError(this.handleError<Hero>('addHero'))

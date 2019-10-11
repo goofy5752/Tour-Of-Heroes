@@ -1,8 +1,9 @@
+import { MovieAdd } from './../../movie-add';
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { Hero } from '../../hero';
 import { HeroService } from '../../hero.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -30,7 +31,8 @@ export class AddHeroComponent implements OnInit {
       heroCoverImage: ['', Validators.required],
       heroBirthday: ['', Validators.required],
       heroGender: ['', Validators.required],
-      heroDescription: ['', Validators.required]
+      heroDescription: ['', Validators.required],
+      moviesArray: this.formBuilder.array([])
     }, {
     });
   }
@@ -39,21 +41,26 @@ export class AddHeroComponent implements OnInit {
     this.heroImageFile = this.heroImage.nativeElement.files[0];
   }
 
-  showFail() {
-    this.toastr.warning('Submit form with right parameters.', 'Failed !');
-  }
-
   stageHeroCoverImageFile(): void {
     this.heroCoverImageFile = this.heroCoverImage.nativeElement.files[0];
   }
 
-  add(name: string, description: string, realName: string, birthday: Date, gender: string): void {
+  get moviesArray() {
+    return this.registerForm.get('moviesArray') as FormArray;
+  }
+
+  addMovie() {
+    this.moviesArray.push(this.formBuilder.control(''));
+  }
+
+  add(name: string, description: string, realName: string, birthday: Date, gender: string, movieTitle: string[]): void {
     name = name.trim();
+    console.log(JSON.stringify(this.registerForm.value));
     description = description.trim();
     const image = this.heroImageFile;
     const coverImage = this.heroCoverImageFile;
     if (!name || !description || !image || !coverImage) { return; }
-    this.heroService.addHero({ name, description, image, coverImage, realName, birthday, gender } as Hero)
+    this.heroService.addHero({ name, description, image, coverImage, realName, birthday, gender, movieTitle } as Hero)
       .subscribe(hero => {
         this.heroes.push(hero);
       });

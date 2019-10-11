@@ -10,4 +10,5 @@ export class Hero {
     birthday: Date;
     gender: string;
     editHistory: EditHistory[];
+    movieTitle: string[];
 }
