@@ -12,7 +12,6 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./add-hero.component.css']
 })
 export class AddHeroComponent implements OnInit {
-  heroes: Hero[];
   registerForm: FormGroup;
   submitted = false;
   @ViewChild('heroImage', { static: false }) heroImage;
@@ -62,9 +61,8 @@ export class AddHeroComponent implements OnInit {
     if (!name || !description || !image || !coverImage) { return; }
     this.heroService.addHero({ name, description, image, coverImage, realName, birthday, gender, movieTitle } as Hero)
       .subscribe(hero => {
-        this.heroes.push(hero);
+        this.toastr.success(`You have create a new character: ${name}`, 'Success !');
       });
-    this.toastr.success(`You have create a new character: ${name}`, 'Success !');
   }
 
   onSubmit() {
