@@ -1,4 +1,3 @@
-import { MovieAdd } from './../../movie-add';
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { Hero } from '../../hero';

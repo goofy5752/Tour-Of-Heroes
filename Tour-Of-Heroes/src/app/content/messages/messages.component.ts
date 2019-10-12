@@ -14,12 +14,10 @@ export class MessagesComponent implements OnInit {
   constructor(public messageService: MessageService, public globals: Globals) {}
 
   ngOnInit() {
-    console.log(this.globals.showActivity);
   }
 
   toggle() {
     this.globals.showActivity = !this.globals.showActivity;
-    // this.show = this.globals.show;
     // CHANGE THE NAME OF THE BUTTON.
     if (this.globals.showActivity) {
       this.buttonName = 'Hide';

@@ -44,9 +44,6 @@ export class HeroDetailComponent implements OnInit {
     return this.movieService.getMovieByCharacterName(this.hero.name).subscribe(data => {
       this.searchResults = data;
       this.allMovies = this.searchResults.results;
-      // panel.show
-      console.log(this.searchResults);
-      console.log(this.allMovies);
     });
   }
 
