@@ -1,5 +1,7 @@
 ﻿namespace TourOfHeroesDTOs
 {
+    using System.Collections.Generic;
+
     using TourOfHeroesData.Models;
     using TourOfHeroesMapping.Mapping;
 
@@ -13,5 +15,7 @@
         public string Image { get; set; }
 
         public string CoverImage { get; set; }
+
+        public IEnumerable<GetMovieTitleDTO> Movies { get; set; }
     }
 }

@@ -26,7 +26,7 @@ export class HeroDetailComponent implements OnInit {
     private heroService: HeroService,
     private movieService: MovieService,
     private location: Location
-  ) { this.allMovies = { } as Movie[]; }
+  ) { this.allMovies = {} as Movie[]; }
 
   ngOnInit(): void {
     this.route.params.subscribe(() => {
@@ -37,14 +37,19 @@ export class HeroDetailComponent implements OnInit {
   getHero(): void {
     const id = +this.route.snapshot.paramMap.get('id');
     this.heroService.getHero(id)
-      .subscribe(hero => {this.hero = hero; this.getMovies(); });
+      .subscribe(hero => { this.hero = hero; this.getMovies(); });
   }
 
   getMovies() {
-    return this.movieService.getMovieByCharacterName(this.hero.name).subscribe(data => {
-      this.searchResults = data;
-      this.allMovies = this.searchResults.results;
-    });
+    console.log(this.hero.description);
+    // tslint:disable-next-line: prefer-for-of
+    for (let i = 0; i < this.hero.movieTitle.length; i++) {
+      const movie = this.hero.movieTitle[i];
+      return this.movieService.getMovieByTitle(movie).subscribe(data => {
+        this.searchResults = data;
+        this.allMovies = this.searchResults.results;
+      });
+    }
   }
 
   goBack(): void {
@@ -57,7 +62,7 @@ export class HeroDetailComponent implements OnInit {
   }
 
   delete(editHistory: EditHistory) {
-    this.hero.editHistory.splice(this.index, 1);
+    this.hero.editHistory = this.hero.editHistory.filter(h => h !== editHistory);
     this.heroService.deleteHistory(editHistory).subscribe();
   }
 }

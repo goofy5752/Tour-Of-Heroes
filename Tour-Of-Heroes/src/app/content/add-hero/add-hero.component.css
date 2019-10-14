@@ -571,16 +571,13 @@ input:focus {
     font-weight: 400;
     opacity: .8;
     padding: 8px 16px;
-    border-color: #888;
-    color: #888
 }
 
 .btn:active,
 .btn:focus,
 .btn:hover {
-    background-color: transparent;
-    color: #777;
-    border-color: #777
+    opacity: 0.7;
+    color: white;
 }
 
 .btn:disabled,
@@ -784,4 +781,17 @@ input:focus {
 
 .custom {
     margin-right: 10px
+}
+
+.btnCustom {
+    position: absolute;
+    background-color: rgb(231, 15, 15);
+    right: 0;
+    margin-right: 16px;
+    color: white;
+    margin-top: 27.2px;
+}
+
+.fa-trash {
+    color: white;
 }

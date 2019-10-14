@@ -1,6 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-
-import { Hero } from '../../hero';
 import { HeroService } from '../../hero.service';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
@@ -30,7 +28,7 @@ export class AddHeroComponent implements OnInit {
       heroBirthday: ['', Validators.required],
       heroGender: ['', Validators.required],
       heroDescription: ['', Validators.required],
-      moviesArray: this.formBuilder.array([])
+      movieTitle: this.formBuilder.array([])
     }, {
     });
   }
@@ -43,22 +41,36 @@ export class AddHeroComponent implements OnInit {
     this.heroCoverImageFile = this.heroCoverImage.nativeElement.files[0];
   }
 
-  get moviesArray() {
-    return this.registerForm.get('moviesArray') as FormArray;
-  }
-
   addMovie() {
-    this.moviesArray.push(this.formBuilder.control(''));
+    this.movieTitleFormGroup.push(this.formBuilder.control(''));
   }
 
-  add(name: string, description: string, realName: string, birthday: Date, gender: string, movieTitle: string[]): void {
+  removeMovie(index) {
+    this.movieTitleFormGroup.removeAt(index);
+  }
+
+  get movieTitleFormGroup() {
+    return this.registerForm.get('movieTitle') as FormArray;
+  }
+
+  add(name: string, description: string, realName: string, birthday: Date, gender: string, movieTitle: string): void {
     name = name.trim();
-    console.log(JSON.stringify(this.registerForm.value));
+    const formData = new FormData();
     description = description.trim();
+    const datestr = (new Date(birthday)).toUTCString();
     const image = this.heroImageFile;
     const coverImage = this.heroCoverImageFile;
+    console.log(movieTitle);
+    formData.append('name', name);
+    formData.append('description', description);
+    formData.append('image', image, image.name);
+    formData.append('coverImage', coverImage, coverImage.name);
+    formData.append('realName', realName);
+    formData.append('birthday', datestr);
+    formData.append('gender', gender);
+    formData.append('movieTitle', JSON.stringify(this.registerForm.get('movieTitle').value));
     if (!name || !description || !image || !coverImage) { return; }
-    this.heroService.addHero({ name, description, image, coverImage, realName, birthday, gender, movieTitle } as Hero)
+    this.heroService.addHero(formData)
       .subscribe(hero => {
         this.toastr.success(`You have create a new character: ${name}`, 'Success !');
       });

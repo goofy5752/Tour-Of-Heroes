@@ -72,18 +72,8 @@ export class HeroService {
   //////// Save methods //////////
 
   /** POST: add a new hero to the server */
-  addHero(hero: Hero): Observable<Hero> {
-    const formData = new FormData();
-    const datestr = (new Date(hero.birthday)).toUTCString();
-    formData.append('name', hero.name);
-    formData.append('description', hero.description);
-    formData.append('image', hero.image, hero.image.name);
-    formData.append('coverImage', hero.coverImage, hero.coverImage.name);
-    formData.append('realName', hero.realName);
-    formData.append('birthday', datestr);
-    formData.append('gender', hero.gender);
-    formData.append('movieTitle', JSON.stringify(hero.movieTitle.values));
-    return this.http.post<Hero>(`${this.heroesUrl}/create-hero`, formData, this.httpOptions).pipe(
+  addHero(fd: FormData): Observable<Hero> {
+    return this.http.post<Hero>(`${this.heroesUrl}/create-hero`, fd, this.httpOptions).pipe(
       tap((newHero: Hero) => { if (this.globals.showActivity) { this.log(`added hero w/ id=${newHero.id}`); } }),
       catchError(this.handleError<Hero>('addHero'))
     );
@@ -100,7 +90,7 @@ export class HeroService {
     );
   }
 
-  deleteHistory(editHistory: EditHistory): Observable<EditHistory> {
+  deleteHistory(editHistory: EditHistory | number): Observable<EditHistory> {
     const id = typeof editHistory === 'number' ? editHistory : editHistory.id;
     const url = `${this.historyUrl}/${id}`;
 

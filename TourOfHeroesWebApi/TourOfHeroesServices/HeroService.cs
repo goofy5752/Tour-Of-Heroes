@@ -1,5 +1,6 @@
 ﻿namespace TourOfHeroesServices
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -63,6 +64,21 @@
                 Birthday = hero.Birthday.Date,
                 Gender = hero.Gender
             };
+
+            var movieTitleList = new List<Movie>();
+            //Replacing and removing all the symbols that prevent the 'movie title' come how its expected.
+            var movieTitles = hero.MovieTitle[0].Replace("\"", "").Replace("\\", "").TrimStart(' ', '"', ']', '\\', '/', '[').TrimEnd(' ', '"', ']', '\\', '/', '[').Split(",", StringSplitOptions.RemoveEmptyEntries);
+            foreach (var title in movieTitles)
+            {
+                var movieTitle = new Movie
+                {
+                    Title = title,
+                    HeroId = heroObj.Id
+                };
+                movieTitleList.Add(movieTitle);
+            }
+
+            heroObj.Movies = movieTitleList;
 
             await this._heroRepository.AddAsync(heroObj);
 

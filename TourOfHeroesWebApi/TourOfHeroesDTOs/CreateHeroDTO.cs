@@ -3,7 +3,6 @@
     using System;
     using System.ComponentModel.DataAnnotations;
     using Microsoft.AspNetCore.Http;
-    using System.Collections.Generic;
 
     // ReSharper disable once InconsistentNaming
     public class CreateHeroDTO
@@ -30,6 +29,6 @@
         public string Gender { get; set; }
 
         [Required(ErrorMessage = "Field is required.")]
-        public List<string> Movie { get; set; }
+        public string[] MovieTitle { get; set; }
     }
 }

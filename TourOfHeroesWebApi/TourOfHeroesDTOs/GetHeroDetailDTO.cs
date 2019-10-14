@@ -28,6 +28,8 @@
         
         public string Gender { get; set; }
 
+        public IEnumerable<GetMovieTitleDTO> Movies { get; set; }
+
         public IEnumerable<EditHistory> EditHistory { get; set; }
     }
 }
