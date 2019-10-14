@@ -1,7 +1,7 @@
 import { EditHistory } from './../../editHistory';
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
+import { Location, JsonPipe } from '@angular/common';
 
 import { Hero } from '../../hero';
 import { HeroService } from '../../hero.service';
@@ -41,11 +41,8 @@ export class HeroDetailComponent implements OnInit {
   }
 
   getMovies() {
-    console.log(this.hero.description);
-    // tslint:disable-next-line: prefer-for-of
-    for (let i = 0; i < this.hero.movieTitle.length; i++) {
-      const movie = this.hero.movieTitle[i];
-      return this.movieService.getMovieByTitle(movie).subscribe(data => {
+    for (const title of this.hero.movies) {
+      this.movieService.getMovieByTitle(`${title}`).subscribe(data => {
         this.searchResults = data;
         this.allMovies = this.searchResults.results;
       });

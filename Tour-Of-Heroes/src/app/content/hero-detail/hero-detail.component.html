@@ -38,7 +38,7 @@
             </div>
         </form>
         <div class="row text-center">
-            <div class="col-md-6" *ngFor="let singleMovie of allMovies.values">
+            <div class="col-md-6" *ngFor="let singleMovie of allMovies.value">
                 <div class="moviesCustom">
                     <img class="thumbnail" src="http://image.tmdb.org/t/p/w500/{{singleMovie.poster_path}}" width="400px" height="600px">
                     <h4>{{singleMovie.title}}</h4>

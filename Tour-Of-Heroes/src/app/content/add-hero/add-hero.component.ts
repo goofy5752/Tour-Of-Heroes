@@ -60,7 +60,6 @@ export class AddHeroComponent implements OnInit {
     const datestr = (new Date(birthday)).toUTCString();
     const image = this.heroImageFile;
     const coverImage = this.heroCoverImageFile;
-    console.log(movieTitle);
     formData.append('name', name);
     formData.append('description', description);
     formData.append('image', image, image.name);
