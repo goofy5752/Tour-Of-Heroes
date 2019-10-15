@@ -37,12 +37,23 @@
                 </table>
             </div>
         </form>
+        <ng-template #t let-fill="fill">
+            <span class="star" [class.full]="fill === 100">
+              <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+            </span>
+        </ng-template>
         <div class="row text-center">
-            <div class="col-md-6" *ngFor="let singleMovie of allMovies.value">
+            <div class="col-md-6 mb-5" *ngFor="let singleMovie of allMovies">
                 <div class="moviesCustom">
                     <img class="thumbnail" src="http://image.tmdb.org/t/p/w500/{{singleMovie.poster_path}}" width="400px" height="600px">
                     <h4>{{singleMovie.title}}</h4>
-                    <p>{{singleMovie.release_date}}</p>
+                    <p>Release date: {{singleMovie.release_date}}</p>
+                    <p>Total vote counts: {{singleMovie.vote_count}}</p>
+                    <div class="bg-white">
+                        <hr>
+                        <p><b>Average vote: {{singleMovie.vote_average}} out of 5</b></p>
+                        <ngb-rating [(rate)]="singleMovie.vote_average" [starTemplate]="t" [readonly]="!readonly" max="5"></ngb-rating>
+                    </div>
                 </div>
             </div>
         </div>
