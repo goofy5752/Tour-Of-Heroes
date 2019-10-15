@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { HeroService } from '../../hero.service';
+import { HeroService } from '../../services/hero.service';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 

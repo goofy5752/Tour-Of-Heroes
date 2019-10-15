@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Globals } from './entities/globals';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Tour of Heroes';
+
+  constructor( public globals: Globals) {}
 }

@@ -1,10 +1,10 @@
-import { Globals } from './../../globals';
+import { Globals } from '../../entities/globals';
 import { tap } from 'rxjs/operators';
-import { PageResult } from './../../pageResult';
+import { PageResult } from '../../entities/pageResult';
 import { Component, OnInit, Inject } from '@angular/core';
 
-import { Hero } from '../../hero';
-import { HeroService } from '../../hero.service';
+import { Hero } from '../../entities/hero';
+import { HeroService } from '../../services/hero.service';
 import { HttpClient } from '@angular/common/http';
 
 import { Router, ActivatedRoute } from '@angular/router';

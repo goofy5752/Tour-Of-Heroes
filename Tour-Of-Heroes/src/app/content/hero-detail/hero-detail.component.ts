@@ -1,12 +1,12 @@
-import { EditHistory } from './../../editHistory';
+import { EditHistory } from '../../entities/editHistory';
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location, JsonPipe } from '@angular/common';
 
-import { Hero } from '../../hero';
-import { HeroService } from '../../hero.service';
-import { MovieService } from 'src/app/movie.service';
-import Movie from '../../movie';
+import { Hero } from '../../entities/hero';
+import { HeroService } from '../../services/hero.service';
+import { MovieService } from 'src/app/services/movie.service';
+import Movie from '../../entities/movie';
 
 @Component({
   selector: 'app-hero-detail',

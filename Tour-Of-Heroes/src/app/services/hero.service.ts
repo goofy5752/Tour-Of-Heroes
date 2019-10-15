@@ -1,13 +1,13 @@
-import { EditHistory } from './editHistory';
+import { EditHistory } from '../entities/editHistory';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
-import { Hero } from './hero';
+import { Hero } from '../entities/hero';
 import { MessageService } from './message.service';
-import { Globals } from './globals';
+import { Globals } from '../entities/globals';
 
 
 @Injectable({ providedIn: 'root' })
