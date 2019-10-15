@@ -1,4 +1,4 @@
-import { UnauthorizedViewComponent } from './layout-view/unauthorized-view/unauthorized-view.component';
+import { UserComponent } from './user/user.component';
 import { HeroesMainContentComponent } from './main-content/heroes-main-content/heroes-main-content.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -9,15 +9,15 @@ import { RegistrationComponent } from './user/registration/registration.componen
 import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'heroes', pathMatch: 'full'},
+  { path: '', redirectTo: 'heroes', pathMatch: 'full' },
   { path: 'detail/:id', component: HeroDetailComponent, canActivate: [AuthGuard] },
   { path: 'heroes', component: HeroesMainContentComponent, canActivate: [AuthGuard] },
   { path: 'add-hero', component: AddHeroMainComponent, canActivate: [AuthGuard] },
   {
-    path: 'user', component: UnauthorizedViewComponent,
+    path: 'user', component: UserComponent,
     children: [
-      { path: 'registration', component: RegistrationComponent },
-      { path: 'login', component: LoginComponent }
+      { path: 'login', component: LoginComponent },
+      { path: 'registration', component: RegistrationComponent }
     ]
   },
 ];

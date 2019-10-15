@@ -23,13 +23,12 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { LayoutComponent } from './layout-view/layout/layout.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { Globals } from './entities/globals';
+import { Globals } from './globals/globals';
 import { UserComponent } from './user/user.component';
 import { LoginComponent } from './user/login/login.component';
 import { RegistrationComponent } from './user/registration/registration.component';
 import { UserService } from './services/user.service';
 import { AuthInterceptor } from './auth/auth.interceptor';
-import { UnauthorizedViewComponent } from './layout-view/unauthorized-view/unauthorized-view.component';
 
 @NgModule({
   imports: [
@@ -60,7 +59,6 @@ import { UnauthorizedViewComponent } from './layout-view/unauthorized-view/unaut
     UserComponent,
     LoginComponent,
     RegistrationComponent,
-    UnauthorizedViewComponent,
   ],
   providers: [
     [UserService, {

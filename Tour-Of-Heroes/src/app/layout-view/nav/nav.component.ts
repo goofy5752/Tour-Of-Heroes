@@ -20,6 +20,6 @@ export class NavComponent implements OnInit {
 
   clearLocalStorage() {
     localStorage.removeItem('token');
-    this.router.navigateByUrl('/user/login');
+    this.router.navigateByUrl('user/login');
   }
 }

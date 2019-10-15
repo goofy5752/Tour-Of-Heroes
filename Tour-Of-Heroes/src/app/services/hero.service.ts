@@ -7,7 +7,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { Hero } from '../entities/hero';
 import { MessageService } from './message.service';
-import { Globals } from '../entities/globals';
+import { Globals } from '../globals/globals';
 
 
 @Injectable({ providedIn: 'root' })

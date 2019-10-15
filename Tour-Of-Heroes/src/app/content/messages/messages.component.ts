@@ -1,4 +1,4 @@
-import { Globals } from '../../entities/globals';
+import { Globals } from '../../globals/globals';
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from '../../services/message.service';
 

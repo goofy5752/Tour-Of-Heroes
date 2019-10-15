@@ -23,7 +23,7 @@ export class AuthInterceptor implements HttpInterceptor {
                         // tslint:disable-next-line: triple-equals
                         if (err.status == 401) {
                             localStorage.removeItem('token');
-                            this.router.navigateByUrl('/user/login');
+                            this.router.navigateByUrl('user/login');
                         }
                     }
                 )

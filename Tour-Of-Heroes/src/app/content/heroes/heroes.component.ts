@@ -1,4 +1,4 @@
-import { Globals } from '../../entities/globals';
+import { Globals } from '../../globals/globals';
 import { tap } from 'rxjs/operators';
 import { PageResult } from '../../entities/pageResult';
 import { Component, OnInit, Inject } from '@angular/core';
