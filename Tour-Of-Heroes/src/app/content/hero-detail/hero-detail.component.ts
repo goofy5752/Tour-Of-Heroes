@@ -26,14 +26,13 @@ export class HeroDetailComponent implements OnInit {
     private heroService: HeroService,
     private movieService: MovieService,
     private location: Location
-  ) { this.allMovies = {} as Movie[]; }
+  ) { this.allMovies = []; }
 
   ngOnInit(): void {
     this.route.params.subscribe(() => {
       this.getHero();
     });
   }
-
   getHero(): void {
     const id = +this.route.snapshot.paramMap.get('id');
     this.heroService.getHero(id)
@@ -41,10 +40,15 @@ export class HeroDetailComponent implements OnInit {
   }
 
   getMovies() {
-    for (const title of this.hero.movies) {
-      this.movieService.getMovieByTitle(`${title}`).subscribe(data => {
+    for (const movie of this.hero.movies) {
+      this.movieService.getMovieByTitle(`${movie.title}`).subscribe(data => {
         this.searchResults = data;
-        this.allMovies = this.searchResults.results;
+        for (const currentMovie of this.searchResults.results) {
+          if (currentMovie.title === movie.title) {
+            currentMovie.vote_average = currentMovie.vote_average / 2;
+            this.allMovies.push(currentMovie);
+          }
+        }
       });
     }
   }

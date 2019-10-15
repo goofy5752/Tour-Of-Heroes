@@ -12,7 +12,7 @@ export class MovieService {
 
   constructor(private http: HttpClient) { }
 
-  getMovieByTitle(name: string) {
-    return this.http.get<Movie[]>(urlMoviedb + 'search/movie' + apikey + `&query=${name}`);
+  getMovieByTitle(title: string) {
+    return this.http.get<Movie[]>(urlMoviedb + 'search/movie' + apikey + `&query=${title}` + `&page=${1}`);
   }
 }

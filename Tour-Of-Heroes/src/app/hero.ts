@@ -1,4 +1,5 @@
 import { EditHistory } from './editHistory';
+import Movie from './movie';
 
 export class Hero {
     id: number;
@@ -10,5 +11,5 @@ export class Hero {
     birthday: Date;
     gender: string;
     editHistory: EditHistory[];
-    movies: string[];
+    movies: Movie[];
 }
