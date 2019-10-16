@@ -20,9 +20,19 @@ namespace TourOfHeroesData.Seeder
         public void SeedDatabase()
         {
             var heroList = new List<Hero>();
+            var cptAmericaMovies = new List<Movie>();
+            var spidermanMovies = new List<Movie>();
+            var hulkMovies = new List<Movie>();
+            var blackWidowMovies = new List<Movie>();
+            var blackPantherMovies = new List<Movie>();
+            var thorMovies = new List<Movie>();
+            var hawkeyeMovies = new List<Movie>();
+            var ironmanMovies = new List<Movie>();
 
             if (!_dbContext.Heroes.Any())
             {
+                #region CaptainAmericaSeeder
+
                 var cptAmerica = new Hero
                 {
                     Name = "Captain America",
@@ -34,7 +44,36 @@ namespace TourOfHeroesData.Seeder
                     Gender = "Male"
                 };
 
+                cptAmericaMovies.Add(new Movie
+                {
+                    Title = "Captain America",
+                    Hero = cptAmerica
+                });
+
+                cptAmericaMovies.Add(new Movie
+                {
+                    Title = "Captain America: The First Avenger",
+                    Hero = cptAmerica
+                });
+
+                cptAmericaMovies.Add(new Movie
+                {
+                    Title = "Captain America: The Winter Soldier",
+                    Hero = cptAmerica
+                });
+
+                cptAmericaMovies.Add(new Movie
+                {
+                    Title = "Captain America: Civil War",
+                    Hero = cptAmerica
+                });
+
+                cptAmerica.Movies.AddRange(cptAmericaMovies);
                 heroList.Add(cptAmerica);
+
+                #endregion
+
+                #region SpiderManSeeder
 
                 var spiderman = new Hero
                 {
@@ -47,7 +86,61 @@ namespace TourOfHeroesData.Seeder
                     Gender = "Male"
                 };
 
+                spidermanMovies.Add(new Movie
+                {
+                    Title = "Spider-Man",
+                    Hero = spiderman
+                });
+
+                spidermanMovies.Add(new Movie
+                {
+                    Title = "Spider-Man 2",
+                    Hero = spiderman
+                });
+
+                spidermanMovies.Add(new Movie
+                {
+                    Title = "Spider-Man 3",
+                    Hero = spiderman
+                });
+
+                spidermanMovies.Add(new Movie
+                {
+                    Title = "The Amazing Spider-Man",
+                    Hero = spiderman
+                });
+
+                spidermanMovies.Add(new Movie
+                {
+                    Title = "The Amazing Spider-Man 2",
+                    Hero = spiderman
+                });
+
+                spidermanMovies.Add(new Movie
+                {
+                    Title = "Spider-Man: Homecoming",
+                    Hero = spiderman
+                });
+
+                spidermanMovies.Add(new Movie
+                {
+                    Title = "Spider-Man: Into the Spider-Verse",
+                    Hero = spiderman
+                });
+
+                spidermanMovies.Add(new Movie
+                {
+                    Title = "Spider-Man: Far From Home",
+                    Hero = spiderman
+                });
+
+                spiderman.Movies.AddRange(spidermanMovies);
+
                 heroList.Add(spiderman);
+
+                #endregion
+
+                #region ThorSeeder
 
                 var thor = new Hero
                 {
@@ -60,7 +153,37 @@ namespace TourOfHeroesData.Seeder
                     Gender = "Male"
                 };
 
+                thorMovies.Add(new Movie
+                {
+                    Title = "Thor",
+                    Hero = thor
+                });
+
+                thorMovies.Add(new Movie
+                {
+                    Title = "Thor: Ragnarok",
+                    Hero = thor
+                });
+
+                thorMovies.Add(new Movie
+                {
+                    Title = "Thor: The Dark World",
+                    Hero = thor
+                });
+
+                thorMovies.Add(new Movie
+                {
+                    Title = "Thor: Love and Thunder",
+                    Hero = thor
+                });
+
+                thor.Movies.AddRange(thorMovies);
+
                 heroList.Add(thor);
+
+                #endregion
+
+                #region HulkSeeder
 
                 var hulk = new Hero
                 {
@@ -73,7 +196,25 @@ namespace TourOfHeroesData.Seeder
                     Gender = "Male"
                 };
 
+                hulkMovies.Add(new Movie
+                {
+                    Title = "The Incredible Hulk",
+                    Hero = hulk
+                });
+
+                hulkMovies.Add(new Movie
+                {
+                    Title = "Hulk",
+                    Hero = hulk
+                });
+
+                hulk.Movies.AddRange(hulkMovies);
+
                 heroList.Add(hulk);
+
+                #endregion
+
+                #region IronManSeeder
 
                 var ironman = new Hero
                 {
@@ -86,7 +227,31 @@ namespace TourOfHeroesData.Seeder
                     Gender = "Male"
                 };
 
+                ironmanMovies.Add(new Movie
+                {
+                    Title = "Iron Man",
+                    Hero = ironman
+                });
+
+                ironmanMovies.Add(new Movie
+                {
+                    Title = "Iron Man 2",
+                    Hero = ironman
+                });
+
+                ironmanMovies.Add(new Movie
+                {
+                    Title = "Iron Man 3",
+                    Hero = ironman
+                });
+
+                ironman.Movies.AddRange(ironmanMovies);
+
                 heroList.Add(ironman);
+
+                #endregion
+
+                #region HawkEyeSeeder
 
                 var hawkeye = new Hero
                 {
@@ -99,7 +264,25 @@ namespace TourOfHeroesData.Seeder
                     Gender = "Male"
                 };
 
+                hawkeyeMovies.Add(new Movie
+                {
+                    Title = "Avengers",
+                    Hero = hawkeye
+                });
+
+                hawkeyeMovies.Add(new Movie
+                {
+                    Title = "The Avengers",
+                    Hero = hawkeye
+                });
+
+                hawkeye.Movies.AddRange(hawkeyeMovies);
+
                 heroList.Add(hawkeye);
+
+                #endregion
+
+                #region BlackWidowSeeder
 
                 var blackwidow = new Hero
                 {
@@ -112,7 +295,19 @@ namespace TourOfHeroesData.Seeder
                     Gender = "Female"
                 };
 
+                blackWidowMovies.Add(new Movie
+                {
+                    Title = "Black Widow",
+                    Hero = blackwidow
+                });
+
+                blackwidow.Movies.AddRange(blackWidowMovies);
+
                 heroList.Add(blackwidow);
+
+                #endregion
+
+                #region BlackPantherSeeder
 
                 var blackpanther = new Hero
                 {
@@ -125,7 +320,17 @@ namespace TourOfHeroesData.Seeder
                     Gender = "Male"
                 };
 
+                blackPantherMovies.Add(new Movie
+                {
+                    Title = "Black Panther",
+                    Hero = blackpanther
+                });
+
+                blackpanther.Movies.AddRange(blackPantherMovies);
+
                 heroList.Add(blackpanther);
+
+                #endregion
 
                 _dbContext.Heroes.AddRange(heroList);
                 _dbContext.SaveChangesAsync();
