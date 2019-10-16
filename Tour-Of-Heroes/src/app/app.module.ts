@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -29,6 +29,7 @@ import { LoginComponent } from './user/login/login.component';
 import { RegistrationComponent } from './user/registration/registration.component';
 import { UserService } from './services/user.service';
 import { AuthInterceptor } from './auth/auth.interceptor';
+import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 
 @NgModule({
   imports: [
@@ -41,6 +42,9 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     NgxPaginationModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    ConfirmationPopoverModule.forRoot({
+      confirmButtonType: 'danger' // set defaults here
+    })
   ],
   declarations: [
     AppComponent,
@@ -66,7 +70,8 @@ import { AuthInterceptor } from './auth/auth.interceptor';
       useClass: AuthInterceptor,
       multi: true
     }],
-    Globals // so do not provide it into another components/services if you want it to be a singleton
+    Globals, // so do not provide it into another components/services if you want it to be a singleton
+    Title
   ],
   bootstrap: [AppComponent]
 })

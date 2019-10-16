@@ -1,3 +1,4 @@
+import { Title } from '@angular/platform-browser';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -8,18 +9,17 @@ import { Router } from '@angular/router';
 })
 export class NavComponent implements OnInit {
 
-  private href = '';
-
-  constructor(private router: Router) { }
+  constructor(private router: Router, private titleService: Title) { }
 
   ngOnInit() {
-    this.href = this.router.url;
-    const charToUpper = this.href.charAt(1).toUpperCase();
-    return charToUpper + this.href.substring(2, this.href.length);
   }
 
   clearLocalStorage() {
     localStorage.removeItem('token');
     this.router.navigateByUrl('user/login');
+  }
+
+  getDocTitle(): string {
+    return this.titleService.getTitle();
   }
 }

@@ -1,3 +1,4 @@
+import { Title } from '@angular/platform-browser';
 import { Globals } from '../../globals/globals';
 import { tap } from 'rxjs/operators';
 import { PageResult } from '../../entities/pageResult';
@@ -16,13 +17,20 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./heroes.component.css']
 })
 export class HeroesComponent implements OnInit {
+  placements: string[] = ['top', 'left', 'right', 'bottom'];
+  popoverTitle = 'Hmmm?';
+  popoverMessage = 'Are you really <b>sure</b> you want to do this?';
+  confirmText = 'Yes <i class="glyphicon glyphicon-ok"></i>';
+  cancelText = 'No <i class="glyphicon glyphicon-remove"></i>';
+  confirmClicked = false;
+  cancelClicked = false;
   private http: HttpClient;
   baseUrl = 'https://localhost:44353';
   public Hero: Hero[];
   public pageNumber = 1;
   public Count: number;
   // tslint:disable-next-line: max-line-length
-  constructor(private heroService: HeroService, http: HttpClient, private router: Router, private route: ActivatedRoute, private toastr: ToastrService, public globals: Globals) {
+  constructor(private heroService: HeroService, http: HttpClient, private router: Router, private route: ActivatedRoute, private toastr: ToastrService, public globals: Globals, private titleService: Title) {
     this.http = http;
 
     // tslint:disable-next-line: max-line-length
@@ -75,5 +83,9 @@ export class HeroesComponent implements OnInit {
     this.Hero = this.Hero.filter(h => h !== hero);
     this.heroService.deleteHero(hero).subscribe();
     this.toastr.success(`You have deleted superhero: ${hero.name}`, 'Success !');
+  }
+
+  setDocTitle(title: string) {
+    this.titleService.setTitle(title);
   }
 }
