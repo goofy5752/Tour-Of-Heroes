@@ -1,7 +1,7 @@
 import { EditHistory } from '../../entities/editHistory';
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Location, JsonPipe } from '@angular/common';
+import { Location } from '@angular/common';
 
 import { Hero } from '../../entities/hero';
 import { HeroService } from '../../services/hero.service';
@@ -15,6 +15,14 @@ import Movie from '../../entities/movie';
 })
 
 export class HeroDetailComponent implements OnInit {
+  placements: string[] = ['top', 'left', 'right', 'bottom'];
+  popoverTitle = 'Hmmm?';
+  popoverMessage = 'Are you really <b>sure</b> you want to do this?';
+  confirmText = 'Yes <i class="glyphicon glyphicon-ok"></i>';
+  cancelText = 'No <i class="glyphicon glyphicon-remove"></i>';
+  confirmClicked = false;
+  cancelClicked = false;
+
   @Input() hero: Hero;
   @Input() movies: Movie[];
   allMovies: Movie[];
@@ -62,8 +70,13 @@ export class HeroDetailComponent implements OnInit {
       .subscribe(() => this.goBack());
   }
 
-  delete(editHistory: EditHistory) {
+  deleteHistory(editHistory: EditHistory) {
     this.hero.editHistory = this.hero.editHistory.filter(h => h !== editHistory);
     this.heroService.deleteHistory(editHistory).subscribe();
+  }
+
+  deleteMovie(movie: Movie) {
+    this.hero.movies = this.hero.movies.filter(h => h !== movie);
+    this.heroService.deleteMovie(movie.title).subscribe();
   }
 }
