@@ -30,7 +30,13 @@ export class HeroesComponent implements OnInit {
   public pageNumber = 1;
   public Count: number;
   // tslint:disable-next-line: max-line-length
-  constructor(private heroService: HeroService, http: HttpClient, private router: Router, private route: ActivatedRoute, private toastr: ToastrService, public globals: Globals, private titleService: Title) {
+  constructor(private heroService: HeroService,
+              http: HttpClient,
+              private router: Router,
+              private route: ActivatedRoute,
+              private toastr: ToastrService,
+              public globals: Globals,
+              private titleService: Title) {
     this.http = http;
 
     // tslint:disable-next-line: max-line-length

@@ -1,8 +1,6 @@
-﻿using System;
-using Microsoft.AspNetCore.Authorization;
-
-namespace TourOfHeroesWebApi.Controllers
+﻿namespace TourOfHeroesWebApi.Controllers
 {
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using System.Collections.Generic;
     using System.Linq;

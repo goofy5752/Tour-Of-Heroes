@@ -1,12 +1,12 @@
-﻿using Microsoft.AspNetCore.Authorization;
-
-namespace TourOfHeroesWebApi.Controllers
+﻿namespace TourOfHeroesWebApi.Controllers
 {
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
     using TourOfHeroesData.Models;
     using TourOfHeroesServices.Contracts;
+    using Microsoft.AspNetCore.Authorization;
 
+    [Authorize]
     public class HistoryController : ApiController
     {
         private readonly IHistoryService _historyService;
@@ -18,7 +18,6 @@ namespace TourOfHeroesWebApi.Controllers
             _logger = logger;
         }
 
-        [Authorize]
         [HttpDelete("{id}")]
         [DisableRequestSizeLimit]
         [Route("history/{id}")]

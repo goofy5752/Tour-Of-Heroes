@@ -79,3 +79,7 @@
     overflow: hidden;
     color: goldenrod;
 }
+
+.removeMovieButton {
+    width: 100%;
+}

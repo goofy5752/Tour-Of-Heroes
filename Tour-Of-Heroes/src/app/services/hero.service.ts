@@ -8,12 +8,14 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { Hero } from '../entities/hero';
 import { MessageService } from './message.service';
 import { Globals } from '../globals/globals';
+import Movie from '../entities/movie';
 
 
 @Injectable({ providedIn: 'root' })
 export class HeroService {
   private heroesUrl = 'https://localhost:44353/api/heroes';  // URL to heroes api
   private historyUrl = 'https://localhost:44353/api/history'; // URL to history api
+  private moviesUrl = 'https://localhost:44353/api/movies'; // URL to movies api
 
   httpOptions = {
     headers: new HttpHeaders()
@@ -90,6 +92,7 @@ export class HeroService {
     );
   }
 
+  /** Delete edit history from the server */
   deleteHistory(editHistory: EditHistory | number): Observable<EditHistory> {
     const id = typeof editHistory === 'number' ? editHistory : editHistory.id;
     const url = `${this.historyUrl}/${id}`;
@@ -97,6 +100,17 @@ export class HeroService {
     return this.http.delete<EditHistory>(url, this.httpOptions).pipe(
       tap(_ => { if (this.globals.showActivity) { this.log(`deleted history id=${id}`); } }),
       catchError(this.handleError<EditHistory>('deleteHistory'))
+    );
+  }
+
+  /** Delete movie from the server */
+  deleteMovie(movie: Movie | string): Observable<Movie> {
+    const title = typeof movie === 'string' ? movie : movie;
+    const url = `${this.moviesUrl}/${title}`;
+
+    return this.http.delete<Movie>(url, this.httpOptions).pipe(
+      tap(_ => { if (this.globals.showActivity) { this.log(`deleted movie title=${title}`); } }),
+      catchError(this.handleError<Movie>('deleteMovie'))
     );
   }
 

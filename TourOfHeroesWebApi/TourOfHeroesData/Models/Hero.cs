@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace TourOfHeroesData.Models
+﻿namespace TourOfHeroesData.Models
 {
     using System;
     using System.Collections.Generic;

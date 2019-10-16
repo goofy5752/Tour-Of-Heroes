@@ -96,6 +96,7 @@ namespace TourOfHeroesWebApi
             services.AddTransient<IImageService, ImageService>();
             services.AddTransient<IHeroService, HeroService>();
             services.AddTransient<IHistoryService, HistoryService>();
+            services.AddTransient<IMovieService, MovieService>();
             services.AddSingleton<ILoggerManager, LoggerManager>();
         }
 
