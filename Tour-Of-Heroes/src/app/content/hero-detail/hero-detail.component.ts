@@ -24,7 +24,6 @@ export class HeroDetailComponent implements OnInit {
   cancelClicked = false;
 
   @Input() hero: Hero;
-  @Input() movies: Movie[];
   allMovies: Movie[];
   index: number;
   searchResults: any;
@@ -76,7 +75,7 @@ export class HeroDetailComponent implements OnInit {
   }
 
   deleteMovie(movie: Movie) {
-    this.hero.movies = this.hero.movies.filter(h => h !== movie);
+    this.allMovies = this.allMovies.filter(h => h !== movie);
     this.heroService.deleteMovie(movie.title).subscribe();
   }
 }
