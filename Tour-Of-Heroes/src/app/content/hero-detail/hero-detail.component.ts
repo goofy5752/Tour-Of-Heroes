@@ -7,6 +7,7 @@ import { Hero } from '../../entities/hero';
 import { HeroService } from '../../services/hero.service';
 import { MovieService } from 'src/app/services/movie.service';
 import Movie from '../../entities/movie';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-hero-detail',
@@ -32,7 +33,8 @@ export class HeroDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private heroService: HeroService,
     private movieService: MovieService,
-    private location: Location
+    private location: Location,
+    private toastr: ToastrService,
   ) { this.allMovies = []; }
 
   ngOnInit(): void {
@@ -75,7 +77,7 @@ export class HeroDetailComponent implements OnInit {
   }
 
   deleteMovie(movie: Movie, password: string) {
-    this.allMovies = this.allMovies.filter(h => h !== movie);
-    this.movieService.deleteMovie(movie.title, password).subscribe();
+    // tslint:disable-next-line: max-line-length
+    this.movieService.deleteMovie(movie.title, password).subscribe(() => this.allMovies = this.allMovies.filter(h => h !== movie), error => { if (error.status != 401) { console.log(error); this.toastr.success(`You have deleted movie: ${movie.title}`, 'Success !'); } else { this.toastr.success(`You have deleted movie: ${movie.title}`, 'Success !'); } });
   }
 }
