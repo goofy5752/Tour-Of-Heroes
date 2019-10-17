@@ -16,7 +16,7 @@ import Movie from '../../entities/movie';
 
 export class HeroDetailComponent implements OnInit {
   placements: string[] = ['top', 'left', 'right', 'bottom'];
-  popoverTitle = 'Hmmm?';
+  popoverTitle = 'Enter your password to confirm!';
   popoverMessage = 'Are you really <b>sure</b> you want to do this?';
   confirmText = 'Yes <i class="glyphicon glyphicon-ok"></i>';
   cancelText = 'No <i class="glyphicon glyphicon-remove"></i>';
@@ -48,10 +48,10 @@ export class HeroDetailComponent implements OnInit {
 
   getMovies() {
     for (const movie of this.hero.movies) {
-      this.movieService.getMovieByTitle(`${movie.title}`).subscribe(data => {
+      this.movieService.getMovieByTitle(`${movie.title.toLowerCase()}`).subscribe(data => {
         this.searchResults = data;
         for (const currentMovie of this.searchResults.results) {
-          if (currentMovie.title === movie.title) {
+          if (currentMovie.title.toLowerCase() === movie.title.toLowerCase()) {
             currentMovie.vote_average = currentMovie.vote_average / 2;
             this.allMovies.push(currentMovie);
           }
@@ -74,8 +74,8 @@ export class HeroDetailComponent implements OnInit {
     this.heroService.deleteHistory(editHistory).subscribe();
   }
 
-  deleteMovie(movie: Movie) {
+  deleteMovie(movie: Movie, password: string) {
     this.allMovies = this.allMovies.filter(h => h !== movie);
-    this.heroService.deleteMovie(movie.title).subscribe();
+    this.movieService.deleteMovie(movie.title, password).subscribe();
   }
 }

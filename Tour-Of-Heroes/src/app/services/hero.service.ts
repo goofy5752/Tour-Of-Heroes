@@ -8,14 +8,12 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { Hero } from '../entities/hero';
 import { MessageService } from './message.service';
 import { Globals } from '../globals/globals';
-import Movie from '../entities/movie';
 
 
 @Injectable({ providedIn: 'root' })
 export class HeroService {
   private heroesUrl = 'https://localhost:44353/api/heroes';  // URL to heroes api
   private historyUrl = 'https://localhost:44353/api/history'; // URL to history api
-  private moviesUrl = 'https://localhost:44353/api/movies'; // URL to movies api
 
   httpOptions = {
     headers: new HttpHeaders()
@@ -103,17 +101,6 @@ export class HeroService {
     );
   }
 
-  /** Delete movie from the server */
-  deleteMovie(movie: Movie | string): Observable<Movie> {
-    const title = typeof movie === 'string' ? movie : movie;
-    const url = `${this.moviesUrl}/${title}`;
-
-    return this.http.delete<Movie>(url, this.httpOptions).pipe(
-      tap(_ => { if (this.globals.showActivity) { this.log(`deleted movie title=${title}`); } }),
-      catchError(this.handleError<Movie>('deleteMovie'))
-    );
-  }
-
   //  PUT: update the hero on the server
   updateHero(hero: Hero): Observable<any> {
     const url = `${this.heroesUrl}/${hero.id}`;
@@ -129,7 +116,7 @@ export class HeroService {
    * @param operation - name of the operation that failed
    * @param result - optional value to return as the observable result
    */
-  private handleError<T>(operation = 'operation', result?: T) {
+  public handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
       // TODO: send the error to remote logging infrastructure
