@@ -1,6 +1,4 @@
-﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
-
-namespace TourOfHeroesWebApi.Controllers
+﻿namespace TourOfHeroesWebApi.Controllers
 {
     using System.Threading.Tasks;
     using System.Linq;
