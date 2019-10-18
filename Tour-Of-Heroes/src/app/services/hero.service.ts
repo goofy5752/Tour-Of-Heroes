@@ -105,8 +105,7 @@ export class HeroService {
   updateHero(hero: Hero): Observable<any> {
     const url = `${this.heroesUrl}/${hero.id}`;
     return this.http.put(url, { name: hero.name }, this.httpOptions).pipe(
-      tap(_ => { if (this.globals.showActivity) { this.log(`updated hero id=${hero.id}`); } }),
-      catchError(this.handleError<any>('updateHero'))
+      tap(_ => { if (this.globals.showActivity) { this.log(`updated hero id=${hero.id}`); } })
     );
   }
 

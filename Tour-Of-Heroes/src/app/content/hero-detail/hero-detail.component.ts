@@ -64,8 +64,21 @@ export class HeroDetailComponent implements OnInit {
   }
 
   save(): void {
-    this.heroService.updateHero(this.hero)
-      .subscribe(() => this.goBack());
+    this.heroService.updateHero(this.hero).subscribe(
+      () => {
+        this.goBack();
+        this.toastr.success(`You have entered new value: ${this.hero.name}`, 'Successfully renamed !');
+      },
+      error => {
+        if (error.status === 400) {
+          this.toastr.error(`Please enter a name that is different from previous one.`, 'Renamed failed.');
+        } else if (error.status === 500) {
+          this.toastr.error(`The character you are trying to rename is probably removed from the server.`, 'Rename failed.');
+        } else {
+          console.log(error);
+        }
+      }
+    );
   }
 
   deleteHistory(editHistory: EditHistory) {

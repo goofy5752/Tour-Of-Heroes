@@ -2,7 +2,7 @@ import { Title } from '@angular/platform-browser';
 import { Globals } from '../../globals/globals';
 import { tap } from 'rxjs/operators';
 import { PageResult } from '../../entities/pageResult';
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { Hero } from '../../entities/hero';
 import { HeroService } from '../../services/hero.service';

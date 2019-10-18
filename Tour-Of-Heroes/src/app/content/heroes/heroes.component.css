@@ -297,3 +297,11 @@
         display: none;
     }
 }
+
+.btn-info {
+    background-color: #2199e8;
+}
+
+.btn-info:hover {
+    background-color: #0970e6;
+}

@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import Movie from '../entities/movie';
 import { Observable } from 'rxjs';
-import { tap, catchError } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 
 @Injectable({
@@ -16,8 +16,8 @@ export class MovieService {
   private urlMoviedb = 'https://api.themoviedb.org/3/';
 
   constructor(private http: HttpClient,
-    private globals: Globals,
-    private heroService: HeroService) { }
+              private globals: Globals,
+              private heroService: HeroService) { }
 
   getMovieByTitle(title: string) {
     return this.http.get<Movie[]>(this.urlMoviedb + 'search/movie' + this.apikey + `&query=${title.toLowerCase()}`);

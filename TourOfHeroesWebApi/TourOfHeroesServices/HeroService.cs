@@ -97,6 +97,7 @@
                 NewValue = hero.Name,
                 HeroId = dbHero.Id
             };
+
             dbHero.EditHistory.Add(editHistory);
             dbHero.Name = hero.Name;
 

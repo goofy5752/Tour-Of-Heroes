@@ -1,7 +1,7 @@
 ﻿namespace TourOfHeroesWebApi.Controllers
 {
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using System.Collections.Generic;
     using System.Linq;
@@ -50,7 +50,7 @@
         #endregion
 
         #region GetHeroById
-        
+
         [HttpGet("{id}")]
         [DisableRequestSizeLimit]
         [Route("heroes/{id}")]
@@ -68,7 +68,7 @@
         #endregion
 
         #region GetHeroesBySearchString
-        
+
         [HttpGet("get-heroes")]
         [DisableRequestSizeLimit]
         [Route("heroes/{get-heroes}")]
@@ -89,7 +89,7 @@
         #endregion
 
         #region CreateHero
-        
+
         [HttpPost("create-hero")]
         [DisableRequestSizeLimit]
         [Route("heroes/{create-hero}")]
@@ -109,7 +109,7 @@
         #endregion
 
         #region UpdateHero
-        
+
         [HttpPut("{id}")]
         [DisableRequestSizeLimit]
         [Route("heroes/{id}")]
@@ -119,10 +119,14 @@
 
             _logger.LogInfo($"Update hero with {id}...");
 
-            if (dbHero != null)
+            if (dbHero == null) return NotFound(new { message = "Hero that you are trying to update is not found." });
+
+            if (dbHero.Name == hero.Name)
             {
-                await this._heroService.UpdateHero(id, hero);
+                return BadRequest(new { message = "Name that you are trying to enter is equal to previous !" });
             }
+
+            await this._heroService.UpdateHero(id, hero);
 
             _logger.LogInfo($"Hero with {id} successfully updated.");
 
