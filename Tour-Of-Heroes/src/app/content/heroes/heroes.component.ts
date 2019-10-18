@@ -18,10 +18,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class HeroesComponent implements OnInit {
   placements: string[] = ['top', 'left', 'right', 'bottom'];
-  popoverTitle = 'Hmmm?';
-  popoverMessage = 'Are you really <b>sure</b> you want to do this?';
-  confirmText = 'Yes <i class="glyphicon glyphicon-ok"></i>';
-  cancelText = 'No <i class="glyphicon glyphicon-remove"></i>';
+  popoverTitle = 'Enter your password to confirm!';
   confirmClicked = false;
   cancelClicked = false;
   private http: HttpClient;
@@ -85,10 +82,20 @@ export class HeroesComponent implements OnInit {
   //      .subscribe(heroes => this.Hero = heroes);
   //  }
 
-  delete(hero: Hero): void {
-    this.Hero = this.Hero.filter(h => h !== hero);
-    this.heroService.deleteHero(hero).subscribe();
-    this.toastr.success(`You have deleted superhero: ${hero.name}`, 'Success !');
+  delete(hero: Hero, password: string): void {
+    this.heroService.deleteHero(hero, password).subscribe(
+      () => {
+        this.Hero = this.Hero.filter(h => h !== hero);
+        this.toastr.success(`You have deleted superhero: ${hero.name}`, 'Success !');
+      },
+      error => {
+        if (error.status === 400 || error.status === 500) {
+          this.toastr.error(`You have entered wrong password.`, 'Authentication failed.');
+        } else {
+          console.log(error);
+        }
+      }
+    );
   }
 
   setDocTitle(title: string) {

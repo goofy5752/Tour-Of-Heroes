@@ -100,3 +100,8 @@ h4 {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.card-header {
+    padding: .5rem .75rem;
+    font-size: 1rem;
+}

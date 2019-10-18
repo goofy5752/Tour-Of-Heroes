@@ -1,6 +1,6 @@
 import { EditHistory } from '../entities/editHistory';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -80,14 +80,14 @@ export class HeroService {
   }
 
   /** DELETE: delete the hero from the server */
-  deleteHero(hero: Hero | number): Observable<Hero> {
+  deleteHero(hero: Hero | number, password): Observable<Hero> {
     const id = typeof hero === 'number' ? hero : hero.id;
     const url = `${this.heroesUrl}/${id}`;
+    const httpParams = new HttpParams().set('password', password);
+    const options = { params: httpParams };
 
-    return this.http.delete<Hero>(url, this.httpOptions).pipe(
-      tap(_ => { if (this.globals.showActivity) { this.log(`deleted hero id=${id}`); } }),
-      catchError(this.handleError<Hero>('deleteHero'))
-    );
+    return this.http.delete<Hero>(url, options).pipe(
+      tap(_ => { if (this.globals.showActivity) { this.log(`deleted hero id=${id}`); } }));
   }
 
   /** Delete edit history from the server */

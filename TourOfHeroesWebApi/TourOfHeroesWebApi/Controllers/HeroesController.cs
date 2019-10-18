@@ -1,5 +1,6 @@
 ﻿namespace TourOfHeroesWebApi.Controllers
 {
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using System.Collections.Generic;
@@ -14,11 +15,13 @@
     {
         private readonly IHeroService _heroService;
         private readonly ILoggerManager _logger;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public HeroesController(IHeroService heroService, ILoggerManager logger)
+        public HeroesController(IHeroService heroService, ILoggerManager logger, UserManager<ApplicationUser> userManager)
         {
             _heroService = heroService;
             _logger = logger;
+            this._userManager = userManager;
         }
 
         #region GetAllHeroes
@@ -133,22 +136,33 @@
         [HttpDelete("{id}")]
         [DisableRequestSizeLimit]
         [Route("heroes/{id}")]
-        public async Task<ActionResult<Hero>> DeleteHero(int id)
+        public async Task<ActionResult<Hero>> DeleteHero(int id, string password)
         {
-            var hero = this._heroService.GetById(id);
+            var userId = HttpContext.User.Claims.First(x => x.Type == "UserID").Value;
 
-            _logger.LogInfo($"Deleting hero with id {id}...");
+            var user = await _userManager.FindByIdAsync(userId);
 
-            if (hero == null)
+            if (user != null && await _userManager.CheckPasswordAsync(user, password))
             {
-                return this.NotFound();
+                var hero = this._heroService.GetById(id);
+
+                _logger.LogInfo($"Deleting hero with id {id}...");
+
+                if (hero == null)
+                {
+                    return this.NotFound();
+                }
+
+                await this._heroService.DeleteHero(id);
+
+                _logger.LogInfo($"Hero with id {id} successfully deleted.");
+
+                return this.NoContent();
             }
-
-            await this._heroService.DeleteHero(id);
-
-            _logger.LogInfo($"Hero with id {id} successfully deleted.");
-
-            return this.NoContent();
+            else
+            {
+                return BadRequest(new { message = "Invalid password !" });
+            }
         }
 
         #endregion

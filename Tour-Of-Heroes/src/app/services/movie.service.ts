@@ -24,7 +24,7 @@ export class MovieService {
   }
 
   /** Delete movie from the server */
-  deleteMovie(movie: Movie | string, password): Observable<Movie> {
+  deleteMovie(movie: Movie | string, password: string): Observable<Movie> {
     const title = typeof movie === 'string' ? movie : movie;
     const url = `${this.moviesUrl}/${title}`;
     const httpParams = new HttpParams().set('password', password);

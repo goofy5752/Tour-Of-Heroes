@@ -63,10 +63,9 @@
                                 <div class="boxAdd">
                                     <div class="card card-info" style="margin: 0 !important;">
                                         <div class="card-header">
-                                            <h5 class="card-title">{{popoverTitle}}</h5>
+                                            <p class="card-title"><b>{{popoverTitle}}</b></p>
                                         </div>
                                         <div class="card-body">
-                                            <label>Password</label>
                                             <input #password type="password" class="form-control" />
                                         </div>
                                         <div class="card-footer">
@@ -78,7 +77,7 @@
                             </div>
                         </div>
                     </ng-template>
-                    <button class="btn btn-danger removeMovieButton" mwlConfirmationPopover [popoverTitle]="popoverTitle" [popoverMessage]="popoverMessage" placement="top" [customTemplate]="customTemplate" (confirm)="confirmClicked = true" title="Delete Movie"><i class="fa fa-trash"
+                    <button class="btn btn-danger removeMovieButton" mwlConfirmationPopover placement="top" [customTemplate]="customTemplate" (confirm)="confirmClicked = true" title="Delete Movie"><i class="fa fa-trash"
                     aria-hidden="true"></i></button>
                 </div>
             </div>

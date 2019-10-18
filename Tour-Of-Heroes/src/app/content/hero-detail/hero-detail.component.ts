@@ -18,9 +18,6 @@ import { ToastrService } from 'ngx-toastr';
 export class HeroDetailComponent implements OnInit {
   placements: string[] = ['top', 'left', 'right', 'bottom'];
   popoverTitle = 'Enter your password to confirm!';
-  popoverMessage = 'Are you really <b>sure</b> you want to do this?';
-  confirmText = 'Yes <i class="glyphicon glyphicon-ok"></i>';
-  cancelText = 'No <i class="glyphicon glyphicon-remove"></i>';
   confirmClicked = false;
   cancelClicked = false;
 
@@ -84,7 +81,7 @@ export class HeroDetailComponent implements OnInit {
         this.toastr.success(`You have deleted movie: ${movie.title}`, 'Success !');
       },
       error => {
-        if (error.status === 400) {
+        if (error.status === 400 || error.status === 500) {
           this.toastr.error(`You have entered wrong password.`, 'Authentication failed.');
         } else {
           console.log(error);

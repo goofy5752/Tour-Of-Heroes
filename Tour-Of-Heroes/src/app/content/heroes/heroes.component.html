@@ -1,6 +1,26 @@
 <div class="container container-lg">
     <div class="row">
         <div class="col-sm-6" *ngFor="let hero of Hero | paginate: { itemsPerPage: 6, currentPage: pageNumber, totalItems:Count }">
+            <ng-template #customTemplate let-options="options">
+                <div [class]="'popover ' + options.placement" style="display: block">
+                    <div class="fond">
+                        <div class="boxAdd">
+                            <div class="card card-info" style="margin: 0 !important;">
+                                <div class="card-header">
+                                    <p class="card-title"><b>{{popoverTitle}}</b></p>
+                                </div>
+                                <div class="card-body">
+                                    <input #password type="password" class="form-control" />
+                                </div>
+                                <div class="card-footer">
+                                    <button type="submit" title="Delete Character" class="btn btn-primary" (click)="delete(hero, password.value)">Confirm</button>
+                                    <button id="cancel" type="button" (click)="options.onCancel({clickEvent: $event})" class="btn btn-danger float-right">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
             <div class="cardbox">
                 <div class="cardbox-body">
                     <div class="d-flex">
@@ -8,7 +28,7 @@
                             <div class="lead mb-2">{{hero.name}}</div>
                             <p><em class="ion-ios-people mr-2 icon-lg text-warning"></em><span>{{hero.id}}</span></p>
                             <button (click)="setDocTitle( 'Details' )" class="btn btn-warning" type="button" routerLink="/detail/{{hero.id}}">Details</button>
-                            <button class="btn btn-danger btnCust" type="button" mwlConfirmationPopover [popoverTitle]="popoverTitle" [popoverMessage]="popoverMessage" placement="left" (confirm)="confirmClicked = true; delete(hero)" (cancel)="cancelClicked = true">Delete</button>
+                            <button class="btn btn-danger btnCust" type="button" mwlConfirmationPopover placement="left" [customTemplate]="customTemplate">Delete</button>
                         </div>
                         <div class="ml-auto"><img alt="hero" class="shadow-z5 thumb80 rounded" src={{hero.image}}></div>
                     </div>
