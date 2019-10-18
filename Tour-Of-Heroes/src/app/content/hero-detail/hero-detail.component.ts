@@ -78,6 +78,18 @@ export class HeroDetailComponent implements OnInit {
 
   deleteMovie(movie: Movie, password: string) {
     // tslint:disable-next-line: max-line-length
-    this.movieService.deleteMovie(movie.title, password).subscribe(() => this.allMovies = this.allMovies.filter(h => h !== movie), error => { if (error.status != 401) { console.log(error); this.toastr.success(`You have deleted movie: ${movie.title}`, 'Success !'); } else { this.toastr.success(`You have deleted movie: ${movie.title}`, 'Success !'); } });
+    this.movieService.deleteMovie(movie.title, password).subscribe(
+      () => {
+        this.allMovies = this.allMovies.filter(h => h !== movie);
+        this.toastr.success(`You have deleted movie: ${movie.title}`, 'Success !');
+      },
+      error => {
+        if (error.status === 400) {
+          this.toastr.error(`You have entered wrong password.`, 'Authentication failed.');
+        } else {
+          console.log(error);
+        }
+      }
+    );
   }
 }

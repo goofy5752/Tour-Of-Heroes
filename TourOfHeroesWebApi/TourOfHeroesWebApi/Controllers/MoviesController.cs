@@ -43,7 +43,7 @@
             }
             else
             {
-                return Unauthorized(new { message = "Invalid password !" });
+                return BadRequest(new { message = "Invalid password !" });
             }
         }
     }

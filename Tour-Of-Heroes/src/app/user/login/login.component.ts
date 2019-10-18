@@ -28,10 +28,10 @@ export class LoginComponent implements OnInit {
       (res: any) => {
         localStorage.setItem('token', res.token);
         this.router.navigateByUrl('/heroes?page=1');
+        this.toastr.success('You have logged in.', 'Authentication success.');
       },
       err => {
-        // tslint:disable-next-line: triple-equals
-        if (err.status == 400) {
+        if (err.status === 400) {
           this.toastr.error('Incorrect username or password.', 'Authentication failed.');
         } else {
           console.log(err);

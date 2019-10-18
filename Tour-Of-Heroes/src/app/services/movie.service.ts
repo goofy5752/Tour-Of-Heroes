@@ -16,8 +16,8 @@ export class MovieService {
   private urlMoviedb = 'https://api.themoviedb.org/3/';
 
   constructor(private http: HttpClient,
-              private globals: Globals,
-              private heroService: HeroService) { }
+    private globals: Globals,
+    private heroService: HeroService) { }
 
   getMovieByTitle(title: string) {
     return this.http.get<Movie[]>(this.urlMoviedb + 'search/movie' + this.apikey + `&query=${title.toLowerCase()}`);
@@ -31,8 +31,11 @@ export class MovieService {
     const options = { params: httpParams };
 
     return this.http.delete<Movie>(url, options).pipe(
-      tap(_ => { if (this.globals.showActivity) { this.heroService.log(`deleted movie title=${title}`); } }),
-      catchError(this.heroService.handleError<Movie>('deleteMovie'))
+      tap(_ => {
+        if (this.globals.showActivity) {
+          this.heroService.log(`deleted movie title=${title}`);
+        }
+      })
     );
   }
 }
