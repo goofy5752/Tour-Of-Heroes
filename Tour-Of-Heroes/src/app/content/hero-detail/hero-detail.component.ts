@@ -40,13 +40,18 @@ export class HeroDetailComponent implements OnInit {
     this.route.params.subscribe(() => {
       this.getHero();
     });
-
-    this.setDocTitleDetailsHero();
   }
+
   getHero(): void {
     const id = +this.route.snapshot.paramMap.get('id');
     this.heroService.getHero(id)
-      .subscribe(hero => { this.hero = hero; this.getMovies(); });
+      .subscribe(hero => {
+        this.hero = hero;
+        this.allMovies = [];
+        this.getMovies();
+        this.titleService.setTitle(`${this.hero.name} Details`);
+      }
+      );
   }
 
   getMovies() {
@@ -105,9 +110,5 @@ export class HeroDetailComponent implements OnInit {
         }
       }
     );
-  }
-
-  setDocTitleDetailsHero() {
-    this.titleService.setTitle(`${this.hero.name} Details`);
   }
 }

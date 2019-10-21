@@ -142,7 +142,9 @@
         [Route("heroes/{id}")]
         public async Task<ActionResult<Hero>> DeleteHero(int id, string password)
         {
-            if (!this._userValidator.CheckPasswordAsync(password).Result)
+            var userId = HttpContext.User.Claims.First(x => x.Type == "UserID").Value;
+
+            if (!this._userValidator.CheckPasswordAsync(userId, password).Result)
                 return BadRequest(new {message = "Invalid password !"});
 
             var hero = this._heroService.GetById(id);

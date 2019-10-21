@@ -26,8 +26,8 @@ namespace TourOfHeroesWebApi
     using TourOfHeroesMapping.Mapping;
     using TourOfHeroesServices;
     using TourOfHeroesServices.Contracts;
-    using Validator;
-    using Validator.Contracts;
+    using Controllers.Validator;
+    using Controllers.Validator.Contracts;
 
     public class Startup
     {

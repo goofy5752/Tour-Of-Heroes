@@ -1,5 +1,6 @@
 ﻿namespace TourOfHeroesWebApi.Controllers
 {
+    using System.Linq;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using System.Threading.Tasks;
@@ -26,7 +27,9 @@
         [Route("movies/{title}")]
         public async Task<ActionResult<Hero>> DeleteMovie(string title, string password)
         {
-            if (!this._userValidator.CheckPasswordAsync(password).Result)
+            var userId = HttpContext.User.Claims.First(x => x.Type == "UserID").Value;
+
+            if (!this._userValidator.CheckPasswordAsync(userId, password).Result)
                 return BadRequest(new {message = "Invalid password !"});
 
             _logger.LogInfo($"Deleting movie with id {title}...");
