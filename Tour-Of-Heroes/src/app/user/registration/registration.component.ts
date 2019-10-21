@@ -24,6 +24,7 @@ export class RegistrationComponent implements OnInit {
       (res: any) => {
         if (res.succeeded) {
           this.service.formModel.reset();
+          this.router.navigateByUrl('user/login');
           this.toastr.success('New user created!', 'Registration successful.');
         } else {
           res.errors.forEach(element => {
