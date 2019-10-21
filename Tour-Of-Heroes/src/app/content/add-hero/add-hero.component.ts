@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { HeroService } from '../../services/hero.service';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-add-hero',
@@ -16,8 +17,10 @@ export class AddHeroComponent implements OnInit {
   heroImageFile: File;
   heroCoverImageFile: File;
 
-  constructor(private heroService: HeroService, private formBuilder: FormBuilder, private toastr: ToastrService) {
-  }
+  constructor(private heroService: HeroService,
+              private formBuilder: FormBuilder,
+              private toastr: ToastrService,
+              private titleService: Title) { }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
@@ -31,6 +34,8 @@ export class AddHeroComponent implements OnInit {
       movieTitle: this.formBuilder.array([])
     }, {
     });
+
+    this.setDocTitleAddHero();
   }
 
   stageHeroImageFile(): void {
@@ -87,6 +92,10 @@ export class AddHeroComponent implements OnInit {
   onReset() {
     this.submitted = false;
     this.registerForm.reset();
+  }
+
+  setDocTitleAddHero() {
+    this.titleService.setTitle('Add hero');
   }
 
   get f() { return this.registerForm.controls; }

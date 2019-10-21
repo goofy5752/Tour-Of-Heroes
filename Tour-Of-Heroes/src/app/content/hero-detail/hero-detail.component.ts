@@ -8,6 +8,7 @@ import { HeroService } from '../../services/hero.service';
 import { MovieService } from 'src/app/services/movie.service';
 import Movie from '../../entities/movie';
 import { ToastrService } from 'ngx-toastr';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-hero-detail',
@@ -31,13 +32,16 @@ export class HeroDetailComponent implements OnInit {
     private heroService: HeroService,
     private movieService: MovieService,
     private location: Location,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private titleService: Title
   ) { this.allMovies = []; }
 
   ngOnInit(): void {
     this.route.params.subscribe(() => {
       this.getHero();
     });
+
+    this.setDocTitleDetailsHero();
   }
   getHero(): void {
     const id = +this.route.snapshot.paramMap.get('id');
@@ -71,7 +75,7 @@ export class HeroDetailComponent implements OnInit {
       },
       error => {
         if (error.status === 400) {
-          this.toastr.error(`Please enter a name that is different from previous one.`, 'Renamed failed.');
+          this.toastr.error(`Please enter a name that is different from the previous one.`, 'Renamed failed.');
         } else if (error.status === 500) {
           this.toastr.error(`The character you are trying to rename is probably removed from the server.`, 'Rename failed.');
         } else {
@@ -101,5 +105,9 @@ export class HeroDetailComponent implements OnInit {
         }
       }
     );
+  }
+
+  setDocTitleDetailsHero() {
+    this.titleService.setTitle(`${this.hero.name} Details`);
   }
 }

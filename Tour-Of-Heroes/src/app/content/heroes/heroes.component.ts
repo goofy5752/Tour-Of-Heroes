@@ -74,6 +74,7 @@ export class HeroesComponent implements OnInit {
       skipLocationChange: false
       // do not trigger navigation
     });
+    this.setDocTitleHeroes();
     // this.getHeroes(); ---- temporary disbled
   }
 
@@ -100,5 +101,9 @@ export class HeroesComponent implements OnInit {
 
   setDocTitle(title: string, heroName: string) {
     this.titleService.setTitle(title + ' ' + heroName);
+  }
+
+  setDocTitleHeroes() {
+    this.titleService.setTitle('Heroes');
   }
 }
