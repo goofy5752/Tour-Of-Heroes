@@ -1,25 +1,24 @@
 ﻿namespace TourOfHeroesWebApi.Controllers
 {
-    using System.Threading.Tasks;
-    using System.Linq;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using System.Threading.Tasks;
     using TourOfHeroesData.Models;
     using TourOfHeroesServices.Contracts;
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Identity;
+    using Validator.Contracts;
 
     [Authorize]
     public class MoviesController : ApiController
     {
         private readonly IMovieService _movieService;
         private readonly ILoggerManager _logger;
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IUserValidator _userValidator;
 
-        public MoviesController(IMovieService movieService, ILoggerManager logger, UserManager<ApplicationUser> userManager)
+        public MoviesController(IMovieService movieService, ILoggerManager logger, IUserValidator userValidator)
         {
             _movieService = movieService;
             _logger = logger;
-            _userManager = userManager;
+            _userValidator = userValidator;
         }
 
         [HttpDelete("{title}")]
@@ -27,24 +26,16 @@
         [Route("movies/{title}")]
         public async Task<ActionResult<Hero>> DeleteMovie(string title, string password)
         {
-            var userId = HttpContext.User.Claims.First(x => x.Type == "UserID").Value;
+            if (!this._userValidator.CheckPasswordAsync(password).Result)
+                return BadRequest(new {message = "Invalid password !"});
 
-            var user = await _userManager.FindByIdAsync(userId);
+            _logger.LogInfo($"Deleting movie with id {title}...");
 
-            if (user != null && await _userManager.CheckPasswordAsync(user, password))
-            {
-                _logger.LogInfo($"Deleting movie with id {title}...");
+            await this._movieService.DeleteMovie(title);
 
-                await this._movieService.DeleteMovie(title);
+            _logger.LogInfo($"Successfully deleted movie with id {title}...");
 
-                _logger.LogInfo($"Successfully deleted movie with id {title}...");
-
-                return this.NoContent();
-            }
-            else
-            {
-                return BadRequest(new { message = "Invalid password !" });
-            }
+            return this.NoContent();
         }
     }
 }

@@ -98,7 +98,7 @@ export class HeroesComponent implements OnInit {
     );
   }
 
-  setDocTitle(title: string) {
-    this.titleService.setTitle(title);
+  setDocTitle(title: string, heroName: string) {
+    this.titleService.setTitle(title + ' ' + heroName);
   }
 }

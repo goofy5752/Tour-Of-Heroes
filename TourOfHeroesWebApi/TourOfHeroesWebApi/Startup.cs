@@ -26,6 +26,8 @@ namespace TourOfHeroesWebApi
     using TourOfHeroesMapping.Mapping;
     using TourOfHeroesServices;
     using TourOfHeroesServices.Contracts;
+    using Validator;
+    using Validator.Contracts;
 
     public class Startup
     {
@@ -98,6 +100,10 @@ namespace TourOfHeroesWebApi
             services.AddTransient<IHistoryService, HistoryService>();
             services.AddTransient<IMovieService, MovieService>();
             services.AddSingleton<ILoggerManager, LoggerManager>();
+
+            //validator service
+
+            services.AddTransient<IUserValidator, UserValidator>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

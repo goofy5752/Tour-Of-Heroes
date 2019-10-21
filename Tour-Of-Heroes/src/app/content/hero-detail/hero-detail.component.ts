@@ -31,7 +31,7 @@ export class HeroDetailComponent implements OnInit {
     private heroService: HeroService,
     private movieService: MovieService,
     private location: Location,
-    private toastr: ToastrService,
+    private toastr: ToastrService
   ) { this.allMovies = []; }
 
   ngOnInit(): void {

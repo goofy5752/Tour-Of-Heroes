@@ -27,7 +27,7 @@
                         <div>
                             <div class="lead mb-2">{{hero.name}}</div>
                             <p><em class="ion-ios-people mr-2 icon-lg text-warning"></em><span>{{hero.id}}</span></p>
-                            <button (click)="setDocTitle( 'Details' )" title="{{hero.name}}" class="btn btn-info" type="button" routerLink="/detail/{{hero.id}}">Details</button>
+                            <button (click)="setDocTitle( 'Details' , hero.name )" title="{{hero.name}}" class="btn btn-info" type="button" routerLink="/detail/{{hero.id}}">Details</button>
                             <button class="btn btn-danger btnCust" type="button" mwlConfirmationPopover placement="left" [customTemplate]="customTemplate">Delete</button>
                         </div>
                         <div class="ml-auto"><img alt="hero" class="shadow-z5 thumb80 rounded" src={{hero.image}}></div>

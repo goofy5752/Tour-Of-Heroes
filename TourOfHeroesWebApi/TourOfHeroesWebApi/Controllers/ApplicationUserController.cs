@@ -3,6 +3,7 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Options;
+    using TourOfHeroesDTOs;
     using Microsoft.IdentityModel.Tokens;
     using System;
     using System.IdentityModel.Tokens.Jwt;
@@ -16,14 +17,12 @@
     public class ApplicationUserController : ApiController
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        private SignInManager<ApplicationUser> _singInManager;
         private readonly ILoggerManager _logger;
         private readonly ApplicationSettings _appSettings;
 
-        public ApplicationUserController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IOptions<ApplicationSettings> appSettings, ILoggerManager logger)
+        public ApplicationUserController(UserManager<ApplicationUser> userManager, IOptions<ApplicationSettings> appSettings, ILoggerManager logger)
         {
             _userManager = userManager;
-            _singInManager = signInManager;
             _logger = logger;
             _appSettings = appSettings.Value;
         }
@@ -31,7 +30,7 @@
         [HttpPost]
         [Route("Register")]
         //POST : /api/ApplicationUser/Register
-        public async Task<object> Register(ApplicationUserModel model)
+        public async Task<object> Register(RegisterUserDTO model)
         {
             var applicationUser = new ApplicationUser()
             {
@@ -60,7 +59,7 @@
         [HttpPost]
         [Route("Login")]
         //POST : /api/ApplicationUser/Login
-        public async Task<IActionResult> Login(LoginModel model)
+        public async Task<IActionResult> Login(LoginUserDTO model)
         {
             _logger.LogInfo($"Logging account with username {model.UserName}...");
             var user = await _userManager.FindByNameAsync(model.UserName);
@@ -68,7 +67,7 @@
             {
                 var tokenDescriptor = new SecurityTokenDescriptor
                 {
-                    Subject = new ClaimsIdentity(new Claim[]
+                    Subject = new ClaimsIdentity(new[]
                     {
                         new Claim("UserID",user.Id)
                     }),
@@ -81,11 +80,9 @@
                 _logger.LogInfo($"Account with username {model.UserName} successfully logged !");
                 return Ok(new { token });
             }
-            else
-            {
-                _logger.LogError($"Username or password is incorrect.");
-                return BadRequest(new {message = "Username or password is incorrect."});
-            }
+
+            _logger.LogError($"Username or password is incorrect.");
+            return BadRequest(new {message = "Username or password is incorrect."});
         }
     }
 }

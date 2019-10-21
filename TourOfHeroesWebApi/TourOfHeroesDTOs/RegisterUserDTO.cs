@@ -1,10 +1,14 @@
-﻿namespace TourOfHeroesData.Models
+﻿namespace TourOfHeroesDTOs
 {
-    public class ApplicationUserModel
+    // ReSharper disable once InconsistentNaming
+    public class RegisterUserDTO
     {
         public string UserName { get; set; }
+
         public string Email { get; set; }
+
         public string Password { get; set; }
+
         public string FullName { get; set; }
     }
 }
