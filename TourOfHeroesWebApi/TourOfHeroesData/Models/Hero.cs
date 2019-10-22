@@ -1,4 +1,5 @@
-﻿namespace TourOfHeroesData.Models
+﻿// ReSharper disable VirtualMemberCallInConstructor
+namespace TourOfHeroesData.Models
 {
     using System;
     using System.Collections.Generic;
@@ -8,10 +9,9 @@
     {
         public Hero()
         {
-            // ReSharper disable once VirtualMemberCallInConstructor
             this.EditHistory = new List<EditHistory>();
-            // ReSharper disable once VirtualMemberCallInConstructor
             this.Movies = new List<Movie>();
+            this.Comments = new List<Comment>();
         }
 
         public int Id { get; set; }
@@ -46,5 +46,7 @@
         public virtual List<EditHistory> EditHistory { get; set; }
         
         public virtual List<Movie> Movies { get; set; }
+
+        public virtual List<Comment> Comments { get; set; }
     }
 }

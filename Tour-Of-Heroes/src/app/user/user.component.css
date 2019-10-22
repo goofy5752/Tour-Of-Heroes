@@ -43,3 +43,8 @@
 .tab-header h2:focus {
     outline: 0
 }
+
+.unathorized-user-background {
+    background-color: aqua;
+    height: 100vh;
+}

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TourOfHeroesData;
 
 namespace TourOfHeroesData.Migrations
 {
     [DbContext(typeof(TourOfHeroesDbContext))]
-    partial class TourOfHeroesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191022084030_CommentEntityAdded")]
+    partial class CommentEntityAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -78,13 +80,15 @@ namespace TourOfHeroesData.Migrations
                         .IsRequired()
                         .HasMaxLength(5000);
 
-                    b.Property<string>("UserId");
+                    b.Property<int>("UserId");
+
+                    b.Property<string>("UserId1");
 
                     b.HasKey("Id");
 
                     b.HasIndex("HeroId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId1");
 
                     b.ToTable("Comments");
                 });
@@ -180,7 +184,7 @@ namespace TourOfHeroesData.Migrations
 
                     b.HasOne("TourOfHeroesData.Models.ApplicationUser", "User")
                         .WithMany("Comments")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId1");
                 });
 
             modelBuilder.Entity("TourOfHeroesData.Models.EditHistory", b =>
