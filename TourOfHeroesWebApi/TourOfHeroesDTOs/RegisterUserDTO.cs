@@ -1,6 +1,5 @@
 ﻿namespace TourOfHeroesDTOs
 {
-    // ReSharper disable once InconsistentNaming
     public class RegisterUserDTO
     {
         public string UserName { get; set; }

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -30,6 +30,7 @@ import { RegistrationComponent } from './user/registration/registration.componen
 import { UserService } from './services/user.service';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
+import { ProfileComponent } from './user/profile/profile.component';
 
 @NgModule({
   imports: [
@@ -63,6 +64,7 @@ import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
     UserComponent,
     LoginComponent,
     RegistrationComponent,
+    ProfileComponent,
   ],
   providers: [
     [UserService, {
@@ -73,7 +75,8 @@ import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
     Globals, // so do not provide it into another components/services if you want it to be a singleton
     Title
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 
 export class AppModule { }

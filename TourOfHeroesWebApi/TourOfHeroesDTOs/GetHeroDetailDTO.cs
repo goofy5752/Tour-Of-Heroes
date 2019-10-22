@@ -3,8 +3,7 @@
     using System.Collections.Generic;
     using TourOfHeroesData.Models;
     using TourOfHeroesMapping.Mapping;
-
-    // ReSharper disable once InconsistentNaming
+    
     public class GetHeroDetailDTO : IMapFrom<Hero>
     {
         public GetHeroDetailDTO()

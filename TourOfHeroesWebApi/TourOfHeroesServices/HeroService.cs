@@ -91,15 +91,19 @@
                 .All()
                 .FirstOrDefault(x => x.Id == id);
 
-            var editHistory = new EditHistory()
+            if (dbHero != null)
             {
-                OldValue = dbHero.Name,
-                NewValue = hero.Name,
-                HeroId = dbHero.Id
-            };
+                var editHistory = new EditHistory()
+                {
+                    OldValue = dbHero.Name,
+                    NewValue = hero.Name,
+                    HeroId = dbHero.Id
+                };
 
-            dbHero.EditHistory.Add(editHistory);
-            dbHero.Name = hero.Name;
+                dbHero.EditHistory.Add(editHistory);
+
+                dbHero.Name = hero.Name;
+            }
 
             await this._heroRepository.SaveChangesAsync();
         }

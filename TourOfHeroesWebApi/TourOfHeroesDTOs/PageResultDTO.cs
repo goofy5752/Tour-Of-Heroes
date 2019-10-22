@@ -1,8 +1,7 @@
 ﻿namespace TourOfHeroesDTOs
 {
     using System.Collections.Generic;
-
-    // ReSharper disable once InconsistentNaming
+    
     public class PageResultDTO<T>
     {
         public int Count { get; set; }

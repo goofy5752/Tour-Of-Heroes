@@ -7,12 +7,14 @@
         </ul>
         <ul class="navbar-nav text-center">
             <li class="nav-item">
-                <button class="btn btn-danger" (click)=clearLocalStorage()>
-                    Logout
-                </button>
+                <a class="nav-link user-profile" routerLink="/user/profile" title="Profile">
+                    <i class="fa fa-user-secret fa-lg"></i>
+                </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="https://github.com/goofy5752/AngularJS"><i class="fa fa-github" aria-hidden="true"></i></a>
+            <li class="nav-item mr-2">
+                <a class="nav-link sign-out" title="Sign-Out" routerLink="/user/login" (click)=clearLocalStorage()>
+                    <i class="fa fa-sign-out fa-lg"></i>
+                </a>
             </li>
             <app-hero-search></app-hero-search>
         </ul>

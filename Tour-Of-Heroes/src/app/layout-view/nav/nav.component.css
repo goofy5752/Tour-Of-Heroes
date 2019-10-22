@@ -16,3 +16,27 @@
     top: 0;
     left: 0;
 }
+
+.user-profile {
+    color: green;
+}
+
+.user-profile:hover {
+    opacity: .75;
+}
+
+.sign-out {
+    color: #dc3545;
+}
+
+.sign-out:hover {
+    opacity: .75;
+}
+
+.github-profile {
+    color: #2199e8;
+}
+
+.github-profile:hover {
+    opacity: .75;
+}

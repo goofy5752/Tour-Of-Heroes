@@ -7,6 +7,7 @@ import { AddHeroMainComponent } from './main-content/add-hero-main/add-hero-main
 import { LoginComponent } from './user/login/login.component';
 import { RegistrationComponent } from './user/registration/registration.component';
 import { AuthGuard } from './auth/auth.guard';
+import { ProfileComponent } from './user/profile/profile.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'heroes', pathMatch: 'full' },
@@ -14,12 +15,13 @@ const routes: Routes = [
   { path: 'heroes', component: HeroesMainContentComponent, canActivate: [AuthGuard] },
   { path: 'add-hero', component: AddHeroMainComponent, canActivate: [AuthGuard] },
   {
-    path: 'user', component: UserComponent, data: {title: 'Authenticate'},
+    path: 'user', component: UserComponent,
     children: [
       { path: 'login', component: LoginComponent },
       { path: 'registration', component: RegistrationComponent }
     ]
   },
+  { path: 'user/profile', component: ProfileComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

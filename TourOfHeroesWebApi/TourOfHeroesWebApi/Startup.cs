@@ -1,16 +1,6 @@
 ﻿// ReSharper disable StringLiteralTypo
 namespace TourOfHeroesWebApi
 {
-    using GlobalErrorHandling.Extensions;
-    using Microsoft.AspNetCore.Builder;
-    using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.AspNetCore.Authentication.JwtBearer;
-    using Microsoft.IdentityModel.Tokens;
     using NLog;
     using System;
     using System.Text;
@@ -28,6 +18,16 @@ namespace TourOfHeroesWebApi
     using TourOfHeroesServices.Contracts;
     using Controllers.Validator;
     using Controllers.Validator.Contracts;
+    using GlobalErrorHandling.Extensions;
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.AspNetCore.Authentication.JwtBearer;
+    using Microsoft.IdentityModel.Tokens;
 
     public class Startup
     {
@@ -99,6 +99,7 @@ namespace TourOfHeroesWebApi
             services.AddTransient<IHeroService, HeroService>();
             services.AddTransient<IHistoryService, HistoryService>();
             services.AddTransient<IMovieService, MovieService>();
+            services.AddTransient<IProfileService, ProfileService>();
             services.AddSingleton<ILoggerManager, LoggerManager>();
 
             //validator service

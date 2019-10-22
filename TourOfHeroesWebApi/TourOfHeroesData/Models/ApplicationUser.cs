@@ -12,8 +12,14 @@
             this.Comments = new List<Comment>();
         }
 
+        public override string Id { get; set; }
+
+        public override string UserName { get; set; }
+
         [Column(TypeName = "nvarchar(150)")]
         public string FullName { get; set; }
+
+        public string ProfileImage { get; set; }
 
         public virtual List<Comment> Comments { get; set; }
     }

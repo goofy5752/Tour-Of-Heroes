@@ -15,12 +15,12 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot): boolean {
     if (localStorage.getItem('token') != null) {
       this.globals.isLogged = true;
-      console.log(this.globals.isLogged);
+      // console.log(this.globals.isLogged);
       return true;
     } else {
       this.router.navigate(['user/login']);
       this.globals.isLogged = false;
-      console.log(this.globals.isLogged);
+      // console.log(this.globals.isLogged);
       return false;
     }
   }

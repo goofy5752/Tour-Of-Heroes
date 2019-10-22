@@ -3,8 +3,7 @@
     using System;
     using System.ComponentModel.DataAnnotations;
     using Microsoft.AspNetCore.Http;
-
-    // ReSharper disable once InconsistentNaming
+    
     public class CreateHeroDTO
     {
         [Required(ErrorMessage = "Field is required.")]
