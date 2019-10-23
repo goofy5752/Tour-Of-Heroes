@@ -1,3 +1,4 @@
+import { Comments } from './comment';
 import { EditHistory } from './editHistory';
 import Movie from './movie';
 
@@ -12,4 +13,5 @@ export class Hero {
     gender: string;
     editHistory: EditHistory[];
     movies: Movie[];
+    comments: Comments[];
 }

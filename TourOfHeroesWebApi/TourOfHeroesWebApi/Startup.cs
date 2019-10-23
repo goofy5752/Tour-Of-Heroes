@@ -100,6 +100,7 @@ namespace TourOfHeroesWebApi
             services.AddTransient<IHistoryService, HistoryService>();
             services.AddTransient<IMovieService, MovieService>();
             services.AddTransient<IProfileService, ProfileService>();
+            services.AddTransient<ICommentService, CommentService>();
             services.AddSingleton<ILoggerManager, LoggerManager>();
 
             //validator service

@@ -1,3 +1,4 @@
+import { CommentService } from './../../services/comment.service';
 import { EditHistory } from '../../entities/editHistory';
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -9,6 +10,7 @@ import { MovieService } from 'src/app/services/movie.service';
 import Movie from '../../entities/movie';
 import { ToastrService } from 'ngx-toastr';
 import { Title } from '@angular/platform-browser';
+import { Profile } from 'selenium-webdriver/firefox';
 
 @Component({
   selector: 'app-hero-detail',
@@ -23,6 +25,7 @@ export class HeroDetailComponent implements OnInit {
   cancelClicked = false;
 
   @Input() hero: Hero;
+  @Input() profile: Profile;
   allMovies: Movie[];
   index: number;
   searchResults: any;
@@ -33,7 +36,8 @@ export class HeroDetailComponent implements OnInit {
     private movieService: MovieService,
     private location: Location,
     private toastr: ToastrService,
-    private titleService: Title
+    private titleService: Title,
+    private commentService: CommentService
   ) { this.allMovies = []; }
 
   ngOnInit(): void {
@@ -110,5 +114,15 @@ export class HeroDetailComponent implements OnInit {
         }
       }
     );
+  }
+
+  postComment(comment: string) {
+    const token = JSON.stringify(localStorage.getItem('token'));
+    const jwtData = token.split('.')[1];
+    const decodedJwtJsonData = window.atob(jwtData);
+    const decodedJwtData = JSON.parse(decodedJwtJsonData);
+    const userId = decodedJwtData.UserID;
+    console.log(comment);
+    this.commentService.postComment(userId, this.hero.id, comment).subscribe();
   }
 }

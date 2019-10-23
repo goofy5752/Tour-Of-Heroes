@@ -9,6 +9,7 @@
         public GetHeroDetailDTO()
         {
             this.EditHistory = new List<EditHistory>();
+            this.Comments = new List<Comment>();
         }
 
         public int Id { get; set; }
@@ -30,5 +31,7 @@
         public IEnumerable<GetMovieTitleDTO> Movies { get; set; }
 
         public IEnumerable<EditHistory> EditHistory { get; set; }
+
+        public IEnumerable<Comment> Comments { get; set; }
     }
 }
