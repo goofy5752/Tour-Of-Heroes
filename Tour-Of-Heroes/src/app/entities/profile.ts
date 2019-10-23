@@ -2,7 +2,7 @@ import { Comments } from './comment';
 
 export class Profile {
     id: string;
-    username: string;
+    userName: string;
     email: string;
     fullName: string;
     comments: Comments[];

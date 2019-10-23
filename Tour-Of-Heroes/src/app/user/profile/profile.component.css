@@ -8,8 +8,8 @@ body {
     margin-bottom: 3%;
     border-radius: 0.5rem;
     padding-left: 240px;
-    background: lightgray;
     padding-top: 50px;
+    height: 87vh;
 }
 
 .profile-img {
@@ -113,4 +113,25 @@ body {
 .profile-tab p {
     font-weight: 600;
     color: #0062cc;
+}
+
+.inputCustom {
+    width: inherit;
+    height: 38px;
+    border-radius: 7px;
+    border-color: ivory;
+    border: solid 1px gray;
+}
+
+.inputCustom:focus {
+    border-color: #6265e4 !important;
+    border-radius: 7px;
+    outline: none;
+    box-shadow: 0 0 5px rgba(98, 101, 228, 1) !important;
+}
+
+.btnCust {
+    position: absolute;
+    right: 0;
+    margin-right: 12px;
 }

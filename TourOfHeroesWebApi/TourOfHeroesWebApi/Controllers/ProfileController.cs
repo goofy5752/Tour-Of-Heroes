@@ -4,6 +4,7 @@
     using Microsoft.AspNetCore.Mvc;
     using TourOfHeroesServices.Contracts;
     using TourOfHeroesDTOs;
+    using System.Threading.Tasks;
 
     [Authorize]
     public class ProfileController : ApiController
@@ -18,8 +19,9 @@
         }
 
         [HttpGet("{id}")]
+        [DisableRequestSizeLimit]
         [Route("profile/{id}")]
-        public ActionResult<GetUserDetailDTO> UserDetail(string id)
+        public ActionResult<GetUserDetailDTO> GetDetail(string id)
         {
             _logger.LogInfo($"Fetching user with id {id}...");
 
@@ -28,6 +30,22 @@
             _logger.LogInfo($"User with id {id} successfully fetched.");
 
             return user;
+        }
+
+        [HttpPut("{id}")]
+        [DisableRequestSizeLimit]
+        [Route("profile/{id}")]
+        public async Task<IActionResult> UpdateEmail(string id, string email)
+        {
+            _logger.LogInfo($"Updating profile with username {id}...");
+
+            if (email == null) return BadRequest();
+
+            await this._profileService.UpdateProfileEmail(id, email);
+
+            _logger.LogInfo($"Profile with id: {id} successfully updated.");
+
+            return NoContent();
         }
     }
 }

@@ -16,6 +16,8 @@
 
         public override string UserName { get; set; }
 
+        public override string Email { get; set; }
+
         [Column(TypeName = "nvarchar(150)")]
         public string FullName { get; set; }
 

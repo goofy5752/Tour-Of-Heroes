@@ -1,6 +1,6 @@
 ﻿namespace TourOfHeroesDTOs
 {
-    public class UpdateUserDTO
+    public class UpdateProfileImageDTO
     {
         public string ProfileImage { get; set; }
     }

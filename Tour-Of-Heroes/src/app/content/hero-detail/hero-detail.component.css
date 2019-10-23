@@ -4,11 +4,11 @@
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
-    margin-bottom: 100px;
+    margin-bottom: 100px
 }
 
 .container-overlap {
-    position: relative;
+    position: relative
 }
 
 .wd-sm {
@@ -27,61 +27,61 @@
 
 .coverImg {
     max-width: 100%;
-    max-height: 100%;
+    max-height: 100%
 }
 
 .contentImg {
     position: absolute;
     left: 50%;
     transform: translate(-50%, 0);
-    bottom: 0;
+    bottom: 0
 }
 
 .section-container {
-    margin-top: 60px;
+    margin-top: 60px
 }
 
 .cardbox-heading {
-    text-align: center;
+    text-align: center
 }
 
 @media only screen and (max-width:1200px) {
     .smallHideCustom {
-        display: none;
+        display: none
     }
     .contentImg {
         margin-bottom: 50px;
         left: 50%;
-        transform: translate(-50%, 0);
+        transform: translate(-50%, 0)
     }
 }
 
 .moviesCustom {
     background-color: rgba(0, 0, 0, .15);
     border: 1px solid rgba(0, 0, 0, .125);
-    border-radius: .25rem;
+    border-radius: .25rem
 }
 
 .star {
     position: relative;
     display: inline-block;
     font-size: 2rem;
-    color: #d3d3d3;
+    color: #d3d3d3
 }
 
 .full {
-    color: red;
+    color: red
 }
 
 .half {
     position: absolute;
     display: inline-block;
     overflow: hidden;
-    color: goldenrod;
+    color: #daa520
 }
 
 .removeMovieButton {
-    width: 100%;
+    width: 100%
 }
 
 .popover-title {
@@ -92,16 +92,68 @@
     background-color: #f7f7f7;
     border-bottom: 1px solid #ebebeb;
     border-top-left-radius: calc(.3rem - 1px);
-    border-top-right-radius: calc(.3rem - 1px);
+    border-top-right-radius: calc(.3rem - 1px)
 }
 
 h4 {
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
+    text-overflow: ellipsis
 }
 
 .card-header {
     padding: .5rem .75rem;
-    font-size: 1rem;
+    font-size: 1rem
+}
+
+.comment-wrapper .panel-body {
+    max-height: 650px;
+    overflow: auto
+}
+
+.comment-wrapper .media-list .media img {
+    width: 64px;
+    height: 64px;
+    border: 2px solid #e5e7e8
+}
+
+.comment-wrapper .media-list .media {
+    border-bottom: 1px dashed #efefef;
+    margin-bottom: 25px
+}
+
+.img-circle {
+    border-radius: 50px;
+}
+
+.panel-heading {
+    color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+    padding: 10px 15px;
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.panel-info {
+    border-color: #bce8f1;
+}
+
+.panel {
+    border: solid;
+    border-color: #bce8f1;
+    background-color: #fff;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+}
+
+.panel-body {
+    padding: 15px;
+}
+
+.pull-left {
+    margin-right: 8px;
+    margin-bottom: 4px;
 }

@@ -7,6 +7,8 @@
     {
         GetUserDetailDTO GetUser(string id);
 
-        Task UpdateUser(string id, UpdateUserDTO user);
+        Task UpdateProfileImage(string id, UpdateProfileImageDTO profile);
+
+        Task UpdateProfileEmail(string id, string email);
     }
 }

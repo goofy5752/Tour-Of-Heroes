@@ -28,13 +28,22 @@
             return user;
         }
 
-        public async Task UpdateUser(string id, UpdateUserDTO user)
+        public async Task UpdateProfileImage(string id, UpdateProfileImageDTO profile)
         {
             var dbUser = this._userRepository
                 .All()
                 .FirstOrDefault(x => x.Id == id);
 
-            dbUser.ProfileImage = user.ProfileImage;
+            await this._userRepository.SaveChangesAsync();
+        }
+
+        public async Task UpdateProfileEmail(string id, string email)
+        {
+            var dbUser = this._userRepository
+                .All()
+                .FirstOrDefault(x => x.Id == id);
+
+            dbUser.Email = email;
 
             await this._userRepository.SaveChangesAsync();
         }
