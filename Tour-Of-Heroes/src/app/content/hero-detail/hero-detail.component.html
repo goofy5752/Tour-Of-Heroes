@@ -117,7 +117,7 @@
                                 <button type="button" (click)="postComment(comment.value)" class="btn btn-info pull-right">Post</button>
                                 <div class="clearfix"></div>
                                 <hr>
-                                <div class="break-word" *ngFor="let comment of hero.comments">
+                                <div class="break-word" *ngFor="let comment of orderedComments">
                                     <ul class="media-list">
                                         <li class="media">
                                             <a href="#" class="pull-left">

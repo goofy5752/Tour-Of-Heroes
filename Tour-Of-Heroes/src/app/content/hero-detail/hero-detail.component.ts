@@ -1,7 +1,7 @@
 import { Comments } from './../../entities/comment';
 import { CommentService } from './../../services/comment.service';
 import { EditHistory } from '../../entities/editHistory';
-import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -24,6 +24,8 @@ export class HeroDetailComponent implements OnInit {
   popoverTitle = 'Enter your password to confirm!';
   confirmClicked = false;
   cancelClicked = false;
+  orderedComments;
+  originalComments;
 
   @Input() hero: Hero;
   @Input() profile: Profile;
@@ -39,13 +41,9 @@ export class HeroDetailComponent implements OnInit {
     private toastr: ToastrService,
     private titleService: Title,
     private commentService: CommentService,
-    private ref: ChangeDetectorRef
   ) {
     this.allMovies = [];
-    setInterval(() => {
-      this.ref.detectChanges();
-     }, 5000);
-   }
+  }
 
   ngOnInit(): void {
     this.route.params.subscribe(() => {
@@ -59,7 +57,9 @@ export class HeroDetailComponent implements OnInit {
       .subscribe(hero => {
         this.hero = hero;
         this.allMovies = [];
+        this.originalComments = hero.comments;
         this.getMovies();
+        this.sortBy('publishedOn');
         this.titleService.setTitle(`${this.hero.name} Details`);
       }
       );
@@ -123,9 +123,9 @@ export class HeroDetailComponent implements OnInit {
     );
   }
 
-   deleteComment(comment: Comments) {
-     this.commentService.deleteComment(comment).subscribe();
-   }
+  deleteComment(comment: Comments) {
+    this.commentService.deleteComment(comment).subscribe();
+  }
 
   postComment(comment: string) {
     const token = JSON.stringify(localStorage.getItem('token'));
@@ -146,5 +146,19 @@ export class HeroDetailComponent implements OnInit {
         }
       }
     );
+  }
+
+  sortBy(field: string) {
+
+    this.originalComments.sort((a: any, b: any) => {
+      if (a[field] > b[field]) {
+        return -1;
+      } else if (a[field] < b[field]) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+    this.orderedComments = this.originalComments;
   }
 }
