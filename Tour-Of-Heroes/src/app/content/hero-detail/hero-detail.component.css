@@ -157,3 +157,7 @@ h4 {
     margin-right: 8px;
     margin-bottom: 4px;
 }
+
+.break-word {
+    word-break: break-word;
+}

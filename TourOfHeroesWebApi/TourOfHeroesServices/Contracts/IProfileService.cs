@@ -9,6 +9,6 @@
 
         Task UpdateProfileImage(string id, UpdateProfileImageDTO profile);
 
-        Task UpdateProfileEmail(string id, string email);
+        Task UpdateProfileEmail(string id, UpdateProfileEmailDTO email);
     }
 }

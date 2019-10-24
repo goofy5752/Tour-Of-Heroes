@@ -35,13 +35,13 @@
         [HttpPut("{id}")]
         [DisableRequestSizeLimit]
         [Route("profile/{id}")]
-        public async Task<IActionResult> UpdateEmail(string id, string email)
+        public async Task<IActionResult> UpdateEmail(string id, UpdateProfileEmailDTO emailDto)
         {
             _logger.LogInfo($"Updating profile with username {id}...");
 
-            if (email == null) return BadRequest();
+            if (emailDto.Email == "") return BadRequest();
 
-            await this._profileService.UpdateProfileEmail(id, email);
+            await this._profileService.UpdateProfileEmail(id, emailDto);
 
             _logger.LogInfo($"Profile with id: {id} successfully updated.");
 

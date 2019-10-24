@@ -21,10 +21,23 @@ export class CommentService {
   constructor(private heroService: HeroService, private globals: Globals, private http: HttpClient) { }
 
   postComment(userId: string, heroId: number, comment: string): Observable<Comments> {
-    return this.http.post<Comments>(`${this.commentsUrl}/create-comment`, {userId, heroId, comment}, this.httpOptions ).pipe(
+    return this.http.post<Comments>(`${this.commentsUrl}/create-comment`, { userId, heroId, comment }, this.httpOptions).pipe(
       tap((newComment: Comments) => {
         if (this.globals.showActivity) {
           this.heroService.log(`added comment w/ id=${newComment.id}`);
+        }
+      })
+    );
+  }
+
+  deleteComment(comment: Comments | number): Observable<Comments> {
+    const id = typeof comment === 'number' ? comment : comment.id;
+    const url = `${this.commentsUrl}/${id}`;
+
+    return this.http.delete<Comments>(url, this.httpOptions).pipe(
+      tap(_ => {
+        if (this.globals.showActivity) {
+          this.heroService.log(`deleted comment id=${id}`);
         }
       })
     );

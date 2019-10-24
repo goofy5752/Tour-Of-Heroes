@@ -17,6 +17,14 @@
         [MaxLength(5000)]
         public string Text { get; set; }
 
+        [Required]
+        [MaxLength(100)]
+        public string UserName { get; set; }
+
+        [Required]
+        [MaxLength(1000)]
+        public string ProfileImage { get; set; }
+
         public DateTime PublishedOn { get; set; }
 
         public bool IsDeleted { get; set; }

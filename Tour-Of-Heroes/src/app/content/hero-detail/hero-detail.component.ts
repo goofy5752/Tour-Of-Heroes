@@ -1,3 +1,4 @@
+import { Comments } from './../../entities/comment';
 import { CommentService } from './../../services/comment.service';
 import { EditHistory } from '../../entities/editHistory';
 import { Component, OnInit, Input } from '@angular/core';
@@ -115,6 +116,10 @@ export class HeroDetailComponent implements OnInit {
       }
     );
   }
+
+   deleteComment(comment: Comments) {
+     this.commentService.deleteComment(comment).subscribe();
+   }
 
   postComment(comment: string) {
     const token = JSON.stringify(localStorage.getItem('token'));

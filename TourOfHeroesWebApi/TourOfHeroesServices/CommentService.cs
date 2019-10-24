@@ -1,6 +1,4 @@
-﻿using TourOfHeroesDTOs;
-
-namespace TourOfHeroesServices
+﻿namespace TourOfHeroesServices
 {
     using Contracts;
     using System.Collections.Generic;
@@ -8,6 +6,7 @@ namespace TourOfHeroesServices
     using System.Threading.Tasks;
     using TourOfHeroesData.Common.Contracts;
     using TourOfHeroesData.Models;
+    using TourOfHeroesDTOs;
 
     public class CommentService : ICommentService
     {
@@ -35,15 +34,34 @@ namespace TourOfHeroesServices
 
             if (heroObj != null)
             {
-                var commentObj = new Comment
+                if (userObj.ProfileImage == null)
                 {
-                    Text = commentDTO.Comment,
-                    HeroId = heroObj.Id,
-                    UserId = userObj.Id
-                };
+                    var commentObj = new Comment
+                    {
+                        Text = commentDTO.Comment,
+                        UserName = userObj.UserName,
+                        ProfileImage = "https://bootdey.com/img/Content/user_1.jpg",
+                        HeroId = heroObj.Id,
+                        UserId = userObj.Id
+                    };
 
-                heroObj.Comments.Add(commentObj);
-                userObj.Comments.Add(commentObj);
+                    heroObj.Comments.Add(commentObj);
+                    userObj.Comments.Add(commentObj);
+                }
+                else
+                {
+                    var commentObj = new Comment
+                    {
+                        Text = commentDTO.Comment,
+                        UserName = userObj.UserName,
+                        ProfileImage = userObj.ProfileImage,
+                        HeroId = heroObj.Id,
+                        UserId = userObj.Id
+                    };
+
+                    heroObj.Comments.Add(commentObj);
+                    userObj.Comments.Add(commentObj);
+                }
 
                 await this._heroRepository.SaveChangesAsync();
                 await this._userRepository.SaveChangesAsync();

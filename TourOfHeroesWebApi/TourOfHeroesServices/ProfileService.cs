@@ -1,4 +1,6 @@
-﻿namespace TourOfHeroesServices
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace TourOfHeroesServices
 {
     using System.Threading.Tasks;
     using TourOfHeroesDTOs;
@@ -37,13 +39,13 @@
             await this._userRepository.SaveChangesAsync();
         }
 
-        public async Task UpdateProfileEmail(string id, string email)
+        public async Task UpdateProfileEmail(string id, UpdateProfileEmailDTO emailDto)
         {
             var dbUser = this._userRepository
                 .All()
                 .FirstOrDefault(x => x.Id == id);
 
-            dbUser.Email = email;
+            dbUser.Email = emailDto.Email;
 
             await this._userRepository.SaveChangesAsync();
         }

@@ -31,7 +31,7 @@ export class ProfileComponent implements OnInit {
   updateEmail(email: string) {
     this.profileService.updateEmail(this.userId, email).subscribe(
       () => {
-        this.toastr.success(`You have entered new value: ${this.profile.email}`, 'Successfully renamed !');
+        this.toastr.success(`You have entered new value: ${email}`, 'Successfully renamed !');
       },
       error => {
         if (error.status === 400) {
