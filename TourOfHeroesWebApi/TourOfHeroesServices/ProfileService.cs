@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-namespace TourOfHeroesServices
+﻿namespace TourOfHeroesServices
 {
     using System.Threading.Tasks;
     using TourOfHeroesDTOs;
@@ -14,10 +12,12 @@ namespace TourOfHeroesServices
     public class ProfileService : IProfileService
     {
         private readonly IRepository<ApplicationUser> _userRepository;
+        private readonly IImageService _imageService;
 
-        public ProfileService(IRepository<ApplicationUser> userRepository)
+        public ProfileService(IRepository<ApplicationUser> userRepository, IImageService imageService)
         {
             _userRepository = userRepository;
+            _imageService = imageService;
         }
 
         public GetUserDetailDTO GetUser(string id)
@@ -35,6 +35,10 @@ namespace TourOfHeroesServices
             var dbUser = this._userRepository
                 .All()
                 .FirstOrDefault(x => x.Id == id);
+
+            var profileImage = this._imageService.AddToCloudinaryAndReturnImageUrl(profile.ProfileImage);
+
+            dbUser.ProfileImage = profileImage;
 
             await this._userRepository.SaveChangesAsync();
         }

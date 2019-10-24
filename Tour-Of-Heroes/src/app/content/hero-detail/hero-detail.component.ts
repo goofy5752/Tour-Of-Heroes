@@ -1,7 +1,7 @@
 import { Comments } from './../../entities/comment';
 import { CommentService } from './../../services/comment.service';
 import { EditHistory } from '../../entities/editHistory';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -38,8 +38,14 @@ export class HeroDetailComponent implements OnInit {
     private location: Location,
     private toastr: ToastrService,
     private titleService: Title,
-    private commentService: CommentService
-  ) { this.allMovies = []; }
+    private commentService: CommentService,
+    private ref: ChangeDetectorRef
+  ) {
+    this.allMovies = [];
+    setInterval(() => {
+      this.ref.detectChanges();
+     }, 5000);
+   }
 
   ngOnInit(): void {
     this.route.params.subscribe(() => {
@@ -128,6 +134,17 @@ export class HeroDetailComponent implements OnInit {
     const decodedJwtData = JSON.parse(decodedJwtJsonData);
     const userId = decodedJwtData.UserID;
     console.log(comment);
-    this.commentService.postComment(userId, this.hero.id, comment).subscribe();
+    this.commentService.postComment(userId, this.hero.id, comment).subscribe(
+      () => {
+        this.toastr.success(`You have added a comment`, 'Success !');
+      },
+      error => {
+        if (error.status === 400 || error.status === 500) {
+          this.toastr.error(`Your comment is not posted try again later.`, 'Something wrong');
+        } else {
+          console.log(error);
+        }
+      }
+    );
   }
 }

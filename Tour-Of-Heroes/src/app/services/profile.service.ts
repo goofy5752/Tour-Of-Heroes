@@ -34,4 +34,14 @@ export class ProfileService {
       tap(_ => { if (this.globals.showActivity) { this.heroService.log(`updated profile id=${userId}`); } })
     );
   }
+
+  updateImage(userId: string, image: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('profileImage', image);
+    formData.append('userId', userId);
+    const url = `${this.BaseURI}/${userId}`;
+    return this.http.post(url, formData, this.httpOptions).pipe(
+      tap(_ => { if (this.globals.showActivity) { this.heroService.log(`updated profile id=${userId}`); } })
+    );
+  }
 }

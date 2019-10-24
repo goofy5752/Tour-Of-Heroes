@@ -47,5 +47,21 @@
 
             return NoContent();
         }
+
+        [HttpPost("{id}")]
+        [DisableRequestSizeLimit]
+        [Route("profile/{id}")]
+        public async Task<IActionResult> UpdateImage([FromForm] UpdateProfileImageDTO profileImageDto)
+        {
+            _logger.LogInfo($"Updating profile with username {profileImageDto.UserId}...");
+
+            if (profileImageDto.ProfileImage == null) return BadRequest();
+
+            await this._profileService.UpdateProfileImage(profileImageDto.UserId, profileImageDto);
+
+            _logger.LogInfo($"Profile with id: {profileImageDto.UserId} successfully updated.");
+
+            return NoContent();
+        }
     }
 }

@@ -1,7 +1,11 @@
 ﻿namespace TourOfHeroesDTOs
 {
+    using Microsoft.AspNetCore.Http;
+
     public class UpdateProfileImageDTO
     {
-        public string ProfileImage { get; set; }
+        public string UserId { get; set; }
+
+        public IFormFile ProfileImage { get; set; }
     }
 }

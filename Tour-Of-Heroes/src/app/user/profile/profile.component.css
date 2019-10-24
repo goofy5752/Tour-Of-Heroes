@@ -1,5 +1,5 @@
-body {
-    background: -webkit-linear-gradient(left, #3931af, #00c6ff);
+.backgroundCustom {
+    background: -webkit-linear-gradient(left, #bbbad1, #c4e5ee);
 }
 
 .emp-profile {
@@ -9,7 +9,7 @@ body {
     border-radius: 0.5rem;
     padding-left: 240px;
     padding-top: 50px;
-    height: 87vh;
+    height: 100%;
 }
 
 .profile-img {
@@ -24,8 +24,9 @@ body {
 .profile-img .file {
     position: relative;
     overflow: hidden;
-    margin-top: -20%;
+    margin-top: -17%;
     width: 70%;
+    height: 100%;
     border: none;
     border-radius: 0;
     font-size: 15px;
@@ -37,6 +38,7 @@ body {
     opacity: 0;
     right: 0;
     top: 0;
+    bottom: 0;
 }
 
 .profile-head h5 {
@@ -84,8 +86,7 @@ body {
 }
 
 .profile-work {
-    padding: 14%;
-    margin-top: -15%;
+    padding-left: 14%;
 }
 
 .profile-work p {

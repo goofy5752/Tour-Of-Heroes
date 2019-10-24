@@ -40,7 +40,7 @@
                     {
                         Text = commentDTO.Comment,
                         UserName = userObj.UserName,
-                        ProfileImage = "https://bootdey.com/img/Content/user_1.jpg",
+                        ProfileImage = "https://icon-library.net/images/no-profile-picture-icon/no-profile-picture-icon-7.jpg",
                         HeroId = heroObj.Id,
                         UserId = userObj.Id
                     };
