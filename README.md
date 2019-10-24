@@ -1,8 +1,8 @@
 # AngularTOH
 ## Web project based on Angular 8 & ASP.NET Core Web API + MSSQL
 
-## DescriptionSimple 
-  - Website for movies with user profile + comment section under every character for user feedback
+## Description 
+  - Simple web application for movies with user profile + comment section under every character for user feedback
 
 ### How to run the project
   - Change the local db connection string at appseting.json with your local server.
