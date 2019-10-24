@@ -59,7 +59,7 @@ export class ProfileComponent implements OnInit {
       },
       error => {
         if (error.status === 400) {
-          this.toastr.error(`Choose a image to upload.`, 'Renamed failed.');
+          this.toastr.error(`Choose a image to upload.`, 'Upload failed.');
         } else {
           console.log(error);
         }
