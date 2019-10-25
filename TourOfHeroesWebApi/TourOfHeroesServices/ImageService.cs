@@ -22,7 +22,7 @@ namespace TourOfHeroesServices
             _cloudinary = new Cloudinary(account);
         }
 
-        public string AddToCloudinaryAndReturnImageUrl(IFormFile photo)
+        public string AddToCloudinaryAndReturnHeroImageUrl(IFormFile photo)
         {
             var file = photo;
 
@@ -36,6 +36,31 @@ namespace TourOfHeroesServices
                     {
                         File = new FileDescription(file.Name, stream),
                         Folder = "/HeroUploads"
+                    };
+
+                    uploadResult = _cloudinary.Upload(uploadParams);
+                }
+            }
+
+            var url = uploadResult.Uri.ToString();
+
+            return url;
+        }
+
+        public string AddToCloudinaryAndReturnProfileImageUrl(IFormFile photo)
+        {
+            var file = photo;
+
+            var uploadResult = new ImageUploadResult();
+
+            if (file.Length > 0)
+            {
+                using (var stream = file.OpenReadStream())
+                {
+                    var uploadParams = new ImageUploadParams()
+                    {
+                        File = new FileDescription(file.Name, stream),
+                        Folder = "/ProfilePictures"
                     };
 
                     uploadResult = _cloudinary.Upload(uploadParams);

@@ -4,7 +4,8 @@
 
     public interface IImageService
     {
-        // ReSharper disable once IdentifierTypo
-        string AddToCloudinaryAndReturnImageUrl(IFormFile formFile);
+        string AddToCloudinaryAndReturnHeroImageUrl(IFormFile formFile);
+
+        string AddToCloudinaryAndReturnProfileImageUrl(IFormFile photo);
     }
 }

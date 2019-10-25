@@ -52,8 +52,8 @@
 
         public async Task CreateHero(CreateHeroDTO hero)
         {
-            var imgUrl = this._imageService.AddToCloudinaryAndReturnImageUrl(hero.Image);
-            var coverImgUrl = this._imageService.AddToCloudinaryAndReturnImageUrl(hero.CoverImage);
+            var imgUrl = this._imageService.AddToCloudinaryAndReturnHeroImageUrl(hero.Image);
+            var coverImgUrl = this._imageService.AddToCloudinaryAndReturnHeroImageUrl(hero.CoverImage);
             var heroObj = new Hero
             {
                 Name = hero.Name,

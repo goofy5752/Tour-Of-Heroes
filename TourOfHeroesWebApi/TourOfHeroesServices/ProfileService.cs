@@ -36,7 +36,7 @@
                 .All()
                 .FirstOrDefault(x => x.Id == id);
 
-            var profileImage = this._imageService.AddToCloudinaryAndReturnImageUrl(profile.ProfileImage);
+            var profileImage = this._imageService.AddToCloudinaryAndReturnProfileImageUrl(profile.ProfileImage);
 
             dbUser.ProfileImage = profileImage;
 
