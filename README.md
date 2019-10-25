@@ -1,4 +1,4 @@
-# AngularTOH
+# Tour Of Heroes
 ## Web project based on Angular 8 & ASP.NET Core Web API + MSSQL
 
 ## Description 
