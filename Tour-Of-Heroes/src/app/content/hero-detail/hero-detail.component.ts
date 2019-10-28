@@ -124,7 +124,13 @@ export class HeroDetailComponent implements OnInit {
   }
 
   deleteComment(comment: Comments) {
-    this.commentService.deleteComment(comment).subscribe();
+    this.commentService.deleteComment(comment).subscribe(
+      () => {
+        this.toastr.success(`You have deleted your comment`, 'Success !');
+      },
+      error => {
+        console.log(error);
+      });
   }
 
   postComment(comment: string) {
@@ -133,6 +139,10 @@ export class HeroDetailComponent implements OnInit {
     const decodedJwtJsonData = window.atob(jwtData);
     const decodedJwtData = JSON.parse(decodedJwtJsonData);
     const userId = decodedJwtData.UserID;
+    if (comment === '') {
+      this.toastr.error(`Write something.`, 'Spam ?');
+      return;
+    }
     console.log(comment);
     this.commentService.postComment(userId, this.hero.id, comment).subscribe(
       () => {
@@ -149,7 +159,6 @@ export class HeroDetailComponent implements OnInit {
   }
 
   sortBy(field: string) {
-
     this.originalComments.sort((a: any, b: any) => {
       if (a[field] > b[field]) {
         return -1;
