@@ -7,18 +7,22 @@
     using TourOfHeroesData.Common.Contracts;
     using TourOfHeroesData.Models;
     using TourOfHeroesDTOs;
+    using Microsoft.AspNetCore.SignalR;
+    using RealTimeHub;
 
     public class CommentService : ICommentService
     {
         private readonly IRepository<Comment> _commentRepository;
         private readonly IRepository<Hero> _heroRepository;
         private readonly IRepository<ApplicationUser> _userRepository;
+        private readonly IHubContext<CommentHub, ITypedHubClient> _hubContext;
 
-        public CommentService(IRepository<Comment> commentRepository, IRepository<Hero> heroRepository, IRepository<ApplicationUser> userRepository)
+        public CommentService(IRepository<Comment> commentRepository, IRepository<Hero> heroRepository, IRepository<ApplicationUser> userRepository, IHubContext<CommentHub, ITypedHubClient> hubContext)
         {
             _commentRepository = commentRepository;
             _heroRepository = heroRepository;
             _userRepository = userRepository;
+            _hubContext = hubContext;
         }
 
         public IEnumerable<Comment> GetAllComments()
@@ -45,6 +49,9 @@
                         UserId = userObj.Id
                     };
 
+
+                    await _hubContext.Clients.All.BroadcastComment(commentObj);
+
                     heroObj.Comments.Add(commentObj);
                     userObj.Comments.Add(commentObj);
                 }
@@ -58,6 +65,8 @@
                         HeroId = heroObj.Id,
                         UserId = userObj.Id
                     };
+
+                    await _hubContext.Clients.All.BroadcastComment(commentObj);
 
                     heroObj.Comments.Add(commentObj);
                     userObj.Comments.Add(commentObj);

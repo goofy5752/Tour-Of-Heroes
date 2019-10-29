@@ -18,6 +18,7 @@ namespace TourOfHeroesWebApi
     using TourOfHeroesServices.Contracts;
     using Controllers.Validator;
     using Controllers.Validator.Contracts;
+    using TourOfHeroesServices.RealTimeHub;
     using GlobalErrorHandling.Extensions;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -130,12 +131,13 @@ namespace TourOfHeroesWebApi
                 options.AllowAnyOrigin()
                     .AllowAnyMethod()
                     .AllowAnyHeader()
+                    .AllowCredentials()
                     .WithOrigins(Configuration["ApplicationSettings:Client_URL"]));
 
-            //app.UseSignalR(routes =>
-            //{
-                //routes.MapHub<ChatHub>("chat");
-            //});
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<CommentHub>("/api/comments");
+            });
 
             app.ConfigureCustomExceptionMiddleware();
 

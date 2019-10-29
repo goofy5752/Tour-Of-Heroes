@@ -2,7 +2,7 @@ import { Comments } from './../../entities/comment';
 import { CommentService } from './../../services/comment.service';
 import { EditHistory } from '../../entities/editHistory';
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { Hero } from '../../entities/hero';
@@ -12,6 +12,7 @@ import Movie from '../../entities/movie';
 import { ToastrService } from 'ngx-toastr';
 import { Title } from '@angular/platform-browser';
 import { Profile } from 'selenium-webdriver/firefox';
+import * as signalR from '@aspnet/signalr';
 
 @Component({
   selector: 'app-hero-detail',
@@ -24,8 +25,9 @@ export class HeroDetailComponent implements OnInit {
   popoverTitle = 'Enter your password to confirm!';
   confirmClicked = false;
   cancelClicked = false;
-  orderedComments;
+  orderedComments: Comments[];
   originalComments;
+  mySubscription: any;
 
   @Input() hero: Hero;
   @Input() profile: Profile;
@@ -41,13 +43,47 @@ export class HeroDetailComponent implements OnInit {
     private toastr: ToastrService,
     private titleService: Title,
     private commentService: CommentService,
+    private router: Router
   ) {
     this.allMovies = [];
+    this.router.routeReuseStrategy.shouldReuseRoute = () => {
+      return false;
+    };
+
+    this.mySubscription = this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        // Trick the Router into believing it's last link wasn't previously loaded
+        this.router.navigated = false;
+      }
+    });
+  }
+
+  // tslint:disable-next-line: use-lifecycle-interface
+  ngOnDestroy() {
+    if (this.mySubscription) {
+      this.mySubscription.unsubscribe();
+    }
   }
 
   ngOnInit(): void {
     this.route.params.subscribe(() => {
       this.getHero();
+    });
+
+    const connection = new signalR.HubConnectionBuilder()
+      .configureLogging(signalR.LogLevel.Information)
+      .withUrl('https://localhost:44353/api/comments')
+      .build();
+
+    connection.start().then(() => {
+      console.log('Connected!');
+    }).catch(err => {
+      return console.error(err.toString());
+    });
+
+    connection.on('BroadcastComment', (comment: Comments) => {
+      this.orderedComments.push(comment);
+      this.sortBy('publishedOn');
     });
   }
 
