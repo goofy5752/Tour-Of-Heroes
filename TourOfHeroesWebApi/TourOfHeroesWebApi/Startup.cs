@@ -65,8 +65,6 @@ namespace TourOfHeroesWebApi
 
             //Jwt Authentication
 
-            services.AddCors();
-
             var key = Encoding.UTF8.GetBytes(Configuration["ApplicationSettings:JWT_Secret"]);
 
             services.AddAuthentication(x =>
@@ -106,6 +104,10 @@ namespace TourOfHeroesWebApi
             //validator service
 
             services.AddTransient<IUserValidator, UserValidator>();
+
+            //real time application service
+
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -124,13 +126,22 @@ namespace TourOfHeroesWebApi
                 app.UseHsts();
             }
 
+            app.UseCors(options =>
+                options.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .WithOrigins(Configuration["ApplicationSettings:Client_URL"]));
+
+            //app.UseSignalR(routes =>
+            //{
+                //routes.MapHub<ChatHub>("chat");
+            //});
+
             app.ConfigureCustomExceptionMiddleware();
 
             seeder.SeedDatabase();
 
             app.UseHttpsRedirection();
-            app.UseCors(options =>
-                options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().WithOrigins(Configuration["ApplicationSettings:Client_URL"]));
             app.UseAuthentication();
             app.UseMvc();
         }

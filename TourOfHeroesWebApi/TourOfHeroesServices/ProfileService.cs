@@ -8,7 +8,6 @@
     using System.Linq;
     using TourOfHeroesMapping.Mapping;
 
-
     public class ProfileService : IProfileService
     {
         private readonly IRepository<ApplicationUser> _userRepository;
