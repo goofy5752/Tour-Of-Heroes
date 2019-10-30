@@ -84,6 +84,8 @@
 
             if (commentToDelete != null) commentToDelete.IsDeleted = true;
 
+            await _hubContext.Clients.All.DeleteComment(id);
+
             await this._commentRepository.SaveChangesAsync();
         }
     }

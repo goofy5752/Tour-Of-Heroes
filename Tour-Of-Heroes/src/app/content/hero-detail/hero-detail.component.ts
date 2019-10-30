@@ -71,6 +71,15 @@ export class HeroDetailComponent implements OnInit {
       this.orderedComments.push(comment);
       this.sortBy('publishedOn');
     });
+
+    connection.on('DeleteComment', (commentId: number) => {
+      for (const i of this.orderedComments) {
+        if (i.id === commentId) {
+          i.isDeleted = true;
+          break;
+        }
+      }
+    });
   }
 
   getHero(): void {

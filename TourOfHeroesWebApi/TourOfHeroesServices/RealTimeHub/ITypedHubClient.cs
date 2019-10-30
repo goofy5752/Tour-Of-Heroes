@@ -7,6 +7,8 @@
     {
         Task BroadcastComment(Comment comment);
 
+        Task DeleteComment(int commentId);
+
         Task UpdateProfileImage(string profileImage);
     }
 }
