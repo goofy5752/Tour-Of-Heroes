@@ -1,6 +1,5 @@
 ﻿namespace TourOfHeroesWebApi.Controllers
 {
-    using System;
     using TourOfHeroesDTOs;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;

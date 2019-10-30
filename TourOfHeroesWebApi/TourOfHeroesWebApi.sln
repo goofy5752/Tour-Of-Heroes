@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.28307.852
+VisualStudioVersion = 15.0.28307.902
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TourOfHeroesWebApi", "TourOfHeroesWebApi\TourOfHeroesWebApi.csproj", "{69C8362F-1DF0-402D-A6CC-7B383B6714D0}"
 EndProject
@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TourOfHeroesServices", "Tou
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TourOfHeroesDTOs", "TourOfHeroesDTOs\TourOfHeroesDTOs.csproj", "{EC80E396-48F7-4A28-8E06-54AC32E49BC6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TourOfHeroesMapping", "TourOfHeroesMapping\TourOfHeroesMapping.csproj", "{C13C98D0-8687-4599-A900-A21FC71EF2A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TourOfHeroesMapping", "TourOfHeroesMapping\TourOfHeroesMapping.csproj", "{C13C98D0-8687-4599-A900-A21FC71EF2A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TourOfHeroesCommon", "TourOfHeroesCommon\TourOfHeroesCommon.csproj", "{CA1714B6-124F-4399-B6A5-1E2E7C6067FD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{C13C98D0-8687-4599-A900-A21FC71EF2A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C13C98D0-8687-4599-A900-A21FC71EF2A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C13C98D0-8687-4599-A900-A21FC71EF2A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA1714B6-124F-4399-B6A5-1E2E7C6067FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA1714B6-124F-4399-B6A5-1E2E7C6067FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA1714B6-124F-4399-B6A5-1E2E7C6067FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA1714B6-124F-4399-B6A5-1E2E7C6067FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -6,19 +6,40 @@ namespace TourOfHeroesData.Seeder
     using System.Collections.Generic;
     using System.Linq;
     using Models;
+    using Microsoft.AspNetCore.Identity;
     using Contracts;
+    using TourOfHeroesCommon;
 
     public class Seeder : ISeeder
     {
         private readonly TourOfHeroesDbContext _dbContext;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public Seeder(TourOfHeroesDbContext dbContext)
+        public Seeder(TourOfHeroesDbContext dbContext, UserManager<ApplicationUser> userManager)
         {
             _dbContext = dbContext;
+            _userManager = userManager;
         }
 
         public void SeedDatabase()
         {
+            if (!_dbContext.ApplicationUsers.Any())
+            {
+                var adminPasswrod = "admin123";
+                var admin = new ApplicationUser()
+                {
+                    UserName = "admin",
+                    Email = "Admin@admin.com",
+                    FullName = "Admin Adminov",
+                };
+
+                _userManager.CreateAsync(admin, adminPasswrod);
+                _userManager.AddToRoleAsync(admin, GlobalConstants.AdminRole);
+                _dbContext.SaveChangesAsync();
+            }
+
+            if (_dbContext.Heroes.Any()) return;
+
             var heroList = new List<Hero>();
             var cptAmericaMovies = new List<Movie>();
             var spidermanMovies = new List<Movie>();
@@ -28,8 +49,6 @@ namespace TourOfHeroesData.Seeder
             var thorMovies = new List<Movie>();
             var hawkeyeMovies = new List<Movie>();
             var ironmanMovies = new List<Movie>();
-
-            if (_dbContext.Heroes.Any()) return;
 
             #region CaptainAmericaSeeder
 

@@ -28,6 +28,7 @@ namespace TourOfHeroesWebApi
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
+    using Microsoft.EntityFrameworkCore.Internal;
     using Microsoft.IdentityModel.Tokens;
 
     public class Startup
@@ -51,7 +52,7 @@ namespace TourOfHeroesWebApi
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDefaultIdentity<ApplicationUser>()
+            services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<TourOfHeroesDbContext>();
 
             services.Configure<IdentityOptions>(options =>
@@ -116,16 +117,36 @@ namespace TourOfHeroesWebApi
         {
             AutoMapperConfig.RegisterMappings(typeof(PageResultDTO<>).GetTypeInfo().Assembly);
 
-            if (env.IsDevelopment())
+            //seed application roles
+
+            using (var serviceScope = app.ApplicationServices.CreateScope())
             {
-                app.UseDeveloperExceptionPage();
+                using (var context = serviceScope.ServiceProvider.GetRequiredService<TourOfHeroesDbContext>())
+                {
+                    context.Database.EnsureCreated();
+
+                    if (!context.Roles.Any())
+                    {
+                        context.Roles.Add(new IdentityRole
+                        {
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        });
+
+                        context.Roles.Add(new IdentityRole
+                        {
+                            Name = "User",
+                            NormalizedName = "USER"
+                        });
+
+                        context.SaveChanges();
+                    }
+                }
             }
-            else
-            {
-                // ReSharper disable once CommentTypo
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
+
+            seeder.SeedDatabase();
+
+            app.UseDeveloperExceptionPage();
 
             app.UseCors(options =>
                 options.AllowAnyOrigin()
@@ -140,10 +161,8 @@ namespace TourOfHeroesWebApi
             });
 
             app.ConfigureCustomExceptionMiddleware();
-
-            seeder.SeedDatabase();
-
             app.UseHttpsRedirection();
+            app.UseHsts();
             app.UseAuthentication();
             app.UseMvc();
         }
