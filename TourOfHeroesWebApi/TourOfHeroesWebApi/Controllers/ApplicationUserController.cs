@@ -10,6 +10,7 @@
     using System.Security.Claims;
     using System.Text;
     using System.Threading.Tasks;
+    using TourOfHeroesCommon;
     using TourOfHeroesData.Common;
     using TourOfHeroesData.Models;
     using TourOfHeroesServices.Contracts;
@@ -38,12 +39,13 @@
                 Email = model.Email,
                 FullName = model.FullName
             };
-            
+
             try
             {
                 _logger.LogInfo($"Creating account with username {model.UserName}...");
 
                 var result = await _userManager.CreateAsync(applicationUser, model.Password);
+                await _userManager.AddToRoleAsync(applicationUser, GlobalConstants.UserRole);
 
                 _logger.LogInfo($"Account with username {model.UserName} successfully created !");
 

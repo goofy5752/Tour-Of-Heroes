@@ -25,7 +25,7 @@ namespace TourOfHeroesData.Seeder
         {
             if (!_dbContext.ApplicationUsers.Any())
             {
-                var adminPasswrod = "admin123";
+                const string adminPassword = "admin123";
                 var admin = new ApplicationUser()
                 {
                     UserName = "admin",
@@ -33,7 +33,7 @@ namespace TourOfHeroesData.Seeder
                     FullName = "Admin Adminov",
                 };
 
-                _userManager.CreateAsync(admin, adminPasswrod);
+                _userManager.CreateAsync(admin, adminPassword);
                 _userManager.AddToRoleAsync(admin, GlobalConstants.AdminRole);
                 _dbContext.SaveChangesAsync();
             }
