@@ -158,6 +158,7 @@ namespace TourOfHeroesWebApi
             app.UseSignalR(routes =>
             {
                 routes.MapHub<CommentHub>("/api/comments");
+                routes.MapHub<ProfileImageHub>("/api/profile");
             });
 
             app.ConfigureCustomExceptionMiddleware();

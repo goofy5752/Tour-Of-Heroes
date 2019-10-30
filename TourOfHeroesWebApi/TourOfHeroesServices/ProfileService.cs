@@ -5,6 +5,8 @@
     using Contracts;
     using TourOfHeroesData.Common.Contracts;
     using TourOfHeroesData.Models;
+    using Microsoft.AspNetCore.SignalR;
+    using RealTimeHub;
     using System.Linq;
     using TourOfHeroesMapping.Mapping;
 
@@ -12,11 +14,13 @@
     {
         private readonly IRepository<ApplicationUser> _userRepository;
         private readonly IImageService _imageService;
+        private readonly IHubContext<ProfileImageHub, ITypedHubClient> _hubContext;
 
-        public ProfileService(IRepository<ApplicationUser> userRepository, IImageService imageService)
+        public ProfileService(IRepository<ApplicationUser> userRepository, IImageService imageService, IHubContext<ProfileImageHub, ITypedHubClient> hubContext)
         {
             _userRepository = userRepository;
             _imageService = imageService;
+            _hubContext = hubContext;
         }
 
         public GetUserDetailDTO GetUser(string id)
@@ -38,6 +42,8 @@
             var profileImage = this._imageService.AddToCloudinaryAndReturnProfileImageUrl(profile.ProfileImage);
 
             dbUser.ProfileImage = profileImage;
+
+            await this._hubContext.Clients.All.UpdateProfileImage(dbUser.ProfileImage);
 
             await this._userRepository.SaveChangesAsync();
         }

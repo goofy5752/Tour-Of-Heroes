@@ -3,6 +3,7 @@ import { ProfileService } from './../../services/profile.service';
 import { Profile } from './../../entities/profile';
 import { Title } from '@angular/platform-browser';
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import * as signalR from '@aspnet/signalr';
 
 @Component({
   selector: 'app-profile',
@@ -31,6 +32,21 @@ export class ProfileComponent implements OnInit {
       data => this.profile = data
     );
     this.titleService.setTitle('Profile');
+
+    const connection = new signalR.HubConnectionBuilder()
+      .configureLogging(signalR.LogLevel.Information)
+      .withUrl('https://localhost:44353/api/profile')
+      .build();
+
+    connection.start().then(() => {
+      console.log('Connected!');
+    }).catch(err => {
+      return console.error(err.toString());
+    });
+
+    connection.on('UpdateProfileImage', (profileImage: string) => {
+      this.profile.profileImage = profileImage;
+    });
   }
 
   updateEmail(email: string) {

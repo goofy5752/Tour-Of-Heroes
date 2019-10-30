@@ -6,5 +6,7 @@
     public interface ITypedHubClient
     {
         Task BroadcastComment(Comment comment);
+
+        Task UpdateProfileImage(string profileImage);
     }
 }
