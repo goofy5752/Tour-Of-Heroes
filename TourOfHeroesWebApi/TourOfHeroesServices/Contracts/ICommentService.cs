@@ -1,9 +1,9 @@
 ﻿namespace TourOfHeroesServices.Contracts
 {
-    using TourOfHeroesDTOs;
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using TourOfHeroesData.Models;
+    using TourOfHeroesDTOs.CommentDtos;
 
     public interface ICommentService
     {

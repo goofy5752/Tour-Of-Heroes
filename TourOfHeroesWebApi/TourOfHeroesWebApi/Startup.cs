@@ -12,8 +12,8 @@ namespace TourOfHeroesWebApi
     using TourOfHeroesData.Models;
     using TourOfHeroesData.Seeder;
     using TourOfHeroesData.Seeder.Contracts;
-    using TourOfHeroesDTOs;
     using TourOfHeroesMapping.Mapping;
+    using TourOfHeroesDTOs.HeroDtos;
     using TourOfHeroesServices;
     using TourOfHeroesServices.Contracts;
     using Controllers.Validator;

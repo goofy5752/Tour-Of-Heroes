@@ -1,4 +1,4 @@
-﻿namespace TourOfHeroesDTOs
+﻿namespace TourOfHeroesDTOs.CommentDtos
 {
     public class CreateCommentDTO
     {

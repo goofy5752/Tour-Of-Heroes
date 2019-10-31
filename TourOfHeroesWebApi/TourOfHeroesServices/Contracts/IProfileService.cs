@@ -1,7 +1,7 @@
 ﻿namespace TourOfHeroesServices.Contracts
 {
     using System.Threading.Tasks;
-    using TourOfHeroesDTOs;
+    using TourOfHeroesDTOs.ProfileDtos;
 
     public interface IProfileService
     {

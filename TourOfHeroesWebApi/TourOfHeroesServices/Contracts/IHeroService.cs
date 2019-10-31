@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using TourOfHeroesDTOs;
+    using TourOfHeroesDTOs.HeroDtos;
 
     public interface IHeroService
     {

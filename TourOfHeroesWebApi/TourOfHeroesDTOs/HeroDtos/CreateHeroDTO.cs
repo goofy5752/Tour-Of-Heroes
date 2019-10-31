@@ -1,9 +1,9 @@
-﻿namespace TourOfHeroesDTOs
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
+
+namespace TourOfHeroesDTOs.HeroDtos
 {
-    using System;
-    using System.ComponentModel.DataAnnotations;
-    using Microsoft.AspNetCore.Http;
-    
     public class CreateHeroDTO
     {
         [Required(ErrorMessage = "Field is required.")]

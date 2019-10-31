@@ -6,7 +6,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using TourOfHeroesData.Models;
-    using TourOfHeroesDTOs;
+    using TourOfHeroesDTOs.HeroDtos;
     using TourOfHeroesServices.Contracts;
     using Validator.Contracts;
 

@@ -3,13 +3,13 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Options;
-    using TourOfHeroesDTOs;
     using Microsoft.IdentityModel.Tokens;
     using System;
     using System.IdentityModel.Tokens.Jwt;
     using System.Security.Claims;
     using System.Text;
     using System.Threading.Tasks;
+    using TourOfHeroesDTOs.UserDtos;
     using TourOfHeroesCommon;
     using TourOfHeroesData.Common;
     using TourOfHeroesData.Models;

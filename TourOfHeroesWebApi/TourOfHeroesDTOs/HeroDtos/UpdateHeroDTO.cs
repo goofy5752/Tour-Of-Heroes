@@ -1,4 +1,4 @@
-﻿namespace TourOfHeroesDTOs
+﻿namespace TourOfHeroesDTOs.HeroDtos
 {
     public class UpdateHeroDTO
     {

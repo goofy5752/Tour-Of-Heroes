@@ -1,4 +1,4 @@
-﻿namespace TourOfHeroesDTOs
+﻿namespace TourOfHeroesDTOs.UserDtos
 {
     public class LoginUserDTO
     {

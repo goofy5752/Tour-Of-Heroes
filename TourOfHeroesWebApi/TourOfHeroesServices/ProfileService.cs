@@ -1,12 +1,12 @@
 ﻿namespace TourOfHeroesServices
 {
     using System.Threading.Tasks;
-    using TourOfHeroesDTOs;
     using Contracts;
     using TourOfHeroesData.Common.Contracts;
     using TourOfHeroesData.Models;
     using Microsoft.AspNetCore.SignalR;
     using RealTimeHub;
+    using TourOfHeroesDTOs.ProfileDtos;
     using System.Linq;
     using TourOfHeroesMapping.Mapping;
 

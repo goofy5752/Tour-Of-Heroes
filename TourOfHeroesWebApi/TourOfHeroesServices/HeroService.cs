@@ -6,8 +6,8 @@
     using System.Threading.Tasks;
     using TourOfHeroesData.Common.Contracts;
     using TourOfHeroesData.Models;
-    using TourOfHeroesDTOs;
     using Contracts;
+    using TourOfHeroesDTOs.HeroDtos;
     using TourOfHeroesMapping.Mapping;
 
     public class HeroService : IHeroService

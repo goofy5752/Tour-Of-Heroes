@@ -6,8 +6,8 @@
     using System.Threading.Tasks;
     using TourOfHeroesData.Common.Contracts;
     using TourOfHeroesData.Models;
-    using TourOfHeroesDTOs;
     using Microsoft.AspNetCore.SignalR;
+    using TourOfHeroesDTOs.CommentDtos;
     using RealTimeHub;
 
     public class CommentService : ICommentService

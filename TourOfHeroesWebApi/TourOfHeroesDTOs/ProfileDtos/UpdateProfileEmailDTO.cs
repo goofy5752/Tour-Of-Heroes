@@ -1,4 +1,4 @@
-﻿namespace TourOfHeroesDTOs
+﻿namespace TourOfHeroesDTOs.ProfileDtos
 {
     public class UpdateProfileEmailDTO
     {

@@ -1,9 +1,10 @@
-﻿namespace TourOfHeroesDTOs
+﻿using System.Collections.Generic;
+using TourOfHeroesData.Models;
+using TourOfHeroesDTOs.MovieDtos;
+using TourOfHeroesMapping.Mapping;
+
+namespace TourOfHeroesDTOs.HeroDtos
 {
-    using System.Collections.Generic;
-    using TourOfHeroesData.Models;
-    using TourOfHeroesMapping.Mapping;
-    
     public class GetHeroDetailDTO : IMapFrom<Hero>
     {
         public GetHeroDetailDTO()
