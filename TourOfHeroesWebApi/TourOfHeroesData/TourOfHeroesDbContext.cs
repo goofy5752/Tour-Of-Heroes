@@ -11,14 +11,17 @@
         public TourOfHeroesDbContext(DbContextOptions<TourOfHeroesDbContext> options)
             : base(options) { }
 
-        public DbSet<Hero> Heroes { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+
+        public DbSet<Blog> Blogs { get; set; }
+
+        public DbSet<Comment> Comments { get; set; }
 
         public DbSet<EditHistory> EditHistory { get; set; }
 
-        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<Hero> Heroes { get; set; }
 
         public DbSet<Movie> Movies { get; set; }
 
-        public DbSet<Comment> Comments { get; set; }
     }
 }

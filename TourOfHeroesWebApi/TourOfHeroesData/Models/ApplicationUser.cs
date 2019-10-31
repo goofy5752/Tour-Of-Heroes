@@ -1,4 +1,5 @@
-﻿namespace TourOfHeroesData.Models
+﻿// ReSharper disable VirtualMemberCallInConstructor
+namespace TourOfHeroesData.Models
 {
     using System.Collections.Generic;
     using Microsoft.AspNetCore.Identity;
@@ -8,8 +9,8 @@
     {
         public ApplicationUser()
         {
-            // ReSharper disable once VirtualMemberCallInConstructor
             this.Comments = new List<Comment>();
+            this.BlogPosts = new List<Blog>();
         }
 
         public override string Id { get; set; }
@@ -24,5 +25,7 @@
         public string ProfileImage { get; set; }
 
         public virtual List<Comment> Comments { get; set; }
+
+        public virtual List<Blog> BlogPosts { get; set; }
     }
 }
