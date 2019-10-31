@@ -1,3 +1,4 @@
+import { Blog } from './blog';
 import { Comments } from './comment';
 
 export class Profile {
@@ -7,4 +8,5 @@ export class Profile {
     profileImage: string;
     fullName: string;
     comments: Comments[];
+    posts: Blog[];
 }

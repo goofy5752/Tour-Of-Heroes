@@ -31,6 +31,9 @@ import { UserService } from './services/user.service';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import { ProfileComponent } from './user/profile/profile.component';
+import { BlogComponent } from './content/blog/blog.component';
+import { AdminComponent } from './user/admin/admin.component';
+import { BlogDetailComponent } from './content/blog-detail/blog-detail.component';
 
 @NgModule({
   imports: [
@@ -65,6 +68,9 @@ import { ProfileComponent } from './user/profile/profile.component';
     LoginComponent,
     RegistrationComponent,
     ProfileComponent,
+    BlogComponent,
+    AdminComponent,
+    BlogDetailComponent,
   ],
   providers: [
     [UserService, {

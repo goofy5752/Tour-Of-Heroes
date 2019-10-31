@@ -34,7 +34,6 @@ export class HeroDetailComponent implements OnInit {
   allMovies: Movie[];
   index: number;
   searchResults: any;
-
   constructor(
     private route: ActivatedRoute,
     private heroService: HeroService,

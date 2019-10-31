@@ -38,7 +38,7 @@
         [HttpDelete("{id}")]
         [DisableRequestSizeLimit]
         [Route("blog/{id}")]
-        public async Task<ActionResult<Hero>> DeleteComment(int id)
+        public async Task<ActionResult<Hero>> DeletePost(int id)
         {
             var post = this._blogService.GetAllPosts();
 
