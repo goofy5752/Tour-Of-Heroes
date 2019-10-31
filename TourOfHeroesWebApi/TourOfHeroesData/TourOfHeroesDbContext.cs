@@ -22,6 +22,5 @@
         public DbSet<Hero> Heroes { get; set; }
 
         public DbSet<Movie> Movies { get; set; }
-
     }
 }
