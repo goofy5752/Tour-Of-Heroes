@@ -75,8 +75,13 @@ export class HeroDetailComponent implements OnInit {
     connection.on('DeleteComment', (commentId: number) => {
       for (const i of this.orderedComments) {
         if (i.id === commentId) {
+          if (i.isDeleted === true) {
+            this.toastr.warning(`Comment is already deleted`, 'Oops !');
+            return;
+          }
+          this.toastr.success(`You have deleted your comment`, 'Success !');
           i.isDeleted = true;
-          break;
+          return;
         }
       }
     });
@@ -156,9 +161,7 @@ export class HeroDetailComponent implements OnInit {
 
   deleteComment(comment: Comments) {
     this.commentService.deleteComment(comment).subscribe(
-      () => {
-        this.toastr.success(`You have deleted your comment`, 'Success !');
-      },
+      () => { },
       error => {
         console.log(error);
       });
