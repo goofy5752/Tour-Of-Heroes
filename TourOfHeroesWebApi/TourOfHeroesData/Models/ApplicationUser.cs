@@ -10,7 +10,7 @@ namespace TourOfHeroesData.Models
         public ApplicationUser()
         {
             this.Comments = new List<Comment>();
-            this.BlogPosts = new List<Blog>();
+            this.Blogs = new List<Blog>();
         }
 
         public override string Id { get; set; }
@@ -26,6 +26,6 @@ namespace TourOfHeroesData.Models
 
         public virtual List<Comment> Comments { get; set; }
 
-        public virtual List<Blog> BlogPosts { get; set; }
+        public virtual List<Blog> Blogs { get; set; }
     }
 }

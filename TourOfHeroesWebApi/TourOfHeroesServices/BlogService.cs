@@ -43,9 +43,9 @@
             return post;
         }
 
-        public async Task CreatePost(CreateBlogPostDTO postDto)
+        public async Task CreatePost(CreateBlogPostDTO postDto, string userId)
         {
-            var userObj = this._userRepository.All().FirstOrDefault(x => x.Id == postDto.UserId);
+            var userObj = this._userRepository.All().FirstOrDefault(x => x.Id == userId);
 
             if (userObj == null) return;
 
@@ -61,7 +61,7 @@
                 UserId = userObj.Id
             };
 
-            userObj.BlogPosts.Add(postObj);
+            userObj.Blogs.Add(postObj);
 
             await this._blogRepository.SaveChangesAsync();
             await this._userRepository.SaveChangesAsync();

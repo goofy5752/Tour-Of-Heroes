@@ -3,14 +3,23 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { Globals } from '../globals/globals';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-    constructor(private router: Router) { }
+    constructor(private router: Router, public globals: Globals) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         if (localStorage.getItem('token') != null) {
+
+            const payLoad = JSON.parse(window.atob(localStorage.getItem('token').split('.')[1]));
+            const userRole = payLoad.role;
+            if (userRole === 'Admin') {
+                this.globals.isAdmin = true;
+            } else {
+                this.globals.isAdmin = false;
+            }
             const clonedReq = req.clone({
                 headers: req.headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'))
             });

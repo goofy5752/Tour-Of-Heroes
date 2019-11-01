@@ -11,7 +11,7 @@
 
         GetPostDetailDTO GetPostDetail(int id);
 
-        Task CreatePost(CreateBlogPostDTO postDto);
+        Task CreatePost(CreateBlogPostDTO postDto, string userId);
 
         Task DeletePost(int id);
     }

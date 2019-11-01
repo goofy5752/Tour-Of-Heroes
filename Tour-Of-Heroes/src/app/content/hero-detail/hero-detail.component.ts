@@ -2,7 +2,7 @@ import { Comments } from './../../entities/comment';
 import { CommentService } from './../../services/comment.service';
 import { EditHistory } from '../../entities/editHistory';
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { Hero } from '../../entities/hero';
@@ -96,8 +96,7 @@ export class HeroDetailComponent implements OnInit {
         this.getMovies();
         this.sortBy('publishedOn');
         this.titleService.setTitle(`${this.hero.name} Details`);
-      }
-      );
+      });
   }
 
   getMovies() {

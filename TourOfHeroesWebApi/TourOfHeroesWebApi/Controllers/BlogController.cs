@@ -21,9 +21,9 @@
             _logger = logger;
         }
 
-        [HttpGet("{all}")]
+        [HttpGet("all")]
         [DisableRequestSizeLimit]
-        [Route("blog/all")]
+        [Route("blog/{all}")]
         public PageResultDTO<GetPostDTO> GetAllPosts(int? page, int pageSize = 6)
         {
             _logger.LogInfo("Fetching all the heroes from the storage...");
@@ -58,15 +58,17 @@
 
         [HttpPost("{create-post}")]
         [DisableRequestSizeLimit]
-        [Route("blog/create-post")]
+        [Route("blog/{create-post}")]
         [Authorize(Roles = "Admin")]
-        public async Task<ActionResult<CreateBlogPostDTO>> CreatePost(CreateBlogPostDTO postDto)
+        public async Task<ActionResult<CreateBlogPostDTO>> CreatePost([FromForm]CreateBlogPostDTO postDto)
         {
+            var userId = HttpContext.User.Claims.First(x => x.Type == "UserID").Value;
+
             if (!ModelState.IsValid) return this.NoContent();
 
             _logger.LogInfo("Creating a new post...");
 
-            await this._blogService.CreatePost(postDto);
+            await this._blogService.CreatePost(postDto, userId);
 
             _logger.LogInfo($"Post with content {postDto.Content} successfully created.");
 

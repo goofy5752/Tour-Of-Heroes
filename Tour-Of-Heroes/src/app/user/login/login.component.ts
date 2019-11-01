@@ -3,6 +3,7 @@ import { UserService } from '../../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Globals } from 'src/app/globals/globals';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit {
     Password: ''
   };
 
-  constructor(private service: UserService, private router: Router, private toastr: ToastrService) { }
+  constructor(private service: UserService, private router: Router, private toastr: ToastrService, public globals: Globals) { }
 
   ngOnInit() {
     if (localStorage.getItem('token') != null) {

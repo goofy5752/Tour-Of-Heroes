@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using TourOfHeroesData.Models;
-using TourOfHeroesMapping.Mapping;
-
-namespace TourOfHeroesDTOs.ProfileDtos
+﻿namespace TourOfHeroesDTOs.ProfileDtos
 {
+    using System.Collections.Generic;
+    using TourOfHeroesData.Models;
+    using TourOfHeroesMapping.Mapping;
+
     public class GetUserDetailDTO : IMapFrom<ApplicationUser>
     {
         public string Id { get; set; }
@@ -17,5 +17,7 @@ namespace TourOfHeroesDTOs.ProfileDtos
         public string FullName { get; set; }
 
         public IEnumerable<Comment> Comments { get; set; }
+
+        public IEnumerable<Blog> Blogs { get; set; }
     }
 }

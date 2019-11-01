@@ -27,7 +27,7 @@
                     <a (click)="setDocTitle( 'Blog' )" routerLink="/blog">
                         <span><img src="https://img.icons8.com/wired/47/ffffff/iron-man.png" class="mr-2 mb-1">Blog</span></a>
                 </li>
-                <li class="">
+                <li class="" *ngIf="globals.isAdmin">
                     <a (click)="setDocTitle( 'Admin panel' )" routerLink="/user/admin">
                         <span><img src="https://img.icons8.com/wired/47/ffffff/hulk.png" class="mr-2 mb-1">Admin panel</span></a>
                 </li>

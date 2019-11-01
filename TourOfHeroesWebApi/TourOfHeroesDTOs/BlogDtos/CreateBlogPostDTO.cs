@@ -9,7 +9,5 @@
         public string Content { get; set; }
 
         public IFormFile BlogImage { get; set; }
-
-        public string UserId { get; set; }
     }
 }

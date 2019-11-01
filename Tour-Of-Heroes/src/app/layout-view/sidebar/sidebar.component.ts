@@ -1,3 +1,4 @@
+import { Globals } from 'src/app/globals/globals';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
@@ -8,7 +9,7 @@ import { Title } from '@angular/platform-browser';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor(private titleService: Title) { }
+  constructor(private titleService: Title, public globals: Globals) { }
 
   ngOnInit() {
   }

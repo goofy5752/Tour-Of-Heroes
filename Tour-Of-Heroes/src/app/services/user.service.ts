@@ -53,7 +53,6 @@ export class UserService {
     let isMatch = false;
     const payLoad = JSON.parse(window.atob(localStorage.getItem('token').split('.')[1]));
     const userRole = payLoad.role;
-    console.log(userRole);
     allowedRoles.forEach(element => {
       if (userRole === element) {
         isMatch = true;

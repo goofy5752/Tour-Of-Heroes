@@ -8,5 +8,5 @@ export class Profile {
     profileImage: string;
     fullName: string;
     comments: Comments[];
-    posts: Blog[];
+    blogs: Blog[];
 }
