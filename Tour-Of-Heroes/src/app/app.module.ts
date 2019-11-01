@@ -35,6 +35,7 @@ import { BlogComponent } from './content/blog/blog.component';
 import { AdminComponent } from './user/admin/admin.component';
 import { BlogDetailComponent } from './content/blog-detail/blog-detail.component';
 import { AddBlogComponent } from './content/add-blog/add-blog.component';
+import { ForbiddenComponent } from './user/forbidden/forbidden.component';
 
 @NgModule({
   imports: [
@@ -73,6 +74,7 @@ import { AddBlogComponent } from './content/add-blog/add-blog.component';
     AdminComponent,
     BlogDetailComponent,
     AddBlogComponent,
+    ForbiddenComponent,
   ],
   providers: [
     [UserService, {

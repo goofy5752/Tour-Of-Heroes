@@ -1,8 +1,9 @@
 import { Comments } from './comment';
 export class Blog {
     id: number;
-    userName: string;
+    authorUserName: string;
     title: string;
+    blogImage: string;
     publishedOn: Date;
     content: string;
     comments: Comments[];

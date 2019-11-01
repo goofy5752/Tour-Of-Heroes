@@ -1,3 +1,4 @@
+import { ForbiddenComponent } from './user/forbidden/forbidden.component';
 import { AddBlogComponent } from './content/add-blog/add-blog.component';
 import { AdminComponent } from './user/admin/admin.component';
 import { BlogDetailComponent } from './content/blog-detail/blog-detail.component';
@@ -29,7 +30,8 @@ const routes: Routes = [
     ]
   },
   { path: 'user/profile', component: ProfileComponent, canActivate: [AuthGuard] },
-  { path: 'user/admin', component: AdminComponent, canActivate: [AuthGuard] }
+  { path: 'user/admin', component: AdminComponent, canActivate: [AuthGuard], data : { permittedRoles: ['Admin'] } },
+  { path: 'user/forbidden', component: ForbiddenComponent}
 ];
 
 @NgModule({

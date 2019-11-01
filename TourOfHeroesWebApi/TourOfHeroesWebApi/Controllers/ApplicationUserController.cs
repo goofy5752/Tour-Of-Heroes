@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace TourOfHeroesWebApi.Controllers
+﻿namespace TourOfHeroesWebApi.Controllers
 {
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -14,6 +12,7 @@ namespace TourOfHeroesWebApi.Controllers
     using TourOfHeroesDTOs.UserDtos;
     using TourOfHeroesCommon;
     using TourOfHeroesData.Common;
+    using System.Linq;
     using TourOfHeroesData.Models;
     using TourOfHeroesServices.Contracts;
 
