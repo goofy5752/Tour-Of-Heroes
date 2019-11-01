@@ -31,10 +31,13 @@
 
         public DateTime? DeletedOn { get; set; }
 
+        public int? HeroId { get; set; }
         public virtual Hero Hero { get; set; }
-        public int HeroId { get; set; }
 
-        public virtual ApplicationUser User { get; set; }
         public string UserId { get; set; }
+        public virtual ApplicationUser User { get; set; }
+
+        public int? BlogId { get; set; }
+        public virtual Blog Blog { get; set; }
     }
 }

@@ -20,8 +20,9 @@ export class CommentService {
 
   constructor(private heroService: HeroService, private globals: Globals, private http: HttpClient) { }
 
-  postComment(userId: string, heroId: number, comment: string): Observable<Comments> {
-    return this.http.post<Comments>(`${this.commentsUrl}/create-comment`, { userId, heroId, comment }, this.httpOptions).pipe(
+  postComment(userId: string, heroId: number, comment: string, action: string): Observable<Comments> {
+    return this.http.post<Comments>(`${this.commentsUrl}/create-comment`, { userId, heroId, comment, action }, this.httpOptions)
+    .pipe(
       tap((newComment: Comments) => {
         if (this.globals.showActivity) {
           this.heroService.log(`added comment w/ id=${newComment.id}`);

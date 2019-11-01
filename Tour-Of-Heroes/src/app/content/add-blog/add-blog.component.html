@@ -1,18 +1,23 @@
 <div class="p-5">
+    <div class="text-center p-2">
+        <h3>
+            Add new topic
+        </h3>
+    </div>
     <form [formGroup]="registerForm">
         <div class="row">
             <div class="col-md-6">
-                <div class="form-group"><label>Title</label><input #title class="form-control" placeholder="Character name" type="text" formControlName="title">
+                <div class="form-group"><label>Title</label><input #title class="form-control" placeholder="Title" type="text" formControlName="title">
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="form-group"><label for="exampleInputEmail1">Content</label><input #content class="form-control" placeholder="Real name" type="text" formControlName="content">
+                <div class="form-group"><label for="exampleInputEmail1">Blog image</label><input #blogImage class="form-control" (change)="stageBlogImageFile()" placeholder="Blog Image" type="file" formControlName="blogImage">
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
-                <div class="form-group"><label>Blog Image</label><input class="form-control" #blogImage type="file" (change)="stageBlogImageFile()" formControlName="blogImage">
+                <div class="form-group"><label>Content</label><textarea class="form-control" #content rows=10 cols=30 formControlName="content"></textarea>
                 </div>
             </div>
         </div>

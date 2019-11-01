@@ -176,7 +176,7 @@ export class HeroDetailComponent implements OnInit {
       return;
     }
     console.log(comment);
-    this.commentService.postComment(userId, this.hero.id, comment).subscribe(
+    this.commentService.postComment(userId, this.hero.id, comment, 'Hero').subscribe(
       () => {
         this.toastr.success(`You have added a comment`, 'Success !');
       },

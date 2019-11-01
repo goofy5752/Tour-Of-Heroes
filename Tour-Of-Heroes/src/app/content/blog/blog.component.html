@@ -6,11 +6,11 @@
                 <h3 class="mb-0 text-dark">
                     {{blog.title}}
                 </h3>
-                <div class="mb-1 text-muted">{{blog.publishedOn | date: 'medium'}}</div>
-                <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-                <button class="btn btn-info">Continue reading</button>
+                <div class="mb-1 text-muted">{{blog.publishedOn | date}}</div>
+                <p class="card-text mb-auto">{{blog.content}}</p>
+                <a routerLink="{{blog.id}}">Continue reading</a>
             </div>
-            <img class="card-img-right flex-auto d-none d-md-block" src="https://res.cloudinary.com/goofy5752/image/upload/v1568707690/HeroUploads/spiderman-img_vcfskb.jpg" width=40% height=fit-content alt="Card image cap">
+            <img class="card-img-right flex-auto d-none d-md-block" src="{{blog.blogImage}}" width=40% height=fit-content alt="Card image cap">
         </div>
     </div>
     <div class="pgnCustom">

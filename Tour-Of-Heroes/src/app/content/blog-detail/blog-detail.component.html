@@ -1,24 +1,76 @@
-<!-- Jumbotron -->
-<div class="jumbotron p-0">
+<div class="row" style="padding: 25px;">
 
-    <!-- Card image -->
-    <div class="view overlay rounded-top">
-        <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(134).jpg" class="img-fluid" alt="Sample image">
-        <a href="#">
-            <div class="mask rgba-white-slight"></div>
-        </a>
-    </div>
-
-    <!-- Card content -->
-    <div class="card-body text-center mb-3">
+    <!-- Post Content Column -->
+    <div class="col-lg-8">
 
         <!-- Title -->
-        <h3 class="card-title h3 my-4"><strong>Card title</strong></h3>
-        <!-- Text -->
-        <p class="card-text py-2">Some quick example text to build on the card title and make up the bulk of the card's</p>
-        <!-- Button -->
-        <a href="#" class="btn purple-gradient btn-rounded mb-4">Button</a>
+        <h1 class="mt-4">{{blog.title}}</h1>
 
+        <!-- Author -->
+        <p class="lead">
+            by
+            <a href="#">{{blog.authorUserName}}</a>
+        </p>
+
+        <hr>
+
+        <!-- Date/Time -->
+        <p>Posted on {{blog.publishedOn | date: 'medium'}}</p>
+
+        <hr>
+
+        <!-- Preview Image -->
+        <img class="img-fluid rounded" src="{{blog.blogImage}}" alt="" width=100% height=fit-content>
+
+        <hr>
+
+        <!-- Post Content -->
+        <p>{{blog.content}}</p>
+
+        <hr>
+
+        <!-- Comments Form -->
+        <div class="card my-4 mb-5">
+            <h5 class="card-header">Leave a Comment:</h5>
+            <div class="card-body">
+                <form>
+                    <div class="form-group">
+                        <textarea #comment class="form-control" rows="3"></textarea>
+                    </div>
+                    <button type="submit" (click)="postComment(comment.value)" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Single Comment -->
+        <div class="break-word mb-5" *ngFor="let comment of orderedComments">
+            <ul class="media-list">
+                <li class="media">
+                    <a href="#" class="pull-left">
+                        <img src="{{comment.profileImage}}" class="img-circle">
+                    </a>
+                    <div class="media-body">
+                        <span class="text-muted pull-right">
+                                    <small class="text-muted">{{comment.publishedOn | date: 'medium'}}</small>
+                                </span>
+                        <strong class="text-success">@{{comment.userName}}</strong>
+                        <p *ngIf="!comment.isDeleted">
+                            {{comment.text}}
+                        </p>
+                        <p class="text-danger" *ngIf="comment.isDeleted">
+                            Comment is deleted
+                        </p>
+                    </div>
+                </li>
+            </ul>
+            <hr>
+        </div>
+        <!-- <div class="media mb-5" *ngFor="let comment of blog.comments">
+            <img class="d-flex mr-3 rounded-circle" src="comment.profileImage" alt="">
+            <div class="media-body">
+                <h5 class="mt-0">{{comment.userName}}</h5>
+                <small class="text-muted">{{comment.publishedOn | date: 'medium'}}</small> {{comment.text}}
+            </div>
+        </div> -->
     </div>
-
 </div>

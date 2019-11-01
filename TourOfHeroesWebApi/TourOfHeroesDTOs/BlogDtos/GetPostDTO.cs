@@ -6,6 +6,8 @@
 
     public class GetPostDTO : IMapFrom<Blog>
     {
+        public int Id { get; set; }
+
         public string AuthorUserName { get; set; }
 
         public string Title { get; set; }

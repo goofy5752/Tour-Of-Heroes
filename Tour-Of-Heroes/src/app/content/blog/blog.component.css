@@ -1,3 +1,11 @@
 .pgnCustom {
     float: right;
 }
+
+.card-text {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    /* space for ellipsis */
+}

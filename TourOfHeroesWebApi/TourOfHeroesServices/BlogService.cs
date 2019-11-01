@@ -38,7 +38,7 @@
             var post = this._blogRepository
                 .All()
                 .To<GetPostDetailDTO>()
-                .Single(x => x.Id == id);
+                .SingleOrDefault(x => x.Id == id);
 
             return post;
         }

@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: 'add-hero', component: AddHeroMainComponent, canActivate: [AuthGuard] },
   { path: 'add-blog', component: AddBlogComponent, canActivate: [AuthGuard], data : { permittedRoles: ['Admin'] } },
   { path: 'blog', component: BlogComponent, canActivate: [AuthGuard] },
-  { path: 'blog-detail/:id', component: BlogDetailComponent, canActivate: [AuthGuard] },
+  { path: 'blog/:id', component: BlogDetailComponent, canActivate: [AuthGuard] },
   {
     path: 'user', component: UserComponent,
     children: [

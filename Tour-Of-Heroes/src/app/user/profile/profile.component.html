@@ -7,8 +7,7 @@
             <div class="row">
                 <div class="col-md-4 text-center">
                     <div class="profile-img">
-                        <img *ngIf="profile.profileImage != null" src="{{profile.profileImage}}" alt="profile-picture" />
-                        <img *ngIf="profile.profileImage == null" src="https://icon-library.net/images/no-profile-picture-icon/no-profile-picture-icon-7.jpg" alt="profile-picture" />
+                        <img src="{{profile.profileImage}}" alt="profile-picture" />
                         <div class="file btn btn-lg btn-primary">
                             Change Photo
                             <input type="file" #profileImage name="file" (change)="stageProfileImageFile()" />

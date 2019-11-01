@@ -16,13 +16,15 @@
         private readonly IRepository<Hero> _heroRepository;
         private readonly IRepository<ApplicationUser> _userRepository;
         private readonly IHubContext<CommentHub, ITypedHubClient> _hubContext;
+        private readonly IRepository<Blog> _blogRepository;
 
-        public CommentService(IRepository<Comment> commentRepository, IRepository<Hero> heroRepository, IRepository<ApplicationUser> userRepository, IHubContext<CommentHub, ITypedHubClient> hubContext)
+        public CommentService(IRepository<Comment> commentRepository, IRepository<Hero> heroRepository, IRepository<ApplicationUser> userRepository, IHubContext<CommentHub, ITypedHubClient> hubContext, IRepository<Blog> blogRepository)
         {
             _commentRepository = commentRepository;
             _heroRepository = heroRepository;
             _userRepository = userRepository;
             _hubContext = hubContext;
+            _blogRepository = blogRepository;
         }
 
         public IEnumerable<Comment> GetAllComments()
@@ -36,43 +38,45 @@
 
             var userObj = this._userRepository.All().FirstOrDefault(x => x.Id == commentDTO.UserId);
 
-            if (heroObj != null)
+            var blogObj = this._blogRepository.All().FirstOrDefault(x => x.Id == commentDTO.HeroId);
+
+            if (heroObj != null && commentDTO.Action == "Hero")
             {
-                if (userObj.ProfileImage == null)
+                var commentObj = new Comment
                 {
-                    var commentObj = new Comment
-                    {
-                        Text = commentDTO.Comment,
-                        UserName = userObj.UserName,
-                        ProfileImage = "https://icon-library.net/images/no-profile-picture-icon/no-profile-picture-icon-7.jpg",
-                        HeroId = heroObj.Id,
-                        UserId = userObj.Id
-                    };
+                    Text = commentDTO.Comment,
+                    UserName = userObj.UserName,
+                    ProfileImage = userObj.ProfileImage,
+                    HeroId = heroObj.Id,
+                    UserId = userObj.Id
+                };
 
+                await _hubContext.Clients.All.BroadcastComment(commentObj);
 
-                    await _hubContext.Clients.All.BroadcastComment(commentObj);
-
-                    heroObj.Comments.Add(commentObj);
-                    userObj.Comments.Add(commentObj);
-                }
-                else
-                {
-                    var commentObj = new Comment
-                    {
-                        Text = commentDTO.Comment,
-                        UserName = userObj.UserName,
-                        ProfileImage = userObj.ProfileImage,
-                        HeroId = heroObj.Id,
-                        UserId = userObj.Id
-                    };
-
-                    await _hubContext.Clients.All.BroadcastComment(commentObj);
-
-                    heroObj.Comments.Add(commentObj);
-                    userObj.Comments.Add(commentObj);
-                }
+                heroObj.Comments.Add(commentObj);
+                userObj.Comments.Add(commentObj);
 
                 await this._heroRepository.SaveChangesAsync();
+                await this._userRepository.SaveChangesAsync();
+                await this._commentRepository.SaveChangesAsync();
+            }
+            else
+            {
+                var commentObj = new Comment
+                {
+                    Text = commentDTO.Comment,
+                    UserName = userObj.UserName,
+                    ProfileImage = userObj.ProfileImage,
+                    BlogId = heroObj.Id,
+                    UserId = userObj.Id
+                };
+
+                await _hubContext.Clients.All.BroadcastComment(commentObj);
+
+                blogObj.Comments.Add(commentObj);
+                userObj.Comments.Add(commentObj);
+
+                await this._blogRepository.SaveChangesAsync();
                 await this._userRepository.SaveChangesAsync();
                 await this._commentRepository.SaveChangesAsync();
             }
