@@ -33,8 +33,8 @@ namespace TourOfHeroesData.Seeder
                     FullName = "Admin Adminov",
                 };
 
-                _userManager.CreateAsync(admin, adminPassword);
-                _userManager.AddToRoleAsync(admin, GlobalConstants.AdminRole);
+                _userManager.CreateAsync(admin, adminPassword).Wait();
+                _userManager.AddToRoleAsync(admin, GlobalConstants.AdminRole).Wait();
                 _dbContext.SaveChangesAsync();
             }
 

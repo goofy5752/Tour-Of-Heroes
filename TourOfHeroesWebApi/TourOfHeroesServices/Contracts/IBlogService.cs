@@ -7,7 +7,9 @@
 
     public interface IBlogService
     {
-        IEnumerable<Blog> GetAllPosts();
+        IEnumerable<GetPostDTO> GetAllPosts();
+
+        GetPostDetailDTO GetPostDetail(int id);
 
         Task CreatePost(CreateBlogPostDTO postDto);
 

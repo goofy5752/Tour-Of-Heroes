@@ -5,6 +5,7 @@
     using TourOfHeroesData.Models;
     using TourOfHeroesDTOs.BlogDtos;
     using TourOfHeroesData.Common.Contracts;
+    using TourOfHeroesMapping.Mapping;
     using System.Linq;
     using Contracts;
     using System;
@@ -22,10 +23,24 @@
             _imageService = imageService;
         }
 
-        public IEnumerable<Blog> GetAllPosts()
+        public IEnumerable<GetPostDTO> GetAllPosts()
         {
-            var allPosts = this._blogRepository.All().ToList();
+            var allPosts = this._blogRepository
+                .All()
+                .To<GetPostDTO>()
+                .ToList();
+
             return allPosts;
+        }
+
+        public GetPostDetailDTO GetPostDetail(int id)
+        {
+            var post = this._blogRepository
+                .All()
+                .To<GetPostDetailDTO>()
+                .Single(x => x.Id == id);
+
+            return post;
         }
 
         public async Task CreatePost(CreateBlogPostDTO postDto)

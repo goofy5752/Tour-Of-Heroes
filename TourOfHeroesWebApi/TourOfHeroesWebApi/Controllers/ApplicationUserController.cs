@@ -1,4 +1,6 @@
-﻿namespace TourOfHeroesWebApi.Controllers
+﻿using System.Linq;
+
+namespace TourOfHeroesWebApi.Controllers
 {
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -67,11 +69,16 @@
             var user = await _userManager.FindByNameAsync(model.UserName);
             if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
             {
+                //Get role assigned to the user
+                var role = await _userManager.GetRolesAsync(user);
+                var options = new IdentityOptions();
+
                 var tokenDescriptor = new SecurityTokenDescriptor
                 {
-                    Subject = new ClaimsIdentity(new[]
+                    Subject = new ClaimsIdentity(new []
                     {
-                        new Claim("UserID",user.Id)
+                        new Claim("UserID",user.Id),
+                        new Claim(options.ClaimsIdentity.RoleClaimType,role.FirstOrDefault())
                     }),
                     Expires = DateTime.UtcNow.AddDays(1),
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_appSettings.JWT_Secret)), SecurityAlgorithms.HmacSha256Signature)
@@ -79,7 +86,6 @@
                 var tokenHandler = new JwtSecurityTokenHandler();
                 var securityToken = tokenHandler.CreateToken(tokenDescriptor);
                 var token = tokenHandler.WriteToken(securityToken);
-                _logger.LogInfo($"Account with username {model.UserName} successfully logged !");
                 return Ok(new { token });
             }
 

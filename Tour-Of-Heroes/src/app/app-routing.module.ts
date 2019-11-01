@@ -1,3 +1,4 @@
+import { AddBlogComponent } from './content/add-blog/add-blog.component';
 import { AdminComponent } from './user/admin/admin.component';
 import { BlogDetailComponent } from './content/blog-detail/blog-detail.component';
 import { UserComponent } from './user/user.component';
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'detail/:id', component: HeroDetailComponent, canActivate: [AuthGuard] },
   { path: 'heroes', component: HeroesMainContentComponent, canActivate: [AuthGuard] },
   { path: 'add-hero', component: AddHeroMainComponent, canActivate: [AuthGuard] },
+  { path: 'add-blog', component: AddBlogComponent, canActivate: [AuthGuard] },
   { path: 'blog', component: BlogComponent, canActivate: [AuthGuard] },
   { path: 'blog-detail/:id', component: BlogDetailComponent, canActivate: [AuthGuard] },
   {

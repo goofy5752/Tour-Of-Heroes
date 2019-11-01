@@ -6,6 +6,8 @@
     using Microsoft.AspNetCore.Mvc;
     using TourOfHeroesData.Models;
     using TourOfHeroesDTOs.BlogDtos;
+    using System.Linq;
+    using TourOfHeroesDTOs.HeroDtos;
 
     [Authorize]
     public class BlogController : ApiController
@@ -19,9 +21,46 @@
             _logger = logger;
         }
 
+        [HttpGet("{all}")]
+        [DisableRequestSizeLimit]
+        [Route("blog/all")]
+        public PageResultDTO<GetPostDTO> GetAllPosts(int? page, int pageSize = 6)
+        {
+            _logger.LogInfo("Fetching all the heroes from the storage...");
+
+            var countDetails = this._blogService.GetAllPosts().Count();
+            var result = new PageResultDTO<GetPostDTO>
+            {
+                Count = countDetails,
+                PageIndex = page ?? 1,
+                PageSize = pageSize,
+                Items = this._blogService.GetAllPosts().Skip((page - 1 ?? 0) * pageSize).Take(pageSize).ToList()
+            };
+
+            _logger.LogInfo($"Returning {countDetails} heroes.");
+
+            return result;
+        }
+
+
+        [HttpGet("{id}")]
+        [DisableRequestSizeLimit]
+        [Route("blog/{id}")]
+        public ActionResult<GetPostDetailDTO> PostDetail(int id)
+        {
+            _logger.LogInfo($"Fetching hero with id {id}...");
+
+            var detail = this._blogService.GetPostDetail(id);
+
+            _logger.LogInfo($"Hero with id {id} successfully fetched.");
+
+            return detail;
+        }
+
         [HttpPost("{create-post}")]
         [DisableRequestSizeLimit]
         [Route("blog/create-post")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<CreateBlogPostDTO>> CreatePost(CreateBlogPostDTO postDto)
         {
             if (!ModelState.IsValid) return this.NoContent();
@@ -38,6 +77,7 @@
         [HttpDelete("{id}")]
         [DisableRequestSizeLimit]
         [Route("blog/{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<Hero>> DeletePost(int id)
         {
             var post = this._blogService.GetAllPosts();

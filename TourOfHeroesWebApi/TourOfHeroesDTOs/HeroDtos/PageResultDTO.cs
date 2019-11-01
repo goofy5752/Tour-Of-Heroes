@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace TourOfHeroesDTOs.HeroDtos
+﻿namespace TourOfHeroesDTOs.HeroDtos
 {
+    using System.Collections.Generic;
+
     public class PageResultDTO<T>
     {
         public int Count { get; set; }

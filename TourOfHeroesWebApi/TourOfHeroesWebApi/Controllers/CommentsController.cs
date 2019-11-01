@@ -38,11 +38,11 @@
         [HttpDelete("{id}")]
         [DisableRequestSizeLimit]
         [Route("comments/{id}")]
-        public async Task<ActionResult<Hero>> DeleteComment(int id)
+        public async Task<ActionResult<Comment>> DeleteComment(int id)
         {
-            var history = this._commentService.GetAllComments();
+            var comments = this._commentService.GetAllComments();
 
-            if (history == null)
+            if (comments == null)
             {
                 return this.NotFound();
             }
