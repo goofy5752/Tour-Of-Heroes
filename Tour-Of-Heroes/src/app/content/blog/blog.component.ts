@@ -27,7 +27,7 @@ export class BlogComponent implements OnInit {
               public globals: Globals,
               private titleService: Title) {
     // tslint:disable-next-line: max-line-length
-    http.get<PageResult<Blog>>(this.baseUrl + '/all').pipe(tap(_ => { if (this.globals.showActivity) { this.heroService.log(`fetched posts from page ${this.pageNumber}`); } })).subscribe(result => {
+    http.get<PageResult<Blog>>(this.baseUrl + '/all?page=1').pipe(tap(_ => { if (this.globals.showActivity) { this.heroService.log(`fetched posts from page ${this.pageNumber}`); } })).subscribe(result => {
       this.Blog = result.items;
       this.pageNumber = result.pageIndex;
       this.Count = result.count;

@@ -1,5 +1,6 @@
 ﻿namespace TourOfHeroesDTOs.ProfileDtos
 {
+    using CommentDtos;
     using System.Collections.Generic;
     using TourOfHeroesData.Models;
     using TourOfHeroesMapping.Mapping;
@@ -16,7 +17,7 @@
 
         public string FullName { get; set; }
 
-        public IEnumerable<Comment> Comments { get; set; }
+        public IEnumerable<CommentDTO> Comments { get; set; }
 
         public IEnumerable<Blog> Blogs { get; set; }
     }
