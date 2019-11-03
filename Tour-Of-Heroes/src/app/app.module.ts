@@ -36,6 +36,7 @@ import { AdminComponent } from './user/admin/admin.component';
 import { BlogDetailComponent } from './content/blog-detail/blog-detail.component';
 import { AddBlogComponent } from './content/add-blog/add-blog.component';
 import { ForbiddenComponent } from './user/forbidden/forbidden.component';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 @NgModule({
   imports: [
@@ -45,6 +46,7 @@ import { ForbiddenComponent } from './user/forbidden/forbidden.component';
     FormsModule,
     NgbModule,
     ReactiveFormsModule,
+    AngularEditorModule,
     NgxPaginationModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),

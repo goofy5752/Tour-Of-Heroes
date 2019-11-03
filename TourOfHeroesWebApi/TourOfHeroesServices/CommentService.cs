@@ -67,7 +67,7 @@
                     Text = commentDTO.Comment,
                     UserName = userObj.UserName,
                     ProfileImage = userObj.ProfileImage,
-                    BlogId = heroObj.Id,
+                    BlogId = blogObj.Id,
                     UserId = userObj.Id
                 };
 
