@@ -32,19 +32,19 @@
             return this._commentRepository.All().ToList();
         }
 
-        public async Task CreateComment(CreateCommentDTO commentDTO)
+        public async Task CreateComment(CreateCommentDTO commentDto)
         {
-            var heroObj = this._heroRepository.All().FirstOrDefault(x => x.Id == commentDTO.HeroId);
 
-            var userObj = this._userRepository.All().FirstOrDefault(x => x.Id == commentDTO.UserId);
+            var userObj = this._userRepository.All().FirstOrDefault(x => x.Id == commentDto.UserId);
 
-            var blogObj = this._blogRepository.All().FirstOrDefault(x => x.Id == commentDTO.HeroId);
 
-            if (heroObj != null && commentDTO.Action == "Hero")
+            if (commentDto.Action == "Hero")
             {
+                var heroObj = this._heroRepository.All().FirstOrDefault(x => x.Id == commentDto.HeroId);
+
                 var commentObj = new Comment
                 {
-                    Text = commentDTO.Comment,
+                    Text = commentDto.Comment,
                     UserName = userObj.UserName,
                     ProfileImage = userObj.ProfileImage,
                     HeroId = heroObj.Id,
@@ -62,9 +62,11 @@
             }
             else
             {
+                var blogObj = this._blogRepository.All().FirstOrDefault(x => x.Id == commentDto.HeroId);
+
                 var commentObj = new Comment
                 {
-                    Text = commentDTO.Comment,
+                    Text = commentDto.Comment,
                     UserName = userObj.UserName,
                     ProfileImage = userObj.ProfileImage,
                     BlogId = blogObj.Id,

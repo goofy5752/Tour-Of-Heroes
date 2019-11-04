@@ -18,8 +18,8 @@ export class AddBlogComponent implements OnInit {
   editorConfig: AngularEditorConfig = {
     editable: true,
       spellcheck: true,
-      height: '240px',
-      minHeight: '240px',
+      height: '13rem',
+      minHeight: '5rem',
       maxHeight: 'auto',
       width: 'auto',
       minWidth: '0',
@@ -63,7 +63,6 @@ export class AddBlogComponent implements OnInit {
       title: [''],
       content: [''],
       blogImage: [''],
-    }, {
     });
   }
 

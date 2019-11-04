@@ -9,7 +9,7 @@
     {
         IEnumerable<Comment> GetAllComments();
 
-        Task CreateComment(CreateCommentDTO commentDTO);
+        Task CreateComment(CreateCommentDTO commentDto);
 
         Task DeleteComment(int id);
     }
