@@ -73,6 +73,8 @@ export class AddBlogComponent implements OnInit {
   add(title: string, content: string): void {
     const formData = new FormData();
     const image = this.blogImageFile;
+    content = document.getElementsByClassName('angular-editor-textarea').item(0).innerHTML;
+    console.log(content);
     formData.append('title', title);
     formData.append('content', content);
     formData.append('blogImage', image, image.name);

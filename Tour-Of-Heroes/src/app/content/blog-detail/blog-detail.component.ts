@@ -18,6 +18,7 @@ export class BlogDetailComponent implements OnInit {
   @Input() blog: Blog;
   originalComments;
   orderedComments;
+  content;
 
   constructor(private route: ActivatedRoute,
               private blogService: BlogService,
@@ -54,6 +55,8 @@ export class BlogDetailComponent implements OnInit {
         this.blog = post;
         this.originalComments = this.blog.comments;
         this.sortBy('publishedOn');
+        this.content = post.content;
+        console.log(this.content);
         this.titleService.setTitle(`Topic Details`);
       });
   }

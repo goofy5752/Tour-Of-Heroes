@@ -36,7 +36,7 @@ export class BlogComponent implements OnInit {
 
   public onPageChange = (pageNumber) => {
     // tslint:disable-next-line: max-line-length
-    this.http.get<PageResult<Blog>>(this.baseUrl + '/all?page=' + pageNumber).pipe(tap(_ =>  {if (this.globals.showActivity) {this.heroService.log(`fetched posts from page ${pageNumber}`); } } )).subscribe(result => {
+    this.http.get<PageResult<Blog>>(this.baseUrl + '/all?page=' + pageNumber).pipe(tap(_ => { if (this.globals.showActivity) { this.heroService.log(`fetched posts from page ${pageNumber}`); } })).subscribe(result => {
       this.Blog = result.items;
       this.pageNumber = result.pageIndex;
       this.router.navigate([], {
@@ -54,16 +54,6 @@ export class BlogComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams: {
-        page: this.pageNumber
-      },
-      queryParamsHandling: 'merge',
-      // preserve the existing query params in the route
-      skipLocationChange: false
-      // do not trigger navigation
-    });
     this.setDocTitleBlog();
     // this.getHeroes(); ---- temporary disbled
   }
@@ -71,5 +61,4 @@ export class BlogComponent implements OnInit {
   setDocTitleBlog() {
     this.titleService.setTitle('Blog');
   }
-
 }
