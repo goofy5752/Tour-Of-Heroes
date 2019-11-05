@@ -1,3 +1,4 @@
+import { Globals } from './../../globals/globals';
 import { Comments } from './../../entities/comment';
 import { CommentService } from './../../services/comment.service';
 import { EditHistory } from '../../entities/editHistory';
@@ -42,7 +43,8 @@ export class HeroDetailComponent implements OnInit {
     private toastr: ToastrService,
     private titleService: Title,
     private commentService: CommentService,
-    private router: Router
+    private router: Router,
+    public globals: Globals
   ) {
     this.allMovies = [];
     this.router.routeReuseStrategy.shouldReuseRoute = () => {

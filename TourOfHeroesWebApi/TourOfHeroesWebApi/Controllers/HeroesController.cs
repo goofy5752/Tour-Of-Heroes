@@ -93,6 +93,7 @@
         [HttpPost("create-hero")]
         [DisableRequestSizeLimit]
         [Route("heroes/{create-hero}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<CreateHeroDTO>> CreateHero([FromForm] CreateHeroDTO hero)
         {
             if (!ModelState.IsValid) return this.NoContent();
@@ -140,6 +141,7 @@
         [HttpDelete("{id}")]
         [DisableRequestSizeLimit]
         [Route("heroes/{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<Hero>> DeleteHero(int id, string password)
         {
             var userId = HttpContext.User.Claims.First(x => x.Type == "UserID").Value;
