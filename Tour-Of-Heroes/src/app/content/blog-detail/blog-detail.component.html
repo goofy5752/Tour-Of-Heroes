@@ -1,3 +1,23 @@
+<ng-template #customTemplate let-options="options">
+    <div [class]="'popover ' + options.placement" style="display: block">
+        <div class="fond">
+            <div class="boxAdd">
+                <div class="card card-info" style="margin: 0 !important;">
+                    <div class="card-header">
+                        <p class="card-title"><b>{{popoverTitle}}</b></p>
+                    </div>
+                    <div class="card-body">
+                        <input #password type="password" class="form-control" />
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" title="Delete Movie" class="btn btn-primary" (click)="deletePost(blog, password.value)">Confirm</button>
+                        <button id="cancel" type="button" (click)="options.onCancel({clickEvent: $event})" class="btn btn-danger float-right">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
 <div class="row" style="padding: 25px;">
 
     <!-- Post Content Column -->
@@ -16,6 +36,7 @@
 
         <!-- Date/Time -->
         <p>Posted on {{blog.publishedOn | date: 'medium'}}</p>
+        <button type="submit" *ngIf="globals.isAdmin" class="btn btn-danger" mwlConfirmationPopover placement="top" [customTemplate]="customTemplate" (confirm)="confirmClicked = true">Delete Post</button>
 
         <hr>
 
@@ -65,12 +86,5 @@
             </ul>
             <hr>
         </div>
-        <!-- <div class="media mb-5" *ngFor="let comment of blog.comments">
-            <img class="d-flex mr-3 rounded-circle" src="comment.profileImage" alt="">
-            <div class="media-body">
-                <h5 class="mt-0">{{comment.userName}}</h5>
-                <small class="text-muted">{{comment.publishedOn | date: 'medium'}}</small> {{comment.text}}
-            </div>
-        </div> -->
     </div>
 </div>

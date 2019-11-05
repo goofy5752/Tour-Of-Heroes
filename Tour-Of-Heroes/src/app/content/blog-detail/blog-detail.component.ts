@@ -1,3 +1,4 @@
+import { Globals } from './../../globals/globals';
 import { Title } from '@angular/platform-browser';
 import { Comments } from './../../entities/comment';
 import { CommentService } from './../../services/comment.service';
@@ -5,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { BlogService } from './../../services/blog.service';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, Input } from '@angular/core';
+import { Location } from '@angular/common';
 import { Blog } from 'src/app/entities/blog';
 import * as signalR from '@aspnet/signalr';
 
@@ -14,7 +16,10 @@ import * as signalR from '@aspnet/signalr';
   styleUrls: ['./blog-detail.component.css']
 })
 export class BlogDetailComponent implements OnInit {
-
+  placements: string[] = ['top', 'left', 'right', 'bottom'];
+  popoverTitle = 'Enter your password to confirm!';
+  confirmClicked = false;
+  cancelClicked = false;
   @Input() blog: Blog;
   originalComments;
   orderedComments;
@@ -24,7 +29,9 @@ export class BlogDetailComponent implements OnInit {
               private blogService: BlogService,
               private toastr: ToastrService,
               private commentService: CommentService,
-              private titleService: Title) { }
+              private titleService: Title,
+              private location: Location,
+              public globals: Globals) { }
 
   ngOnInit() {
     this.route.params.subscribe(() => {
@@ -56,7 +63,6 @@ export class BlogDetailComponent implements OnInit {
         this.originalComments = this.blog.comments;
         this.sortBy('publishedOn');
         this.content = post.content;
-        console.log(this.content);
         this.titleService.setTitle(`Topic Details`);
       });
   }
@@ -86,6 +92,22 @@ export class BlogDetailComponent implements OnInit {
     );
   }
 
+  deletePost(blog: Blog, password: string): void {
+    this.blogService.deletePost(blog, password).subscribe(
+      () => {
+        this.goBack();
+        this.toastr.success(`You have deleted post: ${blog.title}`, 'Success !');
+      },
+      error => {
+        if (error.status === 400 || error.status === 500) {
+          this.toastr.error(`You have entered wrong password.`, 'Authentication failed.');
+        } else {
+          console.log(error);
+        }
+      }
+    );
+  }
+
   sortBy(field: string) {
     this.originalComments.sort((a: any, b: any) => {
       if (a[field] > b[field]) {
@@ -97,5 +119,9 @@ export class BlogDetailComponent implements OnInit {
       }
     });
     this.orderedComments = this.originalComments;
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }

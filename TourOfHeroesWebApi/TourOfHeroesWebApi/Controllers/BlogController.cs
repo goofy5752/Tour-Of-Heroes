@@ -8,17 +8,20 @@
     using TourOfHeroesDTOs.BlogDtos;
     using System.Linq;
     using TourOfHeroesDTOs.HeroDtos;
+    using Validator.Contracts;
 
     [Authorize]
     public class BlogController : ApiController
     {
         private readonly IBlogService _blogService;
         private readonly ILoggerManager _logger;
+        private readonly IUserValidator _userValidator;
 
-        public BlogController(IBlogService blogService, ILoggerManager logger)
+        public BlogController(IBlogService blogService, ILoggerManager logger, IUserValidator userValidator)
         {
             _blogService = blogService;
             _logger = logger;
+            _userValidator = userValidator;
         }
 
         [HttpGet("all")]
@@ -79,11 +82,16 @@
         [DisableRequestSizeLimit]
         [Route("blog/{id}")]
         [Authorize(Roles = "Admin")]
-        public async Task<ActionResult<Hero>> DeletePost(int id)
+        public async Task<ActionResult<Hero>> DeletePost(int id, string password)
         {
-            var post = this._blogService.GetAllPosts();
+            var userId = HttpContext.User.Claims.First(x => x.Type == "UserID").Value;
 
-            if (post == null)
+            if (!this._userValidator.CheckPasswordAsync(userId, password).Result)
+                return BadRequest(new { message = "Invalid password !" });
+
+            var postDetail = this._blogService.GetPostDetail(id);
+
+            if (postDetail == null)
             {
                 return this.NotFound();
             }

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { HeroService } from './hero.service';
 import { Globals } from '../globals/globals';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -37,5 +37,15 @@ export class BlogService {
           this.heroService.log(`added post w/ id=${newPost.id}`);
         }
       }));
+  }
+
+  deletePost(blog: Blog | number, password): Observable<Blog> {
+    const id = typeof blog === 'number' ? blog : blog.id;
+    const url = `${this.blogUrl}/${id}`;
+    const httpParams = new HttpParams().set('password', password);
+    const options = { params: httpParams };
+
+    return this.http.delete<Blog>(url, options).pipe(
+      tap(_ => { if (this.globals.showActivity) { this.heroService.log(`deleted hero id=${id}`); } }));
   }
 }

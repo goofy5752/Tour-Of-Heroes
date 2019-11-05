@@ -1,5 +1,8 @@
 .pgnCustom {
-    float: right;
+    position: absolute;
+    /* bottom: 0; */
+    right: 0;
+    margin-top: -88px!important;
 }
 
 .card-text {
@@ -8,4 +11,8 @@
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     /* space for ellipsis */
+}
+
+.blogBox {
+    margin-bottom: 35px;
 }

@@ -1,3 +1,4 @@
+import { Title } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
 import { BlogService } from './../../services/blog.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -56,7 +57,10 @@ export class AddBlogComponent implements OnInit {
     toolbarPosition: 'top',
 };
 
-  constructor(private formBuilder: FormBuilder, private blogService: BlogService, private toastr: ToastrService) { }
+  constructor(private formBuilder: FormBuilder,
+              private blogService: BlogService,
+              private toastr: ToastrService,
+              private titleService: Title) { }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
@@ -64,6 +68,8 @@ export class AddBlogComponent implements OnInit {
       content: [''],
       blogImage: [''],
     });
+
+    this.titleService.setTitle(`Add new topic`);
   }
 
   stageBlogImageFile(): void {
