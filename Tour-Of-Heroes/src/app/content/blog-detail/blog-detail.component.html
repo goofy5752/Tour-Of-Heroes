@@ -56,7 +56,8 @@
             <div class="card-body">
                 <form>
                     <div class="form-group">
-                        <textarea #comment class="form-control" rows="3"></textarea>
+                        <angular-editor #comment [config]="editorConfig">
+                        </angular-editor>
                     </div>
                     <button type="submit" (click)="postComment(comment.value)" class="btn btn-primary">Submit</button>
                 </form>
@@ -75,8 +76,7 @@
                                     <small class="text-muted">{{comment.publishedOn | date: 'medium'}}</small>
                                 </span>
                         <strong class="text-success">@{{comment.userName}}</strong>
-                        <p *ngIf="!comment.isDeleted">
-                            {{comment.text}}
+                        <p *ngIf="!comment.isDeleted" [innerHTML]="comment.text">
                         </p>
                         <p class="text-danger" *ngIf="comment.isDeleted">
                             Comment is deleted

@@ -9,6 +9,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Location } from '@angular/common';
 import { Blog } from 'src/app/entities/blog';
 import * as signalR from '@aspnet/signalr';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 @Component({
   selector: 'app-blog-detail',
@@ -24,6 +25,47 @@ export class BlogDetailComponent implements OnInit {
   originalComments;
   orderedComments;
   content;
+
+  editorConfig: AngularEditorConfig = {
+    editable: true,
+      spellcheck: true,
+      height: '11rem',
+      minHeight: '5rem',
+      maxHeight: 'auto',
+      width: 'auto',
+      minWidth: '0',
+      translate: 'yes',
+      enableToolbar: true,
+      showToolbar: true,
+      placeholder: 'Enter text here...',
+      defaultParagraphSeparator: '',
+      defaultFontName: '',
+      defaultFontSize: '',
+      fonts: [
+        {class: 'arial', name: 'Arial'},
+        {class: 'times-new-roman', name: 'Times New Roman'},
+        {class: 'calibri', name: 'Calibri'},
+        {class: 'comic-sans-ms', name: 'Comic Sans MS'}
+      ],
+      customClasses: [
+      {
+        name: 'quote',
+        class: 'quote',
+      },
+      {
+        name: 'redText',
+        class: 'redText'
+      },
+      {
+        name: 'titleText',
+        class: 'titleText',
+        tag: 'h1',
+      },
+    ],
+    uploadUrl: 'v1/image',
+    sanitize: true,
+    toolbarPosition: 'top',
+};
 
   constructor(private route: ActivatedRoute,
               private blogService: BlogService,
@@ -72,12 +114,12 @@ export class BlogDetailComponent implements OnInit {
     const jwtData = token.split('.')[1];
     const decodedJwtJsonData = window.atob(jwtData);
     const decodedJwtData = JSON.parse(decodedJwtJsonData);
+    comment = document.getElementsByClassName('angular-editor-textarea').item(0).innerHTML;
     const userId = decodedJwtData.UserID;
     if (comment === '') {
       this.toastr.error(`Write something.`, 'Spam ?');
       return;
     }
-    console.log(comment);
     this.commentService.postComment(userId, this.blog.id, comment, 'Blog').subscribe(
       () => {
         this.toastr.success(`You have added a comment`, 'Success !');
