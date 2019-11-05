@@ -24,6 +24,8 @@
             _userValidator = userValidator;
         }
 
+        #region GetAllPosts
+
         [HttpGet("all")]
         [DisableRequestSizeLimit]
         [Route("blog/{all}")]
@@ -45,6 +47,10 @@
             return result;
         }
 
+        #endregion
+
+        #region PostDetail
+
         [HttpGet("{id}")]
         [DisableRequestSizeLimit]
         [Route("blog/{id}")]
@@ -58,6 +64,10 @@
 
             return detail;
         }
+
+        #endregion
+
+        #region CreatePost
 
         [HttpPost("{create-post}")]
         [DisableRequestSizeLimit]
@@ -77,6 +87,10 @@
 
             return this.CreatedAtAction("CreatePost", new { text = postDto.Content });
         }
+
+        #endregion
+
+        #region DeletePost
 
         [HttpDelete("{id}")]
         [DisableRequestSizeLimit]
@@ -104,5 +118,7 @@
 
             return this.NoContent();
         }
+
+        #endregion
     }
 }
