@@ -136,6 +136,12 @@ namespace TourOfHeroesWebApi
 
                         context.Roles.Add(new IdentityRole
                         {
+                            Name = "Editor",
+                            NormalizedName = "EDITOR"
+                        });
+
+                        context.Roles.Add(new IdentityRole
+                        {
                             Name = "User",
                             NormalizedName = "USER"
                         });
