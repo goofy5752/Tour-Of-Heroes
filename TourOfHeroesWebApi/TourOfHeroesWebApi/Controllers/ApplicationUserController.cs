@@ -75,15 +75,31 @@
         {
             _logger.LogInfo($"Logging account with username {model.UserName}...");
             var user = await _userManager.FindByNameAsync(model.UserName);
-            if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
+
+            if (user == null)
             {
+                _logger.LogError($"Username or password is incorrect.");
+                return BadRequest(new { message = "Username or password is incorrect." });
+            }
+
+            if (await _userManager.CheckPasswordAsync(user, model.Password))
+            {
+                if (user.LockoutEnd >= DateTime.UtcNow)
+                {
+                    _logger.LogError($"User have entered 3 invalid attempts");
+                    user.AccessFailedCount = 0;
+                    return Forbid();
+                }
+
+                user.AccessFailedCount = 0;
+
                 //Get role assigned to the user
                 var role = await _userManager.GetRolesAsync(user);
                 var options = new IdentityOptions();
 
                 var tokenDescriptor = new SecurityTokenDescriptor
                 {
-                    Subject = new ClaimsIdentity(new []
+                    Subject = new ClaimsIdentity(new[]
                     {
                         new Claim("UserID",user.Id),
                         new Claim(options.ClaimsIdentity.RoleClaimType,role.FirstOrDefault())
@@ -97,8 +113,9 @@
                 return Ok(new { token });
             }
 
-            _logger.LogError($"Username or password is incorrect.");
-            return BadRequest(new {message = "Username or password is incorrect."});
+            await _userManager.AccessFailedAsync(user); // Register failed access
+
+            return BadRequest(new { message = "Incorrect password." });
         }
     }
 }
