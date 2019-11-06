@@ -47,9 +47,6 @@ export class HeroDetailComponent implements OnInit {
     public globals: Globals
   ) {
     this.allMovies = [];
-    this.router.routeReuseStrategy.shouldReuseRoute = () => {
-      return false;
-    };
   }
 
   ngOnInit(): void {
