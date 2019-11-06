@@ -1,15 +1,19 @@
 .pgnCustom {
     position: absolute;
     /* bottom: 0; */
-    right: 0;
+    right: 33px;
     margin-top: -88px!important;
 }
 
 .card-text {
-    overflow: hidden;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    margin: 0 auto;
+    -webkit-line-clamp: 6;
     -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 144px;
+    /* Fallback for non-webkit */
 }
 
 .blogBox {
