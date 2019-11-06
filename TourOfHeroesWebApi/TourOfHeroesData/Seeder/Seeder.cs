@@ -1,8 +1,5 @@
 ﻿// ReSharper disable StringLiteralTypo
 // ReSharper disable IdentifierTypo
-
-using System.Security.Claims;
-
 namespace TourOfHeroesData.Seeder
 {
     using System;
