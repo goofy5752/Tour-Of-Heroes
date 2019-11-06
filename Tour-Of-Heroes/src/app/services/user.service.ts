@@ -14,6 +14,7 @@ export class UserService {
     UserName: ['', Validators.required],
     Email: ['', Validators.email],
     FullName: [''],
+    EditorRoleCode: [''],
     Passwords: this.fb.group({
       Password: ['', [Validators.required, Validators.minLength(4)]],
       ConfirmPassword: ['', Validators.required]
@@ -40,6 +41,7 @@ export class UserService {
       UserName: this.formModel.value.UserName,
       Email: this.formModel.value.Email,
       FullName: this.formModel.value.FullName,
+      EditorRoleCode: this.formModel.value.EditorRoleCode,
       Password: this.formModel.value.Passwords.Password
     };
     return this.http.post(this.BaseURI + '/ApplicationUser/Register', body);

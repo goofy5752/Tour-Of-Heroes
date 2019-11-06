@@ -47,7 +47,15 @@
                 _logger.LogInfo($"Creating account with username {model.UserName}...");
 
                 var result = await _userManager.CreateAsync(applicationUser, model.Password);
-                await _userManager.AddToRoleAsync(applicationUser, GlobalConstants.UserRole);
+
+                if (model.EditorRoleCode == GlobalConstants.EditorRoleCode)
+                {
+                    await _userManager.AddToRoleAsync(applicationUser, GlobalConstants.EditorRole);
+                }
+                else
+                {
+                    await _userManager.AddToRoleAsync(applicationUser, GlobalConstants.UserRole);
+                }
 
                 _logger.LogInfo($"Account with username {model.UserName} successfully created !");
 

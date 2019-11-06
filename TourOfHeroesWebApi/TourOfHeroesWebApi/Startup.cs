@@ -5,6 +5,7 @@ namespace TourOfHeroesWebApi
     using System;
     using System.Text;
     using System.IO;
+    using TourOfHeroesCommon;
     using System.Reflection;
     using TourOfHeroesData;
     using TourOfHeroesData.Common;
@@ -130,20 +131,20 @@ namespace TourOfHeroesWebApi
                     {
                         context.Roles.Add(new IdentityRole
                         {
-                            Name = "Admin",
-                            NormalizedName = "ADMIN"
+                            Name = GlobalConstants.AdminRole,
+                            NormalizedName = GlobalConstants.AdminRole.ToUpper()
                         });
 
                         context.Roles.Add(new IdentityRole
                         {
-                            Name = "Editor",
-                            NormalizedName = "EDITOR"
+                            Name = GlobalConstants.EditorRole,
+                            NormalizedName = GlobalConstants.EditorRole.ToUpper()
                         });
 
                         context.Roles.Add(new IdentityRole
                         {
-                            Name = "User",
-                            NormalizedName = "USER"
+                            Name = GlobalConstants.UserRole,
+                            NormalizedName = GlobalConstants.UserRole.ToUpper()
                         });
 
                         context.SaveChanges();
