@@ -41,6 +41,11 @@ namespace TourOfHeroesData.Seeder
                 _userManager.AddToRoleAsync(admin, GlobalConstants.AdminRole).Wait();
                 userId = admin.Id;
             }
+            else
+            {
+                var id = this._userManager.FindByNameAsync("Admin").Result.Id;
+                userId = id;
+            }
 
             // Seed blog posts
 
@@ -117,7 +122,7 @@ namespace TourOfHeroesData.Seeder
 
             // Seed heroes with movies
 
-            if (_dbContext.Heroes.Any()) return;
+            if (_dbContext.Heroes.Any()) { _dbContext.SaveChangesAsync(); return; }
 
             var heroList = new List<Hero>();
             var cptAmericaMovies = new List<Movie>();
