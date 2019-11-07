@@ -1,6 +1,6 @@
 <div class="container container-lg">
-    <div class="row">
-        <div class="col-sm-6" *ngFor="let hero of Hero | paginate: { itemsPerPage: 6, currentPage: pageNumber, totalItems:Count }">
+    <div class="row mt-2" style="height: 100%;">
+        <div class="col-md-4 mb-2" *ngFor="let hero of Hero | paginate: { itemsPerPage: 6, currentPage: pageNumber, totalItems:Count }">
             <ng-template #customTemplate let-options="options">
                 <div [class]="'popover ' + options.placement" style="display: block">
                     <div class="fond">
@@ -21,22 +21,19 @@
                     </div>
                 </div>
             </ng-template>
-            <div class="cardbox">
-                <div class="cardbox-body">
-                    <div class="d-flex">
-                        <div>
-                            <div class="lead mb-2">{{hero.name}}</div>
-                            <p><em class="ion-ios-people mr-2 icon-lg text-warning"></em><span>{{hero.id}}</span></p>
-                            <button (click)="setDocTitle( 'Details' , hero.name )" title="{{hero.name}}" class="btn btn-info" type="button" routerLink="/detail/{{hero.id}}">Details</button>
-                            <button *ngIf="globals.isAdmin" class="btn btn-danger btnCust" title="Delete {{hero.name}}" type="button" mwlConfirmationPopover placement="left" [customTemplate]="customTemplate">Delete</button>
-                        </div>
-                        <div class="ml-auto"><img alt="hero" class="shadow-z5 thumb80 rounded" src={{hero.image}}></div>
-                    </div>
+            <div class="content-panel pn mb-5">
+                <div id="profile-01" [ngStyle]="{'background-image': 'url('+ hero.image +')'}">
+                    <h3>{{hero.name}}</h3>
+                    <h6>{{hero.realName}}</h6>
+                </div>
+                <div class="profile-01 centered" routerLink="/detail/{{hero.id}}">
+                    <p>DETAILS</p>
+                </div>
+                <div *ngIf="globals.isAdmin" class="profile-02 centered" mwlConfirmationPopover placement="top" [customTemplate]="customTemplate">
+                    <p>DELETE</p>
                 </div>
             </div>
         </div>
-        <div class="pgnCustom">
-            <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
-        </div>
     </div>
+    <pagination-controls class="ngx-pagination" (pageChange)="onPageChange($event)"></pagination-controls>
 </div>

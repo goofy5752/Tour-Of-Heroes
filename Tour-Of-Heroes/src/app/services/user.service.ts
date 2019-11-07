@@ -1,14 +1,20 @@
+import { Globals } from 'src/app/globals/globals';
+import { Profile } from './../entities/profile';
 import { Injectable } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { HeroService } from './hero.service';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(private fb: FormBuilder, private http: HttpClient) { }
+  constructor(private fb: FormBuilder, private http: HttpClient, public globals: Globals, private heroService: HeroService) { }
   readonly BaseURI = 'https://localhost:44353/api';
+  readonly BaseUserURI = 'https://localhost:44353/api/users';
 
   formModel = this.fb.group({
     UserName: ['', Validators.required],
@@ -19,8 +25,17 @@ export class UserService {
       Password: ['', [Validators.required, Validators.minLength(4)]],
       ConfirmPassword: ['', Validators.required]
     }, { validator: this.comparePasswords })
-
   });
+
+  getHero(id: string): Observable<Profile> {
+    const url = `${this.BaseUserURI}/${id}`;
+    return this.http.get<Profile>(url).pipe(
+      tap(_ => {
+        if (this.globals.showActivity) {
+          this.heroService.log(`fetched hero ${id}`);
+        }
+      }));
+  }
 
   comparePasswords(fb: FormGroup) {
     const confirmPswrdCtrl = fb.get('ConfirmPassword');

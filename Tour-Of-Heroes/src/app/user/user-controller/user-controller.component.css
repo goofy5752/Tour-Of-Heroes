@@ -1,0 +1,92 @@
+.content-panel {
+    background: #ffffff;
+    box-shadow: 0px 3px 2px #aab2bd;
+    padding-top: 15px;
+    padding-bottom: 5px;
+}
+
+.pn {
+    height: 250px;
+    box-shadow: 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+#profile-01 {
+    background: no-repeat center top;
+    margin-top: -15px;
+    background-attachment: relative;
+    background-position: center center;
+    min-height: 150px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#profile-01 h3 {
+    color: white;
+    padding-top: 50px;
+    margin: 0px;
+    text-align: center;
+}
+
+#profile-01 h6 {
+    color: white;
+    text-align: center;
+    margin-bottom: 0px;
+    font-weight: 900;
+}
+
+.profile-01 {
+    background: #4ECDC4;
+    height: 50px;
+}
+
+.profile-01:hover {
+    background: #2f2f2f;
+    -webkit-transition: background-color 0.6s;
+    -moz-transition: background-color 0.6s;
+    -o-transition: background-color 0.6s;
+    transition: background-color 0.6s;
+    cursor: pointer;
+}
+
+.profile-01 p {
+    color: white;
+    padding-top: 15px;
+    font-weight: 400;
+    font-size: 15px;
+}
+
+p {
+    margin: 0 0 10px;
+}
+
+.h6,
+h6 {
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+.fa {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.centered {
+    text-align: center;
+}
+
+.pgnCustom {
+    position: absolute;
+    right: 47px;
+    top: 639px;
+}

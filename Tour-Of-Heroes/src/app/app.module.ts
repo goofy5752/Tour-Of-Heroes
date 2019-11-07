@@ -37,6 +37,7 @@ import { BlogDetailComponent } from './content/blog-detail/blog-detail.component
 import { AddBlogComponent } from './content/add-blog/add-blog.component';
 import { ForbiddenComponent } from './user/forbidden/forbidden.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { UserControllerComponent } from './user/user-controller/user-controller.component';
 
 @NgModule({
   imports: [
@@ -77,6 +78,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     BlogDetailComponent,
     AddBlogComponent,
     ForbiddenComponent,
+    UserControllerComponent,
   ],
   providers: [
     [UserService, {

@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   constructor(public globals: Globals) {
-    if (globals.isLogged) {
+    if (localStorage.getItem('token') !== null) {
       const token = JSON.stringify(localStorage.getItem('token'));
       const jwtData = token.split('.')[1];
       const decodedJwtJsonData = window.atob(jwtData);

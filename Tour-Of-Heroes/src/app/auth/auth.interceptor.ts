@@ -15,6 +15,8 @@ export class AuthInterceptor implements HttpInterceptor {
 
             const payLoad = JSON.parse(window.atob(localStorage.getItem('token').split('.')[1]));
             const userRole = payLoad.role;
+            this.globals.isLogged = true;
+
             if (userRole === 'Admin') {
                 this.globals.isAdmin = true;
             } else {
