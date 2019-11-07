@@ -29,6 +29,8 @@
             _appSettings = appSettings.Value;
         }
 
+        #region Register
+
         [HttpPost]
         [Route("Register")]
         //POST : /api/ApplicationUser/Register
@@ -67,6 +69,10 @@
                 throw ex;
             }
         }
+
+        #endregion
+
+        #region Login
 
         [HttpPost]
         [Route("Login")]
@@ -117,5 +123,7 @@
 
             return BadRequest(new { message = "Incorrect password." });
         }
+
+        #endregion
     }
 }

@@ -19,6 +19,8 @@
             _logger = logger;
         }
 
+        #region CreateComment
+
         [HttpPost("{create-comment}")]
         [DisableRequestSizeLimit]
         [Route("comments/create-comment")]
@@ -34,6 +36,10 @@
 
             return this.CreatedAtAction("CreateComment", new { text = commentDTO.Comment });
         }
+
+        #endregion
+
+        #region DeleteComment
 
         [HttpDelete("{id}")]
         [DisableRequestSizeLimit]
@@ -55,5 +61,7 @@
 
             return this.NoContent();
         }
+
+        #endregion
     }
 }

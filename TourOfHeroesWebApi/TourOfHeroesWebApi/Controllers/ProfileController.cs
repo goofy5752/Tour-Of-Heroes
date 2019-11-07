@@ -18,19 +18,25 @@
             _logger = logger;
         }
 
+        #region GetProfile
+
         [HttpGet("{id}")]
         [DisableRequestSizeLimit]
         [Route("profile/{id}")]
-        public ActionResult<GetUserDetailDTO> GetDetail(string id)
+        public ActionResult<GetProfileDetailDTO> GetProfile(string id)
         {
             _logger.LogInfo($"Fetching user with id {id}...");
 
-            var user = this._profileService.GetUser(id);
+            var user = this._profileService.GetProfile(id);
 
             _logger.LogInfo($"User with id {id} successfully fetched.");
 
             return user;
         }
+
+        #endregion
+
+        #region UpdateEmail
 
         [HttpPut("{id}")]
         [DisableRequestSizeLimit]
@@ -48,6 +54,10 @@
             return NoContent();
         }
 
+        #endregion
+
+        #region UpdateImage
+
         [HttpPost("{id}")]
         [DisableRequestSizeLimit]
         [Route("profile/{id}")]
@@ -63,5 +73,7 @@
 
             return NoContent();
         }
+
+        #endregion
     }
 }
