@@ -72,7 +72,7 @@
         [HttpPost("{create-post}")]
         [DisableRequestSizeLimit]
         [Route("blog/{create-post}")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, Editor")]
         public async Task<ActionResult<CreateBlogPostDTO>> CreatePost([FromForm]CreateBlogPostDTO postDto)
         {
             var userId = HttpContext.User.Claims.First(x => x.Type == "UserID").Value;
@@ -95,7 +95,7 @@
         [HttpDelete("{id}")]
         [DisableRequestSizeLimit]
         [Route("blog/{id}")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, Editor")]
         public async Task<ActionResult<Hero>> DeletePost(int id, string password)
         {
             var userId = HttpContext.User.Claims.First(x => x.Type == "UserID").Value;

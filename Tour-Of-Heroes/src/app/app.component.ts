@@ -16,8 +16,11 @@ export class AppComponent {
       const role = decodedJwtData.role;
       if (role === 'Admin') {
         this.globals.isAdmin = true;
-      } else {
-        this.globals.isAdmin = false;
+        return;
+      }
+      if (role === 'Editor') {
+        this.globals.isEditor = true;
+        return;
       }
     }
   }

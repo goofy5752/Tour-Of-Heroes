@@ -5,6 +5,7 @@ export class Globals {
   showActivity = true;
   public isLogged: any;
   public isAdmin = false;
+  public isEditor = false;
 
   isLogger() {
     if (localStorage.getItem('token') != null) {

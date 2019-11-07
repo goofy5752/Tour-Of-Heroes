@@ -36,7 +36,7 @@
 
         <!-- Date/Time -->
         <p>Posted on {{blog.publishedOn | date: 'medium'}}</p>
-        <button type="submit" *ngIf="globals.isAdmin" class="btn btn-danger" mwlConfirmationPopover placement="top" [customTemplate]="customTemplate" (confirm)="confirmClicked = true">Delete Post</button>
+        <button type="submit" *ngIf="globals.isAdmin || globals.isEditor" class="btn btn-danger" mwlConfirmationPopover placement="top" [customTemplate]="customTemplate" (confirm)="confirmClicked = true">Delete Post</button>
 
         <hr>
 

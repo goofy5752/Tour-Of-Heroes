@@ -80,6 +80,8 @@ export class BlogDetailComponent implements OnInit {
       this.getPost();
     });
 
+    console.log(this.globals.isEditor);
+
     const connection = new signalR.HubConnectionBuilder()
       .configureLogging(signalR.LogLevel.Information)
       .withUrl('https://localhost:44353/api/blog')

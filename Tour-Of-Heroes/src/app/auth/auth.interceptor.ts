@@ -20,6 +20,13 @@ export class AuthInterceptor implements HttpInterceptor {
             } else {
                 this.globals.isAdmin = false;
             }
+
+            if (userRole === 'Editor') {
+                this.globals.isEditor = true;
+            } else {
+                this.globals.isEditor = false;
+            }
+
             const clonedReq = req.clone({
                 headers: req.headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'))
             });
