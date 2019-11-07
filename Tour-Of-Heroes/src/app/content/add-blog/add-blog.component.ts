@@ -69,7 +69,7 @@ export class AddBlogComponent implements OnInit {
       blogImage: [''],
     });
 
-    this.titleService.setTitle(`Add new topic`);
+    this.titleService.setTitle(`Add new post`);
   }
 
   stageBlogImageFile(): void {
