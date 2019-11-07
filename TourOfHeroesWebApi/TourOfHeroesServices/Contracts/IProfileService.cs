@@ -5,7 +5,7 @@
 
     public interface IProfileService
     {
-        GetUserDetailDTO GetUser(string id);
+        GetProfileDetailDTO GetProfile(string id);
 
         Task UpdateProfileImage(string id, UpdateProfileImageDTO profile);
 

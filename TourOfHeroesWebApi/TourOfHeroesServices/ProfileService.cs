@@ -23,11 +23,11 @@
             _hubContext = hubContext;
         }
 
-        public GetUserDetailDTO GetUser(string id)
+        public GetProfileDetailDTO GetProfile(string id)
         {
             var user = this._userRepository
                 .All()
-                .To<GetUserDetailDTO>()
+                .To<GetProfileDetailDTO>()
                 .Single(x => x.Id == id);
 
             return user;
