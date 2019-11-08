@@ -40,7 +40,6 @@ export class UserControllerComponent implements OnInit {
       this.Count = result.count;
     }, error => console.error(error));
     this.sortedProfile = orderPipe.transform(this.Profile, 'userName');
-    console.log(this.sortedProfile);
   }
 
   public onPageChange = (pageNumber) => {
