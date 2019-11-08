@@ -1,6 +1,7 @@
 ﻿// ReSharper disable VirtualMemberCallInConstructor
 namespace TourOfHeroesData.Models
 {
+    using System;
     using System.Collections.Generic;
     using Microsoft.AspNetCore.Identity;
     using System.ComponentModel.DataAnnotations.Schema;
@@ -23,6 +24,8 @@ namespace TourOfHeroesData.Models
         public string FullName { get; set; }
 
         public string ProfileImage { get; set; }
+
+        public DateTime? RegisteredOn { get; set; }
 
         public virtual List<Comment> Comments { get; set; }
 

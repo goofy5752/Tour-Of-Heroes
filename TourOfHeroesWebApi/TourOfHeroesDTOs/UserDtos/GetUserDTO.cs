@@ -1,5 +1,6 @@
 ﻿namespace TourOfHeroesDTOs.UserDtos
 {
+    using System;
     using TourOfHeroesData.Models;
     using TourOfHeroesMapping.Mapping;
     using System.Collections.Generic;
@@ -16,6 +17,8 @@
         public string FullName { get; set; }
 
         public string ProfileImage { get; set; }
+
+        public DateTime RegisteredOn { get; set; }
 
         public IEnumerable<CommentDTO> Comments { get; set; }
 

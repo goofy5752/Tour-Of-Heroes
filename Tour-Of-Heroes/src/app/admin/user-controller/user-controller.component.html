@@ -2,16 +2,12 @@
     <div class="col-12 text-center mb-3">
         <h3><b>Search filter by string</b></h3>
     </div>
-    <div class="col-4">
-        <label>Search by user name</label>
-        <input class="form-control" type="text" [(ngModel)]="userFilter.userName" placeholder="User name">
-    </div>
-    <div class="col-4">
+    <div class="col-6">
         <label>Search by full name</label>
         <input class="form-control" type="text" [(ngModel)]="userFilter.fullName" placeholder="Full name">
     </div>
-    <div class="col-4">
-        <label>Search by user email</label>
+    <div class="col-6">
+        <label>Search by email</label>
         <input class="form-control" type="text" [(ngModel)]="userFilter.email" placeholder="Email">
     </div>
     <hr>
@@ -22,10 +18,9 @@
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Image</th>
-                    <th [class.active]="order === 'userName'" (click)="setOrder('userName')" scope="col">User name <span [hidden]="reverse">▼</span
-                        ><span [hidden]="!reverse">▲</span></th>
                     <th [class.active]="order === 'fullName'" (click)="setOrder('fullName')" scope="col">Full name <span [hidden]="reverse">▼</span
+                        ><span [hidden]="!reverse">▲</span></th>
+                    <th [class.active]="order === 'registeredOn'" (click)="setOrder('registeredOn')" scope="col">Registered on <span [hidden]="reverse">▼</span
                         ><span [hidden]="!reverse">▲</span></th>
                     <th [class.active]="order === 'email'" (click)="setOrder('email')" scope="col">Email <span [hidden]="reverse">▼</span
                         ><span [hidden]="!reverse">▲</span></th>
@@ -38,9 +33,8 @@
             <tbody>
                 <tr *ngFor="let user of Profile | filterBy: userFilter | orderBy: order:reverse:'case-insensitive' | paginate: { itemsPerPage: 20, currentPage: pageNumber, totalItems:Count }; let i = index;" routerLink="/user-detail/{{user.id}}">
                     <th>{{i + 1}}</th>
-                    <td><img class="image-rounded" src="{{user.profileImage}}" width=50px height=50px></td>
-                    <td>{{user.userName}}</td>
-                    <td>{{user.fullName}}</td>
+                    <td><img class="image-rounded" src="{{user.profileImage}}" width=50px height=50px> {{user.fullName}}</td>
+                    <td>{{user.registeredOn | date: 'longDate'}}</td>
                     <td>{{user.email}}</td>
                     <td>{{user.comments.length}}</td>
                     <td>{{user.blogs.length}}</td>

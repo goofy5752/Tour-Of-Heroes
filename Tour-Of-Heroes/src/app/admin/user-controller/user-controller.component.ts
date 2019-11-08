@@ -19,7 +19,7 @@ export class UserControllerComponent implements OnInit {
   sortedProfile: any[];
   public pageNumber = 1;
   public Count: number;
-  order = 'userName';
+  order = 'fullName';
   reverse: boolean;
   userFilter: any = {
     userName: '',
