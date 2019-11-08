@@ -85,8 +85,18 @@ h6 {
     text-align: center;
 }
 
-.pgnCustom {
-    position: absolute;
-    right: 47px;
-    top: 639px;
+.image-rounded {
+    border-radius: 150px;
+}
+
+.table td,
+.table th {
+    padding: .75rem;
+    vertical-align: middle;
+    font-weight: 600;
+    border-top: 1px solid #e9ecef;
+}
+
+tbody tr {
+    cursor: pointer;
 }
