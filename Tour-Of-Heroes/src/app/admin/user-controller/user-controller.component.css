@@ -100,3 +100,24 @@ h6 {
 tbody tr {
     cursor: pointer;
 }
+
+thead {
+    background-color: #2dc997;
+    color: white;
+}
+
+thead th {
+    cursor: pointer;
+}
+
+thead th span {
+    visibility: hidden;
+}
+
+thead th.active {
+    color: #ffffff;
+}
+
+thead th.active span {
+    visibility: visible;
+}

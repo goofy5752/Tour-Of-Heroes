@@ -1,19 +1,24 @@
 <div class="row pt-5 px-3 mb-5" style="height: 100%;">
     <div class="col-md-12 mb">
         <table class="table table-hover">
-            <thead style="background-color: #2dc997; color: white;">
+            <thead>
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Image</th>
-                    <th scope="col">User name</th>
-                    <th scope="col">Full name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Comments</th>
-                    <th scope="col">Posts</th>
+                    <th [class.active]="order === 'userName'" (click)="setOrder('userName')" scope="col">User name <span [hidden]="reverse">▼</span
+                        ><span [hidden]="!reverse">▲</span></th>
+                    <th [class.active]="order === 'fullName'" (click)="setOrder('fullName')" scope="col">Full name <span [hidden]="reverse">▼</span
+                        ><span [hidden]="!reverse">▲</span></th>
+                    <th [class.active]="order === 'email'" (click)="setOrder('email')" scope="col">Email <span [hidden]="reverse">▼</span
+                        ><span [hidden]="!reverse">▲</span></th>
+                    <th [class.active]="order === 'comments'" (click)="setOrder('comments')" scope="col">Comments <span [hidden]="reverse">▼</span
+                        ><span [hidden]="!reverse">▲</span></th>
+                    <th [class.active]="order === 'blogs'" (click)="setOrder('blogs')" scope="col">Posts <span [hidden]="reverse">▼</span
+                        ><span [hidden]="!reverse">▲</span></th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let user of Profile | paginate: { itemsPerPage: 20, currentPage: pageNumber, totalItems:Count }; let i = index;" routerLink="/user-detail/{{user.id}}">
+                <tr *ngFor="let user of Profile | orderBy: order:reverse:'case-insensitive' | paginate: { itemsPerPage: 20, currentPage: pageNumber, totalItems:Count }; let i = index;" routerLink="/user-detail/{{user.id}}">
                     <th>{{i + 1}}</th>
                     <td><img class="image-rounded" src="{{user.profileImage}}" width=50px height=50px></td>
                     <td>{{user.userName}}</td>

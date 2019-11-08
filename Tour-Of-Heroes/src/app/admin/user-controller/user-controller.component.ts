@@ -7,6 +7,7 @@ import { PageResult } from 'src/app/entities/pageResult';
 import { tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
+import { OrderPipe } from 'ngx-order-pipe';
 
 @Component({
   selector: 'app-user-controller',
@@ -15,8 +16,11 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class UserControllerComponent implements OnInit {
   public Profile: Profile[];
+  sortedProfile: any[];
   public pageNumber = 1;
   public Count: number;
+  order = 'userName';
+  reverse: boolean;
   baseUrl = 'https://localhost:44353/api/users';
 
   constructor(private titleService: Title,
@@ -24,7 +28,8 @@ export class UserControllerComponent implements OnInit {
               private http: HttpClient,
               private route: ActivatedRoute,
               private router: Router,
-              private heroService: HeroService) {
+              private heroService: HeroService,
+              orderPipe: OrderPipe) {
     this.http.get<PageResult<Profile>>(this.baseUrl + '/all?page=1').pipe(tap(_ => {
       if (this.globals.showActivity) {
         this.heroService.log(`fetched users from page ${this.pageNumber}`);
@@ -34,6 +39,8 @@ export class UserControllerComponent implements OnInit {
       this.pageNumber = result.pageIndex;
       this.Count = result.count;
     }, error => console.error(error));
+    this.sortedProfile = orderPipe.transform(this.Profile, 'userName');
+    console.log(this.sortedProfile);
   }
 
   public onPageChange = (pageNumber) => {
@@ -61,5 +68,13 @@ export class UserControllerComponent implements OnInit {
 
   ngOnInit() {
     this.titleService.setTitle('Users');
+  }
+
+  setOrder(value: string) {
+    if (this.order === value) {
+      this.reverse = !this.reverse;
+    }
+
+    this.order = value;
   }
 }

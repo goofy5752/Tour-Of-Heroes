@@ -37,12 +37,14 @@ import { BlogDetailComponent } from './content/blog-detail/blog-detail.component
 import { AddBlogComponent } from './admin/add-blog/add-blog.component';
 import { ForbiddenComponent } from './user/forbidden/forbidden.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { OrderModule } from 'ngx-order-pipe';
 import { UserControllerComponent } from './admin/user-controller/user-controller.component';
 import { UserDetailComponent } from './admin/user-detail/user-detail.component';
 
 @NgModule({
   imports: [
     BrowserModule,
+    OrderModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
