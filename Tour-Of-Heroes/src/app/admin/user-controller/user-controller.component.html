@@ -1,3 +1,20 @@
+<div class="row pt-5 px-3">
+    <div class="col-12 text-center mb-3">
+        <h3><b>Search filter by string</b></h3>
+    </div>
+    <div class="col-4">
+        <label>Search by user name</label>
+        <input class="form-control" type="text" [(ngModel)]="userFilter.userName" placeholder="User name">
+    </div>
+    <div class="col-4">
+        <label>Search by full name</label>
+        <input class="form-control" type="text" [(ngModel)]="userFilter.fullName" placeholder="Full name">
+    </div>
+    <div class="col-4">
+        <label>Search by user email</label>
+        <input class="form-control" type="text" [(ngModel)]="userFilter.email" placeholder="Email">
+    </div>
+</div>
 <div class="row pt-5 px-3 mb-5" style="height: 100%;">
     <div class="col-md-12 mb">
         <table class="table table-hover">
@@ -18,7 +35,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let user of Profile | orderBy: order:reverse:'case-insensitive' | paginate: { itemsPerPage: 20, currentPage: pageNumber, totalItems:Count }; let i = index;" routerLink="/user-detail/{{user.id}}">
+                <tr *ngFor="let user of Profile | filterBy: userFilter | orderBy: order:reverse:'case-insensitive' | paginate: { itemsPerPage: 20, currentPage: pageNumber, totalItems:Count }; let i = index;" routerLink="/user-detail/{{user.id}}">
                     <th>{{i + 1}}</th>
                     <td><img class="image-rounded" src="{{user.profileImage}}" width=50px height=50px></td>
                     <td>{{user.userName}}</td>

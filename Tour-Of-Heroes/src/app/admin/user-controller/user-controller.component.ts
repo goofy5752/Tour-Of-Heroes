@@ -21,6 +21,11 @@ export class UserControllerComponent implements OnInit {
   public Count: number;
   order = 'userName';
   reverse: boolean;
+  userFilter: any = {
+    userName: '',
+    fullName: '',
+    email: ''
+   };
   baseUrl = 'https://localhost:44353/api/users';
 
   constructor(private titleService: Title,
