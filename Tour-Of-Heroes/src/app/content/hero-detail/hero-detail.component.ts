@@ -43,7 +43,6 @@ export class HeroDetailComponent implements OnInit {
     private toastr: ToastrService,
     private titleService: Title,
     private commentService: CommentService,
-    private router: Router,
     public globals: Globals
   ) {
     this.allMovies = [];

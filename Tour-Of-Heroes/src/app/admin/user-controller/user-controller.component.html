@@ -13,7 +13,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let user of Profile | paginate: { itemsPerPage: 20, currentPage: pageNumber, totalItems:Count }; let i = index;">
+                <tr *ngFor="let user of Profile | paginate: { itemsPerPage: 20, currentPage: pageNumber, totalItems:Count }; let i = index;" routerLink="/user-detail/{{user.id}}">
                     <th>{{i + 1}}</th>
                     <td><img class="image-rounded" src="{{user.profileImage}}" width=50px height=50px></td>
                     <td>{{user.userName}}</td>

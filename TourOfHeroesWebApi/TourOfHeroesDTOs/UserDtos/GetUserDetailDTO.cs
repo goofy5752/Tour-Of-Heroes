@@ -2,9 +2,10 @@
 {
     using System.Collections.Generic;
     using TourOfHeroesData.Models;
+    using TourOfHeroesMapping.Mapping;
     using CommentDtos;
 
-    public class GetUserDetailDTO
+    public class GetUserDetailDTO : IMapFrom<ApplicationUser>
     {
         public string Id { get; set; }
 
