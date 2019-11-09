@@ -27,7 +27,7 @@ export class UserService {
     }, { validator: this.comparePasswords })
   });
 
-  getHero(id: string): Observable<Profile> {
+  getUser(id: string): Observable<Profile> {
     const url = `${this.BaseUserURI}/${id}`;
     return this.http.get<Profile>(url).pipe(
       tap(_ => {

@@ -1,7 +1,8 @@
-import { UserControllerComponent } from './user/user-controller/user-controller.component';
+import { UserDetailComponent } from './admin/user-detail/user-detail.component';
+import { UserControllerComponent } from './admin/user-controller/user-controller.component';
 import { ForbiddenComponent } from './user/forbidden/forbidden.component';
-import { AddBlogComponent } from './content/add-blog/add-blog.component';
-import { AdminComponent } from './user/admin/admin.component';
+import { AddBlogComponent } from './admin/add-blog/add-blog.component';
+import { AdminComponent } from './admin/admin.component';
 import { BlogDetailComponent } from './content/blog-detail/blog-detail.component';
 import { UserComponent } from './user/user.component';
 import { HeroesMainContentComponent } from './main-content/heroes-main-content/heroes-main-content.component';
@@ -19,21 +20,22 @@ const routes: Routes = [
   { path: '', redirectTo: 'heroes', pathMatch: 'full' },
   { path: 'detail/:id', component: HeroDetailComponent, canActivate: [AuthGuard] },
   { path: 'heroes', component: HeroesMainContentComponent, canActivate: [AuthGuard] },
-  { path: 'add-hero', component: AddHeroMainComponent, canActivate: [AuthGuard], data : { permittedRoles: ['Admin'] }  },
-  { path: 'add-blog', component: AddBlogComponent, canActivate: [AuthGuard], data : { permittedRoles: ['Admin', 'Editor'] } },
   { path: 'blog', component: BlogComponent, canActivate: [AuthGuard] },
   { path: 'blog/:id', component: BlogDetailComponent, canActivate: [AuthGuard] },
   {
     path: 'user', component: UserComponent,
     children: [
       { path: 'login', component: LoginComponent },
-      { path: 'registration', component: RegistrationComponent }
+      { path: 'registration', component: RegistrationComponent },
     ]
   },
   { path: 'user/profile', component: ProfileComponent, canActivate: [AuthGuard] },
-  { path: 'user/admin', component: AdminComponent, canActivate: [AuthGuard], data : { permittedRoles: ['Admin'] } },
-  { path: 'user/controller', component: UserControllerComponent, canActivate: [AuthGuard], data : { permittedRoles: ['Admin'] } },
-  { path: 'user/forbidden', component: ForbiddenComponent}
+  { path: 'user/forbidden', component: ForbiddenComponent },
+  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard], data: { permittedRoles: ['Admin'] } },
+  { path: 'admin/user-controller', component: UserControllerComponent, canActivate: [AuthGuard], data: { permittedRoles: ['Admin'] } },
+  { path: 'admin/add-hero', component: AddHeroMainComponent, canActivate: [AuthGuard], data: { permittedRoles: ['Admin'] } },
+  { path: 'admin/add-blog', component: AddBlogComponent, canActivate: [AuthGuard], data: { permittedRoles: ['Admin', 'Editor'] } },
+  { path: 'user-detail/:id', component: UserDetailComponent, canActivate: [AuthGuard], data: { permittedRoles: ['Admin'] } }
 ];
 
 @NgModule({

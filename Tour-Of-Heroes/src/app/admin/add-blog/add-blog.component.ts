@@ -1,6 +1,6 @@
 import { Title } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
-import { BlogService } from './../../services/blog.service';
+import { BlogService } from '../../services/blog.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { AngularEditorConfig } from '@kolkov/angular-editor';

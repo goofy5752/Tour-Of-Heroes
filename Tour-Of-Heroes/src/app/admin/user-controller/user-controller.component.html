@@ -1,0 +1,48 @@
+<div class="row pt-5 px-3">
+    <div class="col-12 text-center mb-3">
+        <h3><b>Search filter by string</b></h3>
+    </div>
+    <div class="col-6">
+        <label>Search by full name</label>
+        <input class="form-control" type="text" [(ngModel)]="userFilter.fullName" placeholder="Full name">
+    </div>
+    <div class="col-6">
+        <label>Search by email</label>
+        <input class="form-control" type="text" [(ngModel)]="userFilter.email" placeholder="Email">
+    </div>
+    <hr>
+</div>
+<div class="row pt-5 px-3 mb-5" style="height: 100%;">
+    <div class="col-md-12 mb">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th [class.active]="order === 'fullName'" (click)="setOrder('fullName')" scope="col">Full name <span [hidden]="reverse">▼</span
+                        ><span [hidden]="!reverse">▲</span></th>
+                    <th [class.active]="order === 'registeredOn'" (click)="setOrder('registeredOn')" scope="col">Registered on <span [hidden]="reverse">▼</span
+                        ><span [hidden]="!reverse">▲</span></th>
+                    <th [class.active]="order === 'email'" (click)="setOrder('email')" scope="col">Email <span [hidden]="reverse">▼</span
+                        ><span [hidden]="!reverse">▲</span></th>
+                    <th [class.active]="order === 'comments'" (click)="setOrder('comments')" scope="col">Comments <span [hidden]="reverse">▼</span
+                        ><span [hidden]="!reverse">▲</span></th>
+                    <th [class.active]="order === 'blogs'" (click)="setOrder('blogs')" scope="col">Posts <span [hidden]="reverse">▼</span
+                        ><span [hidden]="!reverse">▲</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of Profile | filterBy: userFilter | orderBy: order:reverse:'case-insensitive' | paginate: { itemsPerPage: 20, currentPage: pageNumber, totalItems:Count }; let i = index;" routerLink="/user-detail/{{user.id}}">
+                    <th>{{i + 1}}</th>
+                    <td><img class="image-rounded" src="{{user.profileImage}}" width=50px height=50px> {{user.fullName}}</td>
+                    <td>{{user.registeredOn | date: 'longDate'}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.comments.length}}</td>
+                    <td>{{user.blogs.length}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-12 text-center">
+        <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+    </div>
+</div>

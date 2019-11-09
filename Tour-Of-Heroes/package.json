@@ -29,6 +29,8 @@
         "bootstrap": "^4.0.0-beta.2",
         "font-awesome": "^4.7.0",
         "jw-angular-pagination": "^1.1.0",
+        "ngx-filter-pipe": "^2.1.2",
+        "ngx-order-pipe": "^2.0.4",
         "ngx-pagination": "^4.1.0",
         "ngx-toastr": "^11.1.0",
         "rxjs": "~6.4.0",

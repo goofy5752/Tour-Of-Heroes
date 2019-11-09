@@ -29,7 +29,7 @@
         [HttpGet("all")]
         [DisableRequestSizeLimit]
         [Route("users/{all}")]
-        public PageResultDTO<GetUserDTO> GetAllUsers(int? page, int pageSize = 6)
+        public PageResultDTO<GetUserDTO> GetAllUsers(int? page, int pageSize = 20)
         {
             _logger.LogInfo("Fetching all the users from the storage...");
 

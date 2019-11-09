@@ -14,7 +14,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { NavComponent } from './layout-view/nav/nav.component';
 import { FooterComponent } from './layout-view/footer/footer.component';
 import { SidebarComponent } from './layout-view/sidebar/sidebar.component';
-import { AddHeroComponent } from './content/add-hero/add-hero.component';
+import { AddHeroComponent } from './admin/add-hero/add-hero.component';
 import { HeroesMainContentComponent } from './main-content/heroes-main-content/heroes-main-content.component';
 import { AddHeroMainComponent } from './main-content/add-hero-main/add-hero-main.component';
 import { JwPaginationComponent } from 'jw-angular-pagination';
@@ -32,16 +32,21 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import { ProfileComponent } from './user/profile/profile.component';
 import { BlogComponent } from './content/blog/blog.component';
-import { AdminComponent } from './user/admin/admin.component';
+import { AdminComponent } from './admin/admin.component';
 import { BlogDetailComponent } from './content/blog-detail/blog-detail.component';
-import { AddBlogComponent } from './content/add-blog/add-blog.component';
+import { AddBlogComponent } from './admin/add-blog/add-blog.component';
 import { ForbiddenComponent } from './user/forbidden/forbidden.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
-import { UserControllerComponent } from './user/user-controller/user-controller.component';
+import { OrderModule } from 'ngx-order-pipe';
+import { FilterPipeModule } from 'ngx-filter-pipe';
+import { UserControllerComponent } from './admin/user-controller/user-controller.component';
+import { UserDetailComponent } from './admin/user-detail/user-detail.component';
 
 @NgModule({
   imports: [
     BrowserModule,
+    OrderModule,
+    FilterPipeModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
@@ -79,6 +84,7 @@ import { UserControllerComponent } from './user/user-controller/user-controller.
     AddBlogComponent,
     ForbiddenComponent,
     UserControllerComponent,
+    UserDetailComponent,
   ],
   providers: [
     [UserService, {

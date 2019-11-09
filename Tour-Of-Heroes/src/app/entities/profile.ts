@@ -7,6 +7,7 @@ export class Profile {
     email: string;
     profileImage: string;
     fullName: string;
+    registeredOn: Date;
     comments: Comments[];
     blogs: Blog[];
 }

@@ -85,8 +85,47 @@ h6 {
     text-align: center;
 }
 
-.pgnCustom {
-    position: absolute;
-    right: 47px;
-    top: 639px;
+.image-rounded {
+    border-radius: 150px;
+}
+
+.table td,
+.table th {
+    padding: .75rem;
+    vertical-align: middle;
+    font-weight: 600;
+    border-top: 1px solid #e9ecef;
+}
+
+tbody tr {
+    cursor: pointer;
+}
+
+thead {
+    background-color: #2dc997;
+    color: white;
+}
+
+thead th {
+    cursor: pointer;
+}
+
+thead th span {
+    visibility: hidden;
+}
+
+thead th.active {
+    color: #ffffff;
+}
+
+thead th.active span {
+    visibility: visible;
+}
+
+hr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    border: 0;
+    border-top: 1px solid rgba(0, 0, 0, .1);
 }
