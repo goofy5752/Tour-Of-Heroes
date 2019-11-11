@@ -1,4 +1,5 @@
-![Angular logo](https://angular.io/assets/images/logos/angular/angular.svg){height="200px" width="200px"}
+<img src="https://angular.io/assets/images/logos/angular/angular.svg" width="200" height="200">
+
 # Tour Of Heroes
 ## Web project based on Angular 8 & ASP.NET Core Web API + MSSQL
 
