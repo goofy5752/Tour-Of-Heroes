@@ -1,6 +1,6 @@
 <div class="container container-lg">
     <div class="row mt-2" style="height: 100%;">
-        <div class="col-md-4 mb-2" *ngFor="let hero of Hero | paginate: { itemsPerPage: 6, currentPage: pageNumber, totalItems:Count }">
+        <div class="col-md-4 mb-2" *ngFor="let hero of Hero | paginate: { itemsPerPage: 9, currentPage: pageNumber, totalItems:Count }">
             <ng-template #customTemplate let-options="options">
                 <div [class]="'popover ' + options.placement" style="display: block">
                     <div class="fond">
@@ -21,7 +21,7 @@
                     </div>
                 </div>
             </ng-template>
-            <div class="content-panel pn mb-5">
+            <div class="content-panel pn mb-2">
                 <div id="profile-01" [ngStyle]="{'background-image': 'url('+ hero.image +')'}">
                     <h3>{{hero.name}}</h3>
                     <h6>{{hero.realName}}</h6>

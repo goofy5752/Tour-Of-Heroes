@@ -1,6 +1,6 @@
 <section class="section-container" *ngIf="hero">
     <div class="container-overlap text-center"><img class="coverImg" src="{{hero.coverImage}}">
-        <div class="contentImg">
+        <div class="contentImg break-word">
             <img alt="user" class="wd-sm rounded-circle img-thumbnail" src={{hero.image}}>
             <div class="text-white">
                 <input type="text" class="inputCustom" [(ngModel)]="hero.name" placeholder="Name" />

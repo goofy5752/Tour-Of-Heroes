@@ -240,7 +240,6 @@ h6 {
 }
 
 .ngx-pagination {
-    position: absolute;
-    bottom: 0;
-    right: 0
+    float: right;
+    margin-bottom: 50px;
 }

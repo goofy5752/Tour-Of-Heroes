@@ -29,7 +29,7 @@
         [HttpGet("all")]
         [DisableRequestSizeLimit]
         [Route("heroes/{all}")]
-        public PageResultDTO<GetHeroDTO> GetAllHeroes(int? page, int pageSize = 6)
+        public PageResultDTO<GetHeroDTO> GetAllHeroes(int? page, int pageSize = 9)
         {
             _logger.LogInfo("Fetching all the heroes from the storage...");
 
@@ -93,7 +93,7 @@
         [HttpPost("create-hero")]
         [DisableRequestSizeLimit]
         [Route("heroes/{create-hero}")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, Editor")]
         public async Task<ActionResult<CreateHeroDTO>> CreateHero([FromForm] CreateHeroDTO hero)
         {
             if (!ModelState.IsValid) return this.NoContent();
