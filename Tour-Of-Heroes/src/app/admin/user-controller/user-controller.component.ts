@@ -8,6 +8,7 @@ import { tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { OrderPipe } from 'ngx-order-pipe';
+import { User } from 'src/app/entities/user';
 
 @Component({
   selector: 'app-user-controller',
@@ -15,7 +16,7 @@ import { OrderPipe } from 'ngx-order-pipe';
   styleUrls: ['./user-controller.component.css']
 })
 export class UserControllerComponent implements OnInit {
-  public Profile: Profile[];
+  public Profile: User[];
   sortedProfile: any[];
   public pageNumber = 1;
   public Count: number;
@@ -35,7 +36,7 @@ export class UserControllerComponent implements OnInit {
               private router: Router,
               private heroService: HeroService,
               orderPipe: OrderPipe) {
-    this.http.get<PageResult<Profile>>(this.baseUrl + '/all?page=1').pipe(tap(_ => {
+    this.http.get<PageResult<User>>(this.baseUrl + '/all?page=1').pipe(tap(_ => {
       if (this.globals.showActivity) {
         this.heroService.log(`fetched users from page ${this.pageNumber}`);
       }
@@ -49,7 +50,7 @@ export class UserControllerComponent implements OnInit {
 
   public onPageChange = (pageNumber) => {
     // tslint:disable-next-line: max-line-length
-    this.http.get<PageResult<Profile>>(this.baseUrl + '/all?page=' + pageNumber).pipe(tap(_ => {
+    this.http.get<PageResult<User>>(this.baseUrl + '/all?page=' + pageNumber).pipe(tap(_ => {
       if (this.globals.showActivity) {
         this.heroService.log(`fetched posts from page ${pageNumber}`);
       }

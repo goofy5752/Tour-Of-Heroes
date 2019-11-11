@@ -1,8 +1,8 @@
+import { User } from './../../entities/user';
 import { Title } from '@angular/platform-browser';
 import { UserService } from './../../services/user.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Profile } from 'src/app/entities/profile';
 
 @Component({
   selector: 'app-user-detail',
@@ -11,7 +11,7 @@ import { Profile } from 'src/app/entities/profile';
 })
 export class UserDetailComponent implements OnInit {
 
-  @Input() profile: Profile;
+  @Input() profile: User;
 
   constructor(private route: ActivatedRoute, private userService: UserService, private titleService: Title) { }
 

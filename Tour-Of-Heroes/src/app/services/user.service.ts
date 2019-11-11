@@ -1,5 +1,5 @@
+import { User } from './../entities/user';
 import { Globals } from 'src/app/globals/globals';
-import { Profile } from './../entities/profile';
 import { Injectable } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
@@ -27,9 +27,9 @@ export class UserService {
     }, { validator: this.comparePasswords })
   });
 
-  getUser(id: string): Observable<Profile> {
+  getUser(id: string): Observable<User> {
     const url = `${this.BaseUserURI}/${id}`;
-    return this.http.get<Profile>(url).pipe(
+    return this.http.get<User>(url).pipe(
       tap(_ => {
         if (this.globals.showActivity) {
           this.heroService.log(`fetched hero ${id}`);
