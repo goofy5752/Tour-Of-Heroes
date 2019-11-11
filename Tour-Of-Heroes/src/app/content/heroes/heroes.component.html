@@ -26,11 +26,16 @@
                     <h3>{{hero.name}}</h3>
                     <h6>{{hero.realName}}</h6>
                 </div>
-                <div class="profile-01 centered" routerLink="/detail/{{hero.id}}">
-                    <p>DETAILS</p>
+                <div class="text-center" *ngIf="globals.isAdmin">
+                    <div class="profile-01 centered" style="float: left; width: 50%;" routerLink="/detail/{{hero.id}}">
+                        <p>DETAILS</p>
+                    </div>
+                    <div class="profile-02 centered" style="float: right; width: 50%;" mwlConfirmationPopover placement="top" [customTemplate]="customTemplate">
+                        <p>DELETE</p>
+                    </div>
                 </div>
-                <div *ngIf="globals.isAdmin" class="profile-02 centered" mwlConfirmationPopover placement="top" [customTemplate]="customTemplate">
-                    <p>DELETE</p>
+                <div *ngIf="!globals.isAdmin" class="profile-01 centered" routerLink="/detail/{{hero.id}}">
+                    <p>DETAILS</p>
                 </div>
             </div>
         </div>

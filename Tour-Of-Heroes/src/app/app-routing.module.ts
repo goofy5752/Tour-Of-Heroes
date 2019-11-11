@@ -33,7 +33,7 @@ const routes: Routes = [
   { path: 'user/forbidden', component: ForbiddenComponent },
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard], data: { permittedRoles: ['Admin'] } },
   { path: 'admin/user-controller', component: UserControllerComponent, canActivate: [AuthGuard], data: { permittedRoles: ['Admin'] } },
-  { path: 'admin/add-hero', component: AddHeroMainComponent, canActivate: [AuthGuard], data: { permittedRoles: ['Admin'] } },
+  { path: 'admin/add-hero', component: AddHeroMainComponent, canActivate: [AuthGuard], data: { permittedRoles: ['Admin', 'Editor'] } },
   { path: 'admin/add-blog', component: AddBlogComponent, canActivate: [AuthGuard], data: { permittedRoles: ['Admin', 'Editor'] } },
   { path: 'user-detail/:id', component: UserDetailComponent, canActivate: [AuthGuard], data: { permittedRoles: ['Admin'] } }
 ];
