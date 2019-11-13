@@ -17,6 +17,8 @@
 
         public string FullName { get; set; }
 
+        public string Role { get; set; }
+
         public IEnumerable<CommentDTO> Comments { get; set; }
 
         public IEnumerable<Blog> Blogs { get; set; }
