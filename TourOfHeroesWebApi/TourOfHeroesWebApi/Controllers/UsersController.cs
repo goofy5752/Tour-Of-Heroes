@@ -80,16 +80,14 @@
 
             if (dbUser == null) return NotFound(new { message = "User that you are trying to update is not found." });
 
-            //TODO: Find a way to implement logic for user role change ...
-
-            //if (dbUser.Name == hero.Name)
-            //{
-            //    return BadRequest(new { message = "Name that you are trying to enter is equal to previous !" });
-            //}
+            if (dbUser.Role == userDTO.Role)
+            {
+                return BadRequest(new { message = "Role that you are trying to change is equal to previous !" });
+            }
 
             await this._userService.UpdateUser(id, userDTO);
 
-            _logger.LogInfo($"Hero with {id} successfully updated.");
+            _logger.LogInfo($"User with {id} successfully updated.");
 
             return this.NoContent();
         }

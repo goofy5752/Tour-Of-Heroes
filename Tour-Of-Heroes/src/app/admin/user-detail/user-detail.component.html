@@ -1,9 +1,93 @@
-<div class="row">
-    <div class="col-6">
-        <p>{{profile.email}}</p>
-        <p>{{profile.userName}}</p>
-        <p>{{profile.blogs.length}}</p>
-        <p>{{profile.profileImage}}</p>
-        <p>{{profile.email}}</p>
+<div class="container p-5">
+    <div class="row my-2">
+        <div class="col-lg-6 order-lg-2">
+            <ul class="nav nav-tabs text-center">
+                <li class="nav-item">
+                    <div class="nav-link">
+                        <h3>Edit</h3>
+                    </div>
+                </li>
+            </ul>
+            <div class="tab-content py-4">
+                <div class="tab-pane active" id="edit">
+                    <form role="form">
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label">Full Name</label>
+                            <div class="col-lg-9">
+                                <input class="form-control" type="text" value="{{user.fullName}}" disabled="true">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label">Email</label>
+                            <div class="col-lg-9">
+                                <input class="form-control" type="email" value="{{user.email}}" disabled="true">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label">Role</label>
+                            <div class="col-lg-9">
+                                <select #role id="user-role" class="form-control" size="0">
+                                    <option value="User">User</option>
+                                    <option value="Editor">Editor</option>
+                                    <option value="Admin">Admin</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label"></label>
+                            <div class="col-lg-9">
+                                <input type="reset" class="btn btn-secondary" value="Cancel">
+                                <input type="button" class="btn btn-primary ml-2" value="Save Changes" (click)="updateUser(role.value)">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 order-lg-1 text-center">
+            <img src="{{user.profileImage}}" class="mx-auto img-fluid img-circle d-block" alt="avatar" width="150px" height="150px">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h4>
+                        Username: {{user.userName}}
+                    </h4>
+                </div>
+                <div class="col-lg-12 ">
+                    <h4>
+                        Role: {{user.role}}
+                    </h4>
+                </div>
+            </div>
+            <h5 class="mt-2 ">Recent Activity</h5>
+            <table class="table table-sm table-hover ">
+                <tbody>
+                    <tr>
+                        <td>
+                            <strong>Abby</strong> joined ACME Project Team in <strong>`Collaboration`</strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Gary</strong> deleted My Board1 in <strong>`Discussions`</strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Kensington</strong> deleted MyBoard3 in <strong>`Discussions`</strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>John</strong> deleted My Board1 in <strong>`Discussions`</strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Skell</strong> deleted his post Look at Why this is.. in <strong>`Discussions`</strong>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>

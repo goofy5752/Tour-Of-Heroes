@@ -1,4 +1,4 @@
-import { User } from './../entities/user';
+import { User } from 'src/app/entities/user';
 import { Globals } from 'src/app/globals/globals';
 import { Injectable } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
@@ -11,7 +11,6 @@ import { tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class UserService {
-
   constructor(private fb: FormBuilder, private http: HttpClient, public globals: Globals, private heroService: HeroService) { }
   readonly BaseURI = 'https://localhost:44353/api';
   readonly BaseUserURI = 'https://localhost:44353/api/users';
@@ -35,6 +34,17 @@ export class UserService {
           this.heroService.log(`fetched hero ${id}`);
         }
       }));
+  }
+
+  updateUser(userId: string, role: string): Observable<any> {
+    const url = `${this.BaseUserURI}/${userId}`;
+    return this.http.put(url, { role }).pipe(
+      tap(_ => {
+        if (this.globals.showActivity) {
+          this.heroService.log(`updated user id=${userId}`);
+        }
+      })
+    );
   }
 
   comparePasswords(fb: FormGroup) {

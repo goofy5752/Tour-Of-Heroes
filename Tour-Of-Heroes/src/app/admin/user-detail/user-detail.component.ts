@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { User } from './../../entities/user';
 import { Title } from '@angular/platform-browser';
 import { UserService } from './../../services/user.service';
@@ -10,10 +11,13 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./user-detail.component.css']
 })
 export class UserDetailComponent implements OnInit {
+  userId = '';
+  @Input() user: User;
 
-  @Input() profile: User;
-
-  constructor(private route: ActivatedRoute, private userService: UserService, private titleService: Title) { }
+  constructor(private route: ActivatedRoute,
+              private userService: UserService,
+              private titleService: Title,
+              private toastr: ToastrService) { }
 
   ngOnInit() {
     this.route.params.subscribe(() => {
@@ -25,8 +29,26 @@ export class UserDetailComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.userService.getUser(id)
       .subscribe(user => {
-        this.profile = user;
-        this.titleService.setTitle(`${this.profile.fullName} Details`);
+        this.userId = id;
+        this.user = user;
+        this.titleService.setTitle(`${this.user.fullName} Details`);
       });
+  }
+
+  updateUser(role: string) {
+    this.userService.updateUser(this.userId, role).subscribe(
+      () => {
+        this.toastr.success(`The user have new title: ${role}`, 'Successfully changed !');
+      },
+      error => {
+        if (error.status === 400) {
+          this.toastr.error(`Please enter a role that is different from the previous one.`, 'Edit failed.');
+        } else if (error.status === 500) {
+          this.toastr.error(`The user you are trying to rename is probably removed from the server.`, 'Edit failed.');
+        } else {
+          console.log(error);
+        }
+      }
+    );
   }
 }
