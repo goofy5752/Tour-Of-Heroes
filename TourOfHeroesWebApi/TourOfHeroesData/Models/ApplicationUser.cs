@@ -30,5 +30,7 @@ namespace TourOfHeroesData.Models
         public virtual List<Comment> Comments { get; set; }
 
         public virtual List<Blog> Blogs { get; set; }
+
+        public virtual List<Movie> LikedMovies { get; set; }
     }
 }
