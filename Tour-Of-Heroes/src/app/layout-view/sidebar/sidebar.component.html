@@ -22,13 +22,17 @@
                     <a (click)="setDocTitle( 'Blog' )" routerLink="/blog">
                         <span><img src="https://img.icons8.com/wired/47/ffffff/iron-man.png" class="mr-2 mb-1">Blog</span></a>
                 </li>
+                <li class="">
+                    <a (click)="setDocTitle( 'Liked movies' )" routerLink="/user/liked-movies">
+                        <span><img src="https://img.icons8.com/pastel-glyph/47/ffffff/like--v1.png" class="mr-2">Likes</span></a>
+                </li>
                 <li class="" *ngIf="globals.isEditor">
                     <a (click)="setDocTitle( 'Add new post' )" routerLink="/admin/add-blog">
                         <span><img src="https://img.icons8.com/ios/47/ffffff/spiderman-new.png" class="mr-2">Add new post</span></a>
                 </li>
                 <li class="" *ngIf="globals.isEditor">
                     <a (click)="setDocTitle( 'Add new post' )" routerLink="/admin/add-hero">
-                        <span><img src="https://img.icons8.com/ios/48/ffffff/popular-man.png" class="mr-2">Add new hero</span></a>
+                        <span><img src="https://img.icons8.com/ios/47/ffffff/popular-man.png" class="mr-2">Add new hero</span></a>
                 </li>
                 <li class="" *ngIf="globals.isAdmin">
                     <a (click)="setDocTitle( 'Admin panel' )" routerLink="/admin">

@@ -1,3 +1,4 @@
+import { LikedMoviesComponent } from './user/liked-movies/liked-movies.component';
 import { UserDetailComponent } from './admin/user-detail/user-detail.component';
 import { UserControllerComponent } from './admin/user-controller/user-controller.component';
 import { ForbiddenComponent } from './user/forbidden/forbidden.component';
@@ -30,7 +31,8 @@ const routes: Routes = [
     ]
   },
   { path: 'user/profile', component: ProfileComponent, canActivate: [AuthGuard] },
-  { path: 'user/forbidden', component: ForbiddenComponent },
+  { path: 'user/forbidden', component: ForbiddenComponent, canActivate: [AuthGuard] },
+  { path: 'user/liked-movies', component: LikedMoviesComponent, canActivate: [AuthGuard] },
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard], data: { permittedRoles: ['Admin'] } },
   { path: 'admin/user-controller', component: UserControllerComponent, canActivate: [AuthGuard], data: { permittedRoles: ['Admin'] } },
   { path: 'admin/add-hero', component: AddHeroMainComponent, canActivate: [AuthGuard], data: { permittedRoles: ['Admin', 'Editor'] } },

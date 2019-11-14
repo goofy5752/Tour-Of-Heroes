@@ -12,6 +12,7 @@ namespace TourOfHeroesData.Models
         {
             this.Comments = new List<Comment>();
             this.Blogs = new List<Blog>();
+            this.LikedMovies = new List<Movie>();
         }
 
         public override string Id { get; set; }

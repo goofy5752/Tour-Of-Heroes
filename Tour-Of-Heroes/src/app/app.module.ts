@@ -41,6 +41,7 @@ import { OrderModule } from 'ngx-order-pipe';
 import { FilterPipeModule } from 'ngx-filter-pipe';
 import { UserControllerComponent } from './admin/user-controller/user-controller.component';
 import { UserDetailComponent } from './admin/user-detail/user-detail.component';
+import { LikedMoviesComponent } from './user/liked-movies/liked-movies.component';
 
 @NgModule({
   imports: [
@@ -85,6 +86,7 @@ import { UserDetailComponent } from './admin/user-detail/user-detail.component';
     ForbiddenComponent,
     UserControllerComponent,
     UserDetailComponent,
+    LikedMoviesComponent,
   ],
   providers: [
     [UserService, {
