@@ -14,11 +14,13 @@
     {
         private readonly IRepository<Movie> _movieRepository;
         private readonly IRepository<LikedMovie> _likedMovieRepository;
+        private readonly IRepository<ApplicationUser> _userRepository;
 
-        public MovieService(IRepository<Movie> movieRepository, IRepository<LikedMovie> likedMovieRepository)
+        public MovieService(IRepository<Movie> movieRepository, IRepository<LikedMovie> likedMovieRepository, IRepository<ApplicationUser> userRepository)
         {
             _movieRepository = movieRepository;
             _likedMovieRepository = likedMovieRepository;
+            _userRepository = userRepository;
         }
 
         public IEnumerable<Movie> GetAllMovies()
@@ -40,13 +42,19 @@
             var movieToLike = new LikedMovie
             {
                 PosterPath = movieDTO.PosterPath,
-                ReleaseDate = DateTime.ParseExact(movieDTO.ReleaseDate, "mm/dd/yyy", CultureInfo.InvariantCulture),
+                ReleaseDate = DateTime.ParseExact(movieDTO.ReleaseDate, "yyyy-MM-dd", CultureInfo.CurrentCulture),
                 Title = movieDTO.Title,
                 UserId = movieDTO.UserId,
-                VoteAverage = movieDTO.VoteAverage,
-                VoteCount = movieDTO.VoteCount
+                VoteAverage = double.Parse(movieDTO.VoteAverage),
+                VoteCount = int.Parse(movieDTO.VoteCount)
             };
 
+            this._userRepository
+                .All()
+                .FirstOrDefault(u => u.Id == movieDTO.UserId)
+                ?.LikedMovies.Add(movieToLike);
+
+            await this._userRepository.SaveChangesAsync();
             await this._likedMovieRepository.AddAsync(movieToLike);
             await this._likedMovieRepository.SaveChangesAsync();
         }

@@ -340,7 +340,7 @@ namespace TourOfHeroesData.Migrations
 
                     b.Property<string>("UserId");
 
-                    b.Property<int>("VoteAverage");
+                    b.Property<double>("VoteAverage");
 
                     b.Property<int>("VoteCount");
 
