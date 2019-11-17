@@ -15,7 +15,7 @@
 
         public int VoteCount { get; set; }
 
-        public int VoteAverage { get; set; }
+        public double VoteAverage { get; set; }
 
         public DateTime ReleaseDate { get; set; }
 
