@@ -5,16 +5,20 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using TourOfHeroesData.Models;
+    using System;
+    using System.Globalization;
     using Contracts;
     using TourOfHeroesDTOs.MovieDtos;
 
     public class MovieService : IMovieService
     {
         private readonly IRepository<Movie> _movieRepository;
+        private readonly IRepository<LikedMovie> _likedMovieRepository;
 
-        public MovieService(IRepository<Movie> movieRepository)
+        public MovieService(IRepository<Movie> movieRepository, IRepository<LikedMovie> likedMovieRepository)
         {
             _movieRepository = movieRepository;
+            _likedMovieRepository = likedMovieRepository;
         }
 
         public IEnumerable<Movie> GetAllMovies()
@@ -31,9 +35,20 @@
             await this._movieRepository.SaveChangesAsync();
         }
 
-        public Task LikeMovie(AddToLikesMovieDTO movieDTO)
-        {
-            throw new System.NotImplementedException();
+        public async Task LikeMovie(AddToLikesMovieDTO movieDTO)
+        { 
+            var movieToLike = new LikedMovie
+            {
+                PosterPath = movieDTO.PosterPath,
+                ReleaseDate = DateTime.ParseExact(movieDTO.ReleaseDate, "mm/dd/yyy", CultureInfo.InvariantCulture),
+                Title = movieDTO.Title,
+                UserId = movieDTO.UserId,
+                VoteAverage = movieDTO.VoteAverage,
+                VoteCount = movieDTO.VoteCount
+            };
+
+            await this._likedMovieRepository.AddAsync(movieToLike);
+            await this._likedMovieRepository.SaveChangesAsync();
         }
     }
 }

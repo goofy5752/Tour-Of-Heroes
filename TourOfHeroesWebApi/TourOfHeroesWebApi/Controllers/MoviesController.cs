@@ -7,6 +7,7 @@
     using TourOfHeroesData.Models;
     using TourOfHeroesServices.Contracts;
     using Validator.Contracts;
+    using TourOfHeroesDTOs.MovieDtos;
 
     [Authorize]
     public class MoviesController : ApiController
@@ -20,6 +21,20 @@
             _movieService = movieService;
             _logger = logger;
             _userValidator = userValidator;
+        }
+
+        [HttpPost("{like}")]
+        [DisableRequestSizeLimit]
+        [Route("movies/{like}")]
+        public async Task<ActionResult<AddToLikesMovieDTO>> LikeMovie([FromForm] AddToLikesMovieDTO movie)
+        {
+            _logger.LogInfo($"Adding movie with title {movie.Title} to liked...");
+
+            await this._movieService.LikeMovie(movie);
+
+            _logger.LogInfo($"Successfully liked movie with title {movie.Title}...");
+
+            return this.Ok();
         }
 
         [HttpDelete("{title}")]
