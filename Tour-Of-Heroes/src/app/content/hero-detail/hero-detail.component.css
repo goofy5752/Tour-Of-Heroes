@@ -84,6 +84,10 @@
     width: 100%
 }
 
+.likeMovieButton {
+    width: 100%;
+}
+
 .popover-title {
     padding: .5rem .75rem;
     margin-bottom: 0;

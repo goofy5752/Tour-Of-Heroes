@@ -29,6 +29,7 @@ export class HeroDetailComponent implements OnInit {
   orderedComments: Comments[];
   originalComments;
   mySubscription: any;
+  userId = '';
 
   @Input() hero: Hero;
   @Input() profile: Profile;
@@ -88,6 +89,11 @@ export class HeroDetailComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get('id');
     this.heroService.getHero(id)
       .subscribe(hero => {
+        const token = JSON.stringify(localStorage.getItem('token'));
+        const jwtData = token.split('.')[1];
+        const decodedJwtJsonData = window.atob(jwtData);
+        const decodedJwtData = JSON.parse(decodedJwtJsonData);
+        this.userId = decodedJwtData.UserID;
         this.hero = hero;
         this.allMovies = [];
         this.originalComments = hero.comments;
@@ -164,17 +170,12 @@ export class HeroDetailComponent implements OnInit {
   }
 
   postComment(comment: string) {
-    const token = JSON.stringify(localStorage.getItem('token'));
-    const jwtData = token.split('.')[1];
-    const decodedJwtJsonData = window.atob(jwtData);
-    const decodedJwtData = JSON.parse(decodedJwtJsonData);
-    const userId = decodedJwtData.UserID;
     if (comment === '') {
       this.toastr.error(`Write something.`, 'Spam ?');
       return;
     }
     console.log(comment);
-    this.commentService.postComment(userId, this.hero.id, comment, 'Hero').subscribe(
+    this.commentService.postComment(this.userId, this.hero.id, comment, 'Hero').subscribe(
       () => {
         this.toastr.success(`You have added a comment`, 'Success !');
       },
@@ -186,6 +187,24 @@ export class HeroDetailComponent implements OnInit {
         }
       }
     );
+  }
+
+  likeMovie(title: string, posterPath: string, voteAverage: number, releaseDate: string, voteCount: number): void {
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('posterPath', posterPath);
+    formData.append('voteAverage', voteAverage.toString());
+    formData.append('releaseDate', releaseDate);
+    formData.append('voteCount', voteCount.toString());
+    formData.append('userId', this.userId);
+    this.movieService.likeMovie(formData)
+      .subscribe(movie => {
+        this.toastr.success(`You liked a movie with title: ${movie.title}`, 'Success !');
+      }, error => {
+        if (error.status === 200) {
+          this.toastr.success(`You liked a movie with title: ${title}`, 'Success !');
+        }
+      });
   }
 
   sortBy(field: string) {

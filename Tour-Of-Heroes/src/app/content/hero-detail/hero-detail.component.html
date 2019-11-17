@@ -77,7 +77,8 @@
                             </div>
                         </div>
                     </ng-template>
-                    <button *ngIf="globals.isAdmin" class="btn btn-danger removeMovieButton" mwlConfirmationPopover placement="top" [customTemplate]="customTemplate" (confirm)="confirmClicked = true" title="Delete - {{singleMovie.title}}"><i class="fa fa-trash"
+                    <button class="btn btn-danger removeMovieButton" (click)="likeMovie(singleMovie.title, singleMovie.poster_path, singleMovie.vote_average, singleMovie.release_date, singleMovie.vote_count)" title="Like"><i class="fa fa-heart" aria-hidden="true"></i></button>
+                    <button *ngIf="globals.isAdmin" class="btn btn-warning removeMovieButton text-white" mwlConfirmationPopover placement="top" [customTemplate]="customTemplate" (confirm)="confirmClicked = true" title="Delete"><i class="fa fa-trash"
                     aria-hidden="true"></i></button>
                 </div>
             </div>

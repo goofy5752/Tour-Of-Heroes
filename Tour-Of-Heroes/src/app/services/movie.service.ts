@@ -23,6 +23,16 @@ export class MovieService {
     return this.http.get<Movie[]>(this.urlMoviedb + 'search/movie' + this.apikey + `&query=${title.toLowerCase()}`);
   }
 
+  likeMovie(fd: FormData): Observable<Movie> {
+    return this.http.post<Movie>(`${this.moviesUrl}/like`, fd).pipe(
+      tap((likedMovie: Movie) => {
+        if (this.globals.showActivity) {
+          this.heroService.log(`liked movie w/ title=${likedMovie.title}`);
+        }
+      })
+    );
+  }
+
   /** Delete movie from the server */
   deleteMovie(movie: Movie | string, password: string): Observable<Movie> {
     const title = typeof movie === 'string' ? movie : movie;
