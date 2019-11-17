@@ -6,6 +6,7 @@
     using System.Threading.Tasks;
     using TourOfHeroesData.Models;
     using Contracts;
+    using TourOfHeroesDTOs.MovieDtos;
 
     public class MovieService : IMovieService
     {
@@ -28,6 +29,11 @@
             this._movieRepository.Delete(movieToDelete);
 
             await this._movieRepository.SaveChangesAsync();
+        }
+
+        public Task LikeMovie(AddToLikesMovieDTO movieDTO)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

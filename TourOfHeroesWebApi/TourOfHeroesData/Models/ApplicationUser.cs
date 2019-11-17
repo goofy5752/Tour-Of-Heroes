@@ -12,7 +12,7 @@ namespace TourOfHeroesData.Models
         {
             this.Comments = new List<Comment>();
             this.Blogs = new List<Blog>();
-            this.LikedMovies = new List<Movie>();
+            this.LikedMovies = new List<LikedMovie>();
         }
 
         public override string Id { get; set; }
@@ -32,6 +32,6 @@ namespace TourOfHeroesData.Models
 
         public virtual List<Blog> Blogs { get; set; }
 
-        public virtual List<Movie> LikedMovies { get; set; }
+        public virtual List<LikedMovie> LikedMovies { get; set; }
     }
 }

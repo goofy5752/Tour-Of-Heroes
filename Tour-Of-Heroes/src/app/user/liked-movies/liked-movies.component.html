@@ -1,1 +1,42 @@
-<p>liked-movies works!</p>
+<div class="row text-center">
+    <div class="col-md-3 mb-5">
+        <div class="moviesCustom">
+            <img class="thumbnail" src="http://image.tmdb.org/t/p/w500/{{singleMovie.poster_path}}" width="100%" height="400px">
+            <h4 title="{{singleMovie.title}}">{{singleMovie.title}}</h4>
+            <p>Release date: {{singleMovie.release_date}}</p>
+            <p>Total vote counts: {{singleMovie.vote_count}}</p>
+            <div class="bg-white">
+                <hr>
+                <p><b>Average vote: {{singleMovie.vote_average}} out of 5</b></p>
+                <ng-template #t let-fill="fill">
+                    <span class="star" [class.full]="fill === 100">
+                    <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+                    </span>
+                </ng-template>
+                <ngb-rating [(rate)]="singleMovie.vote_average" [starTemplate]="t" [readonly]="!readonly" max="5"></ngb-rating>
+            </div>
+            <ng-template #customTemplate let-options="options">
+                <div [class]="'popover ' + options.placement" style="display: block">
+                    <div class="fond">
+                        <div class="boxAdd">
+                            <div class="card card-info" style="margin: 0 !important;">
+                                <div class="card-header">
+                                    <p class="card-title"><b>{{popoverTitle}}</b></p>
+                                </div>
+                                <div class="card-body">
+                                    <input #password type="password" class="form-control" />
+                                </div>
+                                <div class="card-footer">
+                                    <button type="submit" title="Delete Movie" class="btn btn-primary" (click)="deleteMovie(singleMovie, password.value)">Confirm</button>
+                                    <button id="cancel" type="button" (click)="options.onCancel({clickEvent: $event})" class="btn btn-danger float-right">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+            <button *ngIf="globals.isAdmin" class="btn btn-danger removeMovieButton" mwlConfirmationPopover placement="top" [customTemplate]="customTemplate" (confirm)="confirmClicked = true" title="Delete - {{singleMovie.title}}"><i class="fa fa-trash"
+            aria-hidden="true"></i></button>
+        </div>
+    </div>
+</div>

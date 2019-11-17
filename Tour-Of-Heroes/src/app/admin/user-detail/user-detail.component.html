@@ -12,18 +12,6 @@
                 <div class="tab-pane active" id="edit">
                     <form role="form">
                         <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Full Name</label>
-                            <div class="col-lg-9">
-                                <input class="form-control" type="text" value="{{user.fullName}}" disabled="true">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Email</label>
-                            <div class="col-lg-9">
-                                <input class="form-control" type="email" value="{{user.email}}" disabled="true">
-                            </div>
-                        </div>
-                        <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Role</label>
                             <div class="col-lg-9">
                                 <select #role id="user-role" class="form-control" size="0">
@@ -50,6 +38,16 @@
                 <div class="col-lg-12">
                     <h4>
                         Username: {{user.userName}}
+                    </h4>
+                </div>
+                <div class="col-lg-12">
+                    <h4>
+                        Full Name: {{user.fullName}}
+                    </h4>
+                </div>
+                <div class="col-lg-12">
+                    <h4>
+                        Email: {{user.email}}
                     </h4>
                 </div>
                 <div class="col-lg-12 ">

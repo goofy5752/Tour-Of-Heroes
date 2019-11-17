@@ -50,7 +50,7 @@
 
         public async Task UpdateUser(string id, UpdateUserDTO userDTO)
         {
-            var userRole = GetUserRole(id);
+            var userRole = this.GetUserRole(id);
 
             var user = this._userRepository
                 .All()
