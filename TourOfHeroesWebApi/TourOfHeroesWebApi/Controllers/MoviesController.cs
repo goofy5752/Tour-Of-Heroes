@@ -8,6 +8,7 @@
     using TourOfHeroesServices.Contracts;
     using Validator.Contracts;
     using TourOfHeroesDTOs.MovieDtos;
+    using TourOfHeroesDTOs.HeroDtos;
 
     [Authorize]
     public class MoviesController : ApiController
@@ -23,6 +24,33 @@
             _userValidator = userValidator;
         }
 
+        #region GetLikedMovies
+
+        [HttpGet("{likes}")]
+        [DisableRequestSizeLimit]
+        [Route("movies/{likes}")]
+        public PageResultDTO<GetLikedMovieDTO> GetLikedMovies(int? page, int pageSize = 6)
+        {
+            _logger.LogInfo("Fetching all the liked movies from the storage...");
+
+            var countDetails = this._movieService.GetLikedMovies().Count();
+            var result = new PageResultDTO<GetLikedMovieDTO>
+            {
+                Count = countDetails,
+                PageIndex = page ?? 1,
+                PageSize = pageSize,
+                Items = this._movieService.GetLikedMovies().Skip((page - 1 ?? 0) * pageSize).Take(pageSize).ToList()
+            };
+
+            _logger.LogInfo($"Returning {countDetails} movies.");
+
+            return result;
+        }
+
+        #endregion
+
+        #region LikeMovie
+
         [HttpPost("{like}")]
         [DisableRequestSizeLimit]
         [Route("movies/{like}")]
@@ -37,6 +65,10 @@
             return this.Ok();
         }
 
+        #endregion
+
+        #region DeleteMovie
+
         [HttpDelete("{title}")]
         [DisableRequestSizeLimit]
         [Route("movies/{title}")]
@@ -45,7 +77,7 @@
             var userId = HttpContext.User.Claims.First(x => x.Type == "UserID").Value;
 
             if (!this._userValidator.CheckPasswordAsync(userId, password).Result)
-                return BadRequest(new {message = "Invalid password !"});
+                return BadRequest(new { message = "Invalid password !" });
 
             _logger.LogInfo($"Deleting movie with id {title}...");
 
@@ -55,5 +87,7 @@
 
             return this.NoContent();
         }
+
+        #endregion
     }
 }
