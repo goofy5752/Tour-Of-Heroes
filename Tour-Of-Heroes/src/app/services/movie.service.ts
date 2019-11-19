@@ -5,6 +5,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import Movie from '../entities/movie';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { LikedMovie } from '../entities/likedMovie';
 
 
 @Injectable({
@@ -21,6 +22,17 @@ export class MovieService {
 
   getMovieByTitle(title: string) {
     return this.http.get<Movie[]>(this.urlMoviedb + 'search/movie' + this.apikey + `&query=${title.toLowerCase()}`);
+  }
+
+  getLikedMovies(): Observable<LikedMovie> {
+    const url = `${this.moviesUrl}/likes`;
+    return this.http.get<LikedMovie>(url).pipe(
+      tap(_ => {
+        if (this.globals.showActivity) {
+          this.heroService.log(`fetched profile da`);
+        }
+      })
+    );
   }
 
   likeMovie(fd: FormData): Observable<Movie> {

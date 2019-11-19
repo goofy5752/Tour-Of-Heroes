@@ -1,19 +1,19 @@
-<div class="row text-center">
-    <div class="col-md-3 mb-5">
+<div class="row text-center p-5">
+    <div class="col-md-3 mb-5" *ngFor="let singleMovie of likedMovies | paginate: { itemsPerPage: 12, currentPage: pageNumber, totalItems:Count }">
         <div class="moviesCustom">
-            <img class="thumbnail" src="http://image.tmdb.org/t/p/w500/{{singleMovie.poster_path}}" width="100%" height="400px">
+            <img class="thumbnail" src="http://image.tmdb.org/t/p/w500/{{singleMovie.posterPath}}" width="100%" height="320px">
             <h4 title="{{singleMovie.title}}">{{singleMovie.title}}</h4>
-            <p>Release date: {{singleMovie.release_date}}</p>
-            <p>Total vote counts: {{singleMovie.vote_count}}</p>
+            <p>Release date: {{singleMovie.releaseDate | date:'longDate'}}</p>
+            <p>Total vote counts: {{singleMovie.voteCount}}</p>
             <div class="bg-white">
                 <hr>
-                <p><b>Average vote: {{singleMovie.vote_average}} out of 5</b></p>
+                <p><b>Average vote: {{singleMovie.voteAverage}} out of 5</b></p>
                 <ng-template #t let-fill="fill">
                     <span class="star" [class.full]="fill === 100">
                     <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
                     </span>
                 </ng-template>
-                <ngb-rating [(rate)]="singleMovie.vote_average" [starTemplate]="t" [readonly]="!readonly" max="5"></ngb-rating>
+                <ngb-rating [(rate)]="singleMovie.voteAverage" [starTemplate]="t" [readonly]="!readonly" max="5"></ngb-rating>
             </div>
             <ng-template #customTemplate let-options="options">
                 <div [class]="'popover ' + options.placement" style="display: block">
@@ -38,5 +38,8 @@
             <button *ngIf="globals.isAdmin" class="btn btn-danger removeMovieButton" mwlConfirmationPopover placement="top" [customTemplate]="customTemplate" (confirm)="confirmClicked = true" title="Delete - {{singleMovie.title}}"><i class="fa fa-trash"
             aria-hidden="true"></i></button>
         </div>
+    </div>
+    <div class="col-12 text-center">
+        <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
     </div>
 </div>

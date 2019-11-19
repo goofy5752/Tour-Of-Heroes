@@ -20,5 +20,7 @@
         public IEnumerable<CommentDTO> Comments { get; set; }
 
         public IEnumerable<Blog> Blogs { get; set; }
+
+        public IEnumerable<LikedMovie> LikedMovies { get; set; }
     }
 }

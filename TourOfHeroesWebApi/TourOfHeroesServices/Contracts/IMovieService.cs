@@ -9,6 +9,8 @@
     {
         IEnumerable<Movie> GetAllMovies();
 
+        IEnumerable<GetLikedMovieDTO> GetLikedMovies();
+
         Task DeleteMovie(string title);
 
         Task LikeMovie(AddToLikesMovieDTO movieDTO);

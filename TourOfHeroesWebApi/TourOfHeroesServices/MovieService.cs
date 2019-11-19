@@ -9,6 +9,7 @@
     using System.Globalization;
     using Contracts;
     using TourOfHeroesDTOs.MovieDtos;
+    using TourOfHeroesMapping.Mapping;
 
     public class MovieService : IMovieService
     {
@@ -26,6 +27,14 @@
         public IEnumerable<Movie> GetAllMovies()
         {
             return this._movieRepository.All().ToList();
+        }
+
+        public IEnumerable<GetLikedMovieDTO> GetLikedMovies()
+        {
+            return this._likedMovieRepository
+                .All()
+                .To<GetLikedMovieDTO>()
+                .ToList();
         }
 
         public async Task DeleteMovie(string title)
