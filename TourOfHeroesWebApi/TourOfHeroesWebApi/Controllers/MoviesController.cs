@@ -29,7 +29,7 @@
         [HttpGet("{likes}")]
         [DisableRequestSizeLimit]
         [Route("movies/{likes}")]
-        public PageResultDTO<GetLikedMovieDTO> GetLikedMovies(int? page, int pageSize = 6)
+        public PageResultDTO<GetLikedMovieDTO> GetLikedMovies(int? page, int pageSize = 12)
         {
             _logger.LogInfo("Fetching all the liked movies from the storage...");
 
