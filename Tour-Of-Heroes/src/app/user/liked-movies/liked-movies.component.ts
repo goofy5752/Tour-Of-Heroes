@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Globals } from 'src/app/globals/globals';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HeroService } from 'src/app/services/hero.service';
@@ -22,6 +22,9 @@ export class LikedMoviesComponent implements OnInit {
   likedMovies: LikedMovie[];
   pageNumber;
   Count;
+  movieFilter: any = {
+    title: ''
+   };
 
   constructor(public globals: Globals,
               private http: HttpClient,
