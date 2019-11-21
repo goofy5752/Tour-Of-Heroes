@@ -33,13 +33,15 @@
         {
             _logger.LogInfo("Fetching all the liked movies from the storage...");
 
-            var countDetails = this._movieService.GetLikedMovies().Count();
+            var userId = HttpContext.User.Claims.First(x => x.Type == "UserID").Value;
+
+            var countDetails = this._movieService.GetLikedMovies(userId).Count();
             var result = new PageResultDTO<GetLikedMovieDTO>
             {
                 Count = countDetails,
                 PageIndex = page ?? 1,
                 PageSize = pageSize,
-                Items = this._movieService.GetLikedMovies().Skip((page - 1 ?? 0) * pageSize).Take(pageSize).ToList()
+                Items = this._movieService.GetLikedMovies(userId).Skip((page - 1 ?? 0) * pageSize).Take(pageSize).ToList()
             };
 
             _logger.LogInfo($"Returning {countDetails} movies.");

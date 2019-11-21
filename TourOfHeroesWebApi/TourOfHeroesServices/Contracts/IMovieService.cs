@@ -9,7 +9,7 @@
     {
         IEnumerable<Movie> GetAllMovies();
 
-        IEnumerable<GetLikedMovieDTO> GetLikedMovies();
+        IEnumerable<GetLikedMovieDTO> GetLikedMovies(string userId);
 
         Task DeleteMovie(string title);
 

@@ -29,10 +29,11 @@
             return this._movieRepository.All().ToList();
         }
 
-        public IEnumerable<GetLikedMovieDTO> GetLikedMovies()
+        public IEnumerable<GetLikedMovieDTO> GetLikedMovies(string userId)
         {
             return this._likedMovieRepository
                 .All()
+                .Where(x => x.UserId == userId)
                 .To<GetLikedMovieDTO>()
                 .ToList();
         }
