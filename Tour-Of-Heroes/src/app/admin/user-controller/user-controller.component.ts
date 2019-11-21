@@ -1,5 +1,4 @@
 import { Globals } from '../../globals/globals';
-import { Profile } from '../../entities/profile';
 import { Title } from '@angular/platform-browser';
 import { Component, OnInit } from '@angular/core';
 import { HeroService } from 'src/app/services/hero.service';
