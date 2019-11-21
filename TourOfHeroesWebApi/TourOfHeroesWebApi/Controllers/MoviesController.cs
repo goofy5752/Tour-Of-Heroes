@@ -91,5 +91,24 @@
         }
 
         #endregion
+
+        //TODO: IMPLEMENT THE RIGHT LOGIC FLOW FOR DISLIKE MOVIE BUTTON
+        #region DislikeMovie
+
+        [HttpDelete("{title}")]
+        [DisableRequestSizeLimit]
+        [Route("movies/{title}")]
+        public async Task<ActionResult<Hero>> DislikeMovie(int movieId)
+        {
+            _logger.LogInfo($"Deleting movie with id {movieId}...");
+
+            await this._movieService.DislikeMovie(movieId);
+
+            _logger.LogInfo($"Successfully deleted movie with id {movieId}...");
+
+            return this.NoContent();
+        }
+
+        #endregion
     }
 }

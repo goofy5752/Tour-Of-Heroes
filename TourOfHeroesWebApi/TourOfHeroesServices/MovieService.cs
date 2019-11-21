@@ -68,5 +68,15 @@
             await this._likedMovieRepository.AddAsync(movieToLike);
             await this._likedMovieRepository.SaveChangesAsync();
         }
+
+        public async Task DislikeMovie(int id)
+        {
+            //TODO: IMPLEMENT THE RIGHT LOGIC FLOW FOR DISLIKE MOVIE
+            var movieToDislike = this._likedMovieRepository.All().FirstOrDefault(x => x.Id == id);
+
+            this._likedMovieRepository.Delete(movieToDislike);
+
+            await this._movieRepository.SaveChangesAsync();
+        }
     }
 }

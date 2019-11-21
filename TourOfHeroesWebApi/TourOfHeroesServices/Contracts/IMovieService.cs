@@ -14,5 +14,7 @@
         Task DeleteMovie(string title);
 
         Task LikeMovie(AddToLikesMovieDTO movieDTO);
+
+        Task DislikeMovie(int id);
     }
 }
