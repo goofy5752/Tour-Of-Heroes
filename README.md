@@ -1,7 +1,7 @@
 <div>
 <img src="https://angular.io/assets/images/logos/angular/angular.svg" width="200" height="200">
 <img src="https://cdn.worldvectorlogo.com/logos/microsoft-sql-server.svg" width="200" height="200">
-<img src="https://banner2.cleanpng.com/20180707/sxa/kisspng-entity-framework-core-asp-net-core-net-framework-asp-5b40cad7827128.8883550615309728875343.jpg" width="200" height="200">
+<img src="https://ih0.redbubble.net/image.366684650.5673/flat,800x800,070,f.u1.jpg" width="200" height="200">
 </div>
 
 # Tour Of Heroes
