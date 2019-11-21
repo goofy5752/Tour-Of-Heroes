@@ -47,7 +47,7 @@
         }
 
         public async Task LikeMovie(AddToLikesMovieDTO movieDTO)
-        { 
+        {
             var movieToLike = new LikedMovie
             {
                 PosterPath = movieDTO.PosterPath,
