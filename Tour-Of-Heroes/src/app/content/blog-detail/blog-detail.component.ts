@@ -22,6 +22,10 @@ export class BlogDetailComponent implements OnInit {
   confirmClicked = false;
   cancelClicked = false;
   @Input() blog: Blog;
+  title = '';
+  authorUserName = '';
+  blogImage = '';
+  publishedOn: Date;
   originalComments;
   orderedComments;
   content;
@@ -80,8 +84,6 @@ export class BlogDetailComponent implements OnInit {
       this.getPost();
     });
 
-    console.log(this.globals.isEditor);
-
     const connection = new signalR.HubConnectionBuilder()
       .configureLogging(signalR.LogLevel.Information)
       .withUrl('https://localhost:44353/api/blog')
@@ -104,6 +106,10 @@ export class BlogDetailComponent implements OnInit {
     this.blogService.getPostDetail(id)
       .subscribe(post => {
         this.blog = post;
+        this.title = this.blog.title;
+        this.authorUserName = this.blog.authorUserName;
+        this.publishedOn = this.blog.publishedOn;
+        this.blogImage = this.blog.blogImage;
         this.originalComments = this.blog.comments;
         this.sortBy('publishedOn');
         this.content = post.content;
