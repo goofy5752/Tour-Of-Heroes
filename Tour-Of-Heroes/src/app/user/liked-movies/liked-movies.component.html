@@ -25,7 +25,7 @@
                 </ng-template>
                 <ngb-rating [(rate)]="singleMovie.voteAverage" [starTemplate]="t" [readonly]="!readonly" max="5"></ngb-rating>
             </div>
-            <button class="btn btn-danger removeMovieButton" title="Delete - {{singleMovie.title}}"><i class="fa fa-trash"
+            <button class="btn btn-danger removeMovieButton" (click)="dislikeMovie(singleMovie.id)" title="Delete - {{singleMovie.title}}"><i class="fa fa-trash"
             aria-hidden="true"></i></button>
         </div>
     </div>

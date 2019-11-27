@@ -1,3 +1,5 @@
+import { ToastrService } from 'ngx-toastr';
+import { MovieService } from 'src/app/services/movie.service';
 import { Component, OnInit } from '@angular/core';
 import { Globals } from 'src/app/globals/globals';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -18,7 +20,7 @@ export class LikedMoviesComponent implements OnInit {
   popoverTitle = 'Enter your password to confirm!';
   confirmClicked = false;
   cancelClicked = false;
-  baseUrl = 'https://localhost:44353/api/movies';
+  baseUrl = 'https://localhost:44353/api/likedmovies';
   likedMovies: LikedMovie[];
   pageNumber;
   Count;
@@ -31,7 +33,9 @@ export class LikedMoviesComponent implements OnInit {
               private route: ActivatedRoute,
               private router: Router,
               private heroService: HeroService,
-              orderPipe: OrderPipe) {
+              orderPipe: OrderPipe,
+              private movieService: MovieService,
+              private toastr: ToastrService) {
     this.http.get<PageResult<LikedMovie>>(this.baseUrl + '/likes?page=1').pipe(tap(_ => {
       if (this.globals.showActivity) {
         this.heroService.log(`fetched users from page ${this.pageNumber}`);
@@ -67,6 +71,15 @@ export class LikedMoviesComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  dislikeMovie(movieId: number) {
+    this.movieService.dislikeMovie(movieId).subscribe(disliked =>
+      this.toastr.success(`You have disliked movie with name ${disliked.title}`, 'Success !!'),
+      () => {
+        this.toastr.error('Unexpected error. Please try again later !', 'Oops !');
+      }
+    );
   }
 
 }

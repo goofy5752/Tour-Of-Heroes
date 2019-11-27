@@ -1,3 +1,4 @@
+import { LikedMovie } from 'src/app/entities/likedMovie';
 import { HeroService } from './hero.service';
 import { Globals } from './../globals/globals';
 import { Injectable } from '@angular/core';
@@ -5,7 +6,6 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import Movie from '../entities/movie';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { LikedMovie } from '../entities/likedMovie';
 
 
 @Injectable({
@@ -13,6 +13,7 @@ import { LikedMovie } from '../entities/likedMovie';
 })
 export class MovieService {
   private moviesUrl = 'https://localhost:44353/api/movies'; // URL to movies api
+  private likedMoviesUrl = 'https://localhost:44353/api/likedmovies'; // URL to liked movies api
   private apikey = '?api_key=f9b276a8a665a41333c2def2f632a2e4';
   private urlMoviedb = 'https://api.themoviedb.org/3/';
 
@@ -25,7 +26,7 @@ export class MovieService {
   }
 
   getLikedMovies(): Observable<LikedMovie> {
-    const url = `${this.moviesUrl}/likes`;
+    const url = `${this.likedMoviesUrl}/likes`;
     return this.http.get<LikedMovie>(url).pipe(
       tap(_ => {
         if (this.globals.showActivity) {
@@ -36,10 +37,24 @@ export class MovieService {
   }
 
   likeMovie(fd: FormData): Observable<Movie> {
-    return this.http.post<Movie>(`${this.moviesUrl}/like`, fd).pipe(
+    return this.http.post<Movie>(`${this.likedMoviesUrl}/like`, fd).pipe(
       tap((likedMovie: Movie) => {
         if (this.globals.showActivity) {
           this.heroService.log(`liked movie w/ title=${likedMovie.title}`);
+        }
+      })
+    );
+  }
+
+  dislikeMovie(movieId: number): Observable<LikedMovie> {
+    const url = `${this.likedMoviesUrl}/dislike`;
+    const httpParams = new HttpParams().set('movieId', movieId.toString());
+    const options = { params: httpParams };
+
+    return this.http.delete<LikedMovie>(url, options).pipe(
+      tap(_ => {
+        if (this.globals.showActivity) {
+          this.heroService.log(`deleted movie with id=${movieId}`);
         }
       })
     );

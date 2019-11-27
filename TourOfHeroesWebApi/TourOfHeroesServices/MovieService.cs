@@ -69,14 +69,16 @@
             await this._likedMovieRepository.SaveChangesAsync();
         }
 
-        public async Task DislikeMovie(int id)
+        public async Task DislikeMovie(string userId, int id)
         {
-            //TODO: IMPLEMENT THE RIGHT LOGIC FLOW FOR DISLIKE MOVIE
-            var movieToDislike = this._likedMovieRepository.All().FirstOrDefault(x => x.Id == id);
+            // TODO: IMPLEMENT THE LOGIC FOR DISLIKE MOVIE BUTTON
+            var movieToDislike = this._likedMovieRepository
+                .All()
+                .FirstOrDefault(x => x.UserId == userId);
 
             this._likedMovieRepository.Delete(movieToDislike);
 
-            await this._movieRepository.SaveChangesAsync();
+            await this._likedMovieRepository.SaveChangesAsync();
         }
     }
 }
