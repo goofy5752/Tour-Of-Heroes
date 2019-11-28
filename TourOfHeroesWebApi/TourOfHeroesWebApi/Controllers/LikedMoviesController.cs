@@ -73,11 +73,9 @@
         [Route("likedmovies/{dislike}")]
         public async Task<ActionResult<LikedMovie>> DislikeMovie(string movieId)
         {
-            var userId = HttpContext.User.Claims.First(x => x.Type == "UserID").Value;
-
             _logger.LogInfo($"Disliking movie with id {movieId}...");
 
-            await this._movieService.DislikeMovie(userId, int.Parse(movieId));
+            await this._movieService.DislikeMovie(int.Parse(movieId));
 
             _logger.LogInfo($"Successfully disliked movie with id {movieId}...");
 

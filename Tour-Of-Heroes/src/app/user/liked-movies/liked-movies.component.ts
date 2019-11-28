@@ -26,7 +26,7 @@ export class LikedMoviesComponent implements OnInit {
   Count;
   movieFilter: any = {
     title: ''
-   };
+  };
 
   constructor(public globals: Globals,
               private http: HttpClient,
@@ -74,12 +74,18 @@ export class LikedMoviesComponent implements OnInit {
   }
 
   dislikeMovie(movieId: number) {
-    this.movieService.dislikeMovie(movieId).subscribe(disliked =>
-      this.toastr.success(`You have disliked movie with name ${disliked.title}`, 'Success !!'),
+    this.movieService.dislikeMovie(movieId).subscribe(
       () => {
-        this.toastr.error('Unexpected error. Please try again later !', 'Oops !');
+        this.likedMovies = this.likedMovies.filter(h => h.id !== movieId);
+        this.toastr.success(`You have disliked movie with id ${movieId}`, 'Success !!');
+      },
+      error => {
+        if (error.status === 400 || error.status === 500) {
+          this.toastr.error('Unexpected error. Please try again later !', 'Oops !');
+        } else {
+          console.log(error);
+        }
       }
     );
   }
-
 }

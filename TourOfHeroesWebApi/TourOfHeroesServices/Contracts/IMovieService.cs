@@ -15,6 +15,6 @@
 
         Task LikeMovie(AddToLikesMovieDTO movieDTO);
 
-        Task DislikeMovie(string userId, int id);
+        Task DislikeMovie(int id);
     }
 }
