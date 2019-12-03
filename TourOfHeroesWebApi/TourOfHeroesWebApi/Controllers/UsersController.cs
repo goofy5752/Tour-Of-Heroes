@@ -69,7 +69,7 @@
 
         #region UpdateUser
 
-        [HttpPut("{id}")]
+        [HttpPatch("{id}")]
         [DisableRequestSizeLimit]
         [Route("users/{id}")]
         public async Task<IActionResult> UpdateUser(string id, UpdateUserDTO userDTO)

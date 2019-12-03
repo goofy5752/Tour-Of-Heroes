@@ -64,9 +64,8 @@
                 .FirstOrDefault(u => u.Id == movieDTO.UserId)
                 ?.LikedMovies.Add(movieToLike);
 
-            await this._userRepository.SaveChangesAsync();
             await this._likedMovieRepository.AddAsync(movieToLike);
-            await this._likedMovieRepository.SaveChangesAsync();
+            await this._userRepository.SaveChangesAsync();
         }
 
         public async Task DislikeMovie(int id)

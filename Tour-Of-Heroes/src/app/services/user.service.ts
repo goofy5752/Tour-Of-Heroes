@@ -38,7 +38,7 @@ export class UserService {
 
   updateUser(userId: string, role: string): Observable<any> {
     const url = `${this.BaseUserURI}/${userId}`;
-    return this.http.put(url, { role }).pipe(
+    return this.http.patch(url, { role }).pipe(
       tap(_ => {
         if (this.globals.showActivity) {
           this.heroService.log(`updated user id=${userId}`);

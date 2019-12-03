@@ -1,4 +1,4 @@
-import { LikedMovie } from 'src/app/entities/likedMovie';
+import { LikedMovie } from './../entities/likedMovie';
 import { HeroService } from './hero.service';
 import { Globals } from './../globals/globals';
 import { Injectable } from '@angular/core';
@@ -36,11 +36,11 @@ export class MovieService {
     );
   }
 
-  likeMovie(fd: FormData): Observable<Movie> {
-    return this.http.post<Movie>(`${this.likedMoviesUrl}/like`, fd).pipe(
-      tap((likedMovie: Movie) => {
+  likeMovie(fd: FormData): Observable<LikedMovie> {
+    return this.http.post<LikedMovie>(`${this.likedMoviesUrl}/like`, fd).pipe(
+      tap((likedMovie: LikedMovie) => {
         if (this.globals.showActivity) {
-          this.heroService.log(`liked movie w/ title=${likedMovie.title}`);
+          this.heroService.log(`liked movie`);
         }
       })
     );

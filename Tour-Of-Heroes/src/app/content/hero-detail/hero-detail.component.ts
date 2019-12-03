@@ -198,12 +198,9 @@ export class HeroDetailComponent implements OnInit {
     formData.append('voteCount', voteCount.toString());
     formData.append('userId', this.userId);
     this.movieService.likeMovie(formData)
-      .subscribe(movie => {
-        this.toastr.success(`You liked a movie with title: ${movie.title}`, 'Success !');
-      }, error => {
-        if (error.status === 200) {
-          this.toastr.success(`You liked a movie with title: ${title}`, 'Success !');
-        }
+      .subscribe(() => {
+        console.log('dasdasdasdasdsd');
+        this.toastr.success(`You liked a movie with title: ${title}`, 'Success !');
       });
   }
 
