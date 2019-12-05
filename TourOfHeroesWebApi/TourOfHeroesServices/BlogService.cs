@@ -64,7 +64,6 @@
             userObj.Blogs.Add(postObj);
 
             await this._blogRepository.SaveChangesAsync();
-            await this._userRepository.SaveChangesAsync();
         }
 
         public async Task DeletePost(int id)

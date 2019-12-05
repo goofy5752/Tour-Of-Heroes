@@ -57,8 +57,6 @@
                 userObj.Comments.Add(commentObj);
 
                 await this._heroRepository.SaveChangesAsync();
-                await this._userRepository.SaveChangesAsync();
-                await this._commentRepository.SaveChangesAsync();
             }
             else
             {
@@ -79,8 +77,6 @@
                 userObj.Comments.Add(commentObj);
 
                 await this._blogRepository.SaveChangesAsync();
-                await this._userRepository.SaveChangesAsync();
-                await this._commentRepository.SaveChangesAsync();
             }
         }
 
