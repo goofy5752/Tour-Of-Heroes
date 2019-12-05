@@ -1,11 +1,13 @@
 ﻿namespace TourOfHeroesServices
 {
+    using System.Linq;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
     using TourOfHeroesData.Common.Contracts;
     using TourOfHeroesData.Models;
+
     using Contracts;
-    using System.Linq;
 
     public class HistoryService : IHistoryService
     {

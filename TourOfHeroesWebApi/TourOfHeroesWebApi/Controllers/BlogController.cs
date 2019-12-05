@@ -1,14 +1,17 @@
 ﻿namespace TourOfHeroesWebApi.Controllers
 {
-    using Microsoft.AspNetCore.Authorization;
-    using TourOfHeroesServices.Contracts;
+    using System.Linq;
     using System.Threading.Tasks;
-    using Microsoft.AspNetCore.Mvc;
+
+    using TourOfHeroesServices.Contracts;
     using TourOfHeroesData.Models;
     using TourOfHeroesDTOs.BlogDtos;
-    using System.Linq;
     using TourOfHeroesDTOs.HeroDtos;
+
     using Validator.Contracts;
+
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
 
     [Authorize]
     public class BlogController : ApiController

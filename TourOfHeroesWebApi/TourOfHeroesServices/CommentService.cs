@@ -1,14 +1,17 @@
 ﻿namespace TourOfHeroesServices
 {
-    using Contracts;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using TourOfHeroesData.Common.Contracts;
     using TourOfHeroesData.Models;
-    using Microsoft.AspNetCore.SignalR;
     using TourOfHeroesDTOs.CommentDtos;
+
     using RealTimeHub;
+    using Contracts;
+
+    using Microsoft.AspNetCore.SignalR;
 
     public class CommentService : ICommentService
     {

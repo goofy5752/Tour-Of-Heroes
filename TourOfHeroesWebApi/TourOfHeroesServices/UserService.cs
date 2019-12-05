@@ -1,14 +1,17 @@
 ﻿namespace TourOfHeroesServices
 {
-    using TourOfHeroesData.Common.Contracts;
-    using TourOfHeroesData.Models;
+    using System.Linq;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
+    using TourOfHeroesData.Common.Contracts;
+    using TourOfHeroesData.Models;
     using TourOfHeroesDTOs.UserDtos;
     using TourOfHeroesMapping.Mapping;
-    using Microsoft.AspNetCore.Identity;
-    using System.Linq;
+
     using Contracts;
+
+    using Microsoft.AspNetCore.Identity;
 
     public class UserService : IUserService
     {

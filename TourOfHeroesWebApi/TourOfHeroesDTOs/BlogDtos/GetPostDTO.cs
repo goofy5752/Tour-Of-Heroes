@@ -1,6 +1,7 @@
 ﻿namespace TourOfHeroesDTOs.BlogDtos
 {
     using System;
+
     using TourOfHeroesData.Models;
     using TourOfHeroesMapping.Mapping;
 

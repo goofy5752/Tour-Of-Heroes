@@ -3,9 +3,12 @@
     using System;
     using System.Net;
     using System.Threading.Tasks;
-    using Microsoft.AspNetCore.Http;
+
     using TourOfHeroesServices.Contracts;
+
     using Models;
+
+    using Microsoft.AspNetCore.Http;
 
     public class ExceptionMiddleware
     {

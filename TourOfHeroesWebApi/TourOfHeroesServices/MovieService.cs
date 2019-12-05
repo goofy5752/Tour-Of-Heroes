@@ -1,15 +1,17 @@
 ﻿namespace TourOfHeroesServices
 {
+    using System;
     using System.Linq;
-    using TourOfHeroesData.Common.Contracts;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using TourOfHeroesData.Models;
-    using System;
     using System.Globalization;
-    using Contracts;
+
+    using TourOfHeroesData.Common.Contracts;
+    using TourOfHeroesData.Models;
     using TourOfHeroesDTOs.MovieDtos;
     using TourOfHeroesMapping.Mapping;
+
+    using Contracts;
 
     public class MovieService : IMovieService
     {

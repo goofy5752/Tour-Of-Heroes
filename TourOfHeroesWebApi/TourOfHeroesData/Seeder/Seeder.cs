@@ -5,10 +5,13 @@ namespace TourOfHeroesData.Seeder
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Models;
-    using Microsoft.AspNetCore.Identity;
-    using Contracts;
+
     using TourOfHeroesCommon;
+
+    using Models;
+    using Contracts;
+
+    using Microsoft.AspNetCore.Identity;
 
     public class Seeder : ISeeder
     {

@@ -1,14 +1,16 @@
 ﻿namespace TourOfHeroesServices
 {
+    using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
     using TourOfHeroesData.Models;
     using TourOfHeroesDTOs.BlogDtos;
     using TourOfHeroesData.Common.Contracts;
     using TourOfHeroesMapping.Mapping;
-    using System.Linq;
+
     using Contracts;
-    using System;
 
     public class BlogService : IBlogService
     {

@@ -1,14 +1,17 @@
 ﻿namespace TourOfHeroesWebApi.Controllers
 {
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Mvc;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using TourOfHeroesData.Models;
     using TourOfHeroesDTOs.HeroDtos;
     using TourOfHeroesServices.Contracts;
+
     using Validator.Contracts;
+
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
 
     [Authorize]
     public class HeroesController : ApiController

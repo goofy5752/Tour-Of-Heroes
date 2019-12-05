@@ -2,6 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
     using System;
+
     using Common.Contracts;
 
     public class Comment : IDeletableEntity

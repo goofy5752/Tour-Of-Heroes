@@ -3,8 +3,9 @@ namespace TourOfHeroesData.Models
 {
     using System;
     using System.Collections.Generic;
-    using Microsoft.AspNetCore.Identity;
     using System.ComponentModel.DataAnnotations.Schema;
+
+    using Microsoft.AspNetCore.Identity;
 
     public class ApplicationUser : IdentityUser
     {

@@ -1,8 +1,10 @@
 ﻿namespace TourOfHeroesDTOs.UserDtos
 {
     using System.Collections.Generic;
+
     using TourOfHeroesData.Models;
     using TourOfHeroesMapping.Mapping;
+
     using CommentDtos;
 
     public class GetUserDetailDTO : IMapFrom<ApplicationUser>

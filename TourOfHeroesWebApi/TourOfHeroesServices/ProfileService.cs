@@ -1,14 +1,17 @@
 ﻿namespace TourOfHeroesServices
 {
+    using System.Linq;
     using System.Threading.Tasks;
-    using Contracts;
+
     using TourOfHeroesData.Common.Contracts;
     using TourOfHeroesData.Models;
-    using Microsoft.AspNetCore.SignalR;
-    using RealTimeHub;
     using TourOfHeroesDTOs.ProfileDtos;
-    using System.Linq;
     using TourOfHeroesMapping.Mapping;
+
+    using Contracts;
+    using RealTimeHub;
+
+    using Microsoft.AspNetCore.SignalR;
 
     public class ProfileService : IProfileService
     {

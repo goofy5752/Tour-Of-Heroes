@@ -4,11 +4,13 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using TourOfHeroesData.Common.Contracts;
     using TourOfHeroesData.Models;
-    using Contracts;
     using TourOfHeroesDTOs.HeroDtos;
     using TourOfHeroesMapping.Mapping;
+
+    using Contracts;
 
     public class HeroService : IHeroService
     {

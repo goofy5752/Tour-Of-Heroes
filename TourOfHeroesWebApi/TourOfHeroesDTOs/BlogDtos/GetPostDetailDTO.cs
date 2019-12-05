@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+
     using TourOfHeroesData.Models;
     using TourOfHeroesMapping.Mapping;
 

@@ -1,7 +1,8 @@
 ﻿namespace TourOfHeroesServices.RealTimeHub
 {
-    using TourOfHeroesData.Models;
     using System.Threading.Tasks;
+
+    using TourOfHeroesData.Models;
 
     public interface ITypedHubClient
     {

@@ -1,12 +1,12 @@
 ﻿// ReSharper disable StringLiteralTypo
 namespace TourOfHeroesWebApi
 {
-    using NLog;
     using System;
-    using System.Text;
     using System.IO;
-    using TourOfHeroesCommon;
+    using System.Text;
     using System.Reflection;
+
+    using TourOfHeroesCommon;
     using TourOfHeroesData;
     using TourOfHeroesData.Common;
     using TourOfHeroesData.Common.Contracts;
@@ -16,11 +16,15 @@ namespace TourOfHeroesWebApi
     using TourOfHeroesMapping.Mapping;
     using TourOfHeroesDTOs.HeroDtos;
     using TourOfHeroesServices;
+    using TourOfHeroesServices.RealTimeHub;
     using TourOfHeroesServices.Contracts;
+
+    using NLog;
+
     using Controllers.Validator;
     using Controllers.Validator.Contracts;
-    using TourOfHeroesServices.RealTimeHub;
     using GlobalErrorHandling.Extensions;
+
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Identity;

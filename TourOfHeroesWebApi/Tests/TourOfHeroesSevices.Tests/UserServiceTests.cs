@@ -1,13 +1,15 @@
 ﻿namespace TourOfHeroesServices.Tests
 {
-    using Moq;
-    using Xunit;
-    using Contracts;
     using System.Linq;
     using System.Collections.Generic;
+
     using TourOfHeroesData.Models;
     using TourOfHeroesDTOs.UserDtos;
     using TourOfHeroesData.Common.Contracts;
+
+    using Moq;
+    using Xunit;
+    using Contracts;
 
     public class UserServiceTests
     {

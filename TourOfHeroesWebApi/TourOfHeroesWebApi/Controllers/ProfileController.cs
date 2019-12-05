@@ -1,10 +1,12 @@
 ﻿namespace TourOfHeroesWebApi.Controllers
 {
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Mvc;
+    using System.Threading.Tasks;
+
     using TourOfHeroesDTOs.ProfileDtos;
     using TourOfHeroesServices.Contracts;
-    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Authorization;
 
     [Authorize]
     public class ProfileController : ApiController

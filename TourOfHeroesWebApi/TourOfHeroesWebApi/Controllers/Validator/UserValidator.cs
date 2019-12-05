@@ -1,10 +1,13 @@
 ﻿namespace TourOfHeroesWebApi.Controllers.Validator
 {
-    using Contracts;
-    using Microsoft.AspNetCore.Identity;
     using System;
     using System.Threading.Tasks;
+
     using TourOfHeroesData.Models;
+
+    using Contracts;
+
+    using Microsoft.AspNetCore.Identity;
 
     public class UserValidator : ApiController, IUserValidator
     {

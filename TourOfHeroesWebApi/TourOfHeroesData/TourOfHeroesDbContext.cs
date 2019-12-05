@@ -1,9 +1,10 @@
 ﻿namespace TourOfHeroesData
 {
+    using Models;
+
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-    using Models;
 
     public class TourOfHeroesDbContext : IdentityDbContext<ApplicationUser, IdentityRole, string>
     {

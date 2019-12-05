@@ -1,9 +1,11 @@
 ﻿namespace TourOfHeroesWebApi.Controllers
 {
     using System.Threading.Tasks;
-    using Microsoft.AspNetCore.Mvc;
+
     using TourOfHeroesData.Models;
     using TourOfHeroesServices.Contracts;
+
+    using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Authorization;
 
     [Authorize]

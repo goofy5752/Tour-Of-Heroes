@@ -1,6 +1,7 @@
 ﻿namespace TourOfHeroesDTOs.CommentDtos
 {
     using System;
+
     using TourOfHeroesData.Models;
     using TourOfHeroesMapping.Mapping;
 

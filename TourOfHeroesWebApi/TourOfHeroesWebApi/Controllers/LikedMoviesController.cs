@@ -2,12 +2,14 @@
 {
     using System.Linq;
     using System.Threading.Tasks;
-    using Microsoft.AspNetCore.Mvc;
+
     using TourOfHeroesData.Models;
     using TourOfHeroesServices.Contracts;
-    using Microsoft.AspNetCore.Authorization;
     using TourOfHeroesDTOs.HeroDtos;
     using TourOfHeroesDTOs.MovieDtos;
+
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Authorization;
 
     [Authorize]
     public class LikedMoviesController : ApiController

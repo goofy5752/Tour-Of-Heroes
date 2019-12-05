@@ -1,20 +1,22 @@
 ﻿namespace TourOfHeroesWebApi.Controllers
 {
+    using System;
+    using System.Text;
+    using System.Linq;
+    using System.IdentityModel.Tokens.Jwt;
+    using System.Security.Claims;
+    using System.Threading.Tasks;
+
+    using TourOfHeroesDTOs.UserDtos;
+    using TourOfHeroesCommon;
+    using TourOfHeroesData.Common;
+    using TourOfHeroesData.Models;
+    using TourOfHeroesServices.Contracts;
+
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Options;
     using Microsoft.IdentityModel.Tokens;
-    using System;
-    using System.IdentityModel.Tokens.Jwt;
-    using System.Security.Claims;
-    using System.Text;
-    using System.Threading.Tasks;
-    using TourOfHeroesDTOs.UserDtos;
-    using TourOfHeroesCommon;
-    using TourOfHeroesData.Common;
-    using System.Linq;
-    using TourOfHeroesData.Models;
-    using TourOfHeroesServices.Contracts;
 
     public class ApplicationUserController : ApiController
     {
