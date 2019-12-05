@@ -29,6 +29,12 @@
                     Email = "test1@gmail.com",
                     FullName = "Gosho Goshev"
                 },
+                new ApplicationUser {
+                    Id = "3",
+                    UserName = "ko4inata",
+                    Email = "test2@gmail.com",
+                    FullName = "Koce Boce"
+                },
             };
         }
 
