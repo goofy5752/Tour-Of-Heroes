@@ -6,6 +6,7 @@
     using System.Linq;
     using System.Collections.Generic;
     using TourOfHeroesData.Models;
+    using TourOfHeroesDTOs.UserDtos;
     using TourOfHeroesData.Common.Contracts;
 
     public class UserServiceTests
@@ -38,6 +39,11 @@
                 .Returns(GetTestData().AsQueryable());
 
             IUserService service = new UserService(repo.Object, null);
+
+            service.UpdateUser("1", new UpdateUserDTO()
+            {
+                Role = "Admin"
+            });
 
             repo.Verify(x => x.All(), Times.Once);
         }
