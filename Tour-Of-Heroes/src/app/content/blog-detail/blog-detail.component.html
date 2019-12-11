@@ -48,6 +48,23 @@
         <!-- Post Content -->
         <p [innerHTML]="content"></p>
 
+
+
+        <div class="text-right">
+            <span class="likeButton">
+                <button class="btn btn-primary">
+                    <i class="fa fa-thumbs-up"></i>
+                    Like | 12313
+                </button>
+            </span>
+            <span class="likeButton ml-2">
+                    <button class="btn btn-danger">
+                        <i class="fa fa-thumbs-down"></i>
+                        Dislike
+                    </button>
+            </span>
+        </div>
+
         <hr>
 
         <!-- Comments Form -->
@@ -73,8 +90,8 @@
                     </a>
                     <div class="media-body">
                         <span class="text-muted pull-right">
-                                    <small class="text-muted">{{comment.publishedOn | date: 'medium'}}</small>
-                                </span>
+                            <small class="text-muted">{{comment.publishedOn | date: 'medium'}}</small>
+                        </span>
                         <strong class="text-success">@{{comment.userName}}</strong>
                         <p *ngIf="!comment.isDeleted" [innerHTML]="comment.text">
                         </p>
