@@ -1,5 +1,6 @@
 ﻿namespace TourOfHeroesData
 {
+    using EntityConfiguration;
     using Models;
 
     using Microsoft.AspNetCore.Identity;
@@ -25,5 +26,14 @@
         public DbSet<Movie> Movies { get; set; }
 
         public DbSet<LikedMovie> LikedMovies { get; set; }
+
+        public DbSet<UserBlog> UserBlogs { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.ApplyConfiguration(new UserBlogConfiguration());
+        }
     }
 }
