@@ -11,6 +11,8 @@
 
         GetPostDetailDTO GetPostDetail(int id);
 
+        Task LikePost(string userId, int blogId);
+
         Task CreatePost(CreateBlogPostDTO postDto, string userId);
 
         Task DeletePost(int id);

@@ -45,6 +45,31 @@
             return post;
         }
 
+        public async Task LikePost(string userId, int blogId)
+        {
+
+            var blog = this._blogRepository
+                .All()
+                .FirstOrDefault(x => x.Id == blogId);
+
+            var user = this._userRepository
+                .All()
+                .FirstOrDefault(x => x.Id == userId);
+
+            var postLike = new UserBlog
+            {
+                Blog = blog,
+                BlogId = blogId,
+                User = user,
+                UserId = userId
+            };
+
+            blog?.BlogUsers.Add(postLike);
+            user?.UserBlogs.Add(postLike);
+
+            await this._userRepository.SaveChangesAsync();
+        }
+
         public async Task CreatePost(CreateBlogPostDTO postDto, string userId)
         {
             var userObj = this._userRepository.All().FirstOrDefault(x => x.Id == userId);
