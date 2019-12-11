@@ -93,13 +93,30 @@
 
         #endregion
 
+        #region LikePost
+
+        [HttpPost("{like}")]
+        [DisableRequestSizeLimit]
+        [Route("blog/{like}")]
+        public async Task LikePost(int postId)
+        {
+            var userId = HttpContext.User.Claims.First(x => x.Type == "UserID").Value;
+
+            _logger.LogInfo($"Liked post with id {postId} ...");
+
+            await this._blogService.LikePost(userId, postId);
+
+            _logger.LogInfo($"Successfully liked post with id {postId}...");
+        }
+        #endregion
+
         #region DeletePost
 
         [HttpDelete("{id}")]
         [DisableRequestSizeLimit]
         [Route("blog/{id}")]
         [Authorize(Roles = "Admin, Editor")]
-        public async Task<ActionResult<Hero>> DeletePost(int id, string password)
+        public async Task<ActionResult<Blog>> DeletePost(int id, string password)
         {
             var userId = HttpContext.User.Claims.First(x => x.Type == "UserID").Value;
 
