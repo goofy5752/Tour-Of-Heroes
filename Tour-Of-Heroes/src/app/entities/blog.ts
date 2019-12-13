@@ -6,5 +6,6 @@ export class Blog {
     blogImage: string;
     publishedOn: Date;
     content: string;
+    likes: number;
     comments: Comments[];
 }

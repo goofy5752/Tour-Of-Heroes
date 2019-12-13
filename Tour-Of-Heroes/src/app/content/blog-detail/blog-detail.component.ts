@@ -25,6 +25,8 @@ export class BlogDetailComponent implements OnInit {
   title = '';
   authorUserName = '';
   blogImage = '';
+  postId;
+  likes = 0;
   publishedOn: Date;
   originalComments;
   orderedComments;
@@ -110,6 +112,8 @@ export class BlogDetailComponent implements OnInit {
         this.authorUserName = this.blog.authorUserName;
         this.publishedOn = this.blog.publishedOn;
         this.blogImage = this.blog.blogImage;
+        this.postId = id;
+        this.likes = this.blog.likes;
         this.originalComments = this.blog.comments;
         this.sortBy('publishedOn');
         this.content = post.content;
@@ -156,6 +160,13 @@ export class BlogDetailComponent implements OnInit {
         }
       }
     );
+  }
+
+  likePost() {
+    this.blogService.likePost(this.postId)
+      .subscribe(() => {
+        this.toastr.success(`You liked a post with title: ${this.title}`, 'Success !');
+      });
   }
 
   sortBy(field: string) {

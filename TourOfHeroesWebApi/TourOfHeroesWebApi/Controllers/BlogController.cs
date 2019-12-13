@@ -95,9 +95,8 @@
 
         #region LikePost
 
-        [HttpPost("{like}")]
         [DisableRequestSizeLimit]
-        [Route("blog/{like}")]
+        [Route("like")]
         public async Task LikePost(int postId)
         {
             var userId = HttpContext.User.Claims.First(x => x.Type == "UserID").Value;
