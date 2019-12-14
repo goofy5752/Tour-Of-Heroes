@@ -97,15 +97,15 @@
 
         [DisableRequestSizeLimit]
         [Route("like")]
-        public async Task LikePost(int postId)
+        public async Task LikePost(LikePostDTO postDto)
         {
             var userId = HttpContext.User.Claims.First(x => x.Type == "UserID").Value;
 
-            _logger.LogInfo($"Liked post with id {postId} ...");
+            _logger.LogInfo($"Liked post with id {postDto.PostId} ...");
 
-            await this._blogService.LikePost(userId, postId);
+            await this._blogService.LikePost(userId, int.Parse(postDto.PostId));
 
-            _logger.LogInfo($"Successfully liked post with id {postId}...");
+            _logger.LogInfo($"Successfully liked post with id {postDto.PostId}...");
         }
         #endregion
 

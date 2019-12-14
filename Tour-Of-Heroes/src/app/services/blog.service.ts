@@ -52,7 +52,6 @@ export class BlogService {
   likePost(postId: number): Observable<Blog> {
     const httpParams = new HttpParams().set('postId', postId.toString());
     const options = { params: httpParams };
-    console.log(postId);
     return this.http.post<Blog>(`${this.blogUrl}/like`, options).pipe(
       tap(() => {
         if (this.globals.showActivity) {
