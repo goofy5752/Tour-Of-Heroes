@@ -18,14 +18,16 @@
         private readonly IRepository<ApplicationUser> _userRepository;
         private readonly IImageService _imageService;
         private readonly IHubContext<ProfileImageHub, ITypedHubClient> _hubContext;
-        private readonly IRepository<UserBlogLikes> _userBlogRepository;
+        private readonly IRepository<UserBlogLikes> _userBlogLikesRepository;
+        private readonly IRepository<UserBlogDislikes> _userBlogDislikesRepository;
 
-        public ProfileService(IRepository<ApplicationUser> userRepository, IImageService imageService, IHubContext<ProfileImageHub, ITypedHubClient> hubContext, IRepository<UserBlogLikes> userBlogRepository)
+        public ProfileService(IRepository<ApplicationUser> userRepository, IImageService imageService, IHubContext<ProfileImageHub, ITypedHubClient> hubContext, IRepository<UserBlogLikes> userBlogLikesRepository, IRepository<UserBlogDislikes> userBlogDislikesRepository)
         {
             _userRepository = userRepository;
             _imageService = imageService;
             _hubContext = hubContext;
-            _userBlogRepository = userBlogRepository;
+            _userBlogLikesRepository = userBlogLikesRepository;
+            _userBlogDislikesRepository = userBlogDislikesRepository;
         }
 
         public GetProfileDetailDTO GetProfile(string id)
@@ -35,7 +37,11 @@
                 .To<GetProfileDetailDTO>()
                 .Single(x => x.Id == id);
 
-            user.PostLikes = this._userBlogRepository
+            user.PostLikes = this._userBlogLikesRepository
+                .All()
+                .Count(x => x.UserId == id);
+
+            user.PostDislikes = this._userBlogDislikesRepository
                 .All()
                 .Count(x => x.UserId == id);
 

@@ -9,6 +9,7 @@ export class Profile {
     fullName: string;
     registeredOn: Date;
     postLikes: number;
+    postDislikes: number;
     comments: Comments[];
     blogs: Blog[];
 }

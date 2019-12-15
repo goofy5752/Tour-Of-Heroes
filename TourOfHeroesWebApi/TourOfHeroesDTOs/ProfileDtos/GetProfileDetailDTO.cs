@@ -21,6 +21,8 @@
 
         public int PostLikes { get; set; }
 
+        public int PostDislikes { get; set; }
+
         public IEnumerable<CommentDTO> Comments { get; set; }
 
         public IEnumerable<Blog> Blogs { get; set; }
