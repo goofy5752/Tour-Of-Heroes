@@ -8,6 +8,7 @@ export class Profile {
     profileImage: string;
     fullName: string;
     registeredOn: Date;
+    postLikes: number;
     comments: Comments[];
     blogs: Blog[];
 }

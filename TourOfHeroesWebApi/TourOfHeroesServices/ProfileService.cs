@@ -18,12 +18,14 @@
         private readonly IRepository<ApplicationUser> _userRepository;
         private readonly IImageService _imageService;
         private readonly IHubContext<ProfileImageHub, ITypedHubClient> _hubContext;
+        private readonly IRepository<UserBlog> _userBlogRepository;
 
-        public ProfileService(IRepository<ApplicationUser> userRepository, IImageService imageService, IHubContext<ProfileImageHub, ITypedHubClient> hubContext)
+        public ProfileService(IRepository<ApplicationUser> userRepository, IImageService imageService, IHubContext<ProfileImageHub, ITypedHubClient> hubContext, IRepository<UserBlog> userBlogRepository)
         {
             _userRepository = userRepository;
             _imageService = imageService;
             _hubContext = hubContext;
+            _userBlogRepository = userBlogRepository;
         }
 
         public GetProfileDetailDTO GetProfile(string id)
@@ -32,6 +34,10 @@
                 .All()
                 .To<GetProfileDetailDTO>()
                 .Single(x => x.Id == id);
+
+            user.PostLikes = this._userBlogRepository
+                .All()
+                .Count(x => x.UserId == id);
 
             return user;
         }
