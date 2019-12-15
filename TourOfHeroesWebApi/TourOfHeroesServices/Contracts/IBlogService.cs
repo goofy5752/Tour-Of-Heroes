@@ -13,6 +13,8 @@
 
         Task LikePost(string userId, int blogId);
 
+        Task DislikePost(string userId, int blogId);
+
         Task CreatePost(CreateBlogPostDTO postDto, string userId);
 
         Task DeletePost(int id);

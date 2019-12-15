@@ -27,6 +27,7 @@ export class BlogDetailComponent implements OnInit {
   blogImage = '';
   postId;
   likes = 0;
+  dislikes = 0;
   publishedOn: Date;
   originalComments;
   orderedComments;
@@ -114,6 +115,7 @@ export class BlogDetailComponent implements OnInit {
         this.blogImage = this.blog.blogImage;
         this.postId = id;
         this.likes = this.blog.likes;
+        this.dislikes = this.blog.dislikes;
         this.originalComments = this.blog.comments;
         this.sortBy('publishedOn');
         this.content = post.content;
@@ -169,6 +171,20 @@ export class BlogDetailComponent implements OnInit {
       }, err => {
         if (err.status === 400) {
           this.toastr.error('You have already liked this post.', 'Oops!');
+        }
+      });
+  }
+
+  dislikePost(): void {
+    const formData = new FormData();
+    formData.append('id', this.postId);
+    this.blogService.dislikePost(formData)
+      .subscribe(() => {
+        this.toastr.success(`You have disliked a new post: ${this.title}`, 'Success !');
+      },
+      err => {
+        if (err.status === 400) {
+          this.toastr.error(`You have already disliked this post.`, 'Oops !');
         }
       });
   }

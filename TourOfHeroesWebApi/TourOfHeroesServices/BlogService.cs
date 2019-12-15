@@ -17,14 +17,16 @@
         private readonly IRepository<Blog> _blogRepository;
         private readonly IRepository<ApplicationUser> _userRepository;
         private readonly IImageService _imageService;
-        private readonly IRepository<UserBlog> _userBlogRepository;
+        private readonly IRepository<UserBlogLikes> _userBlogLikesRepository;
+        private readonly IRepository<UserBlogDislikes> _userBlogDislikesRepository;
 
-        public BlogService(IRepository<Blog> blogRepository, IRepository<ApplicationUser> userRepository, IImageService imageService, IRepository<UserBlog> userBlogRepository)
+        public BlogService(IRepository<Blog> blogRepository, IRepository<ApplicationUser> userRepository, IImageService imageService, IRepository<UserBlogLikes> userBlogLikesRepository, IRepository<UserBlogDislikes> userBlogDislikesRepository)
         {
             _blogRepository = blogRepository;
             _userRepository = userRepository;
             _imageService = imageService;
-            _userBlogRepository = userBlogRepository;
+            _userBlogLikesRepository = userBlogLikesRepository;
+            _userBlogDislikesRepository = userBlogDislikesRepository;
         }
 
         public IEnumerable<GetPostDTO> GetAllPosts()
@@ -47,7 +49,11 @@
             if (post != null)
             {
                 // ReSharper disable once PossibleNullReferenceException
-                post.Likes = this._userBlogRepository
+                post.Likes = this._userBlogLikesRepository
+                    .All()
+                    .Count(x => x.BlogId == id);
+
+                post.Dislikes = this._userBlogDislikesRepository
                     .All()
                     .Count(x => x.BlogId == id);
             }
@@ -65,7 +71,16 @@
                 .All()
                 .FirstOrDefault(x => x.Id == userId);
 
-            var postLike = new UserBlog
+            if (this._userBlogDislikesRepository.All().Any(x => x.UserId == userId && x.BlogId == blogId))
+            {
+                var entityToDelete = this._userBlogDislikesRepository
+                    .All()
+                    .FirstOrDefault(x => x.BlogId == blogId && x.UserId == userId);
+
+                this._userBlogDislikesRepository.Delete(entityToDelete);
+            }
+
+            var postLike = new UserBlogLikes
             {
                 Blog = blog,
                 BlogId = blogId,
@@ -73,8 +88,41 @@
                 UserId = userId
             };
 
-            blog?.BlogUsers.Add(postLike);
-            user?.UserBlogs.Add(postLike);
+            blog?.BlogUserLikes.Add(postLike);
+            user?.UserBlogLikes.Add(postLike);
+
+            await this._userRepository.SaveChangesAsync();
+        }
+
+        public async Task DislikePost(string userId, int blogId)
+        {
+            var blog = this._blogRepository
+                .All()
+                .FirstOrDefault(x => x.Id == blogId);
+
+            var user = this._userRepository
+                .All()
+                .FirstOrDefault(x => x.Id == userId);
+
+            if (this._userBlogLikesRepository.All().Any(x => x.UserId == userId && x.BlogId == blogId))
+            {
+                var entityToDelete = this._userBlogLikesRepository
+                    .All()
+                    .FirstOrDefault(x => x.BlogId == blogId && x.UserId == userId);
+
+                this._userBlogLikesRepository.Delete(entityToDelete);
+            }
+
+            var postDislike = new UserBlogDislikes
+            {
+                Blog = blog,
+                BlogId = blogId,
+                User = user,
+                UserId = userId
+            };
+
+            blog?.BlogUserDislikes.Add(postDislike);
+            user?.UserBlogDislikes.Add(postDislike);
 
             await this._userRepository.SaveChangesAsync();
         }

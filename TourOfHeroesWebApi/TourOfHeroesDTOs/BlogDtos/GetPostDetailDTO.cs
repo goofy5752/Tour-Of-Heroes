@@ -25,6 +25,8 @@
 
         public int Likes { get; set; }
 
+        public int Dislikes { get; set; }
+
         public DateTime PublishedOn { get; set; }
 
         public IEnumerable<Comment> Comments { get; set; }

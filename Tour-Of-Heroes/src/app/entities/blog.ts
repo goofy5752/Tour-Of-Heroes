@@ -7,5 +7,6 @@ export class Blog {
     publishedOn: Date;
     content: string;
     likes: number;
+    dislikes: number;
     comments: Comments[];
 }

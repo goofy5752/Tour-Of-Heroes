@@ -58,9 +58,9 @@
                 </button>
             </span>
             <span class="likeButton ml-2">
-                    <button class="btn btn-danger">
+                    <button class="btn btn-danger" (click)="dislikePost()">
                         <i class="fa fa-thumbs-down"></i>
-                        Dislike
+                        Dislike | {{dislikes}}
                     </button>
             </span>
         </div>

@@ -60,4 +60,13 @@ export class BlogService {
       })
     );
   }
+
+  dislikePost(fd: FormData): Observable<Blog> {
+    return this.http.post<Blog>(`${this.blogUrl}/dislike`, fd, this.httpOptions).pipe(
+      tap(() => {
+        if (this.globals.showActivity) {
+          this.heroService.log(`disliked post`);
+        }
+      }));
+  }
 }

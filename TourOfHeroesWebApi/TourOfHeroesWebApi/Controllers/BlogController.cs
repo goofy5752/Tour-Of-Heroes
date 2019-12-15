@@ -118,6 +118,34 @@
                 return this.BadRequest();
             }
         }
+
+        #endregion
+
+        #region DislikePost
+
+        [HttpPost]
+        [DisableRequestSizeLimit]
+        [Route("dislike")]
+        public async Task<ActionResult<Blog>> DislikePost([FromForm]string id)
+        {
+            try
+            {
+                var userId = HttpContext.User.Claims.First(x => x.Type == "UserID").Value;
+
+                _logger.LogInfo($"Liked post with id {id} ...");
+
+                await this._blogService.DislikePost(userId, int.Parse(id));
+
+                _logger.LogInfo($"Successfully liked post with id {id}...");
+
+                return this.Ok();
+            }
+            catch (Exception)
+            {
+                return this.BadRequest();
+            }
+        }
+
         #endregion
 
         #region DeletePost

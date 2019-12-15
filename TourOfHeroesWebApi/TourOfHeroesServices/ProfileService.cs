@@ -18,9 +18,9 @@
         private readonly IRepository<ApplicationUser> _userRepository;
         private readonly IImageService _imageService;
         private readonly IHubContext<ProfileImageHub, ITypedHubClient> _hubContext;
-        private readonly IRepository<UserBlog> _userBlogRepository;
+        private readonly IRepository<UserBlogLikes> _userBlogRepository;
 
-        public ProfileService(IRepository<ApplicationUser> userRepository, IImageService imageService, IHubContext<ProfileImageHub, ITypedHubClient> hubContext, IRepository<UserBlog> userBlogRepository)
+        public ProfileService(IRepository<ApplicationUser> userRepository, IImageService imageService, IHubContext<ProfileImageHub, ITypedHubClient> hubContext, IRepository<UserBlogLikes> userBlogRepository)
         {
             _userRepository = userRepository;
             _imageService = imageService;
