@@ -7,7 +7,7 @@
                         {{blog.title}}
                     </h3>
                     <div class="mb-1 text-muted">{{blog.publishedOn | date}}</div>
-                    <p class="card-text mb-auto" [innerHTML]="blog.content"></p>
+                    <p class="card-text mb-auto break-word" [innerHTML]="blog.content"></p>
                     <a routerLink="{{blog.id}}">Continue reading</a>
                 </div>
                 <img class="card-img-right flex-auto d-none d-md-block" src="{{blog.blogImage}}" width=45% height=fit-content alt="Card image cap">

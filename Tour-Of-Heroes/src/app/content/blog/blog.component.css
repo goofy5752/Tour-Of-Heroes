@@ -19,3 +19,7 @@
 .blogBox {
     margin-bottom: 35px;
 }
+
+.break-word {
+    word-break: break-all;
+}
