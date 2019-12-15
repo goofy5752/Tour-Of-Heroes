@@ -23,6 +23,8 @@
 
         public string BlogImage { get; set; }
 
+        public int Likes { get; set; }
+
         public DateTime PublishedOn { get; set; }
 
         public IEnumerable<Comment> Comments { get; set; }

@@ -1,4 +1,6 @@
-﻿namespace TourOfHeroesWebApi.Controllers
+﻿using System;
+
+namespace TourOfHeroesWebApi.Controllers
 {
     using System.Linq;
     using System.Threading.Tasks;
@@ -72,9 +74,9 @@
 
         #region CreatePost
 
-        [HttpPost("{create-post}")]
+        [HttpPost]
         [DisableRequestSizeLimit]
-        [Route("blog/{create-post}")]
+        [Route("create-post")]
         [Authorize(Roles = "Admin, Editor")]
         public async Task<ActionResult<CreateBlogPostDTO>> CreatePost([FromForm]CreateBlogPostDTO postDto)
         {
@@ -95,17 +97,27 @@
 
         #region LikePost
 
+        [HttpPost("{id}")]
         [DisableRequestSizeLimit]
-        [Route("like")]
-        public async Task LikePost(LikePostDTO postDto)
+        [Route("blog/{id}")]
+        public async Task<ActionResult<Blog>> LikePost(int id)
         {
-            var userId = HttpContext.User.Claims.First(x => x.Type == "UserID").Value;
+            try
+            {
+                var userId = HttpContext.User.Claims.First(x => x.Type == "UserID").Value;
 
-            _logger.LogInfo($"Liked post with id {postDto.PostId} ...");
+                _logger.LogInfo($"Liked post with id {id} ...");
 
-            await this._blogService.LikePost(userId, int.Parse(postDto.PostId));
+                await this._blogService.LikePost(userId, id);
 
-            _logger.LogInfo($"Successfully liked post with id {postDto.PostId}...");
+                _logger.LogInfo($"Successfully liked post with id {id}...");
+
+                return this.Ok();
+            }
+            catch (Exception)
+            {
+                return this.BadRequest();
+            }
         }
         #endregion
 

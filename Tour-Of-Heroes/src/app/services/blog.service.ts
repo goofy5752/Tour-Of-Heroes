@@ -49,10 +49,10 @@ export class BlogService {
       tap(_ => { if (this.globals.showActivity) { this.heroService.log(`deleted hero id=${id}`); } }));
   }
 
-  likePost(postId: number): Observable<Blog> {
-    const httpParams = new HttpParams().set('postId', postId.toString());
-    const options = { params: httpParams };
-    return this.http.post<Blog>(`${this.blogUrl}/like`, options).pipe(
+  likePost(id: number): Observable<Blog> {
+    // const httpParams = new HttpParams().set('postId', postId.toString());
+    // const options = { params: httpParams };
+    return this.http.post<Blog>(`${this.blogUrl}/${id}`, this.httpOptions).pipe(
       tap(() => {
         if (this.globals.showActivity) {
           this.heroService.log(`liked movie`);

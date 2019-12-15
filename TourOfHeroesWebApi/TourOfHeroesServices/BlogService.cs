@@ -17,12 +17,14 @@
         private readonly IRepository<Blog> _blogRepository;
         private readonly IRepository<ApplicationUser> _userRepository;
         private readonly IImageService _imageService;
+        private readonly IRepository<UserBlog> _userBlogRepository;
 
-        public BlogService(IRepository<Blog> blogRepository, IRepository<ApplicationUser> userRepository, IImageService imageService)
+        public BlogService(IRepository<Blog> blogRepository, IRepository<ApplicationUser> userRepository, IImageService imageService, IRepository<UserBlog> userBlogRepository)
         {
             _blogRepository = blogRepository;
             _userRepository = userRepository;
             _imageService = imageService;
+            _userBlogRepository = userBlogRepository;
         }
 
         public IEnumerable<GetPostDTO> GetAllPosts()
@@ -42,12 +44,19 @@
                 .To<GetPostDetailDTO>()
                 .SingleOrDefault(x => x.Id == id);
 
+            if (post != null)
+            {
+                // ReSharper disable once PossibleNullReferenceException
+                post.Likes = this._userBlogRepository
+                    .All()
+                    .Count(x => x.BlogId == id);
+            }
+
             return post;
         }
 
         public async Task LikePost(string userId, int blogId)
         {
-
             var blog = this._blogRepository
                 .All()
                 .FirstOrDefault(x => x.Id == blogId);
