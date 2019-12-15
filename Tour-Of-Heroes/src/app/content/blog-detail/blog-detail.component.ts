@@ -166,6 +166,10 @@ export class BlogDetailComponent implements OnInit {
     this.blogService.likePost(this.postId)
       .subscribe(() => {
         this.toastr.success(`You liked a post with title: ${this.title}`, 'Success !');
+      }, err => {
+        if (err.status === 400) {
+          this.toastr.error('You have already liked this post.', 'Oops!');
+        }
       });
   }
 
