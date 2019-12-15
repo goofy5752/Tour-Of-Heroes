@@ -12,7 +12,6 @@ namespace TourOfHeroesData.Models
             this.PublishedOn = DateTime.Now;
             this.Comments = new List<Comment>();
             this.BlogUsers = new List<UserBlog>();
-            this.Likes = 0;
         }
 
         public int Id { get; set; }
@@ -37,8 +36,6 @@ namespace TourOfHeroesData.Models
 
         public ApplicationUser User { get; set; }
         public string UserId { get; set; }
-
-        public int Likes { get; set; }
 
         public virtual List<Comment> Comments { get; set; }
 

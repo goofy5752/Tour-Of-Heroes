@@ -28,8 +28,6 @@ namespace TourOfHeroesData.Models
 
         public string ProfileImage { get; set; }
 
-        public int BlogLikes { get; set; }
-
         public DateTime? RegisteredOn { get; set; }
 
         public virtual List<Comment> Comments { get; set; }
