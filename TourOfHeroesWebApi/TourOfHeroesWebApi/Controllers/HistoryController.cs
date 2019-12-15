@@ -20,6 +20,8 @@
             _logger = logger;
         }
 
+        #region DeleteHistory
+
         [HttpDelete("{id}")]
         [DisableRequestSizeLimit]
         [Route("history/{id}")]
@@ -40,5 +42,7 @@
 
             return this.NoContent();
         }
+
+        #endregion
     }
 }
