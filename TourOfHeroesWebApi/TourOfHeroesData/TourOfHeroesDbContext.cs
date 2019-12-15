@@ -27,13 +27,17 @@
 
         public DbSet<LikedMovie> LikedMovies { get; set; }
 
-        public DbSet<UserBlog> UserBlogs { get; set; }
+        public DbSet<UserBlogLikes> UserBlogLikes { get; set; }
+
+        public DbSet<UserBlogDislikes> UserBlogDislikes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.ApplyConfiguration(new UserBlogConfiguration());
+            modelBuilder.ApplyConfiguration(new UserBlogLikesConfiguration());
+
+            modelBuilder.ApplyConfiguration(new UserBlogDislikesConfiguration());
         }
     }
 }

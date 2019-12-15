@@ -1,6 +1,6 @@
 ﻿namespace TourOfHeroesData.Models
 {
-    public class UserBlog
+    public class UserBlogLikes
     {
         public string UserId { get; set; }
         public ApplicationUser User { get; set; }

@@ -11,7 +11,8 @@ namespace TourOfHeroesData.Models
         {
             this.PublishedOn = DateTime.Now;
             this.Comments = new List<Comment>();
-            this.BlogUsers = new List<UserBlog>();
+            this.BlogUserLikes = new List<UserBlogLikes>();
+            this.BlogUserDislikes = new List<UserBlogDislikes>();
         }
 
         public int Id { get; set; }
@@ -39,6 +40,8 @@ namespace TourOfHeroesData.Models
 
         public virtual List<Comment> Comments { get; set; }
 
-        public virtual List<UserBlog> BlogUsers { get; set; }
+        public virtual List<UserBlogLikes> BlogUserLikes { get; set; }
+
+        public virtual List<UserBlogDislikes> BlogUserDislikes { get; set; }
     }
 }
