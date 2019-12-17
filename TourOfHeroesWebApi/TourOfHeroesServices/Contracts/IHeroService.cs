@@ -9,7 +9,7 @@
     {
         IEnumerable<GetHeroDTO> GetAllHeroes();
 
-        GetHeroDetailDTO GetById(int id);
+        GetHeroDetailDTO GetById(string currentUser, int id);
 
         IEnumerable<GetHeroDTO> GetHeroBySearchString(string name);
 

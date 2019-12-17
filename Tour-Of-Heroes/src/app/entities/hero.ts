@@ -11,6 +11,7 @@ export class Hero {
     realName: string;
     birthday: Date;
     gender: string;
+    currentUser: string;
     editHistory: EditHistory[];
     movies: Movie[];
     comments: Comments[];

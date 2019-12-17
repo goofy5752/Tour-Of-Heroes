@@ -59,9 +59,11 @@
         [Route("heroes/{id}")]
         public ActionResult<GetHeroDetailDTO> GetHeroById(int id)
         {
+            var userId = HttpContext.User.Claims.First(x => x.Type == "UserID").Value;
+
             _logger.LogInfo($"Fetching hero with id {id}...");
 
-            var hero = this._heroService.GetById(id);
+            var hero = this._heroService.GetById(userId, id);
 
             _logger.LogInfo($"Hero with id {id} successfully fetched.");
 
@@ -119,7 +121,9 @@
         [Route("heroes/{id}")]
         public async Task<IActionResult> UpdateHero(int id, UpdateHeroDTO hero)
         {
-            var dbHero = this._heroService.GetById(id);
+            var userId = HttpContext.User.Claims.First(x => x.Type == "UserID").Value;
+
+            var dbHero = this._heroService.GetById(userId, id);
 
             _logger.LogInfo($"Update hero with {id}...");
 
@@ -152,7 +156,7 @@
             if (!this._userValidator.CheckPasswordAsync(userId, password).Result)
                 return BadRequest(new {message = "Invalid password !"});
 
-            var hero = this._heroService.GetById(id);
+            var hero = this._heroService.GetById(userId, id);
 
             _logger.LogInfo($"Deleting hero with id {id}...");
 

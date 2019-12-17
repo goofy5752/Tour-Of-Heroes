@@ -5,6 +5,7 @@
     using TourOfHeroesData.Models;
     using TourOfHeroesMapping.Mapping;
 
+    using CommentDtos;
     using MovieDtos;
 
     public class GetHeroDetailDTO : IMapFrom<Hero>
@@ -12,7 +13,7 @@
         public GetHeroDetailDTO()
         {
             this.EditHistory = new List<EditHistory>();
-            this.Comments = new List<Comment>();
+            this.Comments = new List<CommentDTO>();
         }
 
         public int Id { get; set; }
@@ -31,10 +32,12 @@
         
         public string Gender { get; set; }
 
+        public string  CurrentUser { get; set; }
+
         public IEnumerable<GetMovieTitleDTO> Movies { get; set; }
 
         public IEnumerable<EditHistory> EditHistory { get; set; }
 
-        public IEnumerable<Comment> Comments { get; set; }
+        public IEnumerable<CommentDTO> Comments { get; set; }
     }
 }

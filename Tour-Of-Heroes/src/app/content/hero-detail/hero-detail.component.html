@@ -135,8 +135,8 @@
                                                 <p class="text-danger" *ngIf="comment.isDeleted">
                                                     Comment is deleted
                                                 </p>
-                                                <button class="btn btn-danger pull-right mb-1 mr-1" (click)="deleteComment(comment)" title="Delete comment"><i class="fa fa-trash"
-                                                    aria-hidden="true"></i></button>
+                                                <button *ngIf="hero.currentUser === comment.userName" class="btn btn-danger pull-right mb-1 mr-1" (click)="deleteComment(comment)" title="Delete comment"><i class="fa fa-trash"
+                                                        aria-hidden="true"></i></button>
                                             </div>
                                         </li>
                                     </ul>
