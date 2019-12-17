@@ -16,11 +16,15 @@
     {
         private readonly IRepository<Hero> _heroRepository;
         private readonly IImageService _imageService;
+        private readonly IRepository<ApplicationUser> _userRepository;
+        private readonly IRepository<Comment> _commentRepository;
 
-        public HeroService(IRepository<Hero> heroRepository, IImageService imageService)
+        public HeroService(IRepository<Hero> heroRepository, IImageService imageService, IRepository<ApplicationUser> userRepository, IRepository<Comment> commentRepository)
         {
             _heroRepository = heroRepository;
             _imageService = imageService;
+            _userRepository = userRepository;
+            _commentRepository = commentRepository;
         }
 
         public IEnumerable<GetHeroDTO> GetAllHeroes()
@@ -33,12 +37,14 @@
             return allHeroes;
         }
 
-        public GetHeroDetailDTO GetById(int id)
+        public GetHeroDetailDTO GetById(string currentUser, int id)
         {
             var hero = this._heroRepository
                 .All()
                 .To<GetHeroDetailDTO>()
                 .Single(x => x.Id == id);
+
+            hero.CurrentUser = this._userRepository.All().FirstOrDefault(x => x.Id == currentUser)?.UserName;
 
             return hero;
         }
@@ -115,6 +121,16 @@
             var heroToDelete = this._heroRepository
                 .All()
                 .FirstOrDefault(x => x.Id == id);
+
+            var commentsToDelete = this._commentRepository
+                .All()
+                .Where(x => x.HeroId == id)
+                .ToList();
+
+            foreach (var comment in commentsToDelete)
+            {
+                this._commentRepository.Delete(comment);
+            }
 
             this._heroRepository.Delete(heroToDelete);
 
