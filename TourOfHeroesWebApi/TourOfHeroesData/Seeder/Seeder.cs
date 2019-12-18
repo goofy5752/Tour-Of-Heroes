@@ -88,7 +88,7 @@ namespace TourOfHeroesData.Seeder
 
                 #endregion
 
-                #region MyRegion
+                #region AvengersSeeder
 
                 var avengers = new Blog()
                 {
