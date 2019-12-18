@@ -136,6 +136,10 @@ namespace TourOfHeroesData.Seeder
             var thorMovies = new List<Movie>();
             var hawkeyeMovies = new List<Movie>();
             var ironmanMovies = new List<Movie>();
+            var antmanMovies = new List<Movie>();
+            var venomMovies = new List<Movie>();
+            var thanosMovies = new List<Movie>();
+            var drstrangeMovies = new List<Movie>();
 
             #region CaptainAmericaSeeder
 
@@ -435,6 +439,124 @@ namespace TourOfHeroesData.Seeder
             blackpanther.Movies.AddRange(blackPantherMovies);
 
             heroList.Add(blackpanther);
+
+            #endregion
+
+            #region AntManSeeder
+
+            var antman = new Hero
+            {
+                Name = "Ant-Man",
+                Description = "Ant-Man is a 2015 American superhero film based on the Marvel Comics characters of the same name: Scott Lang and Hank Pym. Produced by Marvel Studios and distributed by Walt Disney Studios Motion Pictures, it is the twelfth film in the Marvel Cinematic Universe (MCU). The film was directed by Peyton Reed, with a screenplay by the writing teams of Edgar Wright and Joe Cornish, and Adam McKay and Paul Rudd. It stars Rudd as Scott Lang / Ant-Man, alongside Evangeline Lilly, Corey Stoll, Bobby Cannavale, Michael Peña, Tip \"T.I.\" Harris, Anthony Mackie, Wood Harris, Judy Greer, David Dastmalchian, and Michael Douglas as Hank Pym. In Ant-Man, Lang must help defend Pym's Ant-Man shrinking technology and plot a heist with worldwide ramifications.",
+                Image = "https://res.cloudinary.com/goofy5752/image/upload/v1571507696/HeroUploads/k7x65bzx6czirkqe7mkf.jpg",
+                CoverImage = "https://res.cloudinary.com/goofy5752/image/upload/v1571507697/HeroUploads/csn37cqsynnwvcf8sigj.jpg",
+                RealName = "Paul Rudd",
+                Birthday = new DateTime(1969, 4, 6).Date,
+                Gender = "Male"
+            };
+
+            antmanMovies.Add(new Movie
+            {
+                Title = "Ant-Man",
+                Hero = antman
+            }); 
+
+            antmanMovies.Add(new Movie
+            {
+                Title = "Ant-Man and the Wasp",
+                Hero = antman
+            });
+
+            antman.Movies.AddRange(antmanMovies);
+
+            heroList.Add(antman);
+
+            #endregion
+
+            #region VenomSeeder
+
+            var venom = new Hero
+            {
+                Name = "Venom",
+                Description = "Venom is a 2018 American superhero film based on the Marvel Comics character of the same name, produced by Columbia Pictures in association with Marvel[5] and Tencent Pictures. Distributed by Sony Pictures Releasing, it is the first film in Sony's Marvel Universe. Directed by Ruben Fleischer from a screenplay by Jeff Pinkner, Scott Rosenberg, and Kelly Marcel, it stars Tom Hardy as Eddie Brock / Venom, alongside Michelle Williams, Riz Ahmed, Scott Haze, and Reid Scott. In Venom, journalist Brock gains superpowers after being bound to an alien symbiote whose species plans to invade Earth.",
+                Image = "https://res.cloudinary.com/goofy5752/image/upload/v1571508451/HeroUploads/zpmgo5isaydrhqndnhvj.jpg",
+                CoverImage = "https://res.cloudinary.com/goofy5752/image/upload/v1571508452/HeroUploads/kgyrdi3obeuwygmrwyfv.jpg",
+                RealName = "Tom Hardy",
+                Birthday = new DateTime(1977, 9, 15).Date,
+                Gender = "Male"
+            };
+
+            venomMovies.Add(new Movie
+            {
+                Title = "Venom",
+                Hero = venom
+            });
+
+            venomMovies.Add(new Movie
+            {
+                Title = "Spider-Man 3",
+                Hero = venom
+            });
+
+            venom.Movies.AddRange(venomMovies);
+
+            heroList.Add(venom);
+
+            #endregion
+
+            #region ThanosSeeder
+
+            var thanos = new Hero
+            {
+                Name = "Thanos",
+                Description = "Thanos is a fictional supervillain appearing in American comic books published by Marvel Comics. The character was created by writer-artist Jim Starlin, and made his first appearance in The Invincible Iron Man #55 (cover dated February 1973). Thanos is one of the most powerful villains in the Marvel Universe and has clashed with many heroes including the Avengers, the Guardians of the Galaxy, the Fantastic Four, and the X-Men.\r\n\r\nThe character appeared in the Marvel Cinematic Universe, portrayed by Damion Poitier in The Avengers (2012) and by Josh Brolin in Guardians of the Galaxy (2014), Avengers: Age of Ultron (2015), Avengers: Infinity War (2018), and Avengers: Endgame (2019) through voice and motion capture. The character has also appeared in various comic adaptations, including animated television series and video games.",
+                Image = "https://res.cloudinary.com/goofy5752/image/upload/v1576663479/HeroUploads/thanos_profile_j8jrab.png",
+                CoverImage = "https://res.cloudinary.com/goofy5752/image/upload/v1576663474/HeroUploads/thanos_cover_ozpf4p.jpg",
+                RealName = "Thanos",
+                Birthday = new DateTime(1973, 2, 1).Date,
+                Gender = "Male"
+            };
+
+            thanosMovies.Add(new Movie
+            {
+                Title = "Avengers: Infinity War",
+                Hero = thanos
+            });
+
+            thanosMovies.Add(new Movie
+            {
+                Title = "Avengers: Endgame",
+                Hero = thanos
+            });
+
+            thanos.Movies.AddRange(thanosMovies);
+
+            heroList.Add(thanos);
+
+            #endregion
+
+            #region DoctorStrangeSeeder
+
+            var drstrange = new Hero
+            {
+                Name = "Doctor Strange",
+                Description = "Doctor Strange is a 2016 American superhero film based on the Marvel Comics character of the same name. Produced by Marvel Studios and distributed by Walt Disney Studios Motion Pictures, it is the fourteenth film in the Marvel Cinematic Universe (MCU). The film was directed by Scott Derrickson from a screenplay he wrote with Jon Spaihts and C. Robert Cargill, and stars Benedict Cumberbatch as surgeon Stephen Strange along with Chiwetel Ejiofor, Rachel McAdams, Benedict Wong, Michael Stuhlbarg, Benjamin Bratt, Scott Adkins, Mads Mikkelsen, and Tilda Swinton. In the film, Strange learns the mystic arts after a career-ending car crash.",
+                Image = "https://res.cloudinary.com/goofy5752/image/upload/v1576664136/HeroUploads/drstrange_profile_araltf.jpg",
+                CoverImage = "https://res.cloudinary.com/goofy5752/image/upload/v1576664135/HeroUploads/drstrange_cover_yfxqzx.jpg",
+                RealName = "Benedict Cumberbatch",
+                Birthday = new DateTime(1973, 2, 1).Date,
+                Gender = "Male"
+            };
+
+            drstrangeMovies.Add(new Movie
+            {
+                Title = "Doctor Strange",
+                Hero = thanos
+            });
+
+            drstrange.Movies.AddRange(drstrangeMovies);
+
+            heroList.Add(drstrange);
 
             #endregion
 
