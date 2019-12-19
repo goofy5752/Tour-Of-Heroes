@@ -102,6 +102,20 @@ export class BlogDetailComponent implements OnInit {
       this.orderedComments.push(comment);
       this.sortBy('publishedOn');
     });
+
+    connection.on('DeleteComment', (commentId: number) => {
+      for (const i of this.orderedComments) {
+        if (i.id === commentId) {
+          if (i.isDeleted === true) {
+            this.toastr.warning(`Comment is already deleted`, 'Oops !');
+            return;
+          }
+          this.toastr.success(`You have deleted your comment`, 'Success !');
+          i.isDeleted = true;
+          return;
+        }
+      }
+    });
   }
 
   getPost(): void {
@@ -146,6 +160,14 @@ export class BlogDetailComponent implements OnInit {
         }
       }
     );
+  }
+
+  deleteComment(comment: Comments) {
+    this.commentService.deleteComment(comment).subscribe(
+      () => { },
+      error => {
+        console.log(error);
+      });
   }
 
   deletePost(blog: Blog, password: string): void {

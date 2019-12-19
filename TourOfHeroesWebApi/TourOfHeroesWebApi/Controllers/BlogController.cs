@@ -60,9 +60,11 @@
         [Route("blog/{id}")]
         public ActionResult<GetPostDetailDTO> PostDetail(int id)
         {
+            var userId = HttpContext.User.Claims.First(x => x.Type == "UserID").Value;
+
             _logger.LogInfo($"Fetching hero with id {id}...");
 
-            var detail = this._blogService.GetPostDetail(id);
+            var detail = this._blogService.GetPostDetail(userId, id);
 
             _logger.LogInfo($"Hero with id {id} successfully fetched.");
 
@@ -161,7 +163,7 @@
             if (!this._userValidator.CheckPasswordAsync(userId, password).Result)
                 return BadRequest(new { message = "Invalid password !" });
 
-            var postDetail = this._blogService.GetPostDetail(id);
+            var postDetail = this._blogService.GetPostDetail(userId, id);
 
             if (postDetail == null)
             {

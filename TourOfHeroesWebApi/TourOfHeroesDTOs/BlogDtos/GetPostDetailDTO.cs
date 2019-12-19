@@ -6,11 +6,13 @@
     using TourOfHeroesData.Models;
     using TourOfHeroesMapping.Mapping;
 
+    using CommentDtos;
+
     public class GetPostDetailDTO : IMapFrom<Blog>
     {
         public GetPostDetailDTO()
         {
-            this.Comments = new List<Comment>();
+            this.Comments = new List<CommentDTO>();
         }
 
         public int Id { get; set; }
@@ -27,8 +29,10 @@
 
         public int Dislikes { get; set; }
 
+        public string CurrentUser { get; set; }
+
         public DateTime PublishedOn { get; set; }
 
-        public IEnumerable<Comment> Comments { get; set; }
+        public IEnumerable<CommentDTO> Comments { get; set; }
     }
 }

@@ -9,7 +9,7 @@
     {
         IEnumerable<GetPostDTO> GetAllPosts();
 
-        GetPostDetailDTO GetPostDetail(int id);
+        GetPostDetailDTO GetPostDetail(string currentUser, int id);
 
         Task LikePost(string userId, int blogId);
 

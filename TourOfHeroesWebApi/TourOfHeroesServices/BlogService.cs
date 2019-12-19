@@ -39,7 +39,7 @@
             return allPosts;
         }
 
-        public GetPostDetailDTO GetPostDetail(int id)
+        public GetPostDetailDTO GetPostDetail(string currentUser, int id)
         {
             var post = this._blogRepository
                 .All()
@@ -56,6 +56,8 @@
                 post.Dislikes = this._userBlogDislikesRepository
                     .All()
                     .Count(x => x.BlogId == id);
+
+                post.CurrentUser = this._userRepository.All().FirstOrDefault(x => x.Id == currentUser)?.UserName;
             }
 
             return post;
