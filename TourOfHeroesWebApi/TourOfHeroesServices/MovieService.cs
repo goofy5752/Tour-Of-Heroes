@@ -66,7 +66,7 @@
                 .Where(x => x.UserId == movieDTO.UserId)
                 .ToList();
 
-            if (likedMovies == null || likedMovies.Any(x => x.Title == movieToLike.Title))
+            if (likedMovies == null || likedMovies.Any(x => x.Title == movieToLike.Title && x.PosterPath == movieToLike.PosterPath))
             {
                 throw new Exception("Movie is already liked.");
             }
