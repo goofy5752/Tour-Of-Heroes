@@ -1,4 +1,6 @@
-﻿namespace TourOfHeroesWebApi.Controllers
+﻿using System;
+
+namespace TourOfHeroesWebApi.Controllers
 {
     using System.Linq;
     using System.Threading.Tasks;
@@ -57,13 +59,20 @@
         [Route("likedmovies/{like}")]
         public async Task<ActionResult<AddToLikesMovieDTO>> LikeMovie([FromForm] AddToLikesMovieDTO movie)
         {
-            _logger.LogInfo($"Adding movie with title {movie.Title} to liked...");
+            try
+            {
+                _logger.LogInfo($"Adding movie with title {movie.Title} to liked...");
 
-            await this._movieService.LikeMovie(movie);
+                await this._movieService.LikeMovie(movie);
 
-            _logger.LogInfo($"Successfully liked movie with title {movie.Title}...");
+                _logger.LogInfo($"Successfully liked movie with title {movie.Title}...");
 
-            return this.Ok();
+                return this.Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
 
         #endregion

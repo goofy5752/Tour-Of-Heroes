@@ -12,5 +12,4 @@ export class User {
     role: string;
     comments: Comments[];
     blogs: Blog[];
-    likedMovies: LikedMovie[];
 }

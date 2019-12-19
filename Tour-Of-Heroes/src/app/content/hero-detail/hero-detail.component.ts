@@ -201,6 +201,11 @@ export class HeroDetailComponent implements OnInit {
       .subscribe(() => {
         console.log('dasdasdasdasdsd');
         this.toastr.success(`You liked a movie with title: ${title}`, 'Success !');
+      },
+      err => {
+        if (err.status === 400) {
+        this.toastr.error(`You already liked a movie with title: ${title}`, 'Oops !');
+        }
       });
   }
 

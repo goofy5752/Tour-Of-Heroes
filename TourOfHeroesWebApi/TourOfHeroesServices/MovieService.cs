@@ -61,6 +61,16 @@
                 VoteCount = int.Parse(movieDTO.VoteCount)
             };
 
+            var likedMovies = this._likedMovieRepository
+                .All()
+                .Where(x => x.UserId == movieDTO.UserId)
+                .ToList();
+
+            if (likedMovies == null || likedMovies.Any(x => x.Title == movieToLike.Title))
+            {
+                throw new Exception("Movie is already liked.");
+            }
+
             this._userRepository
                 .All()
                 .FirstOrDefault(u => u.Id == movieDTO.UserId)
@@ -77,7 +87,7 @@
                 .FirstOrDefault(x => x.Id == id);
 
             this._likedMovieRepository.Delete(movieToDislike);
-            
+
             await this._likedMovieRepository.SaveChangesAsync();
         }
     }
