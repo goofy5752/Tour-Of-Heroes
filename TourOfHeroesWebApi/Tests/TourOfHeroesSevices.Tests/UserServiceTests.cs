@@ -56,21 +56,21 @@
             repo.Verify(x => x.All(), Times.Once);
         }
 
-        //[Fact]
-        //public void UserRepositoryShouldReturnCorrectUserCount()
-        //{
-        //    var repo = new Mock<IRepository<ApplicationUser>>();
+        [Fact]
+        public void UserRepositoryShouldReturnCorrectUserCount()
+        {
+            var repo = new Mock<IRepository<ApplicationUser>>();
 
-        //    repo.Setup(r => r.All())
-        //        .Returns(GetTestData().AsQueryable());
+            repo.Setup(r => r.All())
+                .Returns(GetTestData().AsQueryable());
 
-        //    IUserService service = new UserService(repo.Object, null);
-        //    //service.UpdateUser("1", new UpdateUserDTO()
-        //    //{
-        //    //    Role = "Admin"
-        //    //});
+            IUserService service = new UserService(repo.Object, null);
+            service.UpdateUser("1", new UpdateUserDTO()
+            {
+                Role = "Admin"
+            });
 
-        //    Assert.Equal(3, service.GetAllUsers().Count());
-        //}
+            Assert.Equal(3, service.GetAllUsers().Count());
+        }
     }
 }
