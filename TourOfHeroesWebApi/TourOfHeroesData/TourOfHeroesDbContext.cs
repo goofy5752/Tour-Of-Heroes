@@ -23,13 +23,15 @@
 
         public DbSet<Hero> Heroes { get; set; }
 
-        public DbSet<Movie> Movies { get; set; }
-
         public DbSet<LikedMovie> LikedMovies { get; set; }
 
-        public DbSet<UserBlogLikes> UserBlogLikes { get; set; }
+        public DbSet<Movie> Movies { get; set; }
+
+        public DbSet<UserActivity> UserActivities { get; set; }
 
         public DbSet<UserBlogDislikes> UserBlogDislikes { get; set; }
+
+        public DbSet<UserBlogLikes> UserBlogLikes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
