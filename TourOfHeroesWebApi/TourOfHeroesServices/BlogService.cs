@@ -19,14 +19,16 @@
         private readonly IImageService _imageService;
         private readonly IRepository<UserBlogLikes> _userBlogLikesRepository;
         private readonly IRepository<UserBlogDislikes> _userBlogDislikesRepository;
+        private readonly IRepository<UserActivity> _userActivityRepository;
 
-        public BlogService(IRepository<Blog> blogRepository, IRepository<ApplicationUser> userRepository, IImageService imageService, IRepository<UserBlogLikes> userBlogLikesRepository, IRepository<UserBlogDislikes> userBlogDislikesRepository)
+        public BlogService(IRepository<Blog> blogRepository, IRepository<ApplicationUser> userRepository, IImageService imageService, IRepository<UserBlogLikes> userBlogLikesRepository, IRepository<UserBlogDislikes> userBlogDislikesRepository, IRepository<UserActivity> userActivityRepository)
         {
             _blogRepository = blogRepository;
             _userRepository = userRepository;
             _imageService = imageService;
             _userBlogLikesRepository = userBlogLikesRepository;
             _userBlogDislikesRepository = userBlogDislikesRepository;
+            _userActivityRepository = userActivityRepository;
         }
 
         public IEnumerable<GetPostDTO> GetAllPosts()
@@ -90,8 +92,18 @@
                 UserId = userId
             };
 
+            //TODO: FIX THE ISSUE
+            var activity = new UserActivity
+            {
+                Action = $"Like blog with title {blog?.Title}.",
+                RegisteredOn = DateTime.Now,
+                User = user,
+                UserId = user?.Id
+            };
+
             blog?.BlogUserLikes.Add(postLike);
             user?.UserBlogLikes.Add(postLike);
+            user?.Activity.Add(activity);
 
             await this._userRepository.SaveChangesAsync();
         }
@@ -123,8 +135,16 @@
                 UserId = userId
             };
 
+            var activity = new UserActivity
+            {
+                Action = $"Dislike blog with title {blog?.Title}.",
+                RegisteredOn = DateTime.Now,
+                UserId = user?.Id
+            };
+
             blog?.BlogUserDislikes.Add(postDislike);
             user?.UserBlogDislikes.Add(postDislike);
+            user?.Activity.Add(activity);
 
             await this._userRepository.SaveChangesAsync();
         }

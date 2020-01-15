@@ -1,5 +1,6 @@
 ﻿namespace TourOfHeroesDTOs.UserDtos
 {
+    using System.Collections.Generic;
 
     using TourOfHeroesData.Models;
     using TourOfHeroesMapping.Mapping;
@@ -17,5 +18,7 @@
         public string FullName { get; set; }
 
         public string Role { get; set; }
+
+        public List<UserActivity> Activity { get; set; }
     }
 }

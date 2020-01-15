@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TourOfHeroesData;
 
 namespace TourOfHeroesData.Migrations
 {
     [DbContext(typeof(TourOfHeroesDbContext))]
-    partial class TourOfHeroesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200115203724_EntityUpdate")]
+    partial class EntityUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -378,13 +380,15 @@ namespace TourOfHeroesData.Migrations
 
                     b.Property<string>("Action");
 
+                    b.Property<string>("ApplicationUserId");
+
                     b.Property<DateTime>("RegisteredOn");
 
-                    b.Property<string>("UserId");
+                    b.Property<int>("UserId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("ApplicationUserId");
 
                     b.ToTable("UserActivities");
                 });
@@ -507,9 +511,9 @@ namespace TourOfHeroesData.Migrations
 
             modelBuilder.Entity("TourOfHeroesData.Models.UserActivity", b =>
                 {
-                    b.HasOne("TourOfHeroesData.Models.ApplicationUser", "User")
+                    b.HasOne("TourOfHeroesData.Models.ApplicationUser")
                         .WithMany("Activity")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("ApplicationUserId");
                 });
 
             modelBuilder.Entity("TourOfHeroesData.Models.UserBlogDislikes", b =>

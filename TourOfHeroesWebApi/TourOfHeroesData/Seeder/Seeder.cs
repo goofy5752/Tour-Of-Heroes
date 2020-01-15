@@ -37,6 +37,7 @@ namespace TourOfHeroesData.Seeder
                 {
                     UserName = "Admin",
                     Email = "Admin@admin.com",
+                    ProfileImage = "https://icon-library.net/images/no-profile-picture-icon/no-profile-picture-icon-7.jpg",
                     FullName = "Admin Adminov",
                 };
 
