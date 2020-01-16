@@ -1,6 +1,6 @@
 import { Blog } from './blog';
 import { Comments } from './comment';
-import { LikedMovie } from './likedMovie';
+import { UserActivity } from './userActivity';
 
 export class User {
     id: string;
@@ -12,4 +12,5 @@ export class User {
     role: string;
     comments: Comments[];
     blogs: Blog[];
+    activity: UserActivity[];
 }
