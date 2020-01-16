@@ -61,11 +61,11 @@
         {
             _logger.LogInfo($"Fetching user with id {id}...");
 
-            var hero = this._userService.GetUserDetail(id);
+            var userDetail = this._userService.GetUserDetail(id);
 
             _logger.LogInfo($"User with id {id} successfully fetched.");
 
-            return hero;
+            return userDetail;
         }
 
         #endregion
