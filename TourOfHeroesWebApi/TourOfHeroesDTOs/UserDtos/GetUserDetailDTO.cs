@@ -19,6 +19,6 @@
 
         public string Role { get; set; }
 
-        public List<UserActivity> Activity { get; set; }
+        public List<UserActivityDTO> Activity { get; set; }
     }
 }
