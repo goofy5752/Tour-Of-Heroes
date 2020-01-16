@@ -92,7 +92,6 @@
                 UserId = userId
             };
 
-            //TODO: FIX THE ISSUE
             var activity = new UserActivity
             {
                 Action = $"Like blog with title {blog?.Title}.",
@@ -103,6 +102,7 @@
 
             blog?.BlogUserLikes.Add(postLike);
             user?.UserBlogLikes.Add(postLike);
+            await this._userActivityRepository.AddAsync(activity);
             user?.Activity.Add(activity);
 
             await this._userRepository.SaveChangesAsync();
@@ -139,11 +139,13 @@
             {
                 Action = $"Dislike blog with title {blog?.Title}.",
                 RegisteredOn = DateTime.Now,
+                User = user,
                 UserId = user?.Id
             };
 
             blog?.BlogUserDislikes.Add(postDislike);
             user?.UserBlogDislikes.Add(postDislike);
+            await this._userActivityRepository.AddAsync(activity);
             user?.Activity.Add(activity);
 
             await this._userRepository.SaveChangesAsync();

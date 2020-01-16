@@ -134,15 +134,15 @@
             {
                 var userId = HttpContext.User.Claims.First(x => x.Type == "UserID").Value;
 
-                _logger.LogInfo($"Liked post with id {id} ...");
+                _logger.LogInfo($"Disliked post with id {id} ...");
 
                 await this._blogService.DislikePost(userId, int.Parse(id));
 
-                _logger.LogInfo($"Successfully liked post with id {id}...");
+                _logger.LogInfo($"Successfully disliked post with id {id}...");
 
                 return this.Ok();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return this.BadRequest();
             }
