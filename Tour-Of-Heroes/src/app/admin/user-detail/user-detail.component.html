@@ -62,6 +62,9 @@
                         <thead>
                             <tr>
                                 <th>
+                                    Id
+                                </th>
+                                <th>
                                     Action
                                 </th>
                                 <th>
@@ -70,7 +73,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let user of user.activity">
+                            <tr *ngFor="let user of user.activity; let i = index;">
+                                <td>{{i + 1}}</td>
                                 <td>{{user.action}}</td>
                                 <td>{{user.registeredOn | date:'medium'}}</td>
                             </tr>
