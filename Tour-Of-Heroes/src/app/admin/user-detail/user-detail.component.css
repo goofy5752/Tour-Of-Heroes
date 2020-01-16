@@ -1,3 +1,8 @@
 .container {
     margin-left: 0;
 }
+
+.userActivity {
+    height: 200px;
+    overflow-y: scroll;
+}
