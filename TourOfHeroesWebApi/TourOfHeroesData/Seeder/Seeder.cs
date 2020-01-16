@@ -39,6 +39,7 @@ namespace TourOfHeroesData.Seeder
                     Email = "Admin@admin.com",
                     ProfileImage = "https://icon-library.net/images/no-profile-picture-icon/no-profile-picture-icon-7.jpg",
                     FullName = "Admin Adminov",
+                    RegisteredOn = DateTime.Now
                 };
 
                 _userManager.CreateAsync(admin, adminPassword).Wait();
