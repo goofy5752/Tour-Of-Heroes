@@ -1,7 +1,8 @@
 ﻿namespace TourOfHeroesServices
 {
-    using System.Collections.Generic;
+    using System;
     using System.Linq;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using TourOfHeroesData.Common.Contracts;
@@ -20,14 +21,16 @@
         private readonly IRepository<ApplicationUser> _userRepository;
         private readonly IHubContext<CommentHub, ITypedHubClient> _hubContext;
         private readonly IRepository<Blog> _blogRepository;
+        private readonly IRepository<UserActivity> _userActivityRepository;
 
-        public CommentService(IRepository<Comment> commentRepository, IRepository<Hero> heroRepository, IRepository<ApplicationUser> userRepository, IHubContext<CommentHub, ITypedHubClient> hubContext, IRepository<Blog> blogRepository)
+        public CommentService(IRepository<Comment> commentRepository, IRepository<Hero> heroRepository, IRepository<ApplicationUser> userRepository, IHubContext<CommentHub, ITypedHubClient> hubContext, IRepository<Blog> blogRepository, IRepository<UserActivity> userActivityRepository)
         {
             _commentRepository = commentRepository;
             _heroRepository = heroRepository;
             _userRepository = userRepository;
             _hubContext = hubContext;
             _blogRepository = blogRepository;
+            _userActivityRepository = userActivityRepository;
         }
 
         public IEnumerable<Comment> GetAllComments()
@@ -37,9 +40,7 @@
 
         public async Task CreateComment(CreateCommentDTO commentDto)
         {
-
             var userObj = this._userRepository.All().FirstOrDefault(x => x.Id == commentDto.UserId);
-
 
             if (commentDto.Action == "Hero")
             {
@@ -54,10 +55,20 @@
                     UserId = userObj.Id
                 };
 
+                var activity = new UserActivity
+                {
+                    Action = $"Added comment to hero '{heroObj.Name}'",
+                    RegisteredOn = DateTime.Now,
+                    UserId = userObj.Id,
+                    User = userObj
+                };
+
                 await _hubContext.Clients.All.BroadcastComment(commentObj);
 
                 heroObj.Comments.Add(commentObj);
                 userObj.Comments.Add(commentObj);
+                await this._userActivityRepository.AddAsync(activity);
+                userObj.Activity.Add(activity);
 
                 await this._heroRepository.SaveChangesAsync();
             }
@@ -74,10 +85,20 @@
                     UserId = userObj.Id
                 };
 
+                var activity = new UserActivity
+                {
+                    Action = $"Added comment to post with title '{blogObj.Title}'",
+                    RegisteredOn = DateTime.Now,
+                    UserId = userObj.Id,
+                    User = userObj
+                };
+
                 await _hubContext.Clients.All.BroadcastComment(commentObj);
 
                 blogObj.Comments.Add(commentObj);
                 userObj.Comments.Add(commentObj);
+                await this._userActivityRepository.AddAsync(activity);
+                userObj.Activity.Add(activity);
 
                 await this._blogRepository.SaveChangesAsync();
             }
