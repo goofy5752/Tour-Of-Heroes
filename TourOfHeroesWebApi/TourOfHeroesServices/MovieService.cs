@@ -18,12 +18,14 @@
         private readonly IRepository<Movie> _movieRepository;
         private readonly IRepository<LikedMovie> _likedMovieRepository;
         private readonly IRepository<ApplicationUser> _userRepository;
+        private readonly IRepository<UserActivity> _userActivityRepository;
 
-        public MovieService(IRepository<Movie> movieRepository, IRepository<LikedMovie> likedMovieRepository, IRepository<ApplicationUser> userRepository)
+        public MovieService(IRepository<Movie> movieRepository, IRepository<LikedMovie> likedMovieRepository, IRepository<ApplicationUser> userRepository, IRepository<UserActivity> userActivityRepository)
         {
             _movieRepository = movieRepository;
             _likedMovieRepository = likedMovieRepository;
             _userRepository = userRepository;
+            _userActivityRepository = userActivityRepository;
         }
 
         public IEnumerable<Movie> GetAllMovies()
@@ -66,17 +68,28 @@
                 .Where(x => x.UserId == movieDTO.UserId)
                 .ToList();
 
+            var user = this._userRepository
+                .All()
+                .FirstOrDefault(u => u.Id == movieDTO.UserId);
+
             if (likedMovies == null || likedMovies.Any(x => x.Title == movieToLike.Title && x.PosterPath == movieToLike.PosterPath))
             {
                 throw new Exception("Movie is already liked.");
             }
 
-            this._userRepository
-                .All()
-                .FirstOrDefault(u => u.Id == movieDTO.UserId)
-                ?.LikedMovies.Add(movieToLike);
+            var activity = new UserActivity
+            {
+                Action = $"Like movie with title '{movieToLike.Title}'",
+                RegisteredOn = DateTime.Now,
+                UserId = movieDTO.UserId,
+            };
 
             await this._likedMovieRepository.AddAsync(movieToLike);
+            await this._userActivityRepository.AddAsync(activity);
+
+            user?.LikedMovies.Add(movieToLike);
+            user?.Activity.Add(activity);
+
             await this._userRepository.SaveChangesAsync();
         }
 
@@ -85,6 +98,21 @@
             var movieToDislike = this._likedMovieRepository
                 .All()
                 .FirstOrDefault(x => x.Id == id);
+
+            var activity = new UserActivity
+            {
+                Action = $"Dislike movie with title '{movieToDislike?.Title}'",
+                RegisteredOn = DateTime.Now,
+                UserId = movieToDislike?.UserId,
+            };
+
+            await this._userActivityRepository.AddAsync(activity);
+
+            this._userRepository
+                .All()
+                .FirstOrDefault(x => x.Id == movieToDislike.UserId)
+                ?.Activity
+                .Add(activity);
 
             this._likedMovieRepository.Delete(movieToDislike);
 
