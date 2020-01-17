@@ -20,8 +20,9 @@
         private readonly IRepository<UserBlogLikes> _userBlogLikesRepository;
         private readonly IRepository<UserBlogDislikes> _userBlogDislikesRepository;
         private readonly IRepository<UserActivity> _userActivityRepository;
+        private readonly IRepository<Comment> _commentRepository;
 
-        public BlogService(IRepository<Blog> blogRepository, IRepository<ApplicationUser> userRepository, IImageService imageService, IRepository<UserBlogLikes> userBlogLikesRepository, IRepository<UserBlogDislikes> userBlogDislikesRepository, IRepository<UserActivity> userActivityRepository)
+        public BlogService(IRepository<Blog> blogRepository, IRepository<ApplicationUser> userRepository, IImageService imageService, IRepository<UserBlogLikes> userBlogLikesRepository, IRepository<UserBlogDislikes> userBlogDislikesRepository, IRepository<UserActivity> userActivityRepository, IRepository<Comment> commentRepository)
         {
             _blogRepository = blogRepository;
             _userRepository = userRepository;
@@ -29,6 +30,7 @@
             _userBlogLikesRepository = userBlogLikesRepository;
             _userBlogDislikesRepository = userBlogDislikesRepository;
             _userActivityRepository = userActivityRepository;
+            _commentRepository = commentRepository;
         }
 
         public IEnumerable<GetPostDTO> GetAllPosts()
@@ -177,6 +179,16 @@
         public async Task DeletePost(int id)
         {
             var postToDelete = this._blogRepository.All().FirstOrDefault(x => x.Id == id);
+
+            var commentsToDelete = this._commentRepository
+                .All()
+                .Where(c => c.BlogId == id)
+                .ToList();
+
+            foreach (var comment in commentsToDelete)
+            {
+                this._commentRepository.Delete(comment);
+            }
 
             if (postToDelete != null) this._blogRepository.Delete(postToDelete);
 
