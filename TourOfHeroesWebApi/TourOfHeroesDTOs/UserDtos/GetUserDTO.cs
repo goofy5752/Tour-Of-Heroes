@@ -6,6 +6,7 @@
     using TourOfHeroesData.Models;
     using TourOfHeroesMapping.Mapping;
 
+    using BlogDtos;
     using CommentDtos;
 
     public class GetUserDTO : IMapFrom<ApplicationUser>
@@ -24,6 +25,6 @@
 
         public IEnumerable<CommentDTO> Comments { get; set; }
 
-        public IEnumerable<Blog> Blogs { get; set; }
+        public IEnumerable<GetPostDetailDTO> Blogs { get; set; }
     }
 }
