@@ -56,3 +56,19 @@
 .break-word {
     word-break: break-word;
 }
+
+.right {
+    float: right;
+}
+
+.left {
+    float: left;
+}
+
+.article-image {
+    width: 100%;
+}
+
+.post a {
+    color: black;
+}

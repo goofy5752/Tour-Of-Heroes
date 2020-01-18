@@ -21,7 +21,7 @@
 <div class="row" style="padding: 25px;">
 
     <!-- Post Content Column -->
-    <div class="col-lg-8">
+    <div class="col-lg-9">
 
         <!-- Title -->
         <h1 class="mt-4">{{title}}</h1>
@@ -104,6 +104,29 @@
                 </li>
             </ul>
             <hr>
+        </div>
+    </div>
+    <div class="col-3">
+
+        <h1 class="mt-4">Latest Posts</h1>
+
+        <hr class="mt-5">
+
+        <div class="post mb-5" *ngFor="let post of blog.latestPosts">
+            <a routerLink="/blog/{{post.id}}">
+                <img src="{{post.blogImage}}" width="100%" height="178px">
+                <div class="article-body">
+                    <h3 class="article-title">{{post.title}}</h3>
+                    <div class="article-footer">
+                        <div class="left">
+                            <span>{{publishedOn | date: 'medium'}}</span>
+                        </div>
+                        <div class="right">
+                            <span class="views-count"><i class="fa fa-comment mr-1"></i>{{post.comments.length}}</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
         </div>
     </div>
 </div>

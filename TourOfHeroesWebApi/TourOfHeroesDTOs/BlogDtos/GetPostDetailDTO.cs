@@ -34,5 +34,7 @@
         public DateTime PublishedOn { get; set; }
 
         public IEnumerable<CommentDTO> Comments { get; set; }
+
+        public IEnumerable<GetLatestPostsDTO> LatestPosts { get; set; }
     }
 }

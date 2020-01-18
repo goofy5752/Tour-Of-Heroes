@@ -61,7 +61,17 @@
                     .All()
                     .Count(x => x.BlogId == id);
 
-                post.CurrentUser = this._userRepository.All().FirstOrDefault(x => x.Id == currentUser)?.UserName;
+                post.CurrentUser = this._userRepository
+                    .All()
+                    .FirstOrDefault(x => x.Id == currentUser)
+                    ?.UserName;
+
+                post.LatestPosts = this._blogRepository
+                    .All()
+                    .OrderBy(x => x.PublishedOn)
+                    .Take(6)
+                    .To<GetLatestPostsDTO>()
+                    .ToList();
             }
 
             return post;
