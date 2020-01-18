@@ -1,4 +1,6 @@
+import { LatestPosts } from './latestPosts';
 import { Comments } from './comment';
+
 export class Blog {
     id: number;
     authorUserName: string;
@@ -9,4 +11,5 @@ export class Blog {
     likes: number;
     dislikes: number;
     comments: Comments[];
+    latestPosts: LatestPosts[];
 }
