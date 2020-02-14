@@ -15,6 +15,8 @@
 
         public string ProfileImage { get; set; }
 
+        public string JobTitle { get; set; }
+
         public string FullName { get; set; }
 
         public string Role { get; set; }

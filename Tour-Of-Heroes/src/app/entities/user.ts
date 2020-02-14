@@ -8,6 +8,7 @@ export class User {
     email: string;
     profileImage: string;
     fullName: string;
+    jobTitle: string;
     registeredOn: Date;
     role: string;
     comments: Comments[];

@@ -22,8 +22,8 @@ export class UserControllerComponent implements OnInit {
   order = 'fullName';
   reverse: boolean;
   userFilter: any = {
-    userName: '',
     fullName: '',
+    jobTitle: '',
     email: ''
    };
   baseUrl = 'https://localhost:44353/api/users';

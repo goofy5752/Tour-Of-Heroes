@@ -16,8 +16,8 @@
         <input class="form-control" formControlName="FullName">
     </div>
     <div class="form-group">
-        <label>Editor Role Code</label>
-        <input class="form-control" formControlName="EditorRoleCode">
+        <label>Job Title</label>
+        <input class="form-control" formControlName="JobTitle">
     </div>
     <div formGroupName="Passwords">
         <div class="form-group required">
@@ -41,5 +41,9 @@
         <div class="form-group col-md-8 offset-md-2">
             <button type="submit" class="btn btn-lg btn-block" [disabled]="!service.formModel.valid">Sign Up</button>
         </div>
+    </div>
+    <div class="form-group">
+        <label>Editor Role Code (OPTIONAL)</label>
+        <input class="form-control" formControlName="EditorRoleCode">
     </div>
 </form>

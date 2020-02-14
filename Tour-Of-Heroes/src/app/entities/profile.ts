@@ -1,3 +1,4 @@
+import { LikedMovie } from './likedMovie';
 import { Blog } from './blog';
 import { Comments } from './comment';
 
@@ -10,6 +11,8 @@ export class Profile {
     registeredOn: Date;
     postLikes: number;
     postDislikes: number;
+    jobTitle: string;
+    likedMovies: LikedMovie[];
     comments: Comments[];
     blogs: Blog[];
 }

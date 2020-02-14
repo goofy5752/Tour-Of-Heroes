@@ -10,6 +10,8 @@
 
         public string FullName { get; set; }
 
+        public string JobTitle { get; set; }
+
         public string EditorRoleCode { get; set; }
     }
 }

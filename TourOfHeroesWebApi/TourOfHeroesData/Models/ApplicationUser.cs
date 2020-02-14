@@ -27,6 +27,9 @@ namespace TourOfHeroesData.Models
         [Column(TypeName = "nvarchar(150)")]
         public string FullName { get; set; }
 
+        [Column(TypeName = "nvarchar(150)")]
+        public string JobTitle { get; set; }
+
         public string ProfileImage { get; set; }
 
         public DateTime? RegisteredOn { get; set; }

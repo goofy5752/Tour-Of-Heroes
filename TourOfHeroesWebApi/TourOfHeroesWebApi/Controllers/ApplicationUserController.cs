@@ -43,6 +43,7 @@
                 UserName = model.UserName,
                 Email = model.Email,
                 FullName = model.FullName,
+                JobTitle = model.JobTitle,
                 RegisteredOn = DateTime.Now,
                 ProfileImage = "https://icon-library.net/images/no-profile-picture-icon/no-profile-picture-icon-7.jpg"
             };
@@ -68,7 +69,6 @@
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }

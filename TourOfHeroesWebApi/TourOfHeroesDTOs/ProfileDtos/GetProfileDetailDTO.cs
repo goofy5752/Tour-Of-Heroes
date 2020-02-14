@@ -19,6 +19,8 @@
 
         public string FullName { get; set; }
 
+        public string JobTitle { get; set; }
+
         public int PostLikes { get; set; }
 
         public int PostDislikes { get; set; }
