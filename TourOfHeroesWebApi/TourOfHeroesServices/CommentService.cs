@@ -108,7 +108,11 @@
         {
             var commentToDelete = this._commentRepository.All().FirstOrDefault(x => x.Id == id);
 
-            if (commentToDelete != null) commentToDelete.IsDeleted = true;
+            if (commentToDelete != null)
+            {
+                commentToDelete.IsDeleted = true;
+                commentToDelete.DeletedOn = DateTime.Now;
+            }
 
             await _hubContext.Clients.All.DeleteComment(id);
 

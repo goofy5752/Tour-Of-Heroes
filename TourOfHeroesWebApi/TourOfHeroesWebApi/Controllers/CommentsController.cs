@@ -61,7 +61,7 @@
 
             _logger.LogInfo($"Successfully deleted comment with id {id}...");
 
-            return this.NoContent();
+            return this.Ok();
         }
 
         #endregion
