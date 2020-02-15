@@ -33,25 +33,55 @@
         </div>
         <div class="col-lg-6 order-lg-1 text-center">
             <img src="{{user.profileImage}}" class="mx-auto img-fluid img-circle d-block" alt="avatar" width="150px" height="150px">
-            <div class="row">
-                <div class="col-lg-12">
+            <div class="row text-center">
+                <div class="col-lg-6">
                     <h4>
-                        Username: {{user.userName}}
+                        Username:
                     </h4>
                 </div>
-                <div class="col-lg-12">
+                <div class="col-lg-6">
                     <h4>
-                        Full Name: {{user.fullName}}
+                        {{user.userName}}
                     </h4>
                 </div>
-                <div class="col-lg-12">
+                <div class="col-lg-6">
                     <h4>
-                        Email: {{user.email}}
+                        Full Name:
                     </h4>
                 </div>
-                <div class="col-lg-12 ">
+                <div class="col-lg-6">
                     <h4>
-                        Role: {{user.role}}
+                        {{user.fullName}}
+                    </h4>
+                </div>
+                <div class="col-lg-6">
+                    <h4>
+                        Job Title:
+                    </h4>
+                </div>
+                <div class="col-lg-6">
+                    <h4>
+                        {{user.jobTitle}}
+                    </h4>
+                </div>
+                <div class="col-lg-6">
+                    <h4>
+                        Email:
+                    </h4>
+                </div>
+                <div class="col-lg-6">
+                    <h4>
+                        {{user.email}}
+                    </h4>
+                </div>
+                <div class="col-lg-6">
+                    <h4>
+                        Role:
+                    </h4>
+                </div>
+                <div class="col-lg-6">
+                    <h4>
+                        {{user.role}}
                     </h4>
                 </div>
             </div>
