@@ -21,18 +21,26 @@
                 </div>
                 <div class="col-md-6">
                     <div class="profile-head">
-                        <h5>
-                            {{profile.fullName}}
-                        </h5>
-                        <h6>
-                            {{profile.jobTitle}}
-                        </h6>
-                        <p class="proile-rating">RANKINGS : <span>8/10</span></p>
-                        <ul class="nav nav-tabs" id="myTab" role="tablist">
-                            <li>
-                                <h3>My info</h3>
-                            </li>
-                        </ul>
+                        <div class="text-left">
+                            <h5>
+                                {{profile.fullName}}
+                            </h5>
+                            <h6>
+                                {{profile.jobTitle}}
+                            </h6>
+
+
+                            <div class="text-right">
+                                <button (click)="getPosition()" class="btn btn-success">Show my location</button>
+                                <div id="demo"></div>
+                            </div>
+                            <p class="proile-rating">RANKINGS : <span>8/10</span></p>
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li>
+                                    <h3>My info</h3>
+                                </li>
+                            </ul>
+                        </div>
                         <div class="tab-content profile-tab" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                 <div class="row">
@@ -50,7 +58,7 @@
                                     <div class="col-md-6">
                                         <input type="text" #email class="inputCustom" placeholder="{{profile.email}}" />
                                         <button type="button" class="btn btn-success btnCust" (click)="updateEmail(email.value)"><i class="fa fa-floppy-o"
-                                    aria-hidden="true"></i></button>
+                                                aria-hidden="true"></i></button>
                                     </div>
                                 </div>
                                 <div class="row">

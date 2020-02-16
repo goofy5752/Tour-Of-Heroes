@@ -1,3 +1,4 @@
+import { LocationService } from './../../services/location.service';
 import { ToastrService } from 'ngx-toastr';
 import { ProfileService } from './../../services/profile.service';
 import { Profile } from './../../entities/profile';
@@ -16,10 +17,12 @@ export class ProfileComponent implements OnInit {
   @ViewChild('profileImage', { static: false }) profileImage: any;
   userId = '';
   profileImageFile: File;
+  x = document.getElementById('demo');
 
   constructor(private titleService: Title,
               private profileService: ProfileService,
-              private toastr: ToastrService) { }
+              private toastr: ToastrService,
+              private locationService: LocationService) { }
 
   ngOnInit() {
     const token = JSON.stringify(localStorage.getItem('token'));
@@ -81,5 +84,16 @@ export class ProfileComponent implements OnInit {
         }
       }
     );
+  }
+
+  getPosition() {
+    this.locationService.getPosition().then(pos => {
+         console.log(`Positon: ${pos.lng} ${pos.lat}`);
+         const latlon = pos.lat + ',' + pos.lng;
+         const imgUrl = 'https://maps.googleapis.com/maps/api/staticmap?center' + latlon +
+          '&zoom=14&size=400x300&sensor=false&key=AIzaSyAas9bVlq4nMTk4iB88cngmN6tEOTEFUjw';
+         console.log(imgUrl);
+         document.getElementById('demo').innerHTML = '<img src=\'' + imgUrl + '\'>';
+      });
   }
 }
