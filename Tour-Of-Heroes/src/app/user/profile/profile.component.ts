@@ -88,7 +88,7 @@ export class ProfileComponent implements OnInit {
 
   getPosition() {
     this.locationService.getPosition().then(pos => {
-         console.log(`Positon: ${pos.lng} ${pos.lat}`);
+         console.log(`Positon: ${pos.lat} ${pos.lng}`);
          const latlon = pos.lat + ',' + pos.lng;
          const imgUrl = 'https://maps.googleapis.com/maps/api/staticmap?center' + latlon +
           '&zoom=14&size=400x300&sensor=false&key=AIzaSyAas9bVlq4nMTk4iB88cngmN6tEOTEFUjw';
