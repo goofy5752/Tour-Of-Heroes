@@ -187,7 +187,9 @@
 }
 
 .sidebar-nav ul>li>a:focus,
-.sidebar-nav ul>li>a:hover {
+.sidebar-nav ul>li>a:hover,
+.sidebar-nav ul>li>a:visited,
+.sidebar-nav ul>li>a:active {
     background-color: rgba(162, 162, 162, .09);
     border-left-color: #1e88e5
 }

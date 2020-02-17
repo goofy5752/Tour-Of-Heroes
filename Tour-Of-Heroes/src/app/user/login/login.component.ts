@@ -1,3 +1,4 @@
+import { Title } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../../services/user.service';
 import { Component, OnInit } from '@angular/core';
@@ -16,12 +17,17 @@ export class LoginComponent implements OnInit {
     Password: ''
   };
 
-  constructor(private service: UserService, private router: Router, private toastr: ToastrService, public globals: Globals) { }
+  constructor(private service: UserService,
+              private router: Router,
+              private toastr: ToastrService,
+              public globals: Globals,
+              private titleService: Title) { }
 
   ngOnInit() {
     if (localStorage.getItem('token') != null) {
       this.router.navigateByUrl('/heroes?page=1');
     }
+    this.titleService.setTitle('Login');
   }
 
   onSubmit(form: NgForm) {

@@ -1,3 +1,4 @@
+import { Title } from '@angular/platform-browser';
 import { UserService } from '../../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
@@ -10,13 +11,14 @@ import { Router } from '@angular/router';
 })
 export class RegistrationComponent implements OnInit {
 
-  constructor(public service: UserService, private router: Router, private toastr: ToastrService) { }
+  constructor(public service: UserService, private router: Router, private toastr: ToastrService, private titleService: Title) { }
 
   ngOnInit() {
     this.service.formModel.reset();
     if (localStorage.getItem('token') != null) {
       this.router.navigateByUrl('/heroes?page=1');
     }
+    this.titleService.setTitle('Register');
   }
 
   onSubmit() {

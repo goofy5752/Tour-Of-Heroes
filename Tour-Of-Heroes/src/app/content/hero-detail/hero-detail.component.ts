@@ -124,7 +124,6 @@ export class HeroDetailComponent implements OnInit {
   save(): void {
     this.heroService.updateHero(this.hero).subscribe(
       () => {
-        this.goBack();
         this.toastr.success(`You have entered new value: ${this.hero.name}`, 'Successfully renamed !');
       },
       error => {
