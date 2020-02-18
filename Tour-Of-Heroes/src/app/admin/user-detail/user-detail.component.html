@@ -103,10 +103,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let user of user.activity; let i = index;">
+                            <tr *ngFor="let activity of activity | orderBy:'registeredOn' : true; let i = index;">
                                 <td>{{i + 1}}</td>
-                                <td>{{user.action}}</td>
-                                <td>{{user.registeredOn | date:'medium'}}</td>
+                                <td>{{activity.action}}</td>
+                                <td>{{activity.registeredOn | date:'medium'}}</td>
                             </tr>
                         </tbody>
                     </table>

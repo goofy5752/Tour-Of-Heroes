@@ -4,6 +4,7 @@ import { Title } from '@angular/platform-browser';
 import { UserService } from './../../services/user.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { UserActivity } from 'src/app/entities/userActivity';
 
 @Component({
   selector: 'app-user-detail',
@@ -13,6 +14,7 @@ import { ActivatedRoute } from '@angular/router';
 export class UserDetailComponent implements OnInit {
   userId = '';
   @Input() user: User;
+  activity;
 
   constructor(private route: ActivatedRoute,
               private userService: UserService,
@@ -31,6 +33,7 @@ export class UserDetailComponent implements OnInit {
       .subscribe(user => {
         this.userId = id;
         this.user = user;
+        this.activity = user.activity;
         this.titleService.setTitle(`${this.user.fullName} Details`);
       });
   }
