@@ -42,6 +42,7 @@ import { FilterPipeModule } from 'ngx-filter-pipe';
 import { UserControllerComponent } from './admin/user-controller/user-controller.component';
 import { UserDetailComponent } from './admin/user-detail/user-detail.component';
 import { LikedMoviesComponent } from './user/liked-movies/liked-movies.component';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 @NgModule({
   imports: [
@@ -57,6 +58,7 @@ import { LikedMoviesComponent } from './user/liked-movies/liked-movies.component
     NgxPaginationModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    MDBBootstrapModule.forRoot(),
     ConfirmationPopoverModule.forRoot({
       confirmButtonType: 'danger' // set defaults here
     })
