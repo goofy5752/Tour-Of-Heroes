@@ -6,6 +6,12 @@
     padding-left: 250px;
 }
 
+@media only screen and (max-width:991px) and (min-width:1px) {
+    .container-fluid {
+        padding-left: 0px;
+    }
+}
+
 .row .col-1,
 .row .col-10,
 .row .col-11,
