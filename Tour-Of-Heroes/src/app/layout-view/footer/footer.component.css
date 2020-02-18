@@ -2,3 +2,9 @@
     margin-left: 240px;
     background-color: white;
 }
+
+@media only screen and (max-width:991px) and (min-width:1px) {
+    .navbar {
+        margin-left: 0px;
+    }
+}

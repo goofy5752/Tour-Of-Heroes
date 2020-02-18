@@ -1,6 +1,6 @@
 .backgroundCustom {
     background: -webkit-linear-gradient(left, #bbbad1, #c4e5ee);
-    height: 87vh;
+    height: 100%;
 }
 
 .emp-profile {
@@ -11,6 +11,12 @@
     padding-left: 240px;
     padding-top: 50px;
     height: 100%;
+}
+
+@media only screen and (max-width:991px) and (min-width:1px) {
+    .emp-profile {
+        padding-left: 0px;
+    }
 }
 
 .profile-img {

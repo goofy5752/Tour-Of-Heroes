@@ -9,7 +9,7 @@
     <hr>
 </div>
 <div class="row text-center p-5">
-    <div class="col-md-3 mb-5" *ngFor="let singleMovie of likedMovies | filterBy: movieFilter | paginate: { itemsPerPage: 12, currentPage: pageNumber, totalItems:Count }">
+    <div class="col-sm-12 col-md-6 col-lg-3 mb-5" *ngFor="let singleMovie of likedMovies | filterBy: movieFilter | paginate: { itemsPerPage: 12, currentPage: pageNumber, totalItems:Count }">
         <div class="moviesCustom">
             <img class="thumbnail" src="http://image.tmdb.org/t/p/w500/{{singleMovie.posterPath}}" width="100%" height="320px">
             <h4 title="{{singleMovie.title}}">{{singleMovie.title}}</h4>
