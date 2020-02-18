@@ -1,6 +1,6 @@
 <div class="container container-lg">
     <div class="row mt-2" style="height: 100%;">
-        <div class="col-md-4 mb-2" *ngFor="let hero of Hero | paginate: { itemsPerPage: 9, currentPage: pageNumber, totalItems:Count }">
+        <div class="col-lg-4 col-md-6 col-sm-6 mb-2" *ngFor="let hero of Hero | paginate: { itemsPerPage: 9, currentPage: pageNumber, totalItems:Count }">
             <ng-template #customTemplate let-options="options">
                 <div [class]="'popover ' + options.placement" style="display: block">
                     <div class="fond">
