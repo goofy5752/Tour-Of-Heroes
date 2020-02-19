@@ -21,7 +21,7 @@
 <div class="row" style="padding: 25px;">
 
     <!-- Post Content Column -->
-    <div class="col-lg-9">
+    <div class="col-lg-9 col-md-9 col-sm-8">
 
         <!-- Title -->
         <h1 class="mt-4">{{title}}</h1>
@@ -58,10 +58,10 @@
                 </button>
             </span>
             <span class="likeButton ml-2">
-                    <button class="btn btn-danger" (click)="dislikePost()">
-                        <i class="fa fa-thumbs-down"></i>
-                        Dislike | {{dislikes}}
-                    </button>
+                <button class="btn btn-danger" (click)="dislikePost()">
+                    <i class="fa fa-thumbs-down"></i>
+                    Dislike | {{dislikes}}
+                </button>
             </span>
         </div>
 
@@ -98,21 +98,20 @@
                         <p class="text-danger" *ngIf="comment.isDeleted">
                             Comment is deleted
                         </p>
-                        <button *ngIf="blog.currentUser === comment.userName" class="btn btn-danger pull-right mb-1 mr-1" (click)="deleteComment(comment)" title="Delete comment"><i class="fa fa-trash"
-                            aria-hidden="true"></i></button>
+                        <button *ngIf="blog.currentUser === comment.userName" class="btn btn-danger pull-right mb-1 mr-1" (click)="deleteComment(comment)" title="Delete comment"><i class="fa fa-trash" aria-hidden="true"></i></button>
                     </div>
                 </li>
             </ul>
             <hr>
         </div>
     </div>
-    <div class="col-3">
+    <div class="col-lg-3 col-md-3 col-sm-12">
 
         <h1 class="mt-4">Latest Posts</h1>
 
         <hr class="mt-5">
 
-        <div class="post mb-5" *ngFor="let post of blog.latestPosts">
+        <div class="post mb-5" *ngFor="let post of latestPosts">
             <a routerLink="/blog/{{post.id}}">
                 <img src="{{post.blogImage}}" width="100%" height="178px">
                 <div class="article-body">

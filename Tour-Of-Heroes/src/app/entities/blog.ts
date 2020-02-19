@@ -10,6 +10,7 @@ export class Blog {
     content: string;
     likes: number;
     dislikes: number;
+    currentUser: string;
     comments: Comments[];
     latestPosts: LatestPosts[];
 }

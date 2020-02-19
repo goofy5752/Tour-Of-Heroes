@@ -25,6 +25,7 @@ export class BlogDetailComponent implements OnInit {
   title = '';
   authorUserName = '';
   blogImage = '';
+  latestPosts;
   postId;
   likes = 0;
   dislikes = 0;
@@ -128,6 +129,7 @@ export class BlogDetailComponent implements OnInit {
         this.publishedOn = this.blog.publishedOn;
         this.blogImage = this.blog.blogImage;
         this.postId = id;
+        this.latestPosts = this.blog.latestPosts;
         this.likes = this.blog.likes;
         this.dislikes = this.blog.dislikes;
         this.originalComments = this.blog.comments;
