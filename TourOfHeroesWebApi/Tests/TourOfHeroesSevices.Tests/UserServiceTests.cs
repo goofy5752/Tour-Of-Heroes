@@ -3,6 +3,7 @@
     using System.Linq;
     using System.Collections.Generic;
 
+    using Common;
     using TourOfHeroesData.Models;
     using TourOfHeroesDTOs.UserDtos;
     using TourOfHeroesData.Common.Contracts;
@@ -36,6 +37,11 @@
                     FullName = "Koce Boce"
                 },
             };
+        }
+
+        public UserServiceTests()
+        {
+            MapperInitializer.InitializeMapper();
         }
 
         [Fact]

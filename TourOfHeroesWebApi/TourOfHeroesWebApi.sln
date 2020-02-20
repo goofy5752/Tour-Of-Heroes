@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TourOfHeroesCommon", "TourO
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{CF471E2A-5505-4387-B69A-761FCED7CEFB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TourOfHeroesServices.Tests", "Tests\TourOfHeroesSevices.Tests\TourOfHeroesServices.Tests.csproj", "{1D52B8FF-434D-43C8-A3FF-F95E1C68CC4C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TourOfHeroesServices.Tests", "Tests\TourOfHeroesSevices.Tests\TourOfHeroesServices.Tests.csproj", "{1D52B8FF-434D-43C8-A3FF-F95E1C68CC4C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
