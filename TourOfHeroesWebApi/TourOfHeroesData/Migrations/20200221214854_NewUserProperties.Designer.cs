@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TourOfHeroesData;
 
 namespace TourOfHeroesData.Migrations
 {
     [DbContext(typeof(TourOfHeroesDbContext))]
-    partial class TourOfHeroesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200221214854_NewUserProperties")]
+    partial class NewUserProperties
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

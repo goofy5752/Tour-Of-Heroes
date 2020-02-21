@@ -14,6 +14,8 @@
     <Compile Remove="Migrations\20191101141608_RelationBetweenBlogAndCommentsAddedd.Designer.cs" />
     <Compile Remove="Migrations\20191103182124_MergeHomeOffice.cs" />
     <Compile Remove="Migrations\20191103182124_MergeHomeOffice.Designer.cs" />
+    <Compile Remove="Migrations\20200221213427_InitialCreateNewUserStore.cs" />
+    <Compile Remove="Migrations\20200221213427_InitialCreateNewUserStore.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

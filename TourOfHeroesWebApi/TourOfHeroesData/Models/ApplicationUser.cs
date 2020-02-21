@@ -5,9 +5,11 @@ namespace TourOfHeroesData.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations.Schema;
 
+    using Common.Contracts;
+
     using Microsoft.AspNetCore.Identity;
 
-    public class ApplicationUser : IdentityUser
+    public class ApplicationUser : IdentityUser, IDeletableEntity
     {
         public ApplicationUser()
         {
@@ -33,6 +35,10 @@ namespace TourOfHeroesData.Models
         public string ProfileImage { get; set; }
 
         public DateTime? RegisteredOn { get; set; }
+
+        public bool IsDeleted { get; set; }
+
+        public DateTime? DeletedOn { get; set; }
 
         public virtual List<Comment> Comments { get; set; }
 
