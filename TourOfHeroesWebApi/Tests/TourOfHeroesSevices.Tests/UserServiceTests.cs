@@ -1,4 +1,8 @@
-﻿namespace TourOfHeroesServices.Tests
+﻿using System.Threading.Tasks;
+using TourOfHeroesData;
+using TourOfHeroesMapping.Mapping;
+
+namespace TourOfHeroesServices.Tests
 {
     using System.Linq;
     using System.Collections.Generic;
@@ -14,7 +18,7 @@
 
     public class UserServiceTests
     {
-        public List<ApplicationUser> GetTestData()
+        private List<ApplicationUser> GetTestData()
         {
             return new List<ApplicationUser>
             {
@@ -39,44 +43,42 @@
             };
         }
 
+        private async Task SeedData(TourOfHeroesDbContext context)
+        {
+            context.AddRange(GetTestData());
+            await context.SaveChangesAsync();
+        }
+
         public UserServiceTests()
         {
             MapperInitializer.InitializeMapper();
         }
 
         [Fact]
-        public void RepositoryShouldCallAllMethodOnce()
+        public void GetAllUsers_WithCorrectData_ShouldSuccessfullyGetUsers()
         {
-            var repo = new Mock<IRepository<ApplicationUser>>();
+            string errorMessagePrefix = "UserService GetAllUsers() method does not work properly.";
 
-            repo.Setup(r => r.All())
-                .Returns(GetTestData().AsQueryable());
+            //var context = TourOfHeroesDbContextInMemoryFactory.InitializeContext();
+            //await SeedData(context);
+            var repo = new Mock<IRepository<ApplicationUser>>();
+            repo.Setup(r => r.All()).Returns(GetTestData().AsQueryable);
 
             IUserService service = new UserService(repo.Object, null);
 
-            service.UpdateUser("1", new UpdateUserDTO()
+            var expectedResults = GetTestData();
+            var actualResults = service.GetAllUsers().ToList();
+
+            Assert.True(expectedResults.Count == actualResults.Count(), errorMessagePrefix);
+
+            for (int i = 0; i < expectedResults.Count; i++)
             {
-                Role = "Admin"
-            });
+                var expectedEntry = expectedResults[i];
+                var actualEntry = actualResults[i];
 
-            repo.Verify(x => x.All(), Times.Once);
-        }
-
-        [Fact]
-        public void UserRepositoryShouldReturnCorrectUserCount()
-        {
-            var repo = new Mock<IRepository<ApplicationUser>>();
-
-            repo.Setup(r => r.All())
-                .Returns(GetTestData().AsQueryable());
-
-            IUserService service = new UserService(repo.Object, null);
-            service.UpdateUser("1", new UpdateUserDTO()
-            {
-                Role = "Admin"
-            });
-
-            Assert.Equal(3, service.GetAllUsers().Count());
+                Assert.True(expectedEntry.Email == actualEntry.Email, errorMessagePrefix + " " + "Price is not returned properly.");
+                Assert.True(expectedEntry.FullName == actualEntry.FullName, errorMessagePrefix + " " + "Picture is not returned properly.");
+            }
         }
     }
 }
