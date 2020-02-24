@@ -1,10 +1,9 @@
-﻿using System.Text.RegularExpressions;
-
-namespace TourOfHeroesServices
+﻿namespace TourOfHeroesServices
 {
     using System;
     using System.Linq;
     using System.Threading.Tasks;
+    using System.Text.RegularExpressions;
 
     using TourOfHeroesData.Common.Contracts;
     using TourOfHeroesData.Models;
@@ -71,23 +70,30 @@ namespace TourOfHeroesServices
                 throw new ArgumentException("Incorrect user id.");
             }
 
-            var profileImage = this._imageService.AddToCloudinaryAndReturnProfileImageUrl(profile.ProfileImage);
-
-            dbUser.ProfileImage = profileImage;
-
-            var activity = new UserActivity
+            try
             {
-                Action = $"Update profile image",
-                RegisteredOn = DateTime.Now,
-                UserId = id,
-            };
+                var profileImage = this._imageService.AddToCloudinaryAndReturnProfileImageUrl(profile.ProfileImage);
 
-            await this._hubContext.Clients.All.UpdateProfileImage(dbUser.ProfileImage);
-            await this._userActivityRepository.AddAsync(activity);
+                dbUser.ProfileImage = profileImage;
 
-            dbUser.Activity.Add(activity);
+                var activity = new UserActivity
+                {
+                    Action = $"Update profile image",
+                    RegisteredOn = DateTime.Now,
+                    UserId = id,
+                };
 
-            await this._userRepository.SaveChangesAsync();
+                await this._hubContext.Clients.All.UpdateProfileImage(dbUser.ProfileImage);
+                await this._userActivityRepository.AddAsync(activity);
+
+                dbUser.Activity.Add(activity);
+
+                await this._userRepository.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                throw new ArgumentException(e.Message);
+            }
         }
 
         public async Task UpdateProfileEmail(string id, UpdateProfileEmailDTO emailDto)
@@ -100,6 +106,11 @@ namespace TourOfHeroesServices
             var dbUser = this._userRepository
                 .All()
                 .FirstOrDefault(x => x.Id == id);
+
+            if (dbUser == null)
+            {
+                throw new ArgumentException("User id is invalid!");
+            }
 
             dbUser.Email = emailDto.Email;
 
