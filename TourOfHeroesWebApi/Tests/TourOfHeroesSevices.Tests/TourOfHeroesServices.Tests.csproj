@@ -20,4 +20,10 @@
     <ProjectReference Include="..\..\TourOfHeroesServices\TourOfHeroesServices.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Microsoft.AspNetCore.SignalR.Core">
+      <HintPath>C:\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.aspnetcore.signalr.core\1.1.0\lib\netstandard2.0\Microsoft.AspNetCore.SignalR.Core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
