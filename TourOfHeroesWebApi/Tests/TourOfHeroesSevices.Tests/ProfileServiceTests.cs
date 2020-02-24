@@ -267,12 +267,30 @@
         public async Task UpdateProfileImage_WithIncorrectUserId_ShouldThrowAnException()
         {
             var userRepo = new Mock<IRepository<ApplicationUser>>();
+            var fileMock = new Mock<IFormFile>();
+
+            const string content = "Hello World from a Fake File";
+            const string fileName = "profileImg.jpg";
+            var ms = new MemoryStream();
+            var writer = new StreamWriter(ms);
+            writer.Write(content);
+            writer.Flush();
+            ms.Position = 0;
+
+            fileMock.Setup(_ => _.OpenReadStream()).Returns(ms);
+            fileMock.Setup(_ => _.FileName).Returns(fileName);
+            fileMock.Setup(_ => _.Length).Returns(ms.Length);
+            userRepo.Setup(x => x.All()).Returns(this.GetTestData().AsQueryable);
 
             userRepo.Setup(x => x.All()).Returns(this.GetTestData().AsQueryable);
 
             this._profileService = new ProfileService(userRepo.Object, new ImageService(), null, null, null, null);
 
-            await Assert.ThrowsAsync<ArgumentException>(() => this._profileService.UpdateProfileImage("12", null));
+            await Assert.ThrowsAsync<ArgumentException>(() => this._profileService.UpdateProfileImage("1", new UpdateProfileImageDTO()
+            {
+                ProfileImage = fileMock.Object,
+                UserId = "1"
+            }));
         }
 
         [Fact]
@@ -307,15 +325,29 @@
         public async Task UpdateProfileEmail_WithIncorrectEmail_ShouldThrowAnArgumentException(string id, string email)
         {
             var userRepo = new Mock<IRepository<ApplicationUser>>();
-            var userActivityRepo = new Mock<IRepository<UserActivity>>();
 
             userRepo.Setup(x => x.All()).Returns(this.GetTestData().AsQueryable);
 
-            this._profileService = new ProfileService(userRepo.Object, null, null, null, null, userActivityRepo.Object);
+            this._profileService = new ProfileService(userRepo.Object, null, null, null, null, null);
 
             await Assert.ThrowsAsync<ArgumentException>(() => this._profileService.UpdateProfileEmail(id, new UpdateProfileEmailDTO()
             {
                 Email = email
+            }));
+        }
+
+        [Fact]
+        public async Task UpdateProfileEmail_WithIncorrectUserId_ShouldThrowAnArgumentException()
+        {
+            var userRepo = new Mock<IRepository<ApplicationUser>>();
+
+            userRepo.Setup(x => x.All()).Returns(this.GetTestData().AsQueryable);
+
+            this._profileService = new ProfileService(userRepo.Object, null, null, null, null, null);
+
+            await Assert.ThrowsAsync<ArgumentException>(() => this._profileService.UpdateProfileEmail("-1", new UpdateProfileEmailDTO()
+            {
+                Email = "asdsd@abv.bg"
             }));
         }
     }
