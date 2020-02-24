@@ -1,4 +1,6 @@
-﻿namespace TourOfHeroesServices
+﻿using System.Text.RegularExpressions;
+
+namespace TourOfHeroesServices
 {
     using System;
     using System.Linq;
@@ -35,20 +37,27 @@
 
         public GetProfileDetailDTO GetProfile(string id)
         {
-            var user = this._userRepository
-                .All()
-                .To<GetProfileDetailDTO>()
-                .Single(x => x.Id == id);
+            try
+            {
+                var user = this._userRepository
+                    .All()
+                    .To<GetProfileDetailDTO>()
+                    .Single(x => x.Id == id);
 
-            user.PostLikes = this._userBlogLikesRepository
-                .All()
-                .Count(x => x.UserId == id);
+                user.PostLikes = this._userBlogLikesRepository
+                    .All()
+                    .Count(x => x.UserId == id);
 
-            user.PostDislikes = this._userBlogDislikesRepository
-                .All()
-                .Count(x => x.UserId == id);
+                user.PostDislikes = this._userBlogDislikesRepository
+                    .All()
+                    .Count(x => x.UserId == id);
 
-            return user;
+                return user;
+            }
+            catch (Exception e)
+            {
+                throw new ArgumentException(e.Message);
+            }
         }
 
         public async Task UpdateProfileImage(string id, UpdateProfileImageDTO profile)
@@ -56,6 +65,11 @@
             var dbUser = this._userRepository
                 .All()
                 .FirstOrDefault(x => x.Id == id);
+
+            if (dbUser == null)
+            {
+                throw new ArgumentException("Incorrect user id.");
+            }
 
             var profileImage = this._imageService.AddToCloudinaryAndReturnProfileImageUrl(profile.ProfileImage);
 
@@ -78,6 +92,11 @@
 
         public async Task UpdateProfileEmail(string id, UpdateProfileEmailDTO emailDto)
         {
+            if (!Regex.Match(emailDto.Email, "^\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$").Success)
+            {
+                throw new ArgumentException("Email is invalid!");
+            }
+
             var dbUser = this._userRepository
                 .All()
                 .FirstOrDefault(x => x.Id == id);
