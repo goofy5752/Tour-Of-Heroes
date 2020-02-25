@@ -211,7 +211,7 @@
 
             this._profileService = new ProfileService(userRepo.Object, null, null, userBlogLikes.Object, userBlogDislikes.Object, null);
 
-            Assert.Throws<ArgumentException>(() => this._profileService.GetProfile("4"));
+            Assert.Throws<InvalidOperationException>(() => this._profileService.GetProfile("4"));
         }
 
         [Fact]
@@ -337,7 +337,7 @@
         }
 
         [Fact]
-        public async Task UpdateProfileEmail_WithIncorrectUserId_ShouldThrowAnArgumentException()
+        public async Task UpdateProfileEmail_WithIncorrectUserId_ShouldThrowAnInvalidOperationException()
         {
             var userRepo = new Mock<IRepository<ApplicationUser>>();
 
@@ -345,7 +345,7 @@
 
             this._profileService = new ProfileService(userRepo.Object, null, null, null, null, null);
 
-            await Assert.ThrowsAsync<ArgumentException>(() => this._profileService.UpdateProfileEmail("-1", new UpdateProfileEmailDTO()
+            await Assert.ThrowsAsync<InvalidOperationException>(() => this._profileService.UpdateProfileEmail("-1", new UpdateProfileEmailDTO()
             {
                 Email = "asdsd@abv.bg"
             }));
