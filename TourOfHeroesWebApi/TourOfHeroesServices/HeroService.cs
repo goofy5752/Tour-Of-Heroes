@@ -44,7 +44,7 @@
                 .To<GetHeroDetailDTO>()
                 .Single(x => x.Id == id);
 
-            hero.CurrentUser = this._userRepository.All().FirstOrDefault(x => x.Id == currentUser)?.UserName;
+            hero.CurrentUser = this._userRepository.All().Single(x => x.Id == currentUser).UserName;
 
             return hero;
         }
@@ -58,10 +58,25 @@
                 .ToList();
         }
 
-        public async Task CreateHero(CreateHeroDTO hero)
+        public async Task CreateHero(CreateHeroDTO hero, bool skipAddToCloudinaryMethod = false)
         {
-            var imgUrl = this._imageService.AddToCloudinaryAndReturnHeroImageUrl(hero.Image);
-            var coverImgUrl = this._imageService.AddToCloudinaryAndReturnHeroImageUrl(hero.CoverImage);
+            string imgUrl = "";
+            string coverImgUrl = "";
+
+            if (string.IsNullOrEmpty(hero.Description) || string.IsNullOrEmpty(hero.Gender) ||
+                string.IsNullOrEmpty(hero.Name) || string.IsNullOrEmpty(hero.RealName) ||
+                hero.Image == null || hero.CoverImage == null)
+            {
+                throw new InvalidOperationException("Fields cannot be null or empty.");
+            }
+
+            //Skip this method for unit testing
+            if (!skipAddToCloudinaryMethod)
+            {
+                imgUrl = this._imageService.AddToCloudinaryAndReturnHeroImageUrl(hero.Image);
+                coverImgUrl = this._imageService.AddToCloudinaryAndReturnHeroImageUrl(hero.CoverImage);
+            }
+
             var heroObj = new Hero
             {
                 Name = hero.Name,
@@ -74,19 +89,22 @@
             };
 
             var movieTitleList = new List<Movie>();
-            //Replacing and removing all the symbols that prevent the 'movie title' come how its expected.
-            var movieTitles = hero.MovieTitle[0].Replace("\"", "").Replace("\\", "").TrimStart(' ', '"', ']', '\\', '/', '[').TrimEnd(' ', '"', ']', '\\', '/', '[').Split(",", StringSplitOptions.RemoveEmptyEntries);
-            foreach (var title in movieTitles)
+            if (hero.MovieTitle.Length > 0 && hero.MovieTitle != null)
             {
-                var movieTitle = new Movie
+                //Replacing and removing all the symbols that prevent the 'movie title' come how its expected.
+                var movieTitles = hero.MovieTitle[0].Replace("\"", "").Replace("\\", "").TrimStart(' ', '"', ']', '\\', '/', '[').TrimEnd(' ', '"', ']', '\\', '/', '[').Split(",", StringSplitOptions.RemoveEmptyEntries);
+                foreach (var title in movieTitles)
                 {
-                    Title = title,
-                    HeroId = heroObj.Id
-                };
-                movieTitleList.Add(movieTitle);
-            }
+                    var movieTitle = new Movie
+                    {
+                        Title = title,
+                        HeroId = heroObj.Id
+                    };
+                    movieTitleList.Add(movieTitle);
+                }
 
-            heroObj.Movies = movieTitleList;
+                heroObj.Movies = movieTitleList;
+            }
 
             await this._heroRepository.AddAsync(heroObj);
 

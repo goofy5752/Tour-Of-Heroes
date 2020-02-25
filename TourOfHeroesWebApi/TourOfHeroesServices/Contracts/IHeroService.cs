@@ -13,7 +13,7 @@
 
         IEnumerable<GetHeroDTO> GetHeroBySearchString(string name);
 
-        Task CreateHero(CreateHeroDTO hero);
+        Task CreateHero(CreateHeroDTO hero, bool skipAddToCloudinaryMethod = false);
 
         Task UpdateHero(int id, UpdateHeroDTO hero);
 
