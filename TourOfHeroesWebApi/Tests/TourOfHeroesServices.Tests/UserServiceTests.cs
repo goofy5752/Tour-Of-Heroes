@@ -1,4 +1,6 @@
-﻿namespace TourOfHeroesServices.Tests
+﻿using System.Threading;
+
+namespace TourOfHeroesServices.Tests
 {
     using System.Linq;
     using System.Collections.Generic;
@@ -147,6 +149,7 @@
         public UserServiceTests()
         {
             MapperInitializer.InitializeMapper();
+            Thread.Sleep(11);
         }
 
         [Fact]
