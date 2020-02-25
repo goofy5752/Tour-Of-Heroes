@@ -36,27 +36,20 @@
 
         public GetProfileDetailDTO GetProfile(string id)
         {
-            try
-            {
-                var user = this._userRepository
-                    .All()
-                    .To<GetProfileDetailDTO>()
-                    .Single(x => x.Id == id);
+            var user = this._userRepository
+                .All()
+                .To<GetProfileDetailDTO>()
+                .Single(x => x.Id == id);
 
-                user.PostLikes = this._userBlogLikesRepository
-                    .All()
-                    .Count(x => x.UserId == id);
+            user.PostLikes = this._userBlogLikesRepository
+                .All()
+                .Count(x => x.UserId == id);
 
-                user.PostDislikes = this._userBlogDislikesRepository
-                    .All()
-                    .Count(x => x.UserId == id);
+            user.PostDislikes = this._userBlogDislikesRepository
+                .All()
+                .Count(x => x.UserId == id);
 
-                return user;
-            }
-            catch (Exception e)
-            {
-                throw new ArgumentException(e.Message);
-            }
+            return user;
         }
 
         public async Task UpdateProfileImage(string id, UpdateProfileImageDTO profile)
@@ -105,12 +98,7 @@
 
             var dbUser = this._userRepository
                 .All()
-                .FirstOrDefault(x => x.Id == id);
-
-            if (dbUser == null)
-            {
-                throw new ArgumentException("User id is invalid!");
-            }
+                .Single(x => x.Id == id);
 
             dbUser.Email = emailDto.Email;
 
