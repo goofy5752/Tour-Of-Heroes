@@ -62,11 +62,11 @@
         {
             var userId = HttpContext.User.Claims.First(x => x.Type == "UserID").Value;
 
-            _logger.LogInfo($"Fetching hero with id {id}...");
+            _logger.LogInfo($"Fetching blog with id {id}...");
 
             var detail = this._blogService.GetPostDetail(userId, id);
 
-            _logger.LogInfo($"Hero with id {id} successfully fetched.");
+            _logger.LogInfo($"Blog with id {id} successfully fetched.");
 
             return detail;
         }
@@ -144,7 +144,7 @@
             }
             catch (Exception ex)
             {
-                return this.BadRequest();
+                return this.BadRequest(ex.Message);
             }
         }
 
