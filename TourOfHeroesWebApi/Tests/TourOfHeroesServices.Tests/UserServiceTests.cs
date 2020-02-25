@@ -1,6 +1,5 @@
 ﻿namespace TourOfHeroesServices.Tests
 {
-    using System;
     using System.Linq;
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -13,10 +12,6 @@
 
     using Moq;
     using Xunit;
-
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.Extensions.Logging;
-    using Microsoft.Extensions.Options;
 
     public class UserServiceTests
     {
