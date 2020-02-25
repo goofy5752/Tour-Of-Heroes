@@ -307,5 +307,7 @@
 
             await Assert.ThrowsAsync<InvalidOperationException>(() => this._heroService.CreateHero(createHeroDto));
         }
+
+        //TODO: Finish the unit tests for hero service 
     }
 }
