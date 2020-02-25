@@ -117,19 +117,26 @@
                 .All()
                 .FirstOrDefault(x => x.Id == id);
 
-            if (dbHero != null)
+            if (dbHero?.Name == hero.Name)
             {
-                var editHistory = new EditHistory()
-                {
-                    OldValue = dbHero.Name,
-                    NewValue = hero.Name,
-                    HeroId = dbHero.Id
-                };
-
-                dbHero.EditHistory.Add(editHistory);
-
-                dbHero.Name = hero.Name;
+                throw new ArgumentException("Please enter a name that is different from the previous one.");
             }
+
+            if (string.IsNullOrEmpty(hero.Name) || string.IsNullOrWhiteSpace(hero.Name))
+            {
+                throw new InvalidOperationException("Name cannot be null or empty string.");
+            }
+
+            var editHistory = new EditHistory()
+            {
+                OldValue = dbHero.Name,
+                NewValue = hero.Name,
+                HeroId = dbHero.Id
+            };
+
+            dbHero.EditHistory.Add(editHistory);
+
+            dbHero.Name = hero.Name;
 
             await this._heroRepository.SaveChangesAsync();
         }
@@ -138,7 +145,7 @@
         {
             var heroToDelete = this._heroRepository
                 .All()
-                .FirstOrDefault(x => x.Id == id);
+                .Single(x => x.Id == id);
 
             var commentsToDelete = this._commentRepository
                 .All()
