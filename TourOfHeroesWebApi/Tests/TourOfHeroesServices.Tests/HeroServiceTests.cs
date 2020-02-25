@@ -1,4 +1,6 @@
-﻿namespace TourOfHeroesServices.Tests
+﻿using System.Threading;
+
+namespace TourOfHeroesServices.Tests
 {
     using System;
     using System.IO;
@@ -103,6 +105,7 @@
         public HeroServiceTests()
         {
             MapperInitializer.InitializeMapper();
+            Thread.Sleep(11);
         }
 
         [Fact]
@@ -308,6 +311,94 @@
             await Assert.ThrowsAsync<InvalidOperationException>(() => this._heroService.CreateHero(createHeroDto));
         }
 
-        //TODO: Finish the unit tests for hero service 
+        [Fact]
+        public void UpdateHero_WithCorrectData_ShouldSuccessfullyUpdateHero()
+        {
+            string errorMessagePrefix = "HeroService UpdateHero() method does not work properly.";
+
+            var repo = new Mock<IRepository<Hero>>();
+
+            repo.Setup(r => r.All()).Returns(this.GetTestData().AsQueryable);
+
+            this._heroService = new HeroService(repo.Object, null, null, null);
+
+            var updateHeroDto = new UpdateHeroDTO()
+            {
+                Name = "asd"
+            };
+
+            var expectedName = "asd";
+            var isPassedSuccessfully = this._heroService.UpdateHero(1, updateHeroDto).IsCompletedSuccessfully;
+            var actualName = repo.Object.All().FirstOrDefault(x => x.Id == 1)?.Name;
+
+            Assert.True(isPassedSuccessfully, errorMessagePrefix);
+            Assert.True(expectedName == actualName, errorMessagePrefix);
+        }
+
+        [Fact]
+        public async Task UpdateHero_WithSameNameLikePrevious_ShouldThrowArgumentException()
+        {
+            var repo = new Mock<IRepository<Hero>>();
+
+            repo.Setup(r => r.All()).Returns(this.GetTestData().AsQueryable);
+
+            this._heroService = new HeroService(repo.Object, null, null, null);
+
+            var updateHeroDto = new UpdateHeroDTO()
+            {
+                Name = "Cpt America"
+            };
+
+            await Assert.ThrowsAsync<ArgumentException>(() => this._heroService.UpdateHero(1, updateHeroDto));
+        }
+
+        [Theory]
+        [InlineData("")]
+        [InlineData(" ")]
+        [InlineData(null)]
+        public async Task UpdateHero_WithIncorrectData_ShouldThrowInvalidOperationException(string name)
+        {
+            var repo = new Mock<IRepository<Hero>>();
+
+            repo.Setup(r => r.All()).Returns(this.GetTestData().AsQueryable);
+
+            this._heroService = new HeroService(repo.Object, null, null, null);
+
+            var updateHeroDto = new UpdateHeroDTO()
+            {
+                Name = name
+            };
+
+            await Assert.ThrowsAsync<InvalidOperationException>(() => this._heroService.UpdateHero(1, updateHeroDto));
+        }
+
+        [Fact]
+        public void DeleteHero_WithCorrectData_ShouldSuccessfullyDeleteHero()
+        {
+            string errorMessagePrefix = "HeroService DeleteHero() method does not work properly.";
+
+            var repo = new Mock<IRepository<Hero>>();
+            var commentsRepo = new Mock<IRepository<Comment>>();
+
+            repo.Setup(r => r.All()).Returns(this.GetTestData().AsQueryable);
+
+            this._heroService = new HeroService(repo.Object, null, null, commentsRepo.Object);
+
+            var isPassedSuccessfully = this._heroService.DeleteHero(1).IsCompletedSuccessfully;
+
+            Assert.True(isPassedSuccessfully, errorMessagePrefix);
+        }
+
+        [Fact]
+        public async Task DeleteHero_WithIncorrectHeroId_ShouldThrowInvalidOperationException()
+        {
+            var repo = new Mock<IRepository<Hero>>();
+
+            repo.Setup(r => r.All()).Returns(this.GetTestData().AsQueryable);
+
+            this._heroService = new HeroService(repo.Object, null, null, null);
+
+            await Assert.ThrowsAsync<InvalidOperationException>(() => this._heroService.DeleteHero(-1));
+        }
     }
 }
