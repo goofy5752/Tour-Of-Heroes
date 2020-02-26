@@ -142,12 +142,6 @@
             };
         }
 
-        private async Task SeedData(TourOfHeroesDbContext context)
-        {
-            context.AddRange(GetTestData());
-            await context.SaveChangesAsync();
-        }
-
         public ProfileServiceTests()
         {
             MapperInitializer.InitializeMapper();

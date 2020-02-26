@@ -1,9 +1,8 @@
-﻿using System.Threading;
-
-namespace TourOfHeroesServices.Tests
+﻿namespace TourOfHeroesServices.Tests
 {
     using System.Linq;
     using System.Collections.Generic;
+    using System.Threading;
     using System.Threading.Tasks;
 
     using Common;
@@ -138,12 +137,6 @@ namespace TourOfHeroesServices.Tests
                     }
                 },
             };
-        }
-
-        private async Task SeedData(TourOfHeroesDbContext context)
-        {
-            context.AddRange(GetTestData());
-            await context.SaveChangesAsync();
         }
 
         public UserServiceTests()
