@@ -8,7 +8,6 @@
     using System.Threading.Tasks;
 
     using Contracts;
-    using TourOfHeroesData;
     using TourOfHeroesData.Common.Contracts;
     using TourOfHeroesData.Models;
     using TourOfHeroesDTOs.ProfileDtos;
