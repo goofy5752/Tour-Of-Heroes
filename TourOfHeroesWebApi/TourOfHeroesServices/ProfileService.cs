@@ -52,41 +52,44 @@
             return user;
         }
 
-        public async Task UpdateProfileImage(string id, UpdateProfileImageDTO profile)
+        public async Task UpdateProfileImage(string id, UpdateProfileImageDTO profile, bool skipMethodForTest = false)
         {
             var dbUser = this._userRepository
                 .All()
-                .FirstOrDefault(x => x.Id == id);
+                .Single(x => x.Id == id);
 
-            if (dbUser == null)
+
+            string profileImage = "";
+
+            if (!skipMethodForTest)
             {
-                throw new ArgumentException("Incorrect user id.");
+                profileImage = this._imageService.AddToCloudinaryAndReturnProfileImageUrl(profile.ProfileImage);
             }
 
-            try
+            if (profile.ProfileImage == null)
             {
-                var profileImage = this._imageService.AddToCloudinaryAndReturnProfileImageUrl(profile.ProfileImage);
+                throw new InvalidOperationException("Invalid image file.");
+            }
 
-                dbUser.ProfileImage = profileImage;
+            dbUser.ProfileImage = profileImage;
 
-                var activity = new UserActivity
-                {
-                    Action = $"Update profile image",
-                    RegisteredOn = DateTime.Now,
-                    UserId = id,
-                };
+            var activity = new UserActivity
+            {
+                Action = "Update profile image",
+                RegisteredOn = DateTime.Now,
+                UserId = id,
+            };
 
+            if (!skipMethodForTest)
+            {
                 await this._hubContext.Clients.All.UpdateProfileImage(dbUser.ProfileImage);
-                await this._userActivityRepository.AddAsync(activity);
-
-                dbUser.Activity.Add(activity);
-
-                await this._userRepository.SaveChangesAsync();
             }
-            catch (Exception e)
-            {
-                throw new ArgumentException(e.Message);
-            }
+
+            await this._userActivityRepository.AddAsync(activity);
+
+            dbUser.Activity.Add(activity);
+
+            await this._userRepository.SaveChangesAsync();
         }
 
         public async Task UpdateProfileEmail(string id, UpdateProfileEmailDTO emailDto)
