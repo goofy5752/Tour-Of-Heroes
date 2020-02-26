@@ -1,11 +1,10 @@
-﻿using System.Threading;
-
-namespace TourOfHeroesServices.Tests
+﻿namespace TourOfHeroesServices.Tests
 {
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Threading;
     using System.Threading.Tasks;
 
     using Contracts;
@@ -223,6 +222,7 @@ namespace TourOfHeroesServices.Tests
             string errorMessagePrefix = "ProfileService UpdateProfileImage() method does not work properly.";
 
             var userRepo = new Mock<IRepository<ApplicationUser>>();
+            var userActivityRepo = new Mock<IRepository<UserActivity>>();
             var fileMock = new Mock<IFormFile>();
 
             const string content = "Hello World from a Fake File";
@@ -238,13 +238,13 @@ namespace TourOfHeroesServices.Tests
             fileMock.Setup(_ => _.Length).Returns(ms.Length);
             userRepo.Setup(x => x.All()).Returns(this.GetTestData().AsQueryable);
 
-            this._profileService = new ProfileService(userRepo.Object, new ImageService(), null, null, null, null);
+            this._profileService = new ProfileService(userRepo.Object, new ImageService(), null, null, null, userActivityRepo.Object);
 
             var isPassed = this._profileService.UpdateProfileImage("1", new UpdateProfileImageDTO()
             {
                 ProfileImage = fileMock.Object,
                 UserId = "1"
-            }).IsCompleted;
+            }, true).IsCompletedSuccessfully;
 
             Assert.True(isPassed, errorMessagePrefix);
         }
@@ -253,45 +253,29 @@ namespace TourOfHeroesServices.Tests
         public async Task UpdateProfileImage_WithIncorrectFile_ShouldThrowAnException()
         {
             var userRepo = new Mock<IRepository<ApplicationUser>>();
-            var fileMock = new Mock<IFormFile>();
 
             userRepo.Setup(x => x.All()).Returns(this.GetTestData().AsQueryable);
 
-            this._profileService = new ProfileService(userRepo.Object, new ImageService(), null, null, null, null);
+            this._profileService = new ProfileService(userRepo.Object, null, null, null, null, null);
 
-            await Assert.ThrowsAsync<ArgumentException>(() => this._profileService.UpdateProfileImage("1", new UpdateProfileImageDTO()
+            await Assert.ThrowsAsync<InvalidOperationException>(() => this._profileService.UpdateProfileImage("1", new UpdateProfileImageDTO()
             {
-                ProfileImage = fileMock.Object,
+                ProfileImage = null,
                 UserId = "1"
-            }));
+            }, true));
         }
 
         [Fact]
         public async Task UpdateProfileImage_WithIncorrectUserId_ShouldThrowAnException()
         {
             var userRepo = new Mock<IRepository<ApplicationUser>>();
-            var fileMock = new Mock<IFormFile>();
-
-            const string content = "Hello World from a Fake File";
-            const string fileName = "profileImg.jpg";
-            var ms = new MemoryStream();
-            var writer = new StreamWriter(ms);
-            writer.Write(content);
-            writer.Flush();
-            ms.Position = 0;
-
-            fileMock.Setup(_ => _.OpenReadStream()).Returns(ms);
-            fileMock.Setup(_ => _.FileName).Returns(fileName);
-            fileMock.Setup(_ => _.Length).Returns(ms.Length);
             userRepo.Setup(x => x.All()).Returns(this.GetTestData().AsQueryable);
 
-            userRepo.Setup(x => x.All()).Returns(this.GetTestData().AsQueryable);
+            this._profileService = new ProfileService(userRepo.Object, null, null, null, null, null);
 
-            this._profileService = new ProfileService(userRepo.Object, new ImageService(), null, null, null, null);
-
-            await Assert.ThrowsAsync<ArgumentException>(() => this._profileService.UpdateProfileImage("1", new UpdateProfileImageDTO()
+            await Assert.ThrowsAsync<InvalidOperationException>(() => this._profileService.UpdateProfileImage("-1", new UpdateProfileImageDTO()
             {
-                ProfileImage = fileMock.Object,
+                ProfileImage = null,
                 UserId = "1"
             }));
         }
