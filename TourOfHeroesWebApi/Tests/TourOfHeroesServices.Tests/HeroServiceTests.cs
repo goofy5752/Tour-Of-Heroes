@@ -1,10 +1,9 @@
-﻿using System.Threading;
-
-namespace TourOfHeroesServices.Tests
+﻿namespace TourOfHeroesServices.Tests
 {
     using System;
     using System.IO;
     using System.Linq;
+    using System.Threading;
     using System.Globalization;
     using System.Threading.Tasks;
     using System.Collections.Generic;
