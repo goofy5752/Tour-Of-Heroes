@@ -48,11 +48,15 @@
             var post = this._blogRepository
                 .All()
                 .To<GetPostDetailDTO>()
-                .SingleOrDefault(x => x.Id == id);
+                .Single(x => x.Id == id);
 
             if (post != null)
             {
-                // ReSharper disable once PossibleNullReferenceException
+                post.CurrentUser = this._userRepository
+                    .All()
+                    .Single(x => x.Id == currentUser)
+                    .UserName;
+
                 post.Likes = this._userBlogLikesRepository
                     .All()
                     .Count(x => x.BlogId == id);
@@ -60,11 +64,6 @@
                 post.Dislikes = this._userBlogDislikesRepository
                     .All()
                     .Count(x => x.BlogId == id);
-
-                post.CurrentUser = this._userRepository
-                    .All()
-                    .FirstOrDefault(x => x.Id == currentUser)
-                    ?.UserName;
 
                 post.LatestPosts = this._blogRepository
                     .All()
@@ -81,11 +80,17 @@
         {
             var blog = this._blogRepository
                 .All()
-                .FirstOrDefault(x => x.Id == blogId);
+                .Single(x => x.Id == blogId);
 
             var user = this._userRepository
                 .All()
-                .FirstOrDefault(x => x.Id == userId);
+                .Single(x => x.Id == userId);
+
+            //Check if user have already like the post
+            if (this._userBlogLikesRepository.All().Any(x => x.UserId == userId && x.BlogId == blogId))
+            {
+                throw new Exception();
+            }
 
             if (this._userBlogDislikesRepository.All().Any(x => x.UserId == userId && x.BlogId == blogId))
             {
@@ -124,11 +129,17 @@
         {
             var blog = this._blogRepository
                 .All()
-                .FirstOrDefault(x => x.Id == blogId);
+                .Single(x => x.Id == blogId);
 
             var user = this._userRepository
                 .All()
-                .FirstOrDefault(x => x.Id == userId);
+                .Single(x => x.Id == userId);
+
+            //Check if user have already dislike the post
+            if (this._userBlogDislikesRepository.All().Any(x => x.UserId == userId && x.BlogId == blogId))
+            {
+                throw new Exception();
+            }
 
             if (this._userBlogLikesRepository.All().Any(x => x.UserId == userId && x.BlogId == blogId))
             {
@@ -163,13 +174,22 @@
             await this._userRepository.SaveChangesAsync();
         }
 
-        public async Task CreatePost(CreateBlogPostDTO postDto, string userId)
+        public async Task CreatePost(CreateBlogPostDTO postDto, string userId, bool skipMethodForTest = false)
         {
-            var userObj = this._userRepository.All().FirstOrDefault(x => x.Id == userId);
+            var userObj = this._userRepository.All().Single(x => x.Id == userId);
 
-            if (userObj == null) return;
+            string blogImageUrl = "";
 
-            var blogImageUrl = this._imageService.AddToCloudinaryAndReturnBlogImageUrl(postDto.BlogImage);
+            if (string.IsNullOrEmpty(postDto.Content) || string.IsNullOrEmpty(postDto.Title) ||
+                postDto.BlogImage == null)
+            {
+                throw new InvalidOperationException("Fields cannot be null or empty.");
+            }
+
+            if (!skipMethodForTest)
+            {
+                blogImageUrl = this._imageService.AddToCloudinaryAndReturnBlogImageUrl(postDto.BlogImage);
+            }
 
             var postObj = new Blog
             {
@@ -188,7 +208,7 @@
 
         public async Task DeletePost(int id)
         {
-            var postToDelete = this._blogRepository.All().FirstOrDefault(x => x.Id == id);
+            var postToDelete = this._blogRepository.All().Single(x => x.Id == id);
 
             var commentsToDelete = this._commentRepository
                 .All()
@@ -200,7 +220,7 @@
                 this._commentRepository.Delete(comment);
             }
 
-            if (postToDelete != null) this._blogRepository.Delete(postToDelete);
+            this._blogRepository.Delete(postToDelete);
 
             await this._blogRepository.SaveChangesAsync();
         }
