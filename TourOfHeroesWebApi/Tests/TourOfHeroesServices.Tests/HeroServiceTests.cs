@@ -288,7 +288,7 @@
         [InlineData("HeroName", "RealName", "Description", "")]
         [InlineData(null, null, null, null)]
         [InlineData("", "", "", "")]
-        public async Task CreateHero_WithIncorrectData_ShouldThrowArgumentException(string name, string realName, string description, string gender)
+        public async Task CreateHero_WithIncorrectData_ShouldThrowInvalidOperationException(string name, string realName, string description, string gender)
         {
             var repo = new Mock<IRepository<Hero>>();
             var fileMock = new Mock<IFormFile>();
