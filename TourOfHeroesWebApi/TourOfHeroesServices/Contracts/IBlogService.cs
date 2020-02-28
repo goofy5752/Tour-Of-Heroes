@@ -15,7 +15,7 @@
 
         Task DislikePost(string userId, int blogId);
 
-        Task CreatePost(CreateBlogPostDTO postDto, string userId);
+        Task CreatePost(CreateBlogPostDTO postDto, string userId, bool skipMethodForTest = false);
 
         Task DeletePost(int id);
     }

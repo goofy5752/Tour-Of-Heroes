@@ -58,7 +58,7 @@
                 .ToList();
         }
 
-        public async Task CreateHero(CreateHeroDTO hero, bool skipAddToCloudinaryMethod = false)
+        public async Task CreateHero(CreateHeroDTO hero, bool skipMethodForTest = false)
         {
             string imgUrl = "";
             string coverImgUrl = "";
@@ -71,7 +71,7 @@
             }
 
             //Skip this method for unit testing
-            if (!skipAddToCloudinaryMethod)
+            if (!skipMethodForTest)
             {
                 imgUrl = this._imageService.AddToCloudinaryAndReturnHeroImageUrl(hero.Image);
                 coverImgUrl = this._imageService.AddToCloudinaryAndReturnHeroImageUrl(hero.CoverImage);
