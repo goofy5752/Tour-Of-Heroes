@@ -117,7 +117,7 @@
             }
             catch (Exception)
             {
-                return this.BadRequest();
+                return this.BadRequest("You have already like this post.");
             }
         }
 
