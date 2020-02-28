@@ -104,7 +104,7 @@
         public HeroServiceTests()
         {
             MapperInitializer.InitializeMapper();
-            Thread.Sleep(11);
+            Thread.Sleep(100);
         }
 
         [Fact]
