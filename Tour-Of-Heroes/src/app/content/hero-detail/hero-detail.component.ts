@@ -198,7 +198,6 @@ export class HeroDetailComponent implements OnInit {
     formData.append('userId', this.userId);
     this.movieService.likeMovie(formData)
       .subscribe(() => {
-        console.log('dasdasdasdasdsd');
         this.toastr.success(`You liked a movie with title: ${title}`, 'Success !');
       },
       err => {
