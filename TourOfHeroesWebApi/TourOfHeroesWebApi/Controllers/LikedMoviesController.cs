@@ -1,7 +1,6 @@
-﻿using System;
-
-namespace TourOfHeroesWebApi.Controllers
+﻿namespace TourOfHeroesWebApi.Controllers
 {
+    using System;
     using System.Linq;
     using System.Threading.Tasks;
 
