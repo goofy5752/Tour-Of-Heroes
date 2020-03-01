@@ -1,18 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Moq;
-using TourOfHeroesData.Common.Contracts;
-using TourOfHeroesData.Models;
-using TourOfHeroesServices.Contracts;
-using TourOfHeroesServices.Tests.Common;
-using Xunit;
-
-namespace TourOfHeroesServices.Tests
+﻿namespace TourOfHeroesServices.Tests
 {
+    using System;
+    using System.Linq;
+    using System.Threading;
+    using System.Globalization;
+    using System.Threading.Tasks;
+    using System.Collections.Generic;
+
+    using Common;
+    using Contracts;
+    using TourOfHeroesData.Models;
+    using TourOfHeroesData.Common.Contracts;
+
+    using Moq;
+    using Xunit;
+
     public class HistoryServiceTests
     {
         private IHistoryService _historyService;
