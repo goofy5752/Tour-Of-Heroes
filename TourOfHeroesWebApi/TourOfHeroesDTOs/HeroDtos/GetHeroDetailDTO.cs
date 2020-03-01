@@ -1,4 +1,6 @@
-﻿namespace TourOfHeroesDTOs.HeroDtos
+﻿using TourOfHeroesDTOs.EditHistoryDtos;
+
+namespace TourOfHeroesDTOs.HeroDtos
 {
     using System.Collections.Generic;
 
@@ -12,7 +14,7 @@
     {
         public GetHeroDetailDTO()
         {
-            this.EditHistory = new List<EditHistory>();
+            this.EditHistory = new List<GetAllHistoryDTO>();
             this.Comments = new List<CommentDTO>();
         }
 
@@ -36,7 +38,7 @@
 
         public IEnumerable<GetMovieTitleDTO> Movies { get; set; }
 
-        public IEnumerable<EditHistory> EditHistory { get; set; }
+        public IEnumerable<GetAllHistoryDTO> EditHistory { get; set; }
 
         public IEnumerable<CommentDTO> Comments { get; set; }
     }
