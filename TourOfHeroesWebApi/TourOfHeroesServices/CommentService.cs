@@ -40,11 +40,11 @@
 
         public async Task CreateComment(CreateCommentDTO commentDto)
         {
-            var userObj = this._userRepository.All().FirstOrDefault(x => x.Id == commentDto.UserId);
+            var userObj = this._userRepository.All().Single(x => x.Id == commentDto.UserId);
 
             if (commentDto.Action == "Hero")
             {
-                var heroObj = this._heroRepository.All().FirstOrDefault(x => x.Id == commentDto.HeroId);
+                var heroObj = this._heroRepository.All().Single(x => x.Id == commentDto.HeroId);
 
                 var commentObj = new Comment
                 {
@@ -74,7 +74,7 @@
             }
             else
             {
-                var blogObj = this._blogRepository.All().FirstOrDefault(x => x.Id == commentDto.HeroId);
+                var blogObj = this._blogRepository.All().Single(x => x.Id == commentDto.HeroId);
 
                 var commentObj = new Comment
                 {
@@ -106,13 +106,10 @@
 
         public async Task DeleteComment(int id)
         {
-            var commentToDelete = this._commentRepository.All().FirstOrDefault(x => x.Id == id);
+            var commentToDelete = this._commentRepository.All().Single(x => x.Id == id);
 
-            if (commentToDelete != null)
-            {
-                commentToDelete.IsDeleted = true;
-                commentToDelete.DeletedOn = DateTime.Now;
-            }
+            commentToDelete.IsDeleted = true;
+            commentToDelete.DeletedOn = DateTime.Now;
 
             await _hubContext.Clients.All.DeleteComment(id);
 
