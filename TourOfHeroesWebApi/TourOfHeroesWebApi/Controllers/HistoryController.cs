@@ -27,7 +27,7 @@
         [Route("history/{id}")]
         public async Task<ActionResult<Hero>> DeleteHistory(int id)
         {
-            var history = this._historyService.GetAllHistories();
+            var history = this._historyService.GetAllHistory();
 
             if (history == null)
             {
