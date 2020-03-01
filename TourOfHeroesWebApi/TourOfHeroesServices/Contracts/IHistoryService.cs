@@ -3,11 +3,11 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using TourOfHeroesData.Models;
+    using TourOfHeroesDTOs.EditHistoryDtos;
 
     public interface IHistoryService
     {
-        IEnumerable<EditHistory> GetAllHistories();
+        IEnumerable<GetAllHistoryDTO> GetAllHistory();
 
         Task DeleteHistory(int id);
     }

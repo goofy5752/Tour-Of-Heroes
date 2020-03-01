@@ -4,8 +4,10 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using TourOfHeroesData.Common.Contracts;
     using TourOfHeroesData.Models;
+    using TourOfHeroesMapping.Mapping;
+    using TourOfHeroesDTOs.EditHistoryDtos;
+    using TourOfHeroesData.Common.Contracts;
 
     using Contracts;
 
@@ -18,14 +20,17 @@
             _editHistoryRepository = editHistoryRepository;
         }
         
-        public IEnumerable<EditHistory> GetAllHistories()
+        public IEnumerable<GetAllHistoryDTO> GetAllHistory()
         {
-            return this._editHistoryRepository.All().ToList();
+            return this._editHistoryRepository
+                .All()
+                .To<GetAllHistoryDTO>()
+                .ToList();
         }
 
         public async Task DeleteHistory(int id)
         {
-            var historyToDelete = this._editHistoryRepository.All().FirstOrDefault(x => x.Id == id);
+            var historyToDelete = this._editHistoryRepository.All().Single(x => x.Id == id);
 
             this._editHistoryRepository.Delete(historyToDelete);
 
