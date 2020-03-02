@@ -10,8 +10,8 @@
     {
         IEnumerable<Comment> GetAllComments();
 
-        Task CreateComment(CreateCommentDTO commentDto);
+        Task CreateComment(CreateCommentDTO commentDto, bool skipMethodForTest = false);
 
-        Task DeleteComment(int id);
+        Task DeleteComment(int id, bool skipMethodForTest = false);
     }
 }

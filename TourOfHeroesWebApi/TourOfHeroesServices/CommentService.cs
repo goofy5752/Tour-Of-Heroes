@@ -1,4 +1,6 @@
-﻿namespace TourOfHeroesServices
+﻿using Microsoft.EntityFrameworkCore.Infrastructure;
+
+namespace TourOfHeroesServices
 {
     using System;
     using System.Linq;
@@ -38,13 +40,18 @@
             return this._commentRepository.All().ToList();
         }
 
-        public async Task CreateComment(CreateCommentDTO commentDto)
+        public async Task CreateComment(CreateCommentDTO commentDto, bool skipMethodForTest = false)
         {
             var userObj = this._userRepository.All().Single(x => x.Id == commentDto.UserId);
 
-            if (commentDto.Action == "Hero")
+            if (string.IsNullOrEmpty(commentDto.Action) || string.IsNullOrEmpty(commentDto.Comment) || string.IsNullOrEmpty(commentDto.UserId))
             {
-                var heroObj = this._heroRepository.All().Single(x => x.Id == commentDto.HeroId);
+                throw new InvalidOperationException("Invalid data.");
+            }
+
+            if (commentDto.Action.ToLower() == "hero")
+            {
+                var heroObj = this._heroRepository.All().Single(x => x.Id == commentDto.Id);
 
                 var commentObj = new Comment
                 {
@@ -63,7 +70,10 @@
                     User = userObj
                 };
 
-                await _hubContext.Clients.All.BroadcastComment(commentObj);
+                if (!skipMethodForTest)
+                {
+                    await _hubContext.Clients.All.BroadcastComment(commentObj);
+                }
 
                 heroObj.Comments.Add(commentObj);
                 userObj.Comments.Add(commentObj);
@@ -74,7 +84,7 @@
             }
             else
             {
-                var blogObj = this._blogRepository.All().Single(x => x.Id == commentDto.HeroId);
+                var blogObj = this._blogRepository.All().Single(x => x.Id == commentDto.Id);
 
                 var commentObj = new Comment
                 {
@@ -93,7 +103,10 @@
                     User = userObj
                 };
 
-                await _hubContext.Clients.All.BroadcastComment(commentObj);
+                if (!skipMethodForTest)
+                {
+                    await _hubContext.Clients.All.BroadcastComment(commentObj);
+                }
 
                 blogObj.Comments.Add(commentObj);
                 userObj.Comments.Add(commentObj);
@@ -104,14 +117,17 @@
             }
         }
 
-        public async Task DeleteComment(int id)
+        public async Task DeleteComment(int id, bool skipMethodForTest = false)
         {
             var commentToDelete = this._commentRepository.All().Single(x => x.Id == id);
 
             commentToDelete.IsDeleted = true;
             commentToDelete.DeletedOn = DateTime.Now;
 
-            await _hubContext.Clients.All.DeleteComment(id);
+            if (!skipMethodForTest)
+            {
+                await _hubContext.Clients.All.DeleteComment(id);
+            }
 
             await this._commentRepository.SaveChangesAsync();
         }
