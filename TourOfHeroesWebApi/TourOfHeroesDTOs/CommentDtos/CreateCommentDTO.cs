@@ -6,7 +6,7 @@
 
         public string UserId { get; set; }
 
-        public int HeroId { get; set; }
+        public int Id { get; set; }
 
         public string Action { get; set; }
     }
