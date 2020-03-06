@@ -50,28 +50,37 @@
                 .To<GetPostDetailDTO>()
                 .Single(x => x.Id == id);
 
-            if (post != null)
+            post.CurrentUser = this._userRepository
+                .All()
+                .Single(x => x.Id == currentUser)
+                .UserName;
+
+            post.IsLiked = false;
+            post.IsDisliked = false;
+
+            if (this._userBlogLikesRepository.All().FirstOrDefault(x => x.UserId == currentUser && x.BlogId == id) != null)
             {
-                post.CurrentUser = this._userRepository
-                    .All()
-                    .Single(x => x.Id == currentUser)
-                    .UserName;
-
-                post.Likes = this._userBlogLikesRepository
-                    .All()
-                    .Count(x => x.BlogId == id);
-
-                post.Dislikes = this._userBlogDislikesRepository
-                    .All()
-                    .Count(x => x.BlogId == id);
-
-                post.LatestPosts = this._blogRepository
-                    .All()
-                    .OrderBy(x => x.PublishedOn)
-                    .Take(6)
-                    .To<GetLatestPostsDTO>()
-                    .ToList();
+                post.IsLiked = true;
             }
+            else if (this._userBlogDislikesRepository.All().FirstOrDefault(x => x.UserId == currentUser && x.BlogId == id) != null)
+            {
+                post.IsDisliked = true;
+            }
+
+            post.Likes = this._userBlogLikesRepository
+                .All()
+                .Count(x => x.BlogId == id);
+
+            post.Dislikes = this._userBlogDislikesRepository
+                .All()
+                .Count(x => x.BlogId == id);
+
+            post.LatestPosts = this._blogRepository
+                .All()
+                .OrderBy(x => x.PublishedOn)
+                .Take(6)
+                .To<GetLatestPostsDTO>()
+                .ToList();
 
             return post;
         }

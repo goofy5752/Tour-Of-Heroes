@@ -52,13 +52,13 @@
 
         <div class="text-right">
             <span class="likeButton">
-                <button class="btn btn-primary" (click)="likePost()">
+                <button class="btn btn-primary" (click)="likePost()" [disabled]="isLiked">
                     <i class="fa fa-thumbs-up"></i>
                     Like | {{likes}}
                 </button>
             </span>
             <span class="likeButton ml-2">
-                <button class="btn btn-danger" (click)="dislikePost()">
+                <button class="btn btn-danger" (click)="dislikePost()" [disabled]="isDisliked">
                     <i class="fa fa-thumbs-down"></i>
                     Dislike | {{dislikes}}
                 </button>

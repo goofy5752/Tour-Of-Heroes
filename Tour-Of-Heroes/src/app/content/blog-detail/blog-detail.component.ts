@@ -29,6 +29,8 @@ export class BlogDetailComponent implements OnInit {
   postId;
   likes = 0;
   dislikes = 0;
+  isLiked;
+  isDisliked;
   publishedOn: Date;
   originalComments;
   orderedComments;
@@ -132,6 +134,8 @@ export class BlogDetailComponent implements OnInit {
         this.latestPosts = this.blog.latestPosts;
         this.likes = this.blog.likes;
         this.dislikes = this.blog.dislikes;
+        this.isLiked = this.blog.isLiked;
+        this.isDisliked = this.blog.isDisliked;
         this.originalComments = this.blog.comments;
         this.sortBy('publishedOn');
         this.content = post.content;

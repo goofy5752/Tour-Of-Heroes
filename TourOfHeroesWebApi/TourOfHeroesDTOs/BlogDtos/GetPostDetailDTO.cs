@@ -31,6 +31,10 @@
 
         public string CurrentUser { get; set; }
 
+        public bool IsLiked { get; set; }
+
+        public bool IsDisliked { get; set; }
+
         public DateTime PublishedOn { get; set; }
 
         public IEnumerable<CommentDTO> Comments { get; set; }

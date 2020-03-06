@@ -10,6 +10,8 @@ export class Blog {
     content: string;
     likes: number;
     dislikes: number;
+    isLiked: boolean;
+    isDisliked: boolean;
     currentUser: string;
     comments: Comments[];
     latestPosts: LatestPosts[];
