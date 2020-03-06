@@ -9,9 +9,9 @@
     {
         IEnumerable<GetUserDTO> GetAllUsers();
 
-        GetUserDetailDTO GetUserDetail(string id);
+        GetUserDetailDTO GetUserDetail(string id, bool skipMethodForTest = false);
 
-        Task UpdateUser(string id, UpdateUserDTO userDTO);
+        Task UpdateUser(string id, UpdateUserDTO userDTO, bool skipMethodForTest = false);
 
         Task DeleteUser(string id);
     }

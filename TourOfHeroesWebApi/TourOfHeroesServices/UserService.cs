@@ -1,5 +1,6 @@
 ﻿namespace TourOfHeroesServices
 {
+    using System;
     using System.Linq;
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -34,30 +35,42 @@
             return users;
         }
 
-        public GetUserDetailDTO GetUserDetail(string id)
+        public GetUserDetailDTO GetUserDetail(string id, bool skipMethodForTest = false)
         {
             var userDetail = this._userRepository
                 .All()
                 .To<GetUserDetailDTO>()
-                .FirstOrDefault(x => x.Id == id);
+                .Single(x => x.Id == id);
 
-            var userRole = GetUserRole(id);
-
-            if (userDetail != null)
+            if (!skipMethodForTest)
             {
+                var userRole = GetUserRole(id);
+
                 userDetail.Role = userRole;
             }
 
             return userDetail;
         }
 
-        public async Task UpdateUser(string id, UpdateUserDTO userDTO)
+        public async Task UpdateUser(string id, UpdateUserDTO userDTO, bool skipMethodForTest = false)
         {
-            var userRole = this.GetUserRole(id);
-
             var user = this._userRepository
                 .All()
-                .FirstOrDefault(x => x.Id == id);
+                .Single(x => x.Id == id);
+
+            var roles = new []{"Admin", "User", "Editor"};
+
+            if (!roles.Contains(userDTO.Role))
+            {
+                throw new InvalidOperationException("Role doesn't exist.");
+            }
+
+            var userRole = "";
+
+            if (!skipMethodForTest)
+            {
+                userRole = this.GetUserRole(id);
+            }
 
             await this._userManager.RemoveFromRoleAsync(user, userRole);
             await this._userManager.AddToRoleAsync(user, userDTO.Role);
@@ -68,7 +81,7 @@
         {
             var userToDelete = this._userRepository
                 .All()
-                .FirstOrDefault(x => x.Id == id);
+                .Single(x => x.Id == id);
 
             this._userRepository.Delete(userToDelete);
 
