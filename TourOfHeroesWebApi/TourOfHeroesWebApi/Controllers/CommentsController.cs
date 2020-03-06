@@ -1,5 +1,6 @@
 ﻿namespace TourOfHeroesWebApi.Controllers
 {
+    using System.Linq;
     using System.Threading.Tasks;
 
     using TourOfHeroesData.Models;
@@ -48,11 +49,17 @@
         [Route("comments/{id}")]
         public async Task<ActionResult<Comment>> DeleteComment(int id)
         {
-            var comments = this._commentService.GetAllComments();
+            var currentUserId = HttpContext.User.Claims.First(x => x.Type == "UserID").Value;
+            var comment = this._commentService.GetAllComments().FirstOrDefault(x => x.Id == id);
 
-            if (comments == null)
+            if (comment == null)
             {
-                return this.NotFound();
+                return this.NotFound("Invalid comment id.");
+            }
+
+            if (currentUserId != comment.UserId)
+            {
+                return this.BadRequest("You can't delete other people comment.");
             }
 
             _logger.LogInfo($"Deleting comment with id {id}...");
