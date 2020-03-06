@@ -1,5 +1,6 @@
 ﻿namespace TourOfHeroesServices.Tests
 {
+    using System;
     using System.Linq;
     using System.Collections.Generic;
     using System.Threading;
@@ -7,12 +8,16 @@
 
     using Common;
     using Contracts;
-    using TourOfHeroesData;
+    using TourOfHeroesDTOs.UserDtos;
     using TourOfHeroesData.Models;
     using TourOfHeroesData.Common.Contracts;
 
     using Moq;
     using Xunit;
+
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.Extensions.Logging;
+    using Microsoft.Extensions.Options;
 
     public class UserServiceTests
     {
@@ -175,7 +180,7 @@
         }
 
         [Fact]
-        public void GetAllUsers_WithEmptyData_ShouldReturn0()
+        public void GetAllUsers_WithEmptyData_ShouldReturnEmptyList()
         {
             string errorMessagePrefix = "UserService GetAllUsers() method does not work properly.";
 
@@ -190,44 +195,130 @@
             Assert.True(expectedResults == actualResults.Count(), errorMessagePrefix);
         }
 
-        //[Fact]
-        // TODO Fix null reference issue
-        //public void GetUserDetail_WithExistentId_ShouldReturnCorrectUserDetail()
-        //{
-        //    string errorMessagePrefix = "UserService GetUserDetail() method does not work properly.";
+        [Fact]
+        public void GetUserDetail_WithExistentId_ShouldReturnCorrectUserDetail()
+        {
+            string errorMessagePrefix = "UserService GetUserDetail() method does not work properly.";
 
-        //    var repo = new Mock<IRepository<ApplicationUser>>();
-        //    var mockUserManager = new Mock<UserManager<ApplicationUser>>(
-        //        new Mock<IUserStore<ApplicationUser>>().Object,
-        //        new Mock<IOptions<IdentityOptions>>().Object,
-        //        new Mock<IPasswordHasher<ApplicationUser>>().Object,
-        //        new IUserValidator<ApplicationUser>[0],
-        //        new IPasswordValidator<ApplicationUser>[0],
-        //        new Mock<ILookupNormalizer>().Object,
-        //        new Mock<IdentityErrorDescriber>().Object,
-        //        new Mock<IServiceProvider>().Object,
-        //        new Mock<ILogger<UserManager<ApplicationUser>>>().Object);
+            var repo = new Mock<IRepository<ApplicationUser>>();
 
-        //    repo.Setup(r => r.All()).Returns(GetTestData().AsQueryable);
+            repo.Setup(r => r.All()).Returns(GetTestData().AsQueryable);
 
-        //    
-        //    mockUserManager.Setup(x => x.GetRolesAsync(new ApplicationUser())).ReturnsAsync(new List<string>());
+            this._userService = new UserService(repo.Object, null);
 
-        //    this._userService = new UserService(repo.Object, mockUserManager.Object);
+            var expectedResults = GetTestData().FirstOrDefault(x => x.Id == "1");
+            var actualResults = this._userService.GetUserDetail("1", true);
 
-        //    var expectedResults = GetTestData().FirstOrDefault(x => x.Id == "1");
-        //    var actualResults = this._userService.GetUserDetail("1");
+            Assert.True(expectedResults?.Email ==
+                        actualResults.Email, errorMessagePrefix + " " + "Email is not returned properly.");
+            Assert.True(expectedResults?.FullName ==
+                        actualResults.FullName, errorMessagePrefix + " " + "FullName is not returned properly.");
+            Assert.True(expectedResults?.ProfileImage ==
+                        actualResults.ProfileImage, errorMessagePrefix + " " + "ProfileImage is not returned properly.");
+            Assert.True(expectedResults?.JobTitle ==
+                        actualResults.JobTitle, errorMessagePrefix + " " + "JobTitle is not returned properly.");
+            Assert.True(expectedResults?.Activity.Count ==
+                        actualResults.Activity.Count, errorMessagePrefix + " " + "Activity count is not returned properly.");
+        }
 
-        //    Assert.True(expectedResults?.Email ==
-        //                actualResults.Email, errorMessagePrefix + " " + "Email is not returned properly.");
-        //    Assert.True(expectedResults?.FullName ==
-        //                actualResults.FullName, errorMessagePrefix + " " + "FullName is not returned properly.");
-        //    Assert.True(expectedResults?.ProfileImage ==
-        //                actualResults.ProfileImage, errorMessagePrefix + " " + "ProfileImage is not returned properly.");
-        //    Assert.True(expectedResults?.JobTitle ==
-        //                actualResults.JobTitle, errorMessagePrefix + " " + "JobTitle is not returned properly.");
-        //    Assert.True(expectedResults?.Activity.Count ==
-        //                actualResults.Activity.Count, errorMessagePrefix + " " + "Activity count is not returned properly.");
-        //}
+        [Fact]
+        public void GetUserDetail_WithNonExistentUserId_ShouldThrowInvalidOperationException()
+        {
+            var repo = new Mock<IRepository<ApplicationUser>>();
+
+            repo.Setup(r => r.All()).Returns(GetTestData().AsQueryable);
+
+            this._userService = new UserService(repo.Object, null);
+
+            Assert.Throws<InvalidOperationException>(() => this._userService.GetUserDetail("-1"));
+        }
+
+        [Fact]
+        public void UpdateUser_WithCorrectData_ShouldUpdateUserProperly()
+        {
+            string errorMessagePrefix = "UserService UpdateUser() method does not work properly.";
+
+            var repo = new Mock<IRepository<ApplicationUser>>();
+            var mockUserManager = new Mock<UserManager<ApplicationUser>>(
+                new Mock<IUserStore<ApplicationUser>>().Object,
+                new Mock<IOptions<IdentityOptions>>().Object,
+                new Mock<IPasswordHasher<ApplicationUser>>().Object,
+                new IUserValidator<ApplicationUser>[0],
+                new IPasswordValidator<ApplicationUser>[0],
+                new Mock<ILookupNormalizer>().Object,
+                new Mock<IdentityErrorDescriber>().Object,
+                new Mock<IServiceProvider>().Object,
+                new Mock<ILogger<UserManager<ApplicationUser>>>().Object);
+
+            repo.Setup(r => r.All()).Returns(GetTestData().AsQueryable);
+
+            this._userService = new UserService(repo.Object, mockUserManager.Object);
+
+            var updateUserDto = new UpdateUserDTO
+            {
+                Role = "Editor"
+            };
+
+            var isCompleted = this._userService.UpdateUser("1", updateUserDto, true).IsCompletedSuccessfully;
+
+            Assert.True(isCompleted, errorMessagePrefix);
+        }
+
+        [Fact]
+        public async Task UpdateUser_WithIncorrectUserId_ShouldThrowInvalidOperationException()
+        {
+            var repo = new Mock<IRepository<ApplicationUser>>();
+
+            repo.Setup(r => r.All()).Returns(GetTestData().AsQueryable);
+
+            this._userService = new UserService(repo.Object, null);
+
+            await Assert.ThrowsAsync<InvalidOperationException>(() => this._userService.UpdateUser("-1", null));
+        }
+
+        [Fact]
+        public async Task UpdateUser_WithIncorrectUserRole_ShouldThrowInvalidOperationException()
+        {
+            var repo = new Mock<IRepository<ApplicationUser>>();
+
+            repo.Setup(r => r.All()).Returns(GetTestData().AsQueryable);
+
+            this._userService = new UserService(repo.Object, null);
+
+            var updateUserDto = new UpdateUserDTO()
+            {
+                Role = "go6o"
+            };
+
+            await Assert.ThrowsAsync<InvalidOperationException>(() => this._userService.UpdateUser("1", updateUserDto));
+        }
+
+        [Fact]
+        public void DeleteUser_WithCorrectUserId_ShouldDeleteUserSuccessfully()
+        {
+            string errorMessagePrefix = "UserService DeleteUser() method does not work properly.";
+
+            var repo = new Mock<IRepository<ApplicationUser>>();
+
+            repo.Setup(r => r.All()).Returns(GetTestData().AsQueryable);
+
+            this._userService = new UserService(repo.Object, null);
+
+            var isCompleted = this._userService.DeleteUser("1").IsCompletedSuccessfully;
+
+            Assert.True(isCompleted, errorMessagePrefix);
+        }
+
+        [Fact]
+        public async Task DeleteUser_WithIncorrectUserId_ShouldThrowInvalidOperationException()
+        {
+            var repo = new Mock<IRepository<ApplicationUser>>();
+
+            repo.Setup(r => r.All()).Returns(GetTestData().AsQueryable);
+
+            this._userService = new UserService(repo.Object, null);
+
+            await Assert.ThrowsAsync<InvalidOperationException>(() => this._userService.DeleteUser("-1"));
+        }
     }
 }
