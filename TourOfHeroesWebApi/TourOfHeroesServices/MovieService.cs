@@ -44,7 +44,9 @@
 
         public async Task DeleteMovie(string title)
         {
-            var movieToDelete = this._movieRepository.All().FirstOrDefault(x => x.Title == title);
+            var movieToDelete = this._movieRepository
+                .All()
+                .Single(x => x.Title == title);
 
             this._movieRepository.Delete(movieToDelete);
 
@@ -53,6 +55,19 @@
 
         public async Task LikeMovie(AddToLikesMovieDTO movieDTO)
         {
+            if (string.IsNullOrEmpty(movieDTO.Title) ||
+                string.IsNullOrEmpty(movieDTO.PosterPath) ||
+                string.IsNullOrEmpty(movieDTO.ReleaseDate) ||
+                string.IsNullOrEmpty(movieDTO.VoteAverage) ||
+                string.IsNullOrEmpty(movieDTO.VoteCount))
+            {
+                throw new InvalidOperationException("Invalid movie to like.");
+            }
+
+            var user = this._userRepository
+                .All()
+                .Single(u => u.Id == movieDTO.UserId);
+
             var movieToLike = new LikedMovie
             {
                 PosterPath = movieDTO.PosterPath,
@@ -68,13 +83,9 @@
                 .Where(x => x.UserId == movieDTO.UserId)
                 .ToList();
 
-            var user = this._userRepository
-                .All()
-                .FirstOrDefault(u => u.Id == movieDTO.UserId);
-
             if (likedMovies == null || likedMovies.Any(x => x.Title == movieToLike.Title && x.PosterPath == movieToLike.PosterPath))
             {
-                throw new Exception("Movie is already liked.");
+                throw new InvalidOperationException("Movie is already liked.");
             }
 
             var activity = new UserActivity
@@ -97,7 +108,7 @@
         {
             var movieToDislike = this._likedMovieRepository
                 .All()
-                .FirstOrDefault(x => x.Id == id);
+                .Single(x => x.Id == id);
 
             var activity = new UserActivity
             {
@@ -110,8 +121,8 @@
 
             this._userRepository
                 .All()
-                .FirstOrDefault(x => x.Id == movieToDislike.UserId)
-                ?.Activity
+                .Single(x => x.Id == movieToDislike.UserId)
+                .Activity
                 .Add(activity);
 
             this._likedMovieRepository.Delete(movieToDislike);

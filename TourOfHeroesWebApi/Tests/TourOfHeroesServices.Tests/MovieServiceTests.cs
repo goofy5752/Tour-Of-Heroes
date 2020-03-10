@@ -1,9 +1,12 @@
-﻿namespace TourOfHeroesServices.Tests
+﻿using TourOfHeroesDTOs.MovieDtos;
+
+namespace TourOfHeroesServices.Tests
 {
     using System;
     using System.Linq;
     using System.Threading;
     using System.Globalization;
+    using System.Threading.Tasks;
     using System.Collections.Generic;
 
     using Common;
@@ -160,6 +163,198 @@
             var actualResults = this._movieService.GetLikedMovies("1").Count();
 
             Assert.True(expectedResults == actualResults, errorMessagePrefix);
+        }
+
+        [Fact]
+        public void DeleteMovie_WithExistentMovieTitle_ShouldDeleteMovieProperly()
+        {
+            string errorMessagePrefix = "MovieService DeleteMovie() method does not work properly.";
+
+            var repo = new Mock<IRepository<Movie>>();
+
+            repo.Setup(r => r.All()).Returns(this.GetMovieTestData().AsQueryable());
+
+            this._movieService = new MovieService(repo.Object, null, null, null);
+
+            var isCompleted = this._movieService.DeleteMovie("The last air bender").IsCompletedSuccessfully;
+
+            Assert.True(isCompleted, errorMessagePrefix);
+        }
+
+        [Fact]
+        public async Task DeleteMovie_WithNonExistentMovieTitle_ShouldThrowInvalidOperationException()
+        {
+            var repo = new Mock<IRepository<Movie>>();
+
+            repo.Setup(r => r.All()).Returns(this.GetMovieTestData().AsQueryable());
+
+            this._movieService = new MovieService(repo.Object, null, null, null);
+
+            await Assert.ThrowsAsync<InvalidOperationException>(() => this._movieService.DeleteMovie("asd"));
+        }
+
+        [Fact]
+        public void LikeMovie_WithCorrectData_ShouldLikeMovieProperly()
+        {
+            string errorMessagePrefix = "MovieService LikeMovie() method does not work properly.";
+
+            var repo = new Mock<IRepository<LikedMovie>>();
+            var activityRepo = new Mock<IRepository<UserActivity>>();
+            var userRepo = new Mock<IRepository<ApplicationUser>>();
+
+            repo.Setup(r => r.All()).Returns(this.GetLikedMovieTestData().AsQueryable());
+            userRepo.Setup(x => x.All()).Returns(new List<ApplicationUser>()
+            {
+                new ApplicationUser()
+                {
+                    Id = "1",
+                    Activity = new List<UserActivity>()
+                }
+            }.AsQueryable);
+
+            this._movieService = new MovieService(null, repo.Object, userRepo.Object, activityRepo.Object);
+
+            var movieDto = new AddToLikesMovieDTO()
+            {
+                PosterPath = "poster path",
+                ReleaseDate = "2020-03-10",
+                Title = "The last asd",
+                UserId = "1",
+                VoteAverage = "1.1",
+                VoteCount = "1233"
+            };
+
+            var isCompleted = this._movieService.LikeMovie(movieDto).IsCompletedSuccessfully;
+
+            Assert.True(isCompleted, errorMessagePrefix);
+        }
+
+        [Theory]
+        [InlineData(null, "2020-03-10", "Title", "0.1", "12333")]
+        [InlineData("Poster Path", null, "Title", "0.1", "12333")]
+        [InlineData("Poster Path", "2020-03-10", null, "0.1", "12333")]
+        [InlineData("Poster Path", "2020-03-10", "Title", null, "12333")]
+        [InlineData("Poster Path", "2020-03-10", "Title", "0.1", null)]
+        [InlineData("", "2020-03-10", "Title", "0.1", "12333")]
+        [InlineData("Poster Path", "", "Title", "0.1", "12333")]
+        [InlineData("Poster Path", "2020-03-10", "", "0.1", "12333")]
+        [InlineData("Poster Path", "2020-03-10", "Title", "", "12333")]
+        [InlineData("Poster Path", "2020-03-10", "Title", "0.1", "")]
+        [InlineData(null, null, null, null, null)]
+        [InlineData("", "", "", "", "")]
+        public async Task LikeMovie_WithIncorrectData_ShouldThrowInvalidOperationException(string posterPath, string releaseDate, string title, string voteAverage, string voteCount)
+        {
+            this._movieService = new MovieService(null, null, null, null);
+
+            var movieDto = new AddToLikesMovieDTO()
+            {
+                PosterPath = posterPath,
+                ReleaseDate = releaseDate,
+                Title = title,
+                UserId = "1",
+                VoteAverage = voteAverage,
+                VoteCount = voteCount
+            };
+
+            await Assert.ThrowsAsync<InvalidOperationException>(() => this._movieService.LikeMovie(movieDto));
+        }
+
+        [Fact]
+        public async Task LikeMovie_WithIncorrectUserId_ShouldThrowInvalidOperationException()
+        {
+            var userRepo = new Mock<IRepository<ApplicationUser>>();
+
+            userRepo.Setup(x => x.All()).Returns(new List<ApplicationUser>()
+            {
+                new ApplicationUser()
+                {
+                    Id = "1",
+                    Activity = new List<UserActivity>()
+                }
+            }.AsQueryable);
+
+            this._movieService = new MovieService(null, null, userRepo.Object, null);
+
+            var movieDto = new AddToLikesMovieDTO()
+            {
+                PosterPath = "poster path",
+                ReleaseDate = "2020-03-10",
+                Title = "The last asd",
+                UserId = "-1",
+                VoteAverage = "1.1",
+                VoteCount = "1233"
+            };
+
+            await Assert.ThrowsAsync<InvalidOperationException>(() => this._movieService.LikeMovie(movieDto));
+        }
+
+        [Fact]
+        public async Task LikeMovie_WithAlreadyLikedMovie_ShouldThrowInvalidOperationException()
+        {
+            var userRepo = new Mock<IRepository<ApplicationUser>>();
+            var likedMovieRepo = new Mock<IRepository<LikedMovie>>();
+
+            userRepo.Setup(x => x.All()).Returns(new List<ApplicationUser>()
+            {
+                new ApplicationUser()
+                {
+                    Id = "1",
+                    Activity = new List<UserActivity>()
+                }
+            }.AsQueryable);
+            likedMovieRepo.Setup(x => x.All()).Returns(this.GetLikedMovieTestData().AsQueryable);
+
+            this._movieService = new MovieService(null, likedMovieRepo.Object, userRepo.Object, null);
+
+            var movieDto = new AddToLikesMovieDTO()
+            {
+                PosterPath = "123123123123123",
+                ReleaseDate = "2020-03-10",
+                Title = "The last air bender",
+                UserId = "1",
+                VoteAverage = "1.1",
+                VoteCount = "1233"
+            };
+
+            await Assert.ThrowsAsync<InvalidOperationException>(() => this._movieService.LikeMovie(movieDto));
+        }
+
+        [Fact]
+        public void DislikeMovie_WithExistentMovieId_ShouldDislikeMovieProperly()
+        {
+            string errorMessagePrefix = "MovieService DislikeMovie() method does not work properly.";
+
+            var userRepo = new Mock<IRepository<ApplicationUser>>();
+            var likedMovieRepo = new Mock<IRepository<LikedMovie>>();
+            var activityRepo = new Mock<IRepository<UserActivity>>();
+
+            userRepo.Setup(x => x.All()).Returns(new List<ApplicationUser>()
+            {
+                new ApplicationUser()
+                {
+                    Id = "1",
+                    Activity = new List<UserActivity>()
+                }
+            }.AsQueryable);
+            likedMovieRepo.Setup(x => x.All()).Returns(this.GetLikedMovieTestData().AsQueryable);
+
+            this._movieService = new MovieService(null, likedMovieRepo.Object, userRepo.Object, activityRepo.Object);
+
+            var isCompleted = this._movieService.DislikeMovie(1).IsCompletedSuccessfully;
+
+            Assert.True(isCompleted, errorMessagePrefix);
+        }
+
+        [Fact]
+        public async Task DislikeMovie_WithNonExistenceMovieId_ShouldThrowInvalidOperationException()
+        {
+            var likedMovieRepo = new Mock<IRepository<LikedMovie>>();
+
+            likedMovieRepo.Setup(x => x.All()).Returns(this.GetLikedMovieTestData().AsQueryable);
+
+            this._movieService = new MovieService(null, likedMovieRepo.Object, null, null);
+
+            await Assert.ThrowsAsync<InvalidOperationException>(() => this._movieService.DislikeMovie(-1));
         }
     }
 }
