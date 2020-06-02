@@ -9,9 +9,9 @@
 
     using TourOfHeroesDTOs.UserDtos;
     using TourOfHeroesCommon;
-    using TourOfHeroesData.Common;
     using TourOfHeroesData.Models;
     using TourOfHeroesServices.Contracts;
+    using Infrastructure.Extensions;
 
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -53,6 +53,9 @@
                 _logger.LogInfo($"Creating account with username {model.UserName}...");
 
                 var result = await _userManager.CreateAsync(applicationUser, model.Password);
+
+                if (!result.Succeeded)
+                    return BadRequest(result);
 
                 if (model.EditorRoleCode == GlobalConstants.EditorRoleCode)
                 {
