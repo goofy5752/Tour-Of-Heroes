@@ -4,11 +4,9 @@ namespace TourOfHeroesWebApi
     using System.IO;
     using System.Reflection;
 
-    using TourOfHeroesCommon;
     using TourOfHeroesData.Seeder.Contracts;
     using TourOfHeroesMapping.Mapping;
     using TourOfHeroesDTOs.HeroDtos;
-    using TourOfHeroesData;
     using TourOfHeroesServices.RealTimeHub;
 
     using NLog;
@@ -17,10 +15,8 @@ namespace TourOfHeroesWebApi
 
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.EntityFrameworkCore.Internal;
 
     public class Startup
     {
@@ -49,62 +45,30 @@ namespace TourOfHeroesWebApi
         {
             AutoMapperConfig.RegisterMappings(typeof(PageResultDTO<>).GetTypeInfo().Assembly);
 
-            //seed application roles
-
-            using (var serviceScope = app.ApplicationServices.CreateScope())
-            {
-                using (var context = serviceScope.ServiceProvider.GetRequiredService<TourOfHeroesDbContext>())
-                {
-                    context.Database.EnsureCreated();
-
-                    if (!context.Roles.Any())
-                    {
-                        context.Roles.Add(new IdentityRole
-                        {
-                            Name = GlobalConstants.AdminRole,
-                            NormalizedName = GlobalConstants.AdminRole.ToUpper()
-                        });
-
-                        context.Roles.Add(new IdentityRole
-                        {
-                            Name = GlobalConstants.EditorRole,
-                            NormalizedName = GlobalConstants.EditorRole.ToUpper()
-                        });
-
-                        context.Roles.Add(new IdentityRole
-                        {
-                            Name = GlobalConstants.UserRole,
-                            NormalizedName = GlobalConstants.UserRole.ToUpper()
-                        });
-
-                        context.SaveChanges();
-                    }
-                }
-            }
+            //Seed database with roles, users, blogs, movies, etc..
 
             seeder.SeedDatabase();
 
-            app.UseDeveloperExceptionPage();
-
-            app.UseCors(options =>
-                options.AllowAnyOrigin()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader()
-                    .AllowCredentials()
-                    .WithOrigins(Configuration["ApplicationSettings:Client_URL"]));
-
-            app.UseSignalR(routes =>
-            {
-                routes.MapHub<CommentHub>("/api/comments");
-                routes.MapHub<CommentHub>("/api/blog");
-                routes.MapHub<ProfileImageHub>("/api/profile");
-            });
-
-            app.ConfigureCustomExceptionMiddleware();
-            app.UseHttpsRedirection();
-            app.UseHsts();
-            app.UseAuthentication();
-            app.UseMvc();
+            app
+                .UseDeveloperExceptionPage()
+                .UseCors(options =>
+                    options
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials()
+                        .WithOrigins(Configuration["ApplicationSettings:Client_URL"]))
+                .UseSignalR(routes =>
+                {
+                    routes.MapHub<CommentHub>("/api/comments");
+                    routes.MapHub<CommentHub>("/api/blog");
+                    routes.MapHub<ProfileImageHub>("/api/profile");
+                })
+                .UseHttpsRedirection()
+                .UseHsts()
+                .UseAuthentication()
+                .UseMvc()
+                .ConfigureCustomExceptionMiddleware();
         }
     }
 }

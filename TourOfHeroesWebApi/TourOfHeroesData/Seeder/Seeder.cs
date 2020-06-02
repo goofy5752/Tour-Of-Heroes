@@ -26,7 +26,38 @@ namespace TourOfHeroesData.Seeder
 
         public void SeedDatabase()
         {
+            _dbContext.Database.EnsureCreated();
+
+            // Seed user roles
+
+            #region Roles
+
+            if (!_dbContext.Roles.Any())
+            {
+                _dbContext.Roles.Add(new IdentityRole
+                {
+                    Name = GlobalConstants.AdminRole,
+                    NormalizedName = GlobalConstants.AdminRole.ToUpper()
+                });
+
+                _dbContext.Roles.Add(new IdentityRole
+                {
+                    Name = GlobalConstants.EditorRole,
+                    NormalizedName = GlobalConstants.EditorRole.ToUpper()
+                });
+
+                _dbContext.Roles.Add(new IdentityRole
+                {
+                    Name = GlobalConstants.UserRole,
+                    NormalizedName = GlobalConstants.UserRole.ToUpper()
+                });
+            }
+
+            #endregion
+
             // Seed users
+
+            #region Users
 
             string adminId;
 
@@ -246,7 +277,11 @@ namespace TourOfHeroesData.Seeder
                 adminId = id;
             }
 
+            #endregion
+
             // Seed blog posts
+
+            #region Blogs
 
             if (!_dbContext.Blogs.Any())
             {
@@ -319,7 +354,11 @@ namespace TourOfHeroesData.Seeder
                 _dbContext.Blogs.AddRange(blogList);
             }
 
+            #endregion
+
             // Seed heroes with movies
+
+            #region Heroes
 
             if (_dbContext.Heroes.Any()) { _dbContext.SaveChangesAsync(); return; }
 
@@ -655,7 +694,7 @@ namespace TourOfHeroesData.Seeder
             {
                 Title = "Ant-Man",
                 Hero = antman
-            }); 
+            });
 
             antmanMovies.Add(new Movie
             {
@@ -759,5 +798,7 @@ namespace TourOfHeroesData.Seeder
             _dbContext.Heroes.AddRange(heroList);
             _dbContext.SaveChangesAsync();
         }
+
+        #endregion
     }
 }
