@@ -86,6 +86,13 @@
             return services;
         }
 
+        public static IServiceCollection SetupSignalR(this IServiceCollection services)
+        {
+            services.AddSignalR();
+
+            return services;
+        }
+
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
             => services
                 .AddTransient<ISeeder, Seeder>()
