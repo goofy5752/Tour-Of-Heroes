@@ -18,6 +18,7 @@
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.SignalR;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -86,12 +87,8 @@
             return services;
         }
 
-        public static IServiceCollection SetupSignalR(this IServiceCollection services)
-        {
-            services.AddSignalR();
-
-            return services;
-        }
+        public static ISignalRServerBuilder SetupSignalR(this IServiceCollection services) 
+            => services.AddSignalR();
 
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
             => services
