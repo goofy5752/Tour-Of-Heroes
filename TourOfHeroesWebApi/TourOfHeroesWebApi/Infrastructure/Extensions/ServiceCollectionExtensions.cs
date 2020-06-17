@@ -18,7 +18,6 @@
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.OpenApi.Models;
     using Microsoft.AspNetCore.SignalR;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
@@ -90,18 +89,6 @@
 
         public static ISignalRServerBuilder SetupSignalR(this IServiceCollection services) 
             => services.AddSignalR();
-
-        public static IServiceCollection AddSwagger(this IServiceCollection services)
-            => services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc(
-                    "v1",
-                    new OpenApiInfo
-                    {
-                        Title = "TourOfHeroes API",
-                        Version = "v1"
-                    });
-            });
 
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
             => services

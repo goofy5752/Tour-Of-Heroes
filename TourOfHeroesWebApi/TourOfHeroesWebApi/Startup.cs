@@ -35,7 +35,6 @@ namespace TourOfHeroesWebApi
                 .AddDatabase(this.Configuration)
                 .AddIdentity()
                 .AddJwtAuthentication(services.GetApplicationSettings(this.Configuration))
-                .AddSwagger()
                 .AddApplicationServices()
                 .SetupSignalR();
 
@@ -49,7 +48,6 @@ namespace TourOfHeroesWebApi
             seeder.SeedDatabase();
 
             app
-                .UseSwaggerUi()
                 .UseDeveloperExceptionPage()
                 .UseCors(options =>
                     options
