@@ -7,6 +7,34 @@
 # Tour Of Heroes
 ## Web project based on Angular 8 & ASP.NET Core Web API + MSSQL
 
+### Functionality for users
+  - Read and comment blog posts
+  - Like and dislike movies
+  - Watch and comment the available heroes
+  - Change profile picture, email, etc
+
+### Functionality for editors
+  - Read, comment and delete blog posts
+  - Delete movies
+  - Delete heroes
+  - Create new blog posts
+  - Create new heroes
+  - Like and dislike movies
+  - Watch and comment the available heroes
+  - Change profile picture, email, etc
+  
+### Functionality for admins
+  - Read, comment and delete blog posts
+  - Delete movies
+  - Delete heroes
+  - Create new blog posts
+  - Create new heroes
+  - Like and dislike movies
+  - Watch and comment the available heroes
+  - Change profile picture, email, etc
+  - Manage registered users(change roles, permissions)
+  - Watch users edit history
+
 ### How to run the project
   - Change the local db connection string at appseting.json with your local server.
   - Add migration and update database.
