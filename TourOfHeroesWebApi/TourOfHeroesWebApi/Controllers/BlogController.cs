@@ -96,6 +96,27 @@
 
         #endregion
 
+        #region EditPost
+
+        [HttpPost]
+        [DisableRequestSizeLimit]
+        [Route("edit-post")]
+        [Authorize(Roles = "Admin, Editor")]
+        public async Task<ActionResult<EditBlogPostDTO>> EditPost([FromForm] EditBlogPostDTO postDto)
+        {
+            if (!ModelState.IsValid) return this.NoContent();
+
+            _logger.LogInfo($"Editing a post with id {postDto.Id}...");
+
+            await this._blogService.EditPost(postDto);
+
+            _logger.LogInfo($"Post with id {postDto.Id} successfully edited.");
+
+            return this.Ok();
+        }
+
+        #endregion
+
         #region LikePost
 
         [HttpPost("{id}")]

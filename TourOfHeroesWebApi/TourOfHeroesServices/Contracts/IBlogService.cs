@@ -17,6 +17,8 @@
 
         Task CreatePost(CreateBlogPostDTO postDto, string userId, bool skipMethodForTest = false);
 
+        Task EditPost(EditBlogPostDTO postDto, bool skipMethodForTest = false);
+
         Task DeletePost(int id);
     }
 }

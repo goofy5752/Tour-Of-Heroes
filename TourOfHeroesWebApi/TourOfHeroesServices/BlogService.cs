@@ -215,6 +215,34 @@
             await this._blogRepository.SaveChangesAsync();
         }
 
+        public async Task EditPost(EditBlogPostDTO postDto, bool skipMethodForTest = false)
+        {
+            var blogImageUrl = "";
+
+            if (!skipMethodForTest && postDto.BlogImage != null)
+            {
+                blogImageUrl = this._imageService.AddToCloudinaryAndReturnBlogImageUrl(postDto.BlogImage);
+            }
+
+            if (blogImageUrl == "")
+            {
+                var postObj = this._blogRepository.All().Single(x => x.Id == postDto.Id);
+
+                postObj.Content = postDto.Content;
+                postObj.Title = postDto.Title;
+            }
+            else
+            {
+                var postObj = this._blogRepository.All().Single(x => x.Id == postDto.Id);
+
+                postObj.Content = postDto.Content;
+                postObj.Title = postDto.Title;
+                postObj.BlogImage = blogImageUrl;
+            }
+
+            await this._blogRepository.SaveChangesAsync();
+        }
+
         public async Task DeletePost(int id)
         {
             var postToDelete = this._blogRepository.All().Single(x => x.Id == id);

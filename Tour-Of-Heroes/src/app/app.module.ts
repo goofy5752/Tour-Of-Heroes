@@ -43,6 +43,7 @@ import { UserControllerComponent } from './admin/user-controller/user-controller
 import { UserDetailComponent } from './admin/user-detail/user-detail.component';
 import { LikedMoviesComponent } from './user/liked-movies/liked-movies.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { BlogEditComponent } from './content/blog-edit/blog-edit.component';
 
 @NgModule({
   imports: [
@@ -89,6 +90,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     UserControllerComponent,
     UserDetailComponent,
     LikedMoviesComponent,
+    BlogEditComponent,
   ],
   providers: [
     [UserService, {
