@@ -79,7 +79,7 @@
         [DisableRequestSizeLimit]
         [Route("create-post")]
         [Authorize(Roles = "Admin, Editor")]
-        public async Task<ActionResult<CreateBlogPostDTO>> CreatePost([FromForm]CreateBlogPostDTO postDto)
+        public async Task<ActionResult<CreateBlogPostDTO>> CreatePost([FromForm] CreateBlogPostDTO postDto)
         {
             var userId = HttpContext.User.Claims.First(x => x.Type == "UserID").Value;
 
@@ -98,7 +98,7 @@
 
         #region EditPost
 
-        [HttpPost]
+        [HttpPut]
         [DisableRequestSizeLimit]
         [Route("edit-post")]
         [Authorize(Roles = "Admin, Editor")]

@@ -39,6 +39,15 @@ export class BlogService {
       }));
   }
 
+  editPost(fd: FormData): Observable<Blog> {
+    return this.http.put<Blog>(`${this.blogUrl}/edit-post`, fd, this.httpOptions).pipe(
+      tap((postToEdit: Blog) => {
+        if (this.globals.showActivity) {
+          this.heroService.log(`edit post w/ id=${postToEdit.id}`);
+        }
+      }));
+  }
+
   deletePost(blog: Blog | number, password): Observable<Blog> {
     const id = typeof blog === 'number' ? blog : blog.id;
     const url = `${this.blogUrl}/${id}`;

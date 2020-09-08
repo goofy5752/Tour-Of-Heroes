@@ -16,6 +16,7 @@ import { RegistrationComponent } from './user/registration/registration.componen
 import { AuthGuard } from './auth/auth.guard';
 import { ProfileComponent } from './user/profile/profile.component';
 import { BlogComponent } from './content/blog/blog.component';
+import { BlogEditComponent } from './content/blog-edit/blog-edit.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'heroes', pathMatch: 'full' },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'heroes', component: HeroesMainContentComponent, canActivate: [AuthGuard] },
   { path: 'blog', component: BlogComponent, canActivate: [AuthGuard] },
   { path: 'blog/:id', component: BlogDetailComponent, canActivate: [AuthGuard] },
+  { path: 'edit-blog/:id', component: BlogEditComponent, canActivate: [AuthGuard] },
   {
     path: 'user', component: UserComponent,
     children: [

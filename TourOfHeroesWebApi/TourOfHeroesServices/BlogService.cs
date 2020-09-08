@@ -226,14 +226,14 @@
 
             if (blogImageUrl == "")
             {
-                var postObj = this._blogRepository.All().Single(x => x.Id == postDto.Id);
+                var postObj = this._blogRepository.All().Single(x => x.Id == int.Parse(postDto.Id));
 
                 postObj.Content = postDto.Content;
                 postObj.Title = postDto.Title;
             }
             else
             {
-                var postObj = this._blogRepository.All().Single(x => x.Id == postDto.Id);
+                var postObj = this._blogRepository.All().Single(x => x.Id == int.Parse(postDto.Id));
 
                 postObj.Content = postDto.Content;
                 postObj.Title = postDto.Title;
