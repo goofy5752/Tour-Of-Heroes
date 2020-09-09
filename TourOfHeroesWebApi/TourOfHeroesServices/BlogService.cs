@@ -217,30 +217,19 @@
 
         public async Task EditPost(EditBlogPostDTO postDto, bool skipMethodForTest = false)
         {
-            var blogImageUrl = "";
-
-            if (!skipMethodForTest && postDto.BlogImage != null)
-            {
-                blogImageUrl = this._imageService.AddToCloudinaryAndReturnBlogImageUrl(postDto.BlogImage);
-            }
-
-            if (blogImageUrl == "")
+            try
             {
                 var postObj = this._blogRepository.All().Single(x => x.Id == int.Parse(postDto.Id));
 
                 postObj.Content = postDto.Content;
                 postObj.Title = postDto.Title;
+
+                await this._blogRepository.SaveChangesAsync();
             }
-            else
+            catch (Exception e)
             {
-                var postObj = this._blogRepository.All().Single(x => x.Id == int.Parse(postDto.Id));
-
-                postObj.Content = postDto.Content;
-                postObj.Title = postDto.Title;
-                postObj.BlogImage = blogImageUrl;
+                throw new InvalidOperationException("Invalid post id.", e.InnerException);
             }
-
-            await this._blogRepository.SaveChangesAsync();
         }
 
         public async Task DeletePost(int id)

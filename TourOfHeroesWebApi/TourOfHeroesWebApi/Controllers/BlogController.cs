@@ -104,15 +104,22 @@
         [Authorize(Roles = "Admin, Editor")]
         public async Task<ActionResult<EditBlogPostDTO>> EditPost([FromForm] EditBlogPostDTO postDto)
         {
-            if (!ModelState.IsValid) return this.NoContent();
+            try
+            {
+                if (!ModelState.IsValid) return this.NoContent();
 
-            _logger.LogInfo($"Editing a post with id {postDto.Id}...");
+                _logger.LogInfo($"Editing a post with id {postDto.Id}...");
 
-            await this._blogService.EditPost(postDto);
+                await this._blogService.EditPost(postDto);
 
-            _logger.LogInfo($"Post with id {postDto.Id} successfully edited.");
+                _logger.LogInfo($"Post with id {postDto.Id} successfully edited.");
 
-            return this.Ok();
+                return this.Ok();
+            }
+            catch (Exception e)
+            {
+                return this.BadRequest(e.Message);
+            }
         }
 
         #endregion
