@@ -571,17 +571,6 @@
             var blogRepo = new Mock<IRepository<Blog>>();
             var fileMock = new Mock<IFormFile>();
 
-            const string content = "Hello World from a Fake File";
-            const string fileName = "profileImg.jpg";
-            var ms = new MemoryStream();
-            var writer = new StreamWriter(ms);
-            writer.Write(content);
-            writer.Flush();
-            ms.Position = 0;
-
-            fileMock.Setup(_ => _.OpenReadStream()).Returns(ms);
-            fileMock.Setup(_ => _.FileName).Returns(fileName);
-            fileMock.Setup(_ => _.Length).Returns(ms.Length);
             blogRepo.Setup(x => x.All()).Returns(this.GetTestData().AsQueryable);
 
             this._blogService = new BlogService(blogRepo.Object, null, null, null,
@@ -589,10 +578,9 @@
 
             var expected = new EditBlogPostDTO
             {
-                Id = 1,
+                Id = "1",
                 Title = "George",
                 Content = "qwerty qwerty qwerty",
-                BlogImage = fileMock.Object
             };
 
             var actual = blogRepo.Object.All().Single(x => x.Id == 1);

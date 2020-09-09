@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { BlogService } from 'src/app/services/blog.service';
 import { ToastrService } from 'ngx-toastr';
@@ -16,20 +16,8 @@ export class BlogEditComponent implements OnInit {
 
   @Input() blog: Blog;
   registerForm: FormGroup;
-  @ViewChild('blogImage', { static: false }) blogImage;
-  blogImageFile: File;
 
-  title = '';
-  authorUserName = '';
-  latestPosts;
-  postId;
-  likes = 0;
-  dislikes = 0;
-  isLiked;
-  isDisliked;
-  publishedOn: Date;
-  originalComments;
-  orderedComments;
+  title;
   content;
 
   editorConfig: AngularEditorConfig = {
@@ -91,30 +79,22 @@ export class BlogEditComponent implements OnInit {
       });
     this.registerForm = this.formBuilder.group({
       title: [''],
-      content: [''],
-      blogImage: [''],
+      content: ['']
     });
 
     this.titleService.setTitle(`Add new post`);
   }
 
-  stageBlogImageFile(): void {
-    this.blogImageFile = this.blogImage.nativeElement.files[0];
-  }
-
   edit(title: string, content: string): void {
     const formData = new FormData();
-    const image = this.blogImageFile;
     content = document.getElementsByClassName('angular-editor-textarea').item(0).innerHTML;
     formData.append('id', this.blog.id.toString());
     formData.append('title', title);
     formData.append('content', content);
-    formData.append('blogImage', image, image.name);
     this.blogService.editPost(formData)
       .subscribe(() => {
         this.toastr.success(`The post is edited successfully`, 'Success !');
       });
-    this.toastr.success(`The post is edited successfully`, 'Success !');
   }
 
   onReset() {
