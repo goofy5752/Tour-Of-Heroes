@@ -18,6 +18,7 @@
   - Delete movies
   - Delete heroes
   - Create new blog posts
+  - Edit blog posts
   - Create new heroes
   - Like and dislike movies
   - Watch and comment the available heroes
@@ -28,6 +29,7 @@
   - Delete movies
   - Delete heroes
   - Create new blog posts
+  - Edit blog posts
   - Create new heroes
   - Like and dislike movies
   - Watch and comment the available heroes
