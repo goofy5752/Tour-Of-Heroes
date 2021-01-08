@@ -14,7 +14,7 @@ import * as signalR from '@aspnet/signalr';
 
 export class ProfileComponent implements OnInit {
   @Input() profile: Profile;
-  @ViewChild('profileImage', { static: false }) profileImage: any;
+  @ViewChild('profileImage') profileImage: any;
   userId = '';
   profileImageFile: File;
   x = document.getElementById('demo');

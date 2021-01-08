@@ -12,8 +12,8 @@ import { Title } from '@angular/platform-browser';
 export class AddHeroComponent implements OnInit {
   registerForm: FormGroup;
   submitted = false;
-  @ViewChild('heroImage', { static: false }) heroImage;
-  @ViewChild('heroCoverImage', { static: false }) heroCoverImage;
+  @ViewChild('heroImage') heroImage;
+  @ViewChild('heroCoverImage') heroCoverImage;
   heroImageFile: File;
   heroCoverImageFile: File;
 

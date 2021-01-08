@@ -13,7 +13,7 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 export class AddBlogComponent implements OnInit {
   registerForm: FormGroup;
-  @ViewChild('blogImage', { static: false }) blogImage;
+  @ViewChild('blogImage') blogImage;
   blogImageFile: File;
 
   editorConfig: AngularEditorConfig = {
