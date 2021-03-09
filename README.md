@@ -5,7 +5,7 @@
 </div>
 
 # Tour Of Heroes
-## Web project based on Angular 8 & ASP.NET Core Web API + MSSQL
+## Web project based on Angular 8 & ASP.NET Core 2.2 Web API + MSSQL
 
 ### Functionality for users
   - Read and comment blog posts
