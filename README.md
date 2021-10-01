@@ -1,6 +1,6 @@
 <div>
 <img src="https://angular.io/assets/images/logos/angular/angular.svg" width="200" height="200">
-<img src="https://cdn.worldvectorlogo.com/logos/microsoft-sql-server.svg" width="200" height="200">
+<img src="https://brandslogos.com/wp-content/uploads/thumbs/microsoft-sql-server-logo-vector.svg" width="200" height="200">
 <img src="https://www.pngkey.com/png/full/610-6108848_razor-in-a-console-application-asp-net-core.png" width="200" height="200">
 </div>
 
