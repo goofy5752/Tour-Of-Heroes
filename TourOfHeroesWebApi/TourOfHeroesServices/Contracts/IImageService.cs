@@ -9,5 +9,6 @@
         string AddToCloudinaryAndReturnProfileImageUrl(IFormFile photo);
 
         string AddToCloudinaryAndReturnBlogImageUrl(IFormFile photo);
+
     }
 }
